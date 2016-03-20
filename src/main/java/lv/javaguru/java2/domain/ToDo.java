@@ -1,9 +1,10 @@
 package lv.javaguru.java2.domain;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
-
+/**
+ * Created by ruslan on 16.17.3.
+ */
 public class ToDo {
     private Long toDoId;
     private LocalDateTime toDoTime;
@@ -13,7 +14,6 @@ public class ToDo {
     private String longDescription;
     private Integer priority;
     private Boolean isDone;
-    private String toDoName;
 
     public Long getToDoId() {
         return toDoId;
@@ -39,24 +39,24 @@ public class ToDo {
         this.deadLineTime = deadLineTime;
     }
 
-    public Optional<Integer> getCategoryId() {
-        return Optional.ofNullable(categoryId);
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Optional<String> getShortDescription() {
-        return Optional.ofNullable(shortDescription);
+    public String getShortDescription() {
+        return shortDescription;
     }
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
     }
 
-    public Optional <String> getLongDescription() {
-        return Optional.ofNullable(longDescription);
+    public String getLongDescription() {
+        return longDescription;
     }
 
     public void setLongDescription(String longDescription) {
@@ -77,13 +77,5 @@ public class ToDo {
 
     public void setDone(Boolean done) {
         isDone = done;
-    }
-
-    public String getToDoName() {
-        return toDoName;
-    }
-
-    public void setToDoName(String toDoName) {
-        this.toDoName = toDoName;
     }
 }
