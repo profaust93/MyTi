@@ -46,4 +46,14 @@
         <url-pattern>/jsp</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ToDoServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.AddToDoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ToDoServlet</servlet-name>
+        <url-pattern>/todo</url-pattern>
+    </servlet-mapping>
+
 </web-app>

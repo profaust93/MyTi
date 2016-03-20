@@ -12,7 +12,7 @@ public class TimeLaps {
     private Long toDoId;
     private String shorDescription;
     private String longDescription;
-    private Integer cathegory;
+    private Integer category;
 
     public Long getTimeLapsId() {
         return timeLapsId;
@@ -54,11 +54,11 @@ public class TimeLaps {
         this.longDescription = longDescription;
     }
 
-    public Integer getCathegory() {
-        return cathegory;
+    public Integer getCategory() {
+        return category;
     }
 
-    public void setCathegory(Integer cathegory) {
-        this.cathegory = cathegory;
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 }

@@ -9,7 +9,7 @@ public class ToDo {
     private Long toDoId;
     private LocalDateTime toDoTime;
     private LocalDateTime deadLineTime;
-    private Integer cathegoryId;
+    private Integer categoryId;
     private String shortDescription;
     private String longDescription;
     private Integer priority;
@@ -39,12 +39,12 @@ public class ToDo {
         this.deadLineTime = deadLineTime;
     }
 
-    public Integer getCathegoryId() {
-        return cathegoryId;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCathegoryId(Integer cathegoryId) {
-        this.cathegoryId = cathegoryId;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getShortDescription() {
