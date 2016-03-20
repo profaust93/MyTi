@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Viktor on 01/07/2014.
+ * Created by Viktor on 01/07/2014./
  */
 public class DatabaseCleaner extends DAOImpl {
 
     private List<String> getTableNames() {
-        List<String> tableNames = new ArrayList<String>();
-        tableNames.add("USERS");
+        List<String> tableNames = new ArrayList<>();
+        tableNames.add("Users");
+        tableNames.add("ToDo");
         return tableNames;
     }
 
