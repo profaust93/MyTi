@@ -26,7 +26,7 @@ public class UserDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        User user = createUser("F", "L");
+        User user = createUser("F", "L", "E1", "Lo1", "P");
 
         userDAO.create(user);
 
@@ -39,8 +39,8 @@ public class UserDAOImplTest {
 
     @Test
     public void testMultipleUserCreation() throws DBException {
-        User user1 = createUser("F1", "L1");
-        User user2 = createUser("F2", "L2");
+        User user1 = createUser("F1", "L1", "E1", "Lo1", "P");
+        User user2 = createUser("F2", "L2", "E1", "Lo1", "P");
         userDAO.create(user1);
         userDAO.create(user2);
         List<User> users = userDAO.getAll();
@@ -49,10 +49,13 @@ public class UserDAOImplTest {
 
 
 
-    private User createUser(String firstName, String lastName) {
+    private User createUser(String firstName, String lastName, String email, String login, String password) {
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setEmail(email);
+        user.setLogin(login);
+        user.setPassword(password);
         return user;
     }
 
