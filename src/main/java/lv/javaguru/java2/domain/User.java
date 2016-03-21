@@ -3,6 +3,7 @@ package lv.javaguru.java2.domain;
 public class User {
 
     private long userId;
+    private String login;
     private String firstName;
     private String lastName;
     private String password;
@@ -47,5 +48,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

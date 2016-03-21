@@ -12,8 +12,11 @@ DROP TABLE IF EXISTS `my_ti`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
   `UserID` INT(11) NOT NULL AUTO_INCREMENT,
+  `Login` CHAR(32) NOT NULL,
+  `Password` CHAR(32) NOT NULL,
   `FirstName` CHAR(32) NOT NULL,
   `LastName` CHAR(32) NOT NULL,
+  `Email` CHAR(32) NOT NULL,
   PRIMARY KEY (`UserID`)
 )
 ENGINE = InnoDB
