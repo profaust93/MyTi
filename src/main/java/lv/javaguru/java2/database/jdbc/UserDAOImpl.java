@@ -136,6 +136,8 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setLong(3, user.getUserId());
+
+            //?
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute UserDAOImpl.update()");
