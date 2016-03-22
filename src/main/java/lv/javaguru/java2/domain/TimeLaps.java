@@ -10,7 +10,7 @@ public class TimeLaps {
     private Long timeLapsId;
     private LocalDateTime completeTime;
     private Long toDoId;
-    private String shorDescription;
+    private String shortDescription;
     private String longDescription;
     private Integer category;
 
@@ -38,12 +38,12 @@ public class TimeLaps {
         this.toDoId = toDoId;
     }
 
-    public String getShorDescription() {
-        return shorDescription;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setShorDescription(String shorDescription) {
-        this.shorDescription = shorDescription;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
     public String getLongDescription() {
