@@ -5,6 +5,8 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ruslan on 16.21.3.
@@ -56,7 +58,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE my_ti.TimeLaps SET TimeLapsId = ? , CompleteTime = ?," +
+                    .prepareStatement("UPDATE my_ti.TimeLaps SET CompleteTime = ?," +
                             "ToDoID = ?, ShortDescription = ?, LongDescription = ?,CategoryId = ?");
             if(timeLaps.getCompleteTime() != null){
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(timeLaps.getCompleteTime()));
@@ -67,6 +69,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
             preparedStatement.setString(3,timeLaps.getShortDescription());
             preparedStatement.setString(4,timeLaps.getLongDescription());
             preparedStatement.setInt(5,timeLaps.getCategory());
+            preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if(rs.next()){
                 timeLaps.setTimeLapsId(rs.getLong(1));
@@ -122,7 +125,30 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
         return null;
     }
 
-    void mapResultSetToObject(TimeLaps timeLaps,ResultSet rs) throws SQLException{
+    @Override
+    public List<TimeLaps> getAllTimeLaps() throws DBException {
+        List<TimeLaps> allTimeLaps = new ArrayList<>();
+        Connection connection = null;
+
+        try{
+            connection = getConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM my_ti.TimeLaps");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                TimeLaps timeLaps = new TimeLaps();
+                mapResultSetToObject(timeLaps,rs);
+                allTimeLaps.add(timeLaps);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(connection);
+        }
+        return allTimeLaps;
+    }
+
+    void mapResultSetToObject(TimeLaps timeLaps, ResultSet rs) throws SQLException{
         timeLaps.setTimeLapsId(rs.getLong(1));
         timeLaps.setCompleteTime(rs.getTimestamp(2).toLocalDateTime());
         timeLaps.setToDoId(rs.getLong(3));
