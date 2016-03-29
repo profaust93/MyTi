@@ -31,7 +31,8 @@ public class MainFilter implements Filter {
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
         HttpSession session = httpServletRequest.getSession();
-        if((Boolean) session.getAttribute("isLogIn")) {
+        Boolean isLogedIn = (Boolean) session.getAttribute("isLogIn");
+        if(isLogedIn != null && isLogedIn) {
             controller = new LoginController();
         }  else {
             controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
