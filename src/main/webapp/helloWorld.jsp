@@ -6,6 +6,8 @@
 <body>
 
     <h1>Hello from JSP file!</h1>
+    <p>Message is :<%=request.getAttribute("data")%>
+    </p>
 
 </body>
 </html>
