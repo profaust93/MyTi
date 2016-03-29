@@ -9,9 +9,11 @@ import lv.javaguru.java2.model.MVCModel;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class MainFilter implements Filter {
     Map<String,MVCController> urlToController;
@@ -28,13 +30,11 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
-
-        if(httpServletRequest.getSession(true).getAttribute("isLoggedIn").equals("true")) {
+        HttpSession session = httpServletRequest.getSession();
+        if((Boolean) session.getAttribute("isLogIn")) {
             controller = new LoginController();
-        } else if(urlToController.get(contextURI) == null) {
-            controller = new ErrorController();
-        } else {
-            controller  = urlToController.get(contextURI);
+        }  else {
+            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
         }
 
         MVCModel model;

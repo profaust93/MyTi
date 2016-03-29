@@ -12,6 +12,8 @@
 </head>
 <body>
 <h1 style="text-align:center">Error 404</h1>
-<img src="https://recollectionsofplay.files.wordpress.com/2012/08/sad-pikachu.jpg" alt="404" style="text-align:center">
+<img src="https://recollectionsofplay.files.wordpress.com/2012/08/sad-pikachu.jpg" alt="404" style="display: block;
+  margin-left: auto;
+  margin-right: auto;">
 </body>
 </html>
