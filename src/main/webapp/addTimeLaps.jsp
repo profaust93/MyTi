@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: ruslan
   Date: 16.29.3
@@ -12,9 +12,11 @@
 </head>
 <body>
 <p><%=request.getAttribute("data")%></p>
+<% Map<String,String> resultMap = (Map<String,String>) request.getAttribute("data");
+%>
 <form method = "post" action="addTimeLaps">
     <h1>Your ID:</h1>
-    <input type="text" name="userId">
+    <input type="text" name="userId"> <p><%%></p>
     <h1>Category:</h1>
     <select name="category">
         <option value="sport">Sport</option>

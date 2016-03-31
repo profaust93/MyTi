@@ -10,6 +10,10 @@ import lv.javaguru.java2.service.TimeLapsServices;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -19,9 +23,11 @@ public class AddTimeLapsController implements MVCController {
 
     private String answer;
     private TimeLapsServices timeLapsServices = new TimeLapsServices();
+    private Map<String,String> resultCheckMap = new HashMap<>();
+
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/addTimeLaps.jsp","Add Time Laps");
+        return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
     }
 
     @Override
@@ -41,23 +47,28 @@ public class AddTimeLapsController implements MVCController {
 
         TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
         try {
-            if(timeLapsServices.isNotNull(userId).equalsIgnoreCase("ok")){
+            resultCheckMap.put(userId,timeLapsServices.userIdCheck(userId));
+            if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
-            } else throw new DBException(timeLapsServices.isNotNull(userId));
+            } else{
+
+                throw new DBException(timeLapsServices.userIdCheck(userId));
+            }
 
             timeLaps.setCompleteTime(LocalDateTime.of(Integer.parseInt(year),
                     Integer.parseInt(month),Integer.parseInt(day),
                     Integer.parseInt(hour),Integer.parseInt(minute)));
-            timeLaps.setCategory(12);
+            timeLaps.setCategory(category);
             timeLaps.setShortDescription(shortDescription);
             timeLaps.setLongDescription(longDescription);
             timeLapsDAO.create(timeLaps);
             answer = "OK";
+
         } catch (DBException e) {
             answer = e.getMessage();
-            return new MVCModel("/addTimeLaps.jsp",answer);
+            return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
         }
 
-        return new MVCModel("/addTimeLaps.jsp",answer);
+        return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
     }
 }
