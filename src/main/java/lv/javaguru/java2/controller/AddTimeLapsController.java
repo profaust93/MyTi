@@ -23,8 +23,11 @@ public class AddTimeLapsController implements MVCController {
 
     private String answer;
     private TimeLapsServices timeLapsServices = new TimeLapsServices();
-    private Map<String,String> resultCheckMap = new HashMap<>();
+    private Map<Object,String> resultCheckMap = new HashMap<>();
 
+    //KEYS
+    String userIdKey = "userId";
+    String yearKey = "year";
     @Override
     public MVCModel processGet(HttpServletRequest req) {
         return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
@@ -47,17 +50,16 @@ public class AddTimeLapsController implements MVCController {
 
         TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
         try {
-            resultCheckMap.put(userId,timeLapsServices.userIdCheck(userId));
+
             if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
-            } else{
-
-                throw new DBException(timeLapsServices.userIdCheck(userId));
             }
 
             timeLaps.setCompleteTime(LocalDateTime.of(Integer.parseInt(year),
                     Integer.parseInt(month),Integer.parseInt(day),
                     Integer.parseInt(hour),Integer.parseInt(minute)));
+
+
             timeLaps.setCategory(category);
             timeLaps.setShortDescription(shortDescription);
             timeLaps.setLongDescription(longDescription);
