@@ -1,9 +1,6 @@
 package lv.javaguru.java2.filter;
 
-import lv.javaguru.java2.controller.ErrorController;
-import lv.javaguru.java2.controller.HelloWorldController;
-import lv.javaguru.java2.controller.LoginController;
-import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.controller.*;
 import lv.javaguru.java2.model.MVCModel;
 
 import javax.servlet.*;
@@ -22,6 +19,8 @@ public class MainFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         urlToController = new HashMap<>();
         urlToController.put("/hello",new HelloWorldController());
+        urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
+        urlToController.put("/addTimeLaps",new AddTimeLapsController());
     }
 
     @Override
@@ -31,8 +30,8 @@ public class MainFilter implements Filter {
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
         HttpSession session = httpServletRequest.getSession();
-        Boolean isLogedIn = (Boolean) session.getAttribute("isLogIn");
-        if(isLogedIn != null && isLogedIn) {
+        Boolean isLogIn = (Boolean) session.getAttribute("isLogIn");
+        if(isLogIn != null && isLogIn) {
             controller = new LoginController();
         }  else {
             controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
