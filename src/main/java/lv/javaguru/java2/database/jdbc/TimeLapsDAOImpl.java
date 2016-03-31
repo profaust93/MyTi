@@ -29,7 +29,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
             } else {
                 preparedStatement.setNull(1,java.sql.Types.TIMESTAMP);
             }
-            preparedStatement.setLong(2,timeLaps.getToDoId());
+            preparedStatement.setLong(2,timeLaps.getUserId());
             preparedStatement.setString(3,timeLaps.getShortDescription());
             preparedStatement.setString(4,timeLaps.getLongDescription());
             preparedStatement.setInt(5,timeLaps.getCategory());
@@ -65,7 +65,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
             } else {
                 preparedStatement.setNull(1,java.sql.Types.TIMESTAMP);
             }
-            preparedStatement.setLong(2,timeLaps.getToDoId());
+            preparedStatement.setLong(2,timeLaps.getUserId());
             preparedStatement.setString(3,timeLaps.getShortDescription());
             preparedStatement.setString(4,timeLaps.getLongDescription());
             preparedStatement.setInt(5,timeLaps.getCategory());
@@ -151,7 +151,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     void mapResultSetToObject(TimeLaps timeLaps, ResultSet rs) throws SQLException{
         timeLaps.setTimeLapsId(rs.getLong(1));
         timeLaps.setCompleteTime(rs.getTimestamp(2).toLocalDateTime());
-        timeLaps.setToDoId(rs.getLong(3));
+        timeLaps.setUserId(rs.getLong(3));
         timeLaps.setShortDescription(rs.getString(4));
         timeLaps.setLongDescription(rs.getString(5));
         timeLaps.setCategory(rs.getInt(6));

@@ -51,7 +51,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory(1);
-        timeLaps.setToDoId(todo.getToDoId());
+        timeLaps.setUserId(todo.getToDoId());
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
@@ -67,10 +67,10 @@ public class TimeLapsDAOImplTest {
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory(2);
-        timeLaps.setToDoId(2L);
+        timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
-        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30));
+        timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
         timeLaps.setShortDescription("UpdatedShortDescription");
         timeLaps.setLongDescription("UpdatedLongDescription");
         timeLaps.setCategory(3);
@@ -82,7 +82,7 @@ public class TimeLapsDAOImplTest {
         assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
         assertEquals("UpdatedLongDescription",timeLapsFromDb.getLongDescription());
         assertEquals(new Integer(3),timeLapsFromDb.getCategory());
-        assertEquals(new Long(2),timeLapsFromDb.getToDoId());
+        assertEquals(new Long(2),timeLapsFromDb.getUserId());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory(1);
-        timeLaps.setToDoId(3L);
+        timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLaps1 = new TimeLaps();
@@ -100,7 +100,7 @@ public class TimeLapsDAOImplTest {
         timeLaps1.setShortDescription("ShortDescription");
         timeLaps1.setLongDescription("LongDescription");
         timeLaps1.setCategory(1);
-        timeLaps1.setToDoId(3L);
+        timeLaps1.setUserId(3L);
         timeLapsDAO.create(timeLaps1);
 
         Long timeLapsId = timeLaps.getTimeLapsId();
@@ -116,7 +116,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory(1);
-        timeLaps.setToDoId(3L);
+        timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);
