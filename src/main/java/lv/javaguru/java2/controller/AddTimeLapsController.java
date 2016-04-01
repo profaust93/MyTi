@@ -10,6 +10,7 @@ import lv.javaguru.java2.service.TimeLapsServices;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +38,7 @@ public class AddTimeLapsController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) {
 
         String userId = req.getParameter("userId");
-        String year = req.getParameter("year");
-        String month = req.getParameter("month");
-        String day = req.getParameter("day");
+        String date = req.getParameter("datepicker");
         String hour = req.getParameter("hour");
         String minute = req.getParameter("minute");
         String category = req.getParameter("category");
@@ -50,15 +49,14 @@ public class AddTimeLapsController implements MVCController {
 
         TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
         try {
-
+            resultCheckMap.put("userId", timeLapsServices.userIdCheck(userId));
             if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
-            }
+            } else throw new DBException(timeLapsServices.userIdCheck(userId));
 
-            timeLaps.setCompleteTime(LocalDateTime.of(Integer.parseInt(year),
-                    Integer.parseInt(month),Integer.parseInt(day),
-                    Integer.parseInt(hour),Integer.parseInt(minute)));
-
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime dateTime = LocalDateTime.parse(date,formatter);
+            timeLaps.setCompleteTime(dateTime);
 
             timeLaps.setCategory(category);
             timeLaps.setShortDescription(shortDescription);

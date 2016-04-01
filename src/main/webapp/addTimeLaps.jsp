@@ -37,7 +37,7 @@
     </select>
     <h1>Date:</h1>
     <input type="text" id="datepicker" />
-
+    <input type="datetime-local" id = "date" />
 
     <h1>Short Description</h1>
     <textarea rows="2" cols="50" type="text" name="shortDescription">

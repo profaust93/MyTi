@@ -28,20 +28,17 @@ public class TimeLapsServices {
     public String isDefinedUserId(String data){
         UserDAO userDAO = new UserDAOImpl();
         try {
-            List<User> list = userDAO.getAll();
-            if(list.contains(userDAO.getById(Long.parseLong(data)))){
-                return ok;
-            } else throw new DBException("Not defined Id");
+            userDAO.getById(Long.parseLong(data));
         } catch (DBException e) {
-            e.printStackTrace();
-            return e.getMessage();
+            return "No user in DB";
         }
+        return ok;
     }
 
     public String isNumber(String data) {
         if (StringUtils.isNumeric(data) == false) {
             try {
-                throw new DBException("Must be number");
+                throw new DBException("This field must be number");
             } catch (DBException e) {
                 return e.getMessage();
             }
@@ -54,10 +51,12 @@ public class TimeLapsServices {
         try {
             checkResultList.add(isNotEmpty(data));
             checkResultList.add(isNumber(data));
+            if(isNotEmpty(data)=="ok")
             checkResultList.add(isDefinedUserId(data));
             for (int i = 0; i < checkResultList.size(); i++) {
                 if(checkResultList.get(i).equalsIgnoreCase(ok)== false){
                     throw new DBException(checkResultList.get(i));
+
                 }
             }
         } catch (DBException e){
