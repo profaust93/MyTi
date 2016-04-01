@@ -29,7 +29,7 @@
     <h1>Your ID:</h1>
     <input type="text" name="userId"> <%=resultMap.get("userId")%>
     <h1>Category:</h1>
-    <select name="category">
+    <select name="category"> <%=resultMap.get("category")%>
         <option value="sport">Sport</option>
         <option value="fun">Fun</option>
         <option value="work">Work</option>

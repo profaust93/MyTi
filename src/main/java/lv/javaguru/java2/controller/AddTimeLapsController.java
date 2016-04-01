@@ -11,10 +11,7 @@ import lv.javaguru.java2.service.TimeLapsServices;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -22,7 +19,6 @@ import java.util.Map;
  */
 public class AddTimeLapsController implements MVCController {
 
-    private String answer;
     private TimeLapsServices timeLapsServices = new TimeLapsServices();
     private Map<Object,String> resultCheckMap = new HashMap<>();
 
@@ -38,9 +34,6 @@ public class AddTimeLapsController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) {
 
         String userId = req.getParameter("userId");
-        String date = req.getParameter("datepicker");
-        String hour = req.getParameter("hour");
-        String minute = req.getParameter("minute");
         String category = req.getParameter("category");
         String shortDescription = req.getParameter("shortDescription");
         String longDescription = req.getParameter("longDescription");
@@ -50,26 +43,33 @@ public class AddTimeLapsController implements MVCController {
         TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
         try {
             resultCheckMap.put("userId", timeLapsServices.userIdCheck(userId));
+            resultCheckMap.put("category",timeLapsServices.categoryCheck(category));
             if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
-            } else throw new DBException(timeLapsServices.userIdCheck(userId));
+            }
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime dateTime = LocalDateTime.parse(date,formatter);
+
 
 
             timeLaps.setCompleteTime(LocalDateTime.now());
-
-            timeLaps.setCategory(category);
-
+            if(timeLapsServices.categoryCheck(category).equalsIgnoreCase("ok")){
+                timeLaps.setCategory(category);
+            }
 
             timeLaps.setShortDescription(shortDescription);
             timeLaps.setLongDescription(longDescription);
+
+            Iterator it = resultCheckMap.entrySet().iterator();
+            while (it.hasNext()){
+                Map.Entry<String,String> entry = (Map.Entry<String, String>) it.next();
+                if(entry.getValue().equalsIgnoreCase("ok")== false) throw new DBException("Error");
+            }
+
             timeLapsDAO.create(timeLaps);
-            answer = "OK";
+
 
         } catch (DBException e) {
-            answer = e.getMessage();
             return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
         }
 

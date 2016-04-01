@@ -68,4 +68,16 @@ public class TimeLapsServices {
         }
         return ok;
     }
+
+    public String categoryCheck(String data){
+        try{
+            if(isNotEmpty(data) != ok)
+                throw new DBException(isNotEmpty(data));
+            if(isNumber(data) == ok)
+                throw new DBException("This field must be string");
+        }catch (DBException e){
+            return e.getMessage();
+        }
+        return ok;
+    }
 }
