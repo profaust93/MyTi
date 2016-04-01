@@ -53,11 +53,16 @@ public class AddTimeLapsController implements MVCController {
             if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
             } else throw new DBException(timeLapsServices.userIdCheck(userId));
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime dateTime = LocalDateTime.parse(date,formatter);
-            timeLaps.setCompleteTime(dateTime);
+
+
+            timeLaps.setCompleteTime(LocalDateTime.now());
 
             timeLaps.setCategory(category);
+
+
             timeLaps.setShortDescription(shortDescription);
             timeLaps.setLongDescription(longDescription);
             timeLapsDAO.create(timeLaps);

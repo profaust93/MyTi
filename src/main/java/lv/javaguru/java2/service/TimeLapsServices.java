@@ -6,6 +6,7 @@ import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,19 +48,22 @@ public class TimeLapsServices {
     }
 
     public String userIdCheck(String data){
-        List<String> checkResultList = new ArrayList<>();
         try {
-            checkResultList.add(isNotEmpty(data));
-            checkResultList.add(isNumber(data));
-            if(isNotEmpty(data)=="ok")
-            checkResultList.add(isDefinedUserId(data));
-            for (int i = 0; i < checkResultList.size(); i++) {
-                if(checkResultList.get(i).equalsIgnoreCase(ok)== false){
-                    throw new DBException(checkResultList.get(i));
-
-                }
+            if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+            if(isNumber(data) != ok) throw new DBException(isNumber(data));
+            if(isNotEmpty(data)==ok){
+                if(isDefinedUserId(data) != ok) throw new DBException(isDefinedUserId(data));
             }
         } catch (DBException e){
+            return e.getMessage();
+        }
+        return ok;
+    }
+
+    public String dateCheck(String data){
+        try {
+            if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+        } catch (DBException e) {
             return e.getMessage();
         }
         return ok;
