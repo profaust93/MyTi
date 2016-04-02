@@ -41,6 +41,20 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 100;
+-- -----------------------------------------------------
+-- Table `my_ti`.`TimeLaps`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
+    TimeLapsId INT(11) NOT NULL AUTO_INCREMENT,
+    CompleteTime TIMESTAMP,
+    UserID INT(11),
+    ShortDescription VARCHAR(100),
+    LongDescription VARCHAR(1000),
+    CategoryId INT(11),
+  PRIMARY KEY (TimeLapsId)
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT = 100;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
