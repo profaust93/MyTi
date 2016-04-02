@@ -2,6 +2,7 @@ package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.controller.*;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.model.exceptions.RedirectException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,13 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
+        if(contextURI.matches(".*(css|jpg|png|gif|js)$")){
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
+        }
         HttpSession session = httpServletRequest.getSession();
-        Boolean isLogIn = (Boolean) session.getAttribute("isLogIn");
-        if(isLogIn != null && isLogIn) {
+        Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
+        if(isLogIn == null || !isLogIn) {
             controller = new LoginController();
         }  else {
             controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
@@ -42,19 +47,20 @@ public class MainFilter implements Filter {
         MVCModel model;
         String methodName = httpServletRequest.getMethod();
         if("GET".equalsIgnoreCase(methodName)) {
-            model = controller.processGet(httpServletRequest);
+            try {
+                model = controller.processGet(httpServletRequest);
+            } catch (RedirectException e) {
+                httpServletResponse.sendRedirect(e.getUrlToRedirect());
+                return;
+            }
         } else {
             model = controller.processPost(httpServletRequest);
         }
 
-
         httpServletRequest.setAttribute("data",model.getData());
-
         ServletContext context = servletRequest.getServletContext();
         RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
         requestDispatcher.forward(httpServletRequest,httpServletResponse);
-
-
 
     }
 
