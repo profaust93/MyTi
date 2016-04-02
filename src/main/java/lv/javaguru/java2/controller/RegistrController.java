@@ -4,15 +4,21 @@ import lv.javaguru.java2.model.MVCModel;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ErrorController implements MVCController {
+/**
+ * Created by Kemran on 02/04/2016.
+ */
+public class RegistrController implements MVCController {
+
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/error.jsp","404 BAD");
+        return new MVCModel("/login.jsp", "Login");
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        return null;
+
+        return new MVCModel("/login.jsp", null );
+
     }
 }

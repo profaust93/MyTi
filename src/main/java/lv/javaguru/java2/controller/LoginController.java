@@ -5,6 +5,7 @@ import lv.javaguru.java2.model.MVCModel;
 import javax.servlet.http.HttpServletRequest;
 
 public class LoginController implements MVCController {
+
     @Override
     public MVCModel processGet(HttpServletRequest req) {
         return null;

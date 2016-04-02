@@ -19,6 +19,8 @@ public class MainFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         urlToController = new HashMap<>();
         urlToController.put("/hello",new HelloWorldController());
+        urlToController.put("/registration", new RegistrController());
+        urlToController.put("/login", new LoginController());
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
     }
