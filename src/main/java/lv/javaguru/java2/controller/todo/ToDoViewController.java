@@ -1,6 +1,7 @@
-package lv.javaguru.java2.controller;
+package lv.javaguru.java2.controller.todo;
 
 
+import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 

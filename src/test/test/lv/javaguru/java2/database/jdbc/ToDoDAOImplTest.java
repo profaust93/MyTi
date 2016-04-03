@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -148,7 +149,8 @@ public class ToDoDAOImplTest {
         toDoDAO.create(todo);
         toDoDAO.create(todo);
 
-        List<ToDo> toDoList = toDoDAO.getAllToDo();
+        List<String> toDoList = toDoDAO.getAllToDo().stream().map(e -> Long.toString(e.getToDoId()))
+                .collect(Collectors.toList());
         toDoDAO.delete(toDoList);
         assertEquals(0,toDoDAO.getAllToDo().size());
 
@@ -164,8 +166,9 @@ public class ToDoDAOImplTest {
         toDoDAO.create(todo);
         toDoDAO.create(todo);
 
-        List<ToDo> toDoList = toDoDAO.getAllToDo();
-        toDoList.get(1).setToDoId(null);
+        List<String> toDoList = toDoDAO.getAllToDo().stream().map(e -> Long.toString(e.getToDoId()))
+                .collect(Collectors.toList());
+        toDoList.set(1,null);
         try {
             toDoDAO.delete(toDoList);
         } catch (Exception e) {

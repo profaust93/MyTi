@@ -39,19 +39,12 @@ public class TimeLapsDAOImplTest {
     }
     @Test
     public void testCreate() throws DBException{
-        ToDo todo = new ToDo();
-        todo.setToDoName("TestName");
-        todo.setPriority(1);
-        todo.setDone(true);
-        todo.setDeadLineTime(LocalDateTime.now());
-        toDoDAO.create(todo);
-
         TimeLaps timeLaps = new TimeLaps();
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory(1);
-        timeLaps.setUserId(todo.getToDoId());
+        timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());

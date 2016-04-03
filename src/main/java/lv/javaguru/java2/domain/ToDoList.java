@@ -7,6 +7,13 @@ public class ToDoList {
     private Boolean isDone;
     private String toDoName;
 
+    public ToDoList(Long toDoId, Integer priority, Boolean isDone, String toDoName) {
+        this.toDoId = toDoId;
+        this.priority = priority;
+        this.isDone = isDone;
+        this.toDoName = toDoName;
+    }
+
     public Long getToDoId() {
         return toDoId;
     }

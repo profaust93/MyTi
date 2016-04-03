@@ -179,8 +179,8 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
     }
 
     @Override
-    public void delete(List<ToDo> todoList) throws DBException {
-        if (todoList.isEmpty()) {
+    public void delete(List<String> todoIdList) throws DBException {
+        if (todoIdList.isEmpty()) {
             return;
         }
 
@@ -189,8 +189,8 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             connection = getConnection();
             Statement statement = connection.createStatement();
             connection.setAutoCommit(false);
-            for(ToDo toDo : todoList) {
-                statement.addBatch("DELETE FROM my_ti.ToDo WHERE ToDoID = "+toDo.getToDoId());
+            for(String toDoId : todoIdList) {
+                statement.addBatch("DELETE FROM my_ti.ToDo WHERE ToDoID = "+toDoId);
             }
             int[] result = statement.executeBatch();
             for (int oneRes : result) {

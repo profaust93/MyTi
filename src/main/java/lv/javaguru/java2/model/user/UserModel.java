@@ -20,5 +20,7 @@ public interface UserModel {
 
     Map<String,String> logInUser(String userCred, String password, Boolean rememberMe) throws LoginException;
 
+    
+
     void setUserDAO(UserDAO userDAO);
 }
