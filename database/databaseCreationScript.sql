@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
     UserID INT(11),
     ShortDescription VARCHAR(100),
     LongDescription VARCHAR(1000),
-    CategoryId VARCHAR(100),
+    Category VARCHAR(100),
   PRIMARY KEY (TimeLapsId)
 )
   ENGINE =InnoDB

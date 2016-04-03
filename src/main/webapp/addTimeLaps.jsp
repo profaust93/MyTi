@@ -29,12 +29,13 @@
     <h1>Your ID:</h1>
     <input type="text" name="userId"> <%=resultMap.get("userId")%>
     <h1>Category:</h1>
-    <select name="category"> <%=resultMap.get("category")%>
+    <select name="category">
+        <option value=""></option>
         <option value="sport">Sport</option>
         <option value="fun">Fun</option>
         <option value="work">Work</option>
         <option value="home">Home</option>
-    </select>
+    </select> <%= resultMap.get("category")%>
     <h1>Date:</h1>
     <input type="text" id="datepicker" />
     <input type="datetime-local" id = "date" />

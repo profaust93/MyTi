@@ -16,6 +16,7 @@ import java.util.List;
 public class TimeLapsServices {
 
     String ok = "OK";
+    Integer count;
 
     public String isNotEmpty(String data){
         if(StringUtils.isEmpty(data)) try {
@@ -26,12 +27,21 @@ public class TimeLapsServices {
         return ok;
     }
 
-    public String isDefinedUserId(String data){
+    public String isDefinedUserId(String data) {
         UserDAO userDAO = new UserDAOImpl();
+        count = 0;
         try {
-            userDAO.getById(Long.parseLong(data));
+            List<User> userList = userDAO.getAll();
+            if(userList.size() == 0){
+                throw new DBException("Empty DB");
+            } else for (int i = 0; i < userList.size() ; i++) {
+                if(userList.get(i).getUserId().equals(Long.parseLong(data))){
+                    count++;
+                }
+            }
+            if (count == 0) throw new DBException("No user in DB");
         } catch (DBException e) {
-            return "No user in DB";
+            return e.getMessage();
         }
         return ok;
     }
