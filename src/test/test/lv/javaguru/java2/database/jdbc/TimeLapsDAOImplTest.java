@@ -43,7 +43,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
@@ -59,14 +59,14 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(2);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
         timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
         timeLaps.setShortDescription("UpdatedShortDescription");
         timeLaps.setLongDescription("UpdatedLongDescription");
-        timeLaps.setCategory(3);
+        timeLaps.setCategory("sport");
         timeLapsDAO.update(timeLaps);
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
 
@@ -85,7 +85,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
 
@@ -93,7 +93,7 @@ public class TimeLapsDAOImplTest {
         timeLaps1.setCompleteTime(LocalDateTime.now());
         timeLaps1.setShortDescription("ShortDescription");
         timeLaps1.setLongDescription("LongDescription");
-        timeLaps1.setCategory(1);
+        timeLaps1.setCategory("sport");
         timeLaps1.setUserId(3L);
         timeLapsDAO.create(timeLaps1);
 
@@ -109,7 +109,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);
