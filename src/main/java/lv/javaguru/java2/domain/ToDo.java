@@ -14,6 +14,7 @@ public class ToDo {
     private Integer priority;
     private Boolean isDone;
     private String toDoName;
+    private Long userId;
 
     public Long getToDoId() {
         return toDoId;
@@ -85,5 +86,13 @@ public class ToDo {
 
     public void setToDoName(String toDoName) {
         this.toDoName = toDoName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

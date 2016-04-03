@@ -39,19 +39,12 @@ public class TimeLapsDAOImplTest {
     }
     @Test
     public void testCreate() throws DBException{
-        ToDo todo = new ToDo();
-        todo.setToDoName("TestName");
-        todo.setPriority(1);
-        todo.setDone(true);
-        todo.setDeadLineTime(LocalDateTime.now());
-        toDoDAO.create(todo);
-
         TimeLaps timeLaps = new TimeLaps();
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory("sport");
-        timeLaps.setUserId(todo.getToDoId());
+        timeLaps.setCategory(1);
+        timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
@@ -66,19 +59,20 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory("sport");
+        timeLaps.setCategory(2);
         timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
         timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
         timeLaps.setShortDescription("UpdatedShortDescription");
         timeLaps.setLongDescription("UpdatedLongDescription");
-        timeLaps.setCategory("sport");
+        timeLaps.setCategory(3);
         timeLapsDAO.update(timeLaps);
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
+
         assertNotNull(timeLapsFromDb);
         assertEquals(timeLaps.getTimeLapsId(),timeLapsFromDb.getTimeLapsId());
-        assertEquals(LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
+        assertEquals(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
         assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
         assertEquals("UpdatedLongDescription",timeLapsFromDb.getLongDescription());
         assertEquals(new Integer(3),timeLapsFromDb.getCategory());
@@ -91,7 +85,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory("sport");
+        timeLaps.setCategory(1);
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
 
@@ -99,7 +93,7 @@ public class TimeLapsDAOImplTest {
         timeLaps1.setCompleteTime(LocalDateTime.now());
         timeLaps1.setShortDescription("ShortDescription");
         timeLaps1.setLongDescription("LongDescription");
-        timeLaps1.setCategory("sport");
+        timeLaps1.setCategory(1);
         timeLaps1.setUserId(3L);
         timeLapsDAO.create(timeLaps1);
 
@@ -115,7 +109,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory("sport");
+        timeLaps.setCategory(1);
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);

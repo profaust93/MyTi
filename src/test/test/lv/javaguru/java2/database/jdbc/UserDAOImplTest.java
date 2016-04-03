@@ -103,6 +103,19 @@ public class UserDAOImplTest {
         return user;
     }
 
+    @Test
+    public void testGetUserByEmailOrLogin() throws Exception {
+        User user = createUser("Log","Pass", "FirstN", "LastN", "Email");
+        userDAO.create(user);
+
+
+        User userFromDb = userDAO.getUserByEmailOrLogin(user.getLogin());
+        assertEquals(user.getUserId(),userFromDb.getUserId());
+
+        userFromDb = userDAO.getUserByEmailOrLogin(user.getEmail());
+        assertEquals(user.getLogin(),userFromDb.getLogin());
+    }
+
     @After
     public void tearDown() throws Exception {
         databaseCleaner.cleanDatabase();

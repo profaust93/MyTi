@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
   `Priority` SMALLINT NOT NULL,
   `IsDone` BOOLEAN NOT NULL,
   `Name` VARCHAR(100) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+
   PRIMARY KEY (`ToDoID`)
 )
   ENGINE = InnoDB
@@ -55,6 +57,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
 )
   ENGINE =InnoDB
   AUTO_INCREMENT = 100;
+
+INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
