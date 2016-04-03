@@ -26,6 +26,8 @@ public class MainFilter implements Filter {
         urlToController.put("/login", new LoginController(new UserModelImpl()));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
+        urlToController.put("/viewProfile",new ProfileController());
+
     }
 
     @Override
@@ -43,7 +45,7 @@ public class MainFilter implements Filter {
         if(isLogIn == null || !isLogIn) {
             controller = new LoginController(new UserModelImpl());
         }  else {
-            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
+            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());// java 8
         }
 
         MVCModel model;

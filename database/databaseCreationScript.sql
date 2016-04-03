@@ -24,7 +24,7 @@ AUTO_INCREMENT = 1002;
 
 -- -----------------------------------------------------
 -- Table `my_ti`.`ToDo_`
--- -----------------------------------------------------
+-- ------------------------------------ -----------------
 DROP TABLE IF EXISTS `my_ti`.`ToDo` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
@@ -57,9 +57,28 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
 )
   ENGINE =InnoDB
   AUTO_INCREMENT = 100;
+  -- -----------------------------------------------------
+-- Table `my_ti`.`Profiles`
+DROP TABLE IF EXISTS `my_ti`.`Profiles` ;-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
+    ProfileId INT(11) NOT NULL AUTO_INCREMENT,
+    UserId INT (11) NOT NULL,
+    FirstName VARCHAR (30),
+    LastName VARCHAR (30),
+    Email VARCHAR (30),
+
+  PRIMARY KEY (ProfileId)
+
+)
+  ENGINE =InnoDB
+  AUTO_INCREMENT = 100;
+
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
