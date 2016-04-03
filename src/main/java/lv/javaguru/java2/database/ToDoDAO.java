@@ -19,5 +19,7 @@ public interface ToDoDAO {
 
     void delete (List<ToDo> todoList) throws DBException;
 
+    List<ToDo> getToDoByUserId(Long userId) throws DBException;
+
 
 }

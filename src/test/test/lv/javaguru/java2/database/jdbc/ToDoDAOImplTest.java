@@ -37,6 +37,7 @@ public class ToDoDAOImplTest {
         todo.setPriority(1);
         todo.setDone(false);
         todo.setDeadLineTime(LocalDateTime.now());
+        todo.setUserId(10L);
         toDoDAO.create(todo);
 
         ToDo toDoFromDb = toDoDAO.getById(todo.getToDoId());
@@ -65,6 +66,7 @@ public class ToDoDAOImplTest {
         todo.setCategoryId(1);
         todo.setShortDescription("Before");
         todo.setLongDescription("Long Before");
+        todo.setUserId(10L);
         toDoDAO.create(todo);
 
         todo.setToDoName("RenamedToDo");
@@ -75,6 +77,7 @@ public class ToDoDAOImplTest {
         todo.setCategoryId(3);
         todo.setShortDescription("After");
         todo.setLongDescription("Long After");
+        todo.setUserId(10L);
         toDoDAO.update(todo);
 
         assertEquals("RenamedToDo",todo.getToDoName());
@@ -95,6 +98,7 @@ public class ToDoDAOImplTest {
         todo.setPriority(1);
         todo.setDone(false);
         todo.setDeadLineTime(LocalDateTime.now());
+        todo.setUserId(10L);
         toDoDAO.create(todo);
 
         ToDo todo2 = new ToDo();
@@ -102,6 +106,7 @@ public class ToDoDAOImplTest {
         todo2.setPriority(1);
         todo2.setDone(false);
         todo2.setDeadLineTime(LocalDateTime.now());
+        todo2.setUserId(12L);
         toDoDAO.create(todo2);
 
         Long toDoId = todo.getToDoId();
@@ -120,6 +125,7 @@ public class ToDoDAOImplTest {
         todo.setPriority(1);
         todo.setDone(false);
         todo.setDeadLineTime(LocalDateTime.now());
+        todo.setUserId(10L);
 
         toDoDAO.create(todo);
         toDoDAO.create(todo);
@@ -137,6 +143,7 @@ public class ToDoDAOImplTest {
         todo.setPriority(1);
         todo.setDone(false);
         todo.setDeadLineTime(LocalDateTime.now());
+        todo.setUserId(10L);
         toDoDAO.create(todo);
         toDoDAO.create(todo);
         toDoDAO.create(todo);
@@ -153,6 +160,7 @@ public class ToDoDAOImplTest {
         todo.setToDoName("TestName");
         todo.setPriority(1);
         todo.setDone(false);
+        todo.setUserId(10L);
         toDoDAO.create(todo);
         toDoDAO.create(todo);
 
@@ -168,4 +176,23 @@ public class ToDoDAOImplTest {
 
     }
 
+    @Test
+    public void testGetTodoByUserId() throws Exception {
+        ToDo todo = new ToDo();
+        todo.setToDoName("TestName");
+        todo.setPriority(1);
+        todo.setDone(false);
+        todo.setUserId(10L);
+        toDoDAO.create(todo);
+        toDoDAO.create(todo);
+
+        todo.setUserId(2L);
+        toDoDAO.create(todo);
+
+        List<ToDo> list = toDoDAO.getToDoByUserId(10L);
+
+        assertEquals(list.size(),2);
+        assertEquals(list.stream().filter(e->e.getUserId().equals(10L)).count(),2);
+
+    }
 }

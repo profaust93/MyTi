@@ -23,7 +23,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO my_ti.ToDo VALUES (DEFAULT ,?,?,?,?,?,?,?,?)"
+                    .prepareStatement("INSERT INTO my_ti.ToDo VALUES (DEFAULT ,?,?,?,?,?,?,?,?,?)"
                             ,PreparedStatement.RETURN_GENERATED_KEYS);
             if(toDo.getToDoTime() != null) {
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(toDo.getToDoTime()));
@@ -42,6 +42,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             preparedStatement.setInt(6, toDo.getPriority());
             preparedStatement.setBoolean(7,toDo.getDone());
             preparedStatement.setString(8,toDo.getToDoName());
+            preparedStatement.setLong(9,toDo.getUserId());
 
             //Inserting entity to Database
             preparedStatement.executeUpdate();
@@ -97,7 +98,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE my_ti.ToDo SET ToDoTime = ?, DeadLineTime = ?," +
                             "CategoryId = ?, ShortDesc = ?, FullDesc = ?, Priority = ?, IsDone = ?, " +
-                            "Name = ? WHERE CategoryId = ?");
+                            "Name = ?, UserId = ? WHERE CategoryId = ?");
 
             if(toDo.getToDoTime() != null) {
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(toDo.getToDoTime()));
@@ -116,7 +117,8 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             preparedStatement.setInt(6, toDo.getPriority());
             preparedStatement.setBoolean(7,toDo.getDone());
             preparedStatement.setString(8,toDo.getToDoName());
-            preparedStatement.setLong(9,toDo.getToDoId());
+            preparedStatement.setLong(9,toDo.getUserId());
+            preparedStatement.setLong(10,toDo.getToDoId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e ){
@@ -205,6 +207,32 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
         }
     }
 
+    public List<ToDo> getToDoByUserId(Long userId) throws DBException {Connection connection = null;
+        List<ToDo> toDoList = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM my_ti.ToDo WHERE UserId = ?");
+            preparedStatement.setLong(1,userId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // map result set to object and add to List
+            while (rs.next()) {
+                ToDo toDo = new ToDo();
+                mapResultSetToObject(toDo,rs);
+                toDoList.add(toDo);
+            }
+        }catch (Exception e ){
+            log.log(Level.WARNING,"Database error trying to get all Todo: ",e);
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
+        return toDoList;
+
+    }
+
     private void mapResultSetToObject(ToDo toDo, ResultSet rs) throws SQLException {
         toDo.setToDoId(rs.getLong(1));
         toDo.setToDoTime(rs.getTimestamp(2).toLocalDateTime());
@@ -215,6 +243,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
         toDo.setPriority(rs.getInt(7));
         toDo.setDone(rs.getBoolean(8));
         toDo.setToDoName(rs.getString(9));
+        toDo.setUserId(rs.getLong(10));
     }
 }
 

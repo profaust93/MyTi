@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
   `Priority` SMALLINT NOT NULL,
   `IsDone` BOOLEAN NOT NULL,
   `Name` VARCHAR(100) NOT NULL,
+  `UserId` INT(11) NOT NULL,
+
   PRIMARY KEY (`ToDoID`)
 )
   ENGINE = InnoDB
