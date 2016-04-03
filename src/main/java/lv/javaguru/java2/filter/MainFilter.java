@@ -1,8 +1,10 @@
 package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.controller.*;
+import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
+import lv.javaguru.java2.model.user.UserModelImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ public class MainFilter implements Filter {
         urlToController = new HashMap<>();
         urlToController.put("/hello",new HelloWorldController());
         urlToController.put("/registration", new RegistrController());
-        urlToController.put("/login", new LoginController());
+        urlToController.put("/login", new LoginController(new UserModelImpl()));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
     }
@@ -39,7 +41,7 @@ public class MainFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
         if(isLogIn == null || !isLogIn) {
-            controller = new LoginController();
+            controller = new LoginController(new UserModelImpl());
         }  else {
             controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
         }

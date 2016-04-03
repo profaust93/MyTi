@@ -51,7 +51,7 @@
                     <form id="loginForm" method="post" role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="userCred" type="text" autofocus>
+                                <input class="form-control" placeholder="E-mail or Username" name="userCred" type="text" autofocus>
                             </div>
                             <div id = "wrongLogin" class="alert alert-danger" style="display: none">
                                 Wrong login or email.

@@ -4,8 +4,8 @@ import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.LoginException;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.login.LoginModel;
-import lv.javaguru.java2.model.login.LoginModelImpl;
+import lv.javaguru.java2.model.user.UserModel;
+import lv.javaguru.java2.model.user.UserModelImpl;
 import org.json.simple.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginController implements MVCController {
+    private UserModel userModel;
+    public LoginController(UserModel userModel) {
+        this.userModel = userModel;
+    }
 
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
@@ -30,12 +34,13 @@ public class LoginController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
         Map<String,String> resultMap = new HashMap<>();
-        LoginModel loginModel = new LoginModelImpl(new UserDAOImpl());
+        userModel.setUserDAO(new UserDAOImpl());
         try{
-            Map<String,String> userInfo = loginModel.logInUser(req.getParameter("userCred"),req.getParameter("password"),false);
+            Map<String,String> userInfo = userModel.logInUser(req.getParameter("userCred"),req.getParameter("password"),false);
             if(userInfo == null || userInfo.get("userId") == null) {
                 throw new LoginException("Login Error");
             }
+
             HttpSession session = req.getSession();
             session.setAttribute("IsLoggedIn",true);
             session.setAttribute("userId",userInfo.get("userId"));

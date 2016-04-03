@@ -76,9 +76,10 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCategory(3);
         timeLapsDAO.update(timeLaps);
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
+
         assertNotNull(timeLapsFromDb);
         assertEquals(timeLaps.getTimeLapsId(),timeLapsFromDb.getTimeLapsId());
-        assertEquals(LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
+        assertEquals(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
         assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
         assertEquals("UpdatedLongDescription",timeLapsFromDb.getLongDescription());
         assertEquals(new Integer(3),timeLapsFromDb.getCategory());

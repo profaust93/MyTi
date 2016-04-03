@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.login;
+package lv.javaguru.java2.model.user;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
@@ -9,19 +9,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class LoginModelImpl implements LoginModel {
+public class UserModelImpl implements UserModel {
+
 
     UserDAO userDAO;
 
-    public LoginModelImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
     @Override
     public Map<String, String> logInUser(String userCred, String password, Boolean rememberMe) throws LoginException {
 
         User user;
         Map<String,String> userInfo = new HashMap<>();
-
         try {
             user = Optional.ofNullable(userDAO.getUserByEmailOrLogin(userCred)).orElseThrow(()->new LoginException("User Does Not Exist"));
         } catch (DBException e) {
@@ -37,5 +34,9 @@ public class LoginModelImpl implements LoginModel {
         userInfo.put("userName",user.getFirstName());
         userInfo.put("userLastName",user.getLastName());
         return userInfo;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 }
