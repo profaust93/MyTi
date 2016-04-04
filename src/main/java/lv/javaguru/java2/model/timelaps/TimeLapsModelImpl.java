@@ -1,5 +1,6 @@
 package lv.javaguru.java2.model.timelaps;
 
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
@@ -11,22 +12,21 @@ import java.util.List;
  */
 public class TimeLapsModelImpl implements TimeLapsModel {
 
-    private String jspName;
-    private Object data;
+    TimeLapsDAO timeLapsDAO;
 
-    public TimeLapsModelImpl(String jspName, Object data){
-        this.jspName = jspName;
-        this.data = data;
-    }
 
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
-
+        this.timeLapsDAO = timeLapsDAO;
     }
 
     @Override
     public TimeLaps getTimeLapsById(Long timeLapsId) throws TimeLapsException {
-        return null;
+        try {
+            return timeLapsDAO.getById(timeLapsId);
+        } catch (DBException e) {
+            throw new TimeLapsException(e.getMessage());
+        }
     }
 
     @Override
