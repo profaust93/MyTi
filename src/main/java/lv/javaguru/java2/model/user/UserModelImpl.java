@@ -6,7 +6,6 @@ import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.exceptions.LoginException;
 import lv.javaguru.java2.model.exceptions.RegisterException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -39,45 +38,49 @@ public class UserModelImpl implements UserModel {
     }
 
     @Override
-    public Boolean registerUser(HttpServletRequest req) throws RegisterException {
-        // Добавить  парметры с формы в объект User пример user.setName(request.getParameters("name"))
-        User user = null;
-        try {
-            user.setLogin(req.getParameter("login"));
-            user.setPassword(req.getParameter("password"));
-            user.setFirstName(req.getParameter("firstname"));
-            user.setLastName(req.getParameter("lastname"));
-            user.setEmail(req.getParameter("email"));
-        } catch (NullPointerException e){
-            throw new RegisterException(e.getMessage());
-        }
-        // также проверять обязательный праметры типо логина пароля и т.д чтобы не были пустыми
-        public boolean checkFields(User user){
-            return !(user.getLogin().isEmpty()
-                    || user.getPassword().isEmpty()
-                    || user.getEmail().isEmpty()
-                    || user.getFirstName().isEmpty()
-                    || user.getLastName().isEmpty());
-        }
+    public Boolean registerUser(User user) throws RegisterException {
+
+
         // если что-то плохо выкинуть эксепшн типо throw new RegistrationException("Login is empty")
-        if(!checkFields(user)){
-            throw new RegisterException("Login is empty");
-        //  если все ок вернуть true на всякий пожарный
+        checkFields(user);
+
+        isUserExist(user); //заимплементь метод
+
+        /*if(!checkFields(user)){
+            throw new RegisterException("Login is empty"); // просто вызови метод, а мтеод путьс генерит эксепшены
         }else{
-            return true;
-        }
+            return true;   // после return код не пишется, здесь просто оставь экспешн
+        }*/
         // чтобы вывести пользователя вызови userDAO.create(user)
         try {
             userDAO.create(user);
-            userDAO.getUserByEmailOrLogin(user.getLogin());
-         //......
-        // обзятельно лови эксепшены смотри метод выше
+            //userDAO.getUserByEmailOrLogin(user.getLogin()); //тут это не надо у тебя уже есть юзер после создание
+
         } catch (DBException e){
             throw new RegisterException(e.getMessage());
         }
-
+        return true;
     }
 
+    // также проверять обязательный праметры типо логина пароля и т.д чтобы не были пустыми
+    private void checkFields(User user) throws RegisterException {
+        if(user.getLogin() == null || user.getLogin().isEmpty()) {
+            throw new RegisterException("Login is empty");
+        }
+        // лучше сделай в таком стиле
+        // на каждое поле свой эксепшн
+       /* return !(user.getLogin().isEmpty()
+                || user.getPassword().isEmpty()
+                || user.getEmail().isEmpty()
+                || user.getFirstName().isEmpty()
+                || user.getLastName().isEmpty());*/
+    }
+
+    private void isUserExist(User user) throws RegisterException {
+        //добавь проверку которая будет прореять есть ли юзер с таким логином или емайлом в базе
+        // используй метод userDAO.getUserByEmailOrLogin(user.getLogin()); если он что-то вернет значит юзер уже существует
+        throw new RegisterException("No implemented yet"); // уберешь когда напишешь метож
+    }
 
 
     public void setUserDAO(UserDAO userDAO) {
