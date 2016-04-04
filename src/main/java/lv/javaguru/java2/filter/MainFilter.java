@@ -1,11 +1,10 @@
 package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.controller.*;
-import lv.javaguru.java2.controller.todo.ToDoListController;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
+import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.todo.ToDoModelImpl;
 import lv.javaguru.java2.model.user.UserModelImpl;
 
 import javax.servlet.*;
@@ -24,13 +23,10 @@ public class MainFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         urlToController = new HashMap<>();
         urlToController.put("/hello",new HelloWorldController());
-        urlToController.put("//login.jsp",new HelloWorldController());
         urlToController.put("/registration", new RegistrController());
         urlToController.put("/login", new LoginController(new UserModelImpl()));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
-        urlToController.put("/viewProfile",new ProfileController());
-        urlToController.put("/toDoList", new ToDoListController(new ToDoModelImpl()));
     }
 
     @Override
@@ -39,7 +35,7 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
-        if(contextURI.matches(".*(css|jpg|png|gif|js|ttf|woff)$")){
+        if(contextURI.matches(".*(css|jpg|png|gif|js)$")){
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
@@ -48,7 +44,7 @@ public class MainFilter implements Filter {
         if(isLogIn == null || !isLogIn) {
             controller = new LoginController(new UserModelImpl());
         }  else {
-            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());// java 8
+            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
         }
 
         MVCModel model;

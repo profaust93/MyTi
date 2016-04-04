@@ -92,7 +92,7 @@ public class ToDoModelImpl implements ToDoModel {
     @Override
     public TimeLaps makeTimeLapsFromToDo(ToDo todo) {
         TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCategory(todo.getCategoryId().orElse(0));
+        timeLaps.setCategory("sport");
         timeLaps.setCompleteTime(todo.getToDoTime());
         timeLaps.setUserId(todo.getUserId());
         timeLaps.setShortDescription(todo.getShortDescription().orElse(""));

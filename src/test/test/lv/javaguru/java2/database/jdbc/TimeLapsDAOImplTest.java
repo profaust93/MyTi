@@ -43,8 +43,9 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
@@ -59,14 +60,16 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(2);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
         timeLaps.setShortDescription("UpdatedShortDescription");
         timeLaps.setLongDescription("UpdatedLongDescription");
-        timeLaps.setCategory(3);
+        timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.update(timeLaps);
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
 
@@ -75,7 +78,7 @@ public class TimeLapsDAOImplTest {
         assertEquals(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
         assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
         assertEquals("UpdatedLongDescription",timeLapsFromDb.getLongDescription());
-        assertEquals(new Integer(3),timeLapsFromDb.getCategory());
+        assertEquals(new String("sport"),timeLapsFromDb.getCategory());
         assertEquals(new Long(2),timeLapsFromDb.getUserId());
     }
 
@@ -85,16 +88,18 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
         timeLaps.setUserId(3L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLaps1 = new TimeLaps();
         timeLaps1.setCompleteTime(LocalDateTime.now());
         timeLaps1.setShortDescription("ShortDescription");
         timeLaps1.setLongDescription("LongDescription");
-        timeLaps1.setCategory(1);
+        timeLaps1.setCategory("sport");
         timeLaps1.setUserId(3L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps1);
 
         Long timeLapsId = timeLaps.getTimeLapsId();
@@ -109,7 +114,8 @@ public class TimeLapsDAOImplTest {
         timeLaps.setCompleteTime(LocalDateTime.now());
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
-        timeLaps.setCategory(1);
+        timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName("timelaps");
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);

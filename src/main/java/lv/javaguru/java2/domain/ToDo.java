@@ -8,7 +8,7 @@ public class ToDo {
     private Long toDoId;
     private LocalDateTime toDoTime;
     private LocalDateTime deadLineTime;
-    private Integer categoryId;
+    private String category;
     private String shortDescription;
     private String longDescription;
     private Integer priority;
@@ -40,12 +40,12 @@ public class ToDo {
         this.deadLineTime = deadLineTime;
     }
 
-    public Optional<Integer> getCategoryId() {
-        return Optional.ofNullable(categoryId);
+    public Optional<String> getCategory() {
+        return Optional.ofNullable(category);
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Optional<String> getShortDescription() {

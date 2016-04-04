@@ -64,7 +64,7 @@ public class ToDoDAOImplTest {
         todo.setDone(false);
         todo.setToDoTime(LocalDateTime.now());
         todo.setDeadLineTime(LocalDateTime.now());
-        todo.setCategoryId(1);
+        todo.setCategory("fun");
         todo.setShortDescription("Before");
         todo.setLongDescription("Long Before");
         todo.setUserId(10L);
@@ -75,7 +75,7 @@ public class ToDoDAOImplTest {
         todo.setDone(true);
         todo.setToDoTime(LocalDateTime.of(2016,1,2,4,5));
         todo.setDeadLineTime(LocalDateTime.of(2017,1,2,4,5));
-        todo.setCategoryId(3);
+        todo.setCategory("sport");
         todo.setShortDescription("After");
         todo.setLongDescription("Long After");
         todo.setUserId(10L);
@@ -86,7 +86,7 @@ public class ToDoDAOImplTest {
         assertEquals(true,todo.getDone());
         assertEquals(LocalDateTime.of(2016,1,2,4,5),todo.getToDoTime());
         assertEquals(LocalDateTime.of(2017,1,2,4,5),todo.getDeadLineTime());
-        assertEquals(new Integer(3),todo.getCategoryId().orElse(0));
+        assertEquals(new String("sport"),todo.getCategory().orElse(null));
         assertEquals("After",todo.getShortDescription().orElse(""));
         assertEquals("Long After",todo.getLongDescription().orElse(""));
 

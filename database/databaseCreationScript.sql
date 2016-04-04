@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
   `ToDoID` INT(11) NOT NULL AUTO_INCREMENT,
   `ToDoTime` TIMESTAMP,
   `DeadLineTime` TIMESTAMP,
-  `CategoryId` INT(11),
+  `Category` VARCHAR(100),
   `ShortDesc` VARCHAR(100),
   `FullDesc` VARCHAR(1000),
   `Priority` SMALLINT NOT NULL,
@@ -48,11 +48,12 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
     TimeLapsId INT(11) NOT NULL AUTO_INCREMENT,
+    TimeLapsName VARCHAR(100),
     CompleteTime TIMESTAMP,
     UserID INT(11),
     ShortDescription VARCHAR(100),
     LongDescription VARCHAR(1000),
-    CategoryId INT(11),
+    Category VARCHAR(100),
   PRIMARY KEY (TimeLapsId)
 )
   ENGINE =InnoDB

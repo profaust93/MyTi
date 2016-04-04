@@ -36,7 +36,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
                 preparedStatement.setNull(2,java.sql.Types.TIMESTAMP);
 
             }
-            preparedStatement.setInt(3,toDo.getCategoryId().orElse(0));
+            preparedStatement.setString(3,toDo.getCategory().orElse(null));
             preparedStatement.setString(4,toDo.getShortDescription().orElse(""));
             preparedStatement.setString(5, toDo.getLongDescription().orElse(""));
             preparedStatement.setInt(6, toDo.getPriority());
@@ -97,8 +97,8 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE my_ti.ToDo SET ToDoTime = ?, DeadLineTime = ?," +
-                            "CategoryId = ?, ShortDesc = ?, FullDesc = ?, Priority = ?, IsDone = ?, " +
-                            "Name = ?, UserId = ? WHERE CategoryId = ?");
+                            "Category = ?, ShortDesc = ?, FullDesc = ?, Priority = ?, IsDone = ?, " +
+                            "Name = ?, UserId = ? WHERE Category = ?");
 
             if(toDo.getToDoTime() != null) {
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(toDo.getToDoTime()));
@@ -111,7 +111,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
                 preparedStatement.setNull(2,java.sql.Types.TIMESTAMP);
 
             }
-            preparedStatement.setInt(3,toDo.getCategoryId().orElse(0));
+            preparedStatement.setString(3,toDo.getCategory().orElse(null));
             preparedStatement.setString(4,toDo.getShortDescription().orElse(""));
             preparedStatement.setString(5, toDo.getLongDescription().orElse(""));
             preparedStatement.setInt(6, toDo.getPriority());
@@ -237,7 +237,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
         toDo.setToDoId(rs.getLong(1));
         toDo.setToDoTime(rs.getTimestamp(2).toLocalDateTime());
         toDo.setDeadLineTime(rs.getTimestamp(3).toLocalDateTime());
-        toDo.setCategoryId(rs.getInt(4));
+        toDo.setCategory(rs.getString(4));
         toDo.setShortDescription(rs.getString(5));
         toDo.setLongDescription(rs.getString(6));
         toDo.setPriority(rs.getInt(7));

@@ -2,7 +2,7 @@ package lv.javaguru.java2.domain;
 
 public class User {
 
-    private long userId;
+    private Long userId;
     private String login;
     private String firstName;
     private String lastName;
@@ -10,7 +10,7 @@ public class User {
     private String email;
 
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
