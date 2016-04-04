@@ -5,7 +5,7 @@ import lv.javaguru.java2.model.MVCModel;
 import javax.servlet.http.HttpServletRequest;
 
 
-public class HelloWorldController implements MVCController {
+public class IndexController implements MVCController {
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
@@ -17,3 +17,4 @@ public class HelloWorldController implements MVCController {
         return null;
     }
 }
+

@@ -98,7 +98,7 @@ public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE my_ti.ToDo SET ToDoTime = ?, DeadLineTime = ?," +
                             "Category = ?, ShortDesc = ?, FullDesc = ?, Priority = ?, IsDone = ?, " +
-                            "Name = ?, UserId = ? WHERE Category = ?");
+                            "Name = ?, UserId = ? WHERE ToDoID = ?");
 
             if(toDo.getToDoTime() != null) {
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(toDo.getToDoTime()));
