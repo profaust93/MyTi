@@ -1,7 +1,8 @@
 package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.controller.*;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
+import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.user.UserModelImpl;

@@ -45,6 +45,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
@@ -61,12 +62,14 @@ public class TimeLapsDAOImplTest {
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory("sport");
         timeLaps.setUserId(2L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
         timeLaps.setShortDescription("UpdatedShortDescription");
         timeLaps.setLongDescription("UpdatedLongDescription");
         timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.update(timeLaps);
         TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
 
@@ -87,6 +90,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory("sport");
         timeLaps.setUserId(3L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps);
 
         TimeLaps timeLaps1 = new TimeLaps();
@@ -95,6 +99,7 @@ public class TimeLapsDAOImplTest {
         timeLaps1.setLongDescription("LongDescription");
         timeLaps1.setCategory("sport");
         timeLaps1.setUserId(3L);
+        timeLaps.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps1);
 
         Long timeLapsId = timeLaps.getTimeLapsId();
@@ -110,6 +115,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setShortDescription("ShortDescription");
         timeLaps.setLongDescription("LongDescription");
         timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName("timelaps");
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);

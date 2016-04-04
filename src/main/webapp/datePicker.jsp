@@ -10,27 +10,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"      "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/resources/lib/datetimepicker/jquery.datetimepicker.css"/>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-    <script src="/resources/lib/datetimepicker/jquery.js"></script>
-    <script src="/resources/lib/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
-
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-    <script>
-        jQuery(function() {
-            jQuery('#datetimepicker').datetimepicker();
-        });
-    </script>
-    <title>Test</title>
 </head>
 <body>
+<div id="datetimepicker" class="input-append date">
+    <input type="text" id = "date"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+</div>
 
-Date: <input id="datetimepicker" type="text" >
+<script type="text/javascript"
+        src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js">
+</script>
+
+<script type="text/javascript"
+        src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+</script>
+<script type="text/javascript">
+    $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy hh:mm:ss',
+        language: 'en'
+    });
+</script>
+
 </body>
-</html>
+<html>

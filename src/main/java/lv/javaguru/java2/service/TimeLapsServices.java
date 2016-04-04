@@ -7,6 +7,7 @@ import lv.javaguru.java2.domain.User;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,13 @@ public class TimeLapsServices {
         return ok;
     }
 
+    public LocalDateTime dateConvert(String data){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(data,formatter);
+        System.out.println(dateTime);
+        return dateTime;
+    }
+
     public String userIdCheck(String data){
         try {
             if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
@@ -73,6 +81,7 @@ public class TimeLapsServices {
     public String dateCheck(String data){
         try {
             if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+
         } catch (DBException e) {
             return e.getMessage();
         }

@@ -1,5 +1,6 @@
-package lv.javaguru.java2.controller;
+package lv.javaguru.java2.controller.timelaps;
 
+import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.model.MVCModel;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by ruslan on 16.29.3.
  */
-public class ViewTimeLapsController implements MVCController{
+public class ViewTimeLapsController implements MVCController {
     @Override
     public MVCModel processGet(HttpServletRequest req) {
 

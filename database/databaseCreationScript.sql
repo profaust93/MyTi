@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
     TimeLapsId INT(11) NOT NULL AUTO_INCREMENT,
+    TimeLapsName VARCHAR(100),
     CompleteTime TIMESTAMP,
     UserID INT(11),
     ShortDescription VARCHAR(100),

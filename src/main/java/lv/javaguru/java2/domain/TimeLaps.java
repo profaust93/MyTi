@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class TimeLaps {
 
     private Long timeLapsId;
+    private String timeLapsName;
     private LocalDateTime completeTime;
     private Long userId;
     private String shortDescription;
@@ -20,6 +21,14 @@ public class TimeLaps {
 
     public void setTimeLapsId(Long timeLapsId) {
         this.timeLapsId = timeLapsId;
+    }
+
+    public String getTimeLapsName() {
+        return timeLapsName;
+    }
+
+    public void setTimeLapsName(String timeLapsName) {
+        this.timeLapsName = timeLapsName;
     }
 
     public LocalDateTime getCompleteTime() {

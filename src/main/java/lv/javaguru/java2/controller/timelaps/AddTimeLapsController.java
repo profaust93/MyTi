@@ -1,11 +1,16 @@
 
-package lv.javaguru.java2.controller;
+package lv.javaguru.java2.controller.timelaps;
 
+import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
+import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.model.exceptions.LoginException;
+import lv.javaguru.java2.model.user.UserModel;
 import lv.javaguru.java2.service.TimeLapsServices;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,18 +27,18 @@ public class AddTimeLapsController implements MVCController {
     private TimeLapsServices timeLapsServices = new TimeLapsServices();
     private Map<Object,String> resultCheckMap = new HashMap<>();
 
-    //KEYS
-    String userIdKey = "userId";
-    String yearKey = "year";
     @Override
     public MVCModel processGet(HttpServletRequest req) {
+        String userId = (String) req.getSession().getAttribute("userId");
+        resultCheckMap.put("getUserId",userId);
         return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
 
-        String userId = req.getParameter("userId");
+        String userId = (String) req.getSession().getAttribute("userId");
+        String date = req.getParameter("date");
         String category = req.getParameter("category");
         String shortDescription = req.getParameter("shortDescription");
         String longDescription = req.getParameter("longDescription");
@@ -42,17 +47,18 @@ public class AddTimeLapsController implements MVCController {
 
         TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
         try {
-            resultCheckMap.put("userId", timeLapsServices.userIdCheck(userId));
-            resultCheckMap.put("category",timeLapsServices.categoryCheck(category));
+            resultCheckMap.put("userIdCheckResult", timeLapsServices.userIdCheck(userId));
+            resultCheckMap.put("categoryCheckResult",timeLapsServices.categoryCheck(category));
+            resultCheckMap.put("dateCheckResult",timeLapsServices.dateCheck(date));
+
             if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
                 timeLaps.setUserId(Long.parseLong(userId));
             }
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            if(timeLapsServices.dateCheck(date).equalsIgnoreCase("ok")){
+                timeLaps.setCompleteTime(timeLapsServices.dateConvert(date));
+            }
 
-
-
-            timeLaps.setCompleteTime(LocalDateTime.now());
             if(timeLapsServices.categoryCheck(category).equalsIgnoreCase("ok")){
                 timeLaps.setCategory(category);
             }
@@ -60,13 +66,11 @@ public class AddTimeLapsController implements MVCController {
             timeLaps.setShortDescription(shortDescription);
             timeLaps.setLongDescription(longDescription);
 
-            Iterator it = resultCheckMap.entrySet().iterator();
-            while (it.hasNext()){
-                Map.Entry<String,String> entry = (Map.Entry<String, String>) it.next();
-                if(entry.getValue().equalsIgnoreCase("ok")== false) throw new DBException("Error");
-            }
+
 
             timeLapsDAO.create(timeLaps);
+
+            System.out.println(timeLapsDAO.getById(timeLaps.getTimeLapsId()));
 
 
         } catch (DBException e) {
