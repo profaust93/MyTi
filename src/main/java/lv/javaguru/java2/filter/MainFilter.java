@@ -1,7 +1,12 @@
 package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.controller.*;
+import lv.javaguru.java2.controller.todo.ToDoListController;
+import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.model.exceptions.RedirectException;
+import lv.javaguru.java2.model.todo.ToDoModelImpl;
+import lv.javaguru.java2.model.user.UserModelImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +24,13 @@ public class MainFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         urlToController = new HashMap<>();
         urlToController.put("/hello",new HelloWorldController());
+        urlToController.put("//login.jsp",new HelloWorldController());
+        urlToController.put("/registration", new RegistrController());
+        urlToController.put("/login", new LoginController(new UserModelImpl()));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
+        urlToController.put("/viewProfile",new ProfileController());
+        urlToController.put("/toDoList", new ToDoListController(new ToDoModelImpl()));
     }
 
     @Override
@@ -29,30 +39,35 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
+        if(contextURI.matches(".*(css|jpg|png|gif|js|ttf|woff)$")){
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
+        }
         HttpSession session = httpServletRequest.getSession();
-        Boolean isLogIn = (Boolean) session.getAttribute("isLogIn");
-        if(isLogIn != null && isLogIn) {
-            controller = new LoginController();
+        Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
+        if(isLogIn == null || !isLogIn) {
+            controller = new LoginController(new UserModelImpl());
         }  else {
-            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
+            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());// java 8
         }
 
         MVCModel model;
         String methodName = httpServletRequest.getMethod();
         if("GET".equalsIgnoreCase(methodName)) {
-            model = controller.processGet(httpServletRequest);
+            try {
+                model = controller.processGet(httpServletRequest);
+            } catch (RedirectException e) {
+                httpServletResponse.sendRedirect(e.getUrlToRedirect());
+                return;
+            }
         } else {
             model = controller.processPost(httpServletRequest);
         }
 
-
         httpServletRequest.setAttribute("data",model.getData());
-
         ServletContext context = servletRequest.getServletContext();
         RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
         requestDispatcher.forward(httpServletRequest,httpServletResponse);
-
-
 
     }
 

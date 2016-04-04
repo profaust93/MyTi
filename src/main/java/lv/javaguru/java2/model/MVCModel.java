@@ -1,6 +1,5 @@
 package lv.javaguru.java2.model;
 
-import java.util.Objects;
 
 public class MVCModel {
     private String jspName;
@@ -18,4 +17,6 @@ public class MVCModel {
     public Object getData() {
         return data;
     }
+
+
 }

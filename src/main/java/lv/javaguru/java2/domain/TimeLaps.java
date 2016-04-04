@@ -3,7 +3,7 @@ package lv.javaguru.java2.domain;
 import java.time.LocalDateTime;
 
 /**
- * Created by ruslan on 16.17.3.
+ * Created by ruslan on 16.17.3 for MyTi project.
  */
 public class TimeLaps {
 
