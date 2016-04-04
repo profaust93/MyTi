@@ -38,6 +38,7 @@ public class AddTimeLapsController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) {
 
         String userId = (String) req.getSession().getAttribute("userId");
+        String name = req.getParameter("name");
         String date = req.getParameter("date");
         String category = req.getParameter("category");
         String shortDescription = req.getParameter("shortDescription");

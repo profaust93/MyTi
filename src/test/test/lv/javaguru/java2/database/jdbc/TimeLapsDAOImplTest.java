@@ -78,7 +78,7 @@ public class TimeLapsDAOImplTest {
         assertEquals(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
         assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
         assertEquals("UpdatedLongDescription",timeLapsFromDb.getLongDescription());
-        assertEquals(new Integer(3),timeLapsFromDb.getCategory());
+        assertEquals(new String("sport"),timeLapsFromDb.getCategory());
         assertEquals(new Long(2),timeLapsFromDb.getUserId());
     }
 

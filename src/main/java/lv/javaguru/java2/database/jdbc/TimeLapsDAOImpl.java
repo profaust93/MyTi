@@ -59,7 +59,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE my_ti.TimeLaps SET CompleteTime = ?," +
-                            "UserID = ?, ShortDescription = ?, LongDescription = ?,CategoryId = ?");
+                            "UserID = ?, ShortDescription = ?, LongDescription = ?,Category = ?");
             if(timeLaps.getCompleteTime() != null){
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(timeLaps.getCompleteTime()));
             } else {

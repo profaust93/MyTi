@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
   `ToDoID` INT(11) NOT NULL AUTO_INCREMENT,
   `ToDoTime` TIMESTAMP,
   `DeadLineTime` TIMESTAMP,
-  `CategoryId` INT(11),
+  `Category` VARCHAR(100),
   `ShortDesc` VARCHAR(100),
   `FullDesc` VARCHAR(1000),
   `Priority` SMALLINT NOT NULL,
