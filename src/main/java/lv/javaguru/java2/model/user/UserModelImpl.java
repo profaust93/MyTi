@@ -1,6 +1,5 @@
 package lv.javaguru.java2.model.user;
 
-import com.sun.deploy.net.HttpRequest;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
