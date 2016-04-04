@@ -1,6 +1,6 @@
 package lv.javaguru.java2.model.user;
 
-import com.sun.deploy.net.HttpRequest;
+import javax.servlet.http.HttpServletRequest;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
@@ -38,7 +38,7 @@ public class UserModelImpl implements UserModel {
     }
 
     @Override
-    public Boolean registerUser(HttpRequest request) {
+    public Boolean registerUser(HttpServletRequest request) {
         // Добавить  парметры с формы в объект User пример user.setName(request.getParameters("name"))
         // также проверять обязательный праметры типо логина пароля и т.д чтобы не были пустыми
         // если что-то плохо выкинуть эксепшн типо throw new RegistrationException("Login is empty")
