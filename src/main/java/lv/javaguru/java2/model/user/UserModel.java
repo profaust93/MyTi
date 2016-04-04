@@ -1,6 +1,7 @@
 package lv.javaguru.java2.model.user;
 
 
+import com.sun.deploy.net.HttpRequest;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.model.exceptions.LoginException;
 
@@ -20,7 +21,7 @@ public interface UserModel {
 
     Map<String,String> logInUser(String userCred, String password, Boolean rememberMe) throws LoginException;
 
-    
+    Boolean registerUser(HttpRequest request);
 
     void setUserDAO(UserDAO userDAO);
 }

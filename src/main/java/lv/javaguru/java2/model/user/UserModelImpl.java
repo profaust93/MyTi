@@ -1,5 +1,6 @@
 package lv.javaguru.java2.model.user;
 
+import com.sun.deploy.net.HttpRequest;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
@@ -12,7 +13,7 @@ import java.util.Optional;
 public class UserModelImpl implements UserModel {
 
 
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Override
     public Map<String, String> logInUser(String userCred, String password, Boolean rememberMe) throws LoginException {
@@ -34,6 +35,17 @@ public class UserModelImpl implements UserModel {
         userInfo.put("userName",user.getFirstName());
         userInfo.put("userLastName",user.getLastName());
         return userInfo;
+    }
+
+    @Override
+    public Boolean registerUser(HttpRequest request) {
+        // Добавить  парметры с формы в объект User пример user.setName(request.getParameters("name"))
+        // также проверять обязательный праметры типо логина пароля и т.д чтобы не были пустыми
+        // если что-то плохо выкинуть эксепшн типо throw new RegistrationException("Login is empty")
+        //  если все ок вернуть true на всякий пожарный
+        // чтобы вывести пользователя вызови userDAO.create(user)
+        // обзятельно лови эксепшены смотри метод выше
+        return null;
     }
 
     public void setUserDAO(UserDAO userDAO) {
