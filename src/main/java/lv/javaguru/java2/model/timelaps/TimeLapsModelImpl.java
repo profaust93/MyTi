@@ -31,7 +31,13 @@ public class TimeLapsModelImpl implements TimeLapsModel {
 
     @Override
     public List<TimeLaps> getAllTimeLapsForUser(String userId) throws TimeLapsException {
-        List<TimeLaps> allTimeLaps = timeLapsDAO.getAllTimeLaps()
+        try {
+            List<TimeLaps> allTimeLaps = timeLapsDAO.getAllTimeLaps();
+
+            return allTimeLaps.stream().map(timeLaps -> new TimeLaps)
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
         return
     }
 
