@@ -24,7 +24,7 @@ public class LoginController implements MVCController {
         HttpSession session = req.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
         if(isLogIn != null && isLogIn) {
-            throw new RedirectException("Don't need to login again","/java2/hello");
+            throw new RedirectException("Don't need to login again","/java2/index");
         }
         String contextURI = req.getRequestURL().toString();
         session.setAttribute("comeFrom",contextURI);
@@ -51,7 +51,7 @@ public class LoginController implements MVCController {
                 resultMap.put("redirectTo",(String)session.getAttribute("comeFrom"));
 
             } else {
-                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/hello";
+                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/index";
                 resultMap.put("redirectTo",url);
             }
             return new MVCModel("/json.jsp",new JSONObject(resultMap));

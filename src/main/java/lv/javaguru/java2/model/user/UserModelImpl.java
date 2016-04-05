@@ -21,6 +21,7 @@ public class UserModelImpl implements UserModel {
         User user;
         Map<String,String> userInfo = new HashMap<>();
         try {
+            //вренте либо юзера либо выкинет exception что юзера с таким логино нету
             user = Optional.ofNullable(userDAO.getUserByEmailOrLogin(userCred)).orElseThrow(()->new LoginException("User Does Not Exist"));
         } catch (DBException e) {
             throw new LoginException(e.getMessage());

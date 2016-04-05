@@ -67,7 +67,7 @@ public class LoginControllerTest {
             fail("No exception was thrown");
         } catch (RedirectException e) {
             assertEquals("Don't need to login again",e.getMessage());
-            assertEquals("/java2/hello",e.getUrlToRedirect());
+            assertEquals("/java2/index",e.getUrlToRedirect());
         }
     }
 
@@ -86,7 +86,7 @@ public class LoginControllerTest {
 
     @Test
     public void testLoginAndRedirectToPageWhereCome() throws Exception {
-        when(req.getServletPath()).thenReturn("/hello");
+        when(req.getServletPath()).thenReturn("/index");
 
         MVCModel mvcModel = loginController.processPost(req);
         assertEquals("/json.jsp",mvcModel.getJspName());
@@ -112,7 +112,7 @@ public class LoginControllerTest {
         assertEquals("/json.jsp",mvcModel.getJspName());
         assertEquals("OK",json.get("status"));
         assertEquals("Name",json.get("userName"));
-        assertEquals("http://myTi.com:80/hello",json.get("redirectTo"));
+        assertEquals("http://myTi.com:80/index",json.get("redirectTo"));
 
     }
 
