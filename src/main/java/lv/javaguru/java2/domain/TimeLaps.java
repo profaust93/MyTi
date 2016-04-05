@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 public class TimeLaps {
 
     private Long timeLapsId;
-    private String timeLapsName;
     private LocalDateTime completeTime;
     private Long userId;
     private String shortDescription;
     private String longDescription;
     private String category;
+    private String timeLapsName;
 
     public Long getTimeLapsId() {
         return timeLapsId;

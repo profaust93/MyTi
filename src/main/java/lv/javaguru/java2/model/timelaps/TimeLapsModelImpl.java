@@ -65,7 +65,6 @@ public class TimeLapsModelImpl implements TimeLapsModel {
             resultCheckMap.put("categoryCheckResult",timeLapsServices.categoryCheck(category));
             resultCheckMap.put("nameCheckResult",timeLapsServices.nameCheck(name));
             resultCheckMap.put("dateCheckResult",timeLapsServices.dateCheck(date));
-            resultCheckMap.put("getUserId",userId);
 
             TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
             TimeLaps timeLaps = new TimeLaps();
@@ -90,8 +89,13 @@ public class TimeLapsModelImpl implements TimeLapsModel {
             timeLaps.setLongDescription(longDescription);
 
 
+            for(Map.Entry entry:resultCheckMap.entrySet()){
+                String value = (String) entry.getValue();
+                if(!value.equalsIgnoreCase("ok")) throw new DBException("Error");
+            }
 
             timeLapsDAO.create(timeLaps);
+
         } catch (DBException e) {
             return resultCheckMap;
         }

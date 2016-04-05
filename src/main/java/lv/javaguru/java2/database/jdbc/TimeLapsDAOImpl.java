@@ -47,7 +47,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
         try{
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO my_ti.TimeLaps VALUES (DEFAULT,?,?,?,?,?)",
+                    .prepareStatement("INSERT INTO my_ti.TimeLaps VALUES (DEFAULT,?,?,?,?,?,?)",
                             PreparedStatement.RETURN_GENERATED_KEYS);
             if(timeLaps.getCompleteTime() != null){
                 preparedStatement.setTimestamp(1, Timestamp.valueOf(timeLaps.getCompleteTime()));
@@ -58,6 +58,7 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
             preparedStatement.setString(3,timeLaps.getShortDescription());
             preparedStatement.setString(4,timeLaps.getLongDescription());
             preparedStatement.setString(5,timeLaps.getCategory());
+            preparedStatement.setString(6,timeLaps.getTimeLapsName());
 
             preparedStatement.executeUpdate();
 

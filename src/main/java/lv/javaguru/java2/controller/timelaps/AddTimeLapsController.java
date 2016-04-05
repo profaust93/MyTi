@@ -30,8 +30,6 @@ public class AddTimeLapsController implements MVCController {
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        String userId = (String) req.getSession().getAttribute("userId");
-        resultCheckMap.put("getUserId",userId);
         return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
     }
 

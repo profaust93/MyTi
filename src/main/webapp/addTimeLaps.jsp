@@ -19,7 +19,6 @@
 <% Map<String,String> dataMap = (Map<String,String>) request.getAttribute("data");
 %>
 <form method = "post" action="addTimeLaps">
-    <h3>User ID: <%=dataMap.get("getUserId")%> </h3>
     <h3>TimeLaps name:</h3>
     <input type="text" name="name"> <%=dataMap.get("nameCheckResult")%>
     <h3>Category:</h3>
@@ -33,7 +32,7 @@
     <h3>Date:</h3> <%= dataMap.get("dateCheckResult")%>
 
     <div id="datetimepicker" class="input-append date">
-        <input type="text" name = "date"></input>
+        <input type="text" name = "date">
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
       </span>
