@@ -99,4 +99,14 @@ public class TimeLapsServices {
         }
         return ok;
     }
+
+    public String nameCheck(String data){
+        try{
+            if(isNotEmpty(data) != ok)
+                throw new DBException(isNotEmpty(data));
+        } catch (DBException e) {
+            return e.getMessage();
+        }
+        return ok;
+    }
 }

@@ -25,7 +25,7 @@ public class TimeLapsDAOImplTest {
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
     private TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
-    private ToDoDAO toDoDAO = new ToDoDAOImpl();
+
 
     @Before
     public void init() throws DBException {
