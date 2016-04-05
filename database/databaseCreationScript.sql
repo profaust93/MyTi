@@ -11,13 +11,13 @@ USE `my_ti` ;
 DROP TABLE IF EXISTS `my_ti`.`Users` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
-  `UserID` INT(11) NOT NULL AUTO_INCREMENT,
+  `UserId` INT(11) NOT NULL AUTO_INCREMENT,
   `Login` CHAR(32) NOT NULL,
   `Password` CHAR(32) NOT NULL,
   `FirstName` CHAR(32) NOT NULL,
   `LastName` CHAR(32) NOT NULL,
   `Email` CHAR(32) NOT NULL,
-  PRIMARY KEY (`UserID`)
+  PRIMARY KEY (`UserId`)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
@@ -28,7 +28,7 @@ AUTO_INCREMENT = 1002;
 DROP TABLE IF EXISTS `my_ti`.`ToDo` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
-  `ToDoID` INT(11) NOT NULL AUTO_INCREMENT,
+  `ToDoId` INT(11) NOT NULL AUTO_INCREMENT,
   `ToDoTime` TIMESTAMP,
   `DeadLineTime` TIMESTAMP,
   `Category` VARCHAR(100),
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
   `Name` VARCHAR(100) NOT NULL,
   `UserId` INT(11) NOT NULL,
 
-  PRIMARY KEY (`ToDoID`)
+  PRIMARY KEY (`ToDoId`)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 100;
@@ -69,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
     LastName VARCHAR (30),
     Email VARCHAR (30),
 
-  PRIMARY KEY (ProfileId)
+  PRIMARY KEY (ProfileId),
+  FOREIGN KEY (UserId) REFERENCES Users (UserId) ON DELETE CASCADE on UPDATE CASCADE
 
 )
   ENGINE =InnoDB
