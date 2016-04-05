@@ -13,6 +13,31 @@ import java.util.List;
  */
 public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     @Override
+    public List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException {
+        List<TimeLaps> timeLapsList = new ArrayList<>();
+        Connection connection=null;
+
+        try{
+            connection = getConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM my_ti.TimeLaps WHERE UserID = ?");
+            preparedStatement.setLong(1,userId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                TimeLaps timeLaps = new TimeLaps();
+                mapResultSetToObject(timeLaps,rs);
+                timeLapsList.add(timeLaps);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
+        return timeLapsList;
+    }
+
+    @Override
     public void create(TimeLaps timeLaps) throws DBException {
         if(timeLaps == null){
             return;

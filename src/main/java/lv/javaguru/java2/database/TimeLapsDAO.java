@@ -19,5 +19,7 @@ public interface TimeLapsDAO {
 
     List<TimeLaps> getAllTimeLaps() throws DBException;
 
+    List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException;
+
 
 }

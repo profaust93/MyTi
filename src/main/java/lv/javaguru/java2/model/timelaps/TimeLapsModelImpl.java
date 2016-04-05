@@ -31,7 +31,8 @@ public class TimeLapsModelImpl implements TimeLapsModel {
 
     @Override
     public List<TimeLaps> getAllTimeLapsForUser(String userId) throws TimeLapsException {
-        return null;
+        List<TimeLaps> allTimeLaps = timeLapsDAO.getAllTimeLaps()
+        return
     }
 
     @Override
