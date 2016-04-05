@@ -85,8 +85,12 @@ public class TimeLapsModelImpl implements TimeLapsModel {
                 timeLaps.setTimeLapsName(name);
             }
 
-            timeLaps.setShortDescription(shortDescription);
-            timeLaps.setLongDescription(longDescription);
+            if(timeLapsServices.descriptionCheck(shortDescription,100).equalsIgnoreCase("ok")){
+                timeLaps.setShortDescription(shortDescription);
+            }
+            if(timeLapsServices.descriptionCheck(longDescription,1000).equalsIgnoreCase("ok")) {
+                timeLaps.setLongDescription(longDescription);
+            }
 
 
             for(Map.Entry entry:resultCheckMap.entrySet()){

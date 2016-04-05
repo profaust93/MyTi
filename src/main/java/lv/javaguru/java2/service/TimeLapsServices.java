@@ -19,8 +19,8 @@ public class TimeLapsServices {
     String ok = "OK";
     Integer count;
 
-    public String isNotEmpty(String data){
-        if(StringUtils.isEmpty(data)) try {
+    public String isNotEmpty(String data) {
+        if (StringUtils.isEmpty(data)) try {
             throw new DBException("This field must be not empty");
         } catch (DBException e) {
             return e.getMessage();
@@ -33,10 +33,10 @@ public class TimeLapsServices {
         count = 0;
         try {
             List<User> userList = userDAO.getAll();
-            if(userList.size() == 0){
+            if (userList.size() == 0) {
                 throw new DBException("Empty DB");
-            } else for (int i = 0; i < userList.size() ; i++) {
-                if(userList.get(i).getUserId().equals(Long.parseLong(data))){
+            } else for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getUserId().equals(Long.parseLong(data))) {
                     count++;
                 }
             }
@@ -58,29 +58,29 @@ public class TimeLapsServices {
         return ok;
     }
 
-    public LocalDateTime dateConvert(String data){
+    public LocalDateTime dateConvert(String data) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(data,formatter);
+        LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
         System.out.println(dateTime);
         return dateTime;
     }
 
-    public String userIdCheck(String data){
+    public String userIdCheck(String data) {
         try {
-            if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
-            if(isNumber(data) != ok) throw new DBException(isNumber(data));
-            if(isNotEmpty(data)==ok){
-                if(isDefinedUserId(data) != ok) throw new DBException(isDefinedUserId(data));
+            if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+            if (isNumber(data) != ok) throw new DBException(isNumber(data));
+            if (isNotEmpty(data) == ok) {
+                if (isDefinedUserId(data) != ok) throw new DBException(isDefinedUserId(data));
             }
-        } catch (DBException e){
+        } catch (DBException e) {
             return e.getMessage();
         }
         return ok;
     }
 
-    public String dateCheck(String data){
+    public String dateCheck(String data) {
         try {
-            if(isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+            if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
 
         } catch (DBException e) {
             return e.getMessage();
@@ -88,22 +88,34 @@ public class TimeLapsServices {
         return ok;
     }
 
-    public String categoryCheck(String data){
-        try{
-            if(isNotEmpty(data) != ok)
+    public String categoryCheck(String data) {
+        try {
+            if (isNotEmpty(data) != ok)
                 throw new DBException(isNotEmpty(data));
-            if(isNumber(data) == ok)
+            if (isNumber(data) == ok)
                 throw new DBException("This field must be string");
-        }catch (DBException e){
+        } catch (DBException e) {
             return e.getMessage();
         }
         return ok;
     }
 
-    public String nameCheck(String data){
-        try{
-            if(isNotEmpty(data) != ok)
+    public String nameCheck(String data) {
+        try {
+            if (isNotEmpty(data) != ok)
                 throw new DBException(isNotEmpty(data));
+        } catch (DBException e) {
+            return e.getMessage();
+        }
+        return ok;
+    }
+
+    public String descriptionCheck(String data, Integer count) {
+        try {
+            if (data.length() > count) {
+                throw new DBException("Too long description, must be shorter(not more than" +
+                        count + " symbols)");
+            }
         } catch (DBException e) {
             return e.getMessage();
         }
