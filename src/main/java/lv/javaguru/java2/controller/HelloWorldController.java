@@ -9,7 +9,7 @@ public class HelloWorldController implements MVCController {
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/datePicker.jsp","Hello From MVC");
+        return new MVCModel("/index.jsp","Hello From MVC");
     }
 
     @Override

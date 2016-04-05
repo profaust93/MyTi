@@ -24,7 +24,7 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
         connection = getConnection();
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO my_ti.profiles VALUES (default,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("INSERT INTO my_ti.Profiles VALUES (default,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setLong(1, userProfile.getUserId());
             preparedStatement.setString(2, userProfile.getFirstName());
@@ -52,7 +52,7 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
         try {
         connection = getConnection();
 
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_ti.profiles WHERE userId = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM my_ti.Profiles WHERE userId = ?");
         preparedStatement.setLong(1, userId);
         ResultSet rs = preparedStatement.executeQuery();
         UserProfile userProfile = null;
@@ -80,7 +80,7 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
         Connection connection = null;
         try {
             connection = getConnection();
-           PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM my_ti.profiles WHERE userId = ?");
+           PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM my_ti.Profiles WHERE userId = ?");
            preparedStatement.setLong(1,userId);
             preparedStatement.executeUpdate();
         } catch (Throwable e){
@@ -98,7 +98,7 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE my_ti.profiles set userId = ?, firstName = ?, lastName = ?, email = ? WHERE profileId = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE my_ti.Profiles set userId = ?, firstName = ?, lastName = ?, email = ? WHERE profileId = ?");
             preparedStatement.setLong(1,userProfile.getUserId());
             preparedStatement.setString(2,userProfile.getFirstName());
             preparedStatement.setString(3, userProfile.getLastName());

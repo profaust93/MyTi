@@ -22,8 +22,8 @@ public class MainFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         urlToController = new HashMap<>();
-        urlToController.put("/hello",new HelloWorldController());
-        urlToController.put("/registration", new RegistrController());
+        urlToController.put("/index",new HelloWorldController());
+        urlToController.put("/registration", new RegisterController());
         urlToController.put("/login", new LoginController(new UserModelImpl()));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());

@@ -86,7 +86,7 @@ public class ToDoDAOImplTest {
         assertEquals(true,todo.getDone());
         assertEquals(LocalDateTime.of(2016,1,2,4,5),todo.getToDoTime());
         assertEquals(LocalDateTime.of(2017,1,2,4,5),todo.getDeadLineTime());
-        assertEquals(new String("sport"),todo.getCategory().orElse(null));
+        assertEquals("sport",todo.getCategory().orElse(null));
         assertEquals("After",todo.getShortDescription().orElse(""));
         assertEquals("Long After",todo.getLongDescription().orElse(""));
 

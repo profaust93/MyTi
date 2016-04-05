@@ -9,6 +9,19 @@ public class User {
     private String password;
     private String email;
 
+    public User(){
+
+    }
+
+    public User(String login, String firstName,
+                String lastName, String password, String email) {
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+    }
+
 
     public Long getUserId() {
         return userId;
