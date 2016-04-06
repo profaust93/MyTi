@@ -12,16 +12,17 @@ public class TimeLapsList {
     private LocalDateTime completeTime;
     private String shortDescription;
     private String longDescription;
-
+    private String category;
 
 
     public TimeLapsList(Long timeLapsId, String timeLapsName, LocalDateTime completeTime,
-                        String shortDescription,String longDescription) {
+                        String shortDescription, String longDescription,String category) {
         this.timeLapsId = timeLapsId;
         this.timeLapsName = timeLapsName;
         this.completeTime = completeTime;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
+        this.category = category;
     }
 
     public Long getTimeLapsId() {
@@ -63,4 +64,13 @@ public class TimeLapsList {
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
