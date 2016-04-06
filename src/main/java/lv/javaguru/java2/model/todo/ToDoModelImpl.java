@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class ToDoModelImpl implements ToDoModel {
+class ToDoModelImpl implements ToDoModel {
     private ToDoDAO toDoDAO;
 
     @Override
@@ -35,7 +35,10 @@ public class ToDoModelImpl implements ToDoModel {
         try {
             List<ToDo> allToDo  = toDoDAO.getToDoByUserId(Long.parseLong(userId));
 
-            return allToDo.stream().map(todo ->
+            List<ToDo> filteredToDo = allToDo.stream().filter(e->e.getUserId()
+                    .equals(Long.parseLong(userId))).collect(Collectors.toList());
+
+            return filteredToDo.stream().map(todo ->
                     new ToDoList(todo.getToDoId(), todo.getPriority(),
                             todo.getDone(),todo.getToDoName()))
                     .collect(Collectors.toList());
@@ -92,7 +95,8 @@ public class ToDoModelImpl implements ToDoModel {
     @Override
     public TimeLaps makeTimeLapsFromToDo(ToDo todo) {
         TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName(todo.getToDoName());
+        timeLaps.setCategory(todo.getCategory().orElse(""));
         timeLaps.setCompleteTime(todo.getToDoTime());
         timeLaps.setUserId(todo.getUserId());
         timeLaps.setShortDescription(todo.getShortDescription().orElse(""));
