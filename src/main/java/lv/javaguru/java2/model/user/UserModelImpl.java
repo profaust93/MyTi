@@ -42,20 +42,18 @@ public class UserModelImpl implements UserModel {
     public Boolean registerUser(User user) throws RegisterException {
 
 
-        // если что-то плохо выкинуть эксепшн типо throw new RegistrationException("Login is empty")
         checkFields(user);
 
         isUserExist(user); //заимплементь метод
 
-        /*if(!checkFields(user)){
-            throw new RegisterException("Login is empty"); // просто вызови метод, а мтеод путьс генерит эксепшены
+      /*  if(!checkFields(user)){
+            checkFields(user); // просто вызови метод, а мтеод путьс генерит эксепшены
         }else{
             return true;   // после return код не пишется, здесь просто оставь экспешн
         }*/
         // чтобы вывести пользователя вызови userDAO.create(user)
         try {
             userDAO.create(user);
-            //userDAO.getUserByEmailOrLogin(user.getLogin()); //тут это не надо у тебя уже есть юзер после создание
 
         } catch (DBException e){
             throw new RegisterException(e.getMessage());
@@ -63,24 +61,34 @@ public class UserModelImpl implements UserModel {
         return true;
     }
 
-    // также проверять обязательный праметры типо логина пароля и т.д чтобы не были пустыми
     private void checkFields(User user) throws RegisterException {
         if(user.getLogin() == null || user.getLogin().isEmpty()) {
             throw new RegisterException("Login is empty");
+        } else if(user.getPassword() == null || user.getPassword().isEmpty()){
+            throw new RegisterException("Password is empty");
+        } else if (user.getFirstName() == null || user.getFirstName().isEmpty()){
+            throw new RegisterException("First Name is empty");
+        } else if (user.getLastName() == null || user.getLastName().isEmpty()){
+            throw new RegisterException("Last Name is empty");
+        } else if (user.getEmail() == null || user.getEmail().isEmpty()){
+            throw new RegisterException("Email is empty");
         }
-        // лучше сделай в таком стиле
-        // на каждое поле свой эксепшн
-       /* return !(user.getLogin().isEmpty()
-                || user.getPassword().isEmpty()
-                || user.getEmail().isEmpty()
-                || user.getFirstName().isEmpty()
-                || user.getLastName().isEmpty());*/
     }
 
     private void isUserExist(User user) throws RegisterException {
         //добавь проверку которая будет прореять есть ли юзер с таким логином или емайлом в базе
         // используй метод userDAO.getUserByEmailOrLogin(user.getLogin()); если он что-то вернет значит юзер уже существует
-        throw new RegisterException("No implemented yet"); // уберешь когда напишешь метож
+        User testUser;
+        try{
+            testUser = userDAO.getUserByEmailOrLogin(user.getLogin());
+        }catch (DBException e){
+            throw new RegisterException(e.getMessage());
+        }
+
+        if (user.getLogin().equals(testUser.getLogin()) || user.getEmail().equals(testUser.getEmail())){
+            throw new RegisterException("User is already Exist");
+        }
+
     }
 
 

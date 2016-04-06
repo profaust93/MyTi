@@ -98,12 +98,12 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE my_ti.Profiles set userId = ?, firstName = ?, lastName = ?, email = ? WHERE profileId = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE my_ti.Profiles set userId = ?, firstName = ?, lastName = ?, email = ? WHERE UserId = ?");
             preparedStatement.setLong(1,userProfile.getUserId());
             preparedStatement.setString(2,userProfile.getFirstName());
             preparedStatement.setString(3, userProfile.getLastName());
             preparedStatement.setString(4, userProfile.getEmail());
-            preparedStatement.setLong(5, userProfile.getProfileId());
+            preparedStatement.setLong(5,userProfile.getUserId());
             preparedStatement.executeUpdate();
 
         } catch (Throwable e) {

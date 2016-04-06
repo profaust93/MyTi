@@ -6,9 +6,8 @@ import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.UserProfile;
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.*;
 
 /**
  * Created by Camille on 03.04.2016.
@@ -17,7 +16,6 @@ public class UserProfileDaoImplTest {
 
     private DatabaseCleaner dbCleaner = new DatabaseCleaner();
     private UserProfileDAO userProfileDAO = new UserProfileDAOImpl();
-    private UserDAO userDAO = new UserDAOImpl();
     private User user = createUser("login","password", "Name", "SecName", "explorer@int.com");
     public User createUser(String login, String password, String firstName, String lastName, String email) {
         User user = new User();
@@ -31,29 +29,61 @@ public class UserProfileDaoImplTest {
 
 
     @Before
-
     public void setUp () throws DBException {
-       // dbCleaner.cleanDatabase();
+       dbCleaner.cleanDatabase();
         UserDAO userDAO = new UserDAOImpl();
+        System.out.println("before create "+user.getUserId());
         userDAO.create(user);
+        System.out.println("after create "+user.getUserId()+ "create user executed");
+        System.out.println("@Before executed");
+
 
     }
 
     @After
     public void tearDown() throws Exception {
         dbCleaner.cleanDatabase();
+        System.out.println("@After executed");
 
     }
 
     @Test
     public void testCreate ()throws Exception {
         UserProfile userProfile = new UserProfile();
-        userProfile.setUserId((long) 1);
+        System.out.println(user.getUserId());
+        userProfile.setUserId(user.getUserId());
         userProfile.setFirstName("nameName");
         userProfile.setLastName("lastNameLastName");
         userProfile.setEmail("emailEmail");
         userProfileDAO.create(userProfile);
-        UserProfile userProfileFromDB = userProfileDAO.getById((long) 1);
+        UserProfile userProfileFromDB = userProfileDAO.getById(user.getUserId());
+        assertEquals(userProfile.getFirstName(),userProfileFromDB.getFirstName());
+        assertEquals(userProfile.getLastName(),userProfileFromDB.getLastName());
+        assertEquals(userProfile.getEmail(),userProfileFromDB.getEmail());
+        assertEquals(userProfile.getProfileId(),userProfileFromDB.getProfileId());
+        assertEquals(userProfile.getUserId(),userProfileFromDB.getUserId());
+    }
+
+    @Test
+    public void testUpdate() throws Exception{
+        System.out.println("testUpdate START");
+
+        UserProfile userProfile = new UserProfile();
+        System.out.println(user.getUserId());
+        userProfile.setUserId(user.getUserId());
+        userProfile.setFirstName("nameName");
+        userProfile.setLastName("lastNameLastName");
+        userProfile.setEmail("emailEmail");
+        userProfile.setUserId(user.getUserId());
+        userProfileDAO.create(userProfile);
+        System.out.println("profileId= "+userProfile.getProfileId());
+
+        userProfile.setFirstName("nameName22");
+        userProfile.setLastName("lastNameLastName2");
+        userProfile.setEmail("emailEmail2");
+        userProfileDAO.update(userProfile);
+
+        UserProfile userProfileFromDB = userProfileDAO.getById(user.getUserId());
         assertEquals(userProfile.getFirstName(),userProfileFromDB.getFirstName());
         assertEquals(userProfile.getLastName(),userProfileFromDB.getLastName());
         assertEquals(userProfile.getEmail(),userProfileFromDB.getEmail());
