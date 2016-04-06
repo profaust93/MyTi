@@ -60,8 +60,12 @@ public class TimeLapsServices {
 
     public LocalDateTime dateConvert(String data) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        if(!isNotEmpty(data).equalsIgnoreCase(ok)) try {
+            throw new DBException("Empty field, LDT - now");
+        } catch (DBException e) {
+            return LocalDateTime.now();
+        }
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
-        System.out.println(dateTime);
         return dateTime;
     }
 
@@ -81,7 +85,6 @@ public class TimeLapsServices {
     public String dateCheck(String data) {
         try {
             if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
-
         } catch (DBException e) {
             return e.getMessage();
         }

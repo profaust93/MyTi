@@ -16,7 +16,6 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     public List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException {
         List<TimeLaps> timeLapsList = new ArrayList<>();
         Connection connection=null;
-
         try{
             connection = getConnection();
             PreparedStatement preparedStatement =
@@ -177,5 +176,6 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
         timeLaps.setShortDescription(rs.getString(4));
         timeLaps.setLongDescription(rs.getString(5));
         timeLaps.setCategory(rs.getString(6));
+        timeLaps.setTimeLapsName(rs.getString(7));
     }
 }

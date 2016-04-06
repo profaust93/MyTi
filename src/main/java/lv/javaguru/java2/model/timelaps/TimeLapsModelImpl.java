@@ -1,5 +1,7 @@
 package lv.javaguru.java2.model.timelaps;
 
+
+import com.mysql.jdbc.StringUtils;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
@@ -8,7 +10,6 @@ import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.TimeLapsServices;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,8 @@ public class TimeLapsModelImpl implements TimeLapsModel {
         try {
             List<TimeLaps> allTimeLaps  = timeLapsDAO.getAllTimeLapsByUserId(Long.parseLong(userId));
             return allTimeLaps.stream().map(timelaps ->
-                    new TimeLapsList(timelaps.getTimeLapsId(),timelaps.getTimeLapsName(),timelaps.getCompleteTime()))
+                    new TimeLapsList(timelaps.getTimeLapsId(),timelaps.getTimeLapsName(),timelaps.getCompleteTime(),
+                            timelaps.getShortDescription(),timelaps.getLongDescription()))
                     .collect(Collectors.toList());
         } catch (DBException e) {
             throw new TimeLapsException(e.getMessage());
@@ -49,45 +51,21 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public Map<Object, String> addTimeLaps(String userId,String name,String date,
-                                           String category,String shortDescription,String longDescription) {
+    public Map<Object, String> addTimeLaps(TimeLaps timeLaps) {
 
         Map<Object,String> resultCheckMap = new HashMap<>();
 
 
 
         try{
-            resultCheckMap.put("userIdCheckResult", timeLapsServices.userIdCheck(userId));
-            resultCheckMap.put("categoryCheckResult",timeLapsServices.categoryCheck(category));
-            resultCheckMap.put("nameCheckResult",timeLapsServices.nameCheck(name));
-            resultCheckMap.put("dateCheckResult",timeLapsServices.dateCheck(date));
+            resultCheckMap.put("userIdCheckResult", timeLapsServices.userIdCheck(String.valueOf(timeLaps.getUserId())));
+            resultCheckMap.put("categoryCheckResult",timeLapsServices.categoryCheck(timeLaps.getCategory()));
+            resultCheckMap.put("nameCheckResult",timeLapsServices.nameCheck(timeLaps.getTimeLapsName()));
+            resultCheckMap.put("dateCheckResult",timeLapsServices.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
+            resultCheckMap.put("sDescCheck",timeLapsServices.descriptionCheck(timeLaps.getShortDescription(),100));
+            resultCheckMap.put("lDescCheck",timeLapsServices.descriptionCheck(timeLaps.getLongDescription(),1000));
 
             TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
-            TimeLaps timeLaps = new TimeLaps();
-
-            if(timeLapsServices.userIdCheck(userId).equalsIgnoreCase("ok")){
-                timeLaps.setUserId(Long.parseLong(userId));
-            }
-
-            if(timeLapsServices.dateCheck(date).equalsIgnoreCase("ok")){
-                timeLaps.setCompleteTime(timeLapsServices.dateConvert(date));
-            }
-
-            if(timeLapsServices.categoryCheck(category).equalsIgnoreCase("ok")){
-                timeLaps.setCategory(category);
-            }
-
-            if(timeLapsServices.nameCheck(name).equalsIgnoreCase("ok")){
-                timeLaps.setTimeLapsName(name);
-            }
-
-            if(timeLapsServices.descriptionCheck(shortDescription,100).equalsIgnoreCase("ok")){
-                timeLaps.setShortDescription(shortDescription);
-            }
-            if(timeLapsServices.descriptionCheck(longDescription,1000).equalsIgnoreCase("ok")) {
-                timeLaps.setLongDescription(longDescription);
-            }
-
 
             for(Map.Entry entry:resultCheckMap.entrySet()){
                 String value = (String) entry.getValue();

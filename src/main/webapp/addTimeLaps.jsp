@@ -53,10 +53,10 @@
         });
     </script>
 
-    <h3>Short Description</h3>
+    <h3>Short Description</h3> <%= dataMap.get("sDescCheck")%>
     <textarea rows="2" cols="50" type="text" name="shortDescription" autofocus maxlength="100">
     </textarea>
-    <h3>Long Description</h3>
+    <h3>Long Description</h3><%= dataMap.get("lDescCheck")%>
     <textarea rows="4" cols="50" type="text" name="longDescription" autofocus maxlength="1000">
     </textarea>
     <input type="submit" value="submit">

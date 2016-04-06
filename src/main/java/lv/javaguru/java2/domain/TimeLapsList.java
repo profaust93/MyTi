@@ -10,11 +10,18 @@ public class TimeLapsList {
     private Long timeLapsId;
     private String timeLapsName;
     private LocalDateTime completeTime;
+    private String shortDescription;
+    private String longDescription;
 
-    public TimeLapsList(Long timeLapsId, String timeLapsName, LocalDateTime completeTime) {
+
+
+    public TimeLapsList(Long timeLapsId, String timeLapsName, LocalDateTime completeTime,
+                        String shortDescription,String longDescription) {
         this.timeLapsId = timeLapsId;
         this.timeLapsName = timeLapsName;
         this.completeTime = completeTime;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
     }
 
     public Long getTimeLapsId() {
@@ -39,5 +46,21 @@ public class TimeLapsList {
 
     public void setCompleteTime(LocalDateTime completeTime) {
         this.completeTime = completeTime;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 }
