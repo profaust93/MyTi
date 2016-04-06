@@ -42,7 +42,7 @@ public class TimeLapsModelImpl implements TimeLapsModel {
             List<TimeLaps> allTimeLaps  = timeLapsDAO.getAllTimeLapsByUserId(Long.parseLong(userId));
             return allTimeLaps.stream().map(timelaps ->
                     new TimeLapsList(timelaps.getTimeLapsId(),timelaps.getTimeLapsName(),timelaps.getCompleteTime(),
-                            timelaps.getShortDescription(),timelaps.getLongDescription()))
+                            timelaps.getShortDescription(),timelaps.getLongDescription(),timelaps.getCategory()))
                     .collect(Collectors.toList());
         } catch (DBException e) {
             throw new TimeLapsException(e.getMessage());
@@ -54,8 +54,6 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     public Map<Object, String> addTimeLaps(TimeLaps timeLaps) {
 
         Map<Object,String> resultCheckMap = new HashMap<>();
-
-
 
         try{
             resultCheckMap.put("userIdCheckResult", timeLapsServices.userIdCheck(String.valueOf(timeLaps.getUserId())));
