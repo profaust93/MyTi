@@ -43,6 +43,18 @@ public class TimeLapsModelTest {
 
         timeLapsModel.addTimeLaps(timeLaps);
 
+
+        List<TimeLapsList> timeLapsList = timeLapsModel.getAllTimeLapsForUser("1");
+
+        Predicate<TimeLapsList> timeLapsId = timeLaps1 -> Long.valueOf(666) ==
+                timeLaps1.getTimeLapsId();
+
+        Optional<TimeLapsList> myTimeLapsId = timeLapsList.stream()
+                .filter(timeLapsId).findAny();
+
+        assertFalse(myTimeLapsId.isPresent());
+
+
         Boolean status = true;
         for(Map.Entry entry:timeLapsModel.addTimeLaps(timeLaps).entrySet()) {
             String value = (String) entry.getValue();
