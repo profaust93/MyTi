@@ -4,6 +4,8 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.exceptions.LoginException;
+import lv.javaguru.java2.model.exceptions.RegisterException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +39,8 @@ public class UserModelTest {
         when(userDAO.getUserByEmailOrLogin("bad")).thenThrow(new DBException("Db Don't work"));
 
     }
+
+
 
     @Test
     public void testLoginExistingUser() throws Exception {
@@ -77,6 +81,34 @@ public class UserModelTest {
 
     }
 
+    @Test
+    public void testRegisterUserExist() throws Exception {
+        try{
+            userModel.registerUser(createUser(2L,"user","password","user","lastN","email"));
+            fail("No Exception was thrown");
+        } catch (RegisterException e){
+            assertEquals("User is already Exist", e.getMessage());
+        }
+    }
+
+
+    @Test
+    public void testEmptyFields() throws Exception {
+        try{
+            userModel.registerUser(createUser(2L,"","password","user","lastN","email"));
+            fail("No Exception was thrown");
+        } catch (RegisterException e){
+            assertEquals("Login is empty", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testNewUser() throws Exception {
+        Boolean newUser = userModel.registerUser(createUser(2L,"userother","password","user","lastN","soup"));
+        assertEquals(true, newUser);
+    }
+
+
     private User createUser(Long id, String login, String password, String firstName, String lastName, String email) {
         User user = new User();
         user.setUserId(id);
@@ -87,4 +119,7 @@ public class UserModelTest {
         user.setEmail(email);
         return user;
     }
+
+
+
 }

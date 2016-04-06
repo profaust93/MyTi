@@ -52,12 +52,7 @@ public class UserModelImpl implements UserModel {
             return true;   // после return код не пишется, здесь просто оставь экспешн
         }*/
         // чтобы вывести пользователя вызови userDAO.create(user)
-        try {
-            userDAO.create(user);
 
-        } catch (DBException e){
-            throw new RegisterException(e.getMessage());
-        }
         return true;
     }
 
@@ -85,7 +80,14 @@ public class UserModelImpl implements UserModel {
             throw new RegisterException(e.getMessage());
         }
 
-        if (user.getLogin().equals(testUser.getLogin()) || user.getEmail().equals(testUser.getEmail())){
+        if (testUser == null) {
+            try {
+                userDAO.create(user);
+            } catch (DBException e){
+                throw new RegisterException("Problem with creating account");
+            }
+        }
+        else if (user.getLogin().equals(testUser.getLogin()) || user.getEmail().equals(testUser.getEmail())){
             throw new RegisterException("User is already Exist");
         }
 
