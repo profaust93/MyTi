@@ -54,7 +54,7 @@
     </script>
 
     <h3>Short Description</h3>
-    <textarea rows="2" cols="50" type="text" name="shortDescription" autofocus maxlength="3">
+    <textarea rows="2" cols="50" type="text" name="shortDescription" autofocus maxlength="100">
     </textarea>
     <h3>Long Description</h3>
     <textarea rows="4" cols="50" type="text" name="longDescription" autofocus maxlength="1000">

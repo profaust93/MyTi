@@ -49,16 +49,12 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public Map<Object, String> addTimeLaps(HttpServletRequest req) {
+    public Map<Object, String> addTimeLaps(String userId,String name,String date,
+                                           String category,String shortDescription,String longDescription) {
 
         Map<Object,String> resultCheckMap = new HashMap<>();
 
-        String userId = (String) req.getSession().getAttribute("userId");
-        String name = req.getParameter("name");
-        String date = req.getParameter("date");
-        String category = req.getParameter("category");
-        String shortDescription = req.getParameter("shortDescription");
-        String longDescription = req.getParameter("longDescription");
+
 
         try{
             resultCheckMap.put("userIdCheckResult", timeLapsServices.userIdCheck(userId));

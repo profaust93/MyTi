@@ -36,8 +36,17 @@ public class AddTimeLapsController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
 
+        String userId = (String) req.getSession().getAttribute("userId");
+        String name = req.getParameter("name");
+        String date = req.getParameter("date");
+        String category = req.getParameter("category");
+        String shortDescription = req.getParameter("shortDescription");
+        String longDescription = req.getParameter("longDescription");
+
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
-        resultCheckMap = timeLapsModel.addTimeLaps(req);
+        resultCheckMap = timeLapsModel.addTimeLaps(userId,name,date,category,
+                shortDescription,longDescription);
+
         return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
     }
 }

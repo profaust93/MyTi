@@ -20,7 +20,8 @@ public interface TimeLapsModel {
 
     List<TimeLapsList> getAllTimeLapsForUser(String userId) throws TimeLapsException;
 
-    Map<Object,String> addTimeLaps(HttpServletRequest req);
+    Map<Object,String> addTimeLaps(String userId,String name,String date,
+                                   String category,String shortDescription,String longDescription);
 
     void editTimeLaps(TimeLaps timeLaps);
 
