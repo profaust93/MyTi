@@ -115,7 +115,8 @@ public class TimeLapsServices {
 
     public String descriptionCheck(String data, Integer count) {
         try {
-            if (data.length() > count) {
+
+            if (StringUtils.length(data) > count) {
                 throw new DBException("Too long description, must be shorter(not more than" +
                         count + " symbols)");
             }

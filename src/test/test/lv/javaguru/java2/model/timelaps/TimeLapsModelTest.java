@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Ruslan on 2016.04.06..
@@ -25,7 +27,7 @@ import static org.junit.Assert.*;
 public class TimeLapsModelTest {
 
     @Mock
-    TimeLapsDAO timeLapsDAO;
+    private TimeLapsDAO timeLapsDAO;
 
     @InjectMocks
     TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
@@ -41,26 +43,43 @@ public class TimeLapsModelTest {
         timeLaps.setTimeLapsName("Test#1");
         timeLaps.setTimeLapsId(666L);
 
+        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
         timeLapsModel.addTimeLaps(timeLaps);
 
 
-        List<TimeLapsList> timeLapsList = timeLapsModel.getAllTimeLapsForUser("1");
 
-        Predicate<TimeLapsList> timeLapsId = timeLaps1 -> Long.valueOf(666) ==
-                timeLaps1.getTimeLapsId();
+        List<TimeLapsList> timeLapsLists = timeLapsModel.getAllTimeLapsForUser("1");
 
-        Optional<TimeLapsList> myTimeLapsId = timeLapsList.stream()
-                .filter(timeLapsId).findAny();
-
-        assertFalse(myTimeLapsId.isPresent());
-
-
-        Boolean status = true;
-        for(Map.Entry entry:timeLapsModel.addTimeLaps(timeLaps).entrySet()) {
-            String value = (String) entry.getValue();
-            if (!value.equalsIgnoreCase("ok")) status = false;
-        }
-        assertEquals(true,status);
+        Optional<TimeLapsList> filtered = timeLapsLists
+                .stream()
+                .filter(t -> t.getTimeLapsName().matches("Test#1"))
+                .filter(t -> t.getTimeLapsId().equals(timeLaps.getTimeLapsId()))  // 666 не работает (и результат другой у getTimeLapsId)
+                .filter(t -> t.getCategory().matches("Fun"))
+                .findAny();
+        assertTrue(filtered.isPresent());
 
     }
+
+    @Test
+    public void testAddNewTimeLapsWithNullFields() throws Exception {
+        TimeLaps timeLaps = new TimeLaps();
+        timeLaps.setCompleteTime(null);
+        timeLaps.setUserId(1L);
+        timeLaps.setCategory(null);
+        timeLaps.setShortDescription(null);
+        timeLaps.setLongDescription(null);
+        timeLaps.setTimeLapsName(null);
+        timeLaps.setTimeLapsId(null);
+
+        timeLapsModel.addTimeLaps(timeLaps);
+
+    }
+
+    @Test
+    public void testGetTimeLapsById() throws Exception {
+        timeLapsModel.getTimeLapsById(666L);
+        verify(timeLapsDAO).getById(666L);
+    }
+
+
 }
