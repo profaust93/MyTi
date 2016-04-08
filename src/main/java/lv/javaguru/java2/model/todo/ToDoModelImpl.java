@@ -10,6 +10,7 @@ import lv.javaguru.java2.model.exceptions.ToDoException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -35,7 +36,7 @@ class ToDoModelImpl implements ToDoModel {
         try {
             List<ToDo> allToDo  = toDoDAO.getToDoByUserId(Long.parseLong(userId));
 
-            List<ToDo> filteredToDo = allToDo.stream().filter(e->e.getUserId()
+            List<ToDo> filteredToDo = allToDo.stream().filter(e -> e.getUserId()
                     .equals(Long.parseLong(userId))).collect(Collectors.toList());
 
             return filteredToDo.stream().map(todo ->
@@ -94,6 +95,10 @@ class ToDoModelImpl implements ToDoModel {
 
     @Override
     public TimeLaps makeTimeLapsFromToDo(ToDo todo) {
+        Optional<ToDo> todoO = Optional.of(todo);
+
+        todoO.map(ToDo::getDeadLineTime).orElse(LocalDateTime.now());
+
         TimeLaps timeLaps = new TimeLaps();
         timeLaps.setTimeLapsName(todo.getToDoName());
         timeLaps.setCategory(todo.getCategory().orElse(""));

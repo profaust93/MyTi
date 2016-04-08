@@ -5,14 +5,17 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.exceptions.LoginException;
 import lv.javaguru.java2.model.exceptions.RegisterException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 public class UserModelImpl implements UserModel {
 
-
+    @Autowired
     private UserDAO userDAO;
 
     @Override
@@ -92,11 +95,5 @@ public class UserModelImpl implements UserModel {
         }
 
     }
-
-
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
 
 }

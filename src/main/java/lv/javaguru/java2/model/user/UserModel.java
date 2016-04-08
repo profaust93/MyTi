@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.exceptions.LoginException;
 import lv.javaguru.java2.model.exceptions.RegisterException;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -25,5 +26,4 @@ public interface UserModel {
 
     Boolean registerUser(User user) throws RegisterException;
 
-    void setUserDAO(UserDAO userDAO);
 }

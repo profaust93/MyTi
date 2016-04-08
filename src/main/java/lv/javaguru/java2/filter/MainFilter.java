@@ -1,11 +1,15 @@
 package lv.javaguru.java2.filter;
 
+import lv.javaguru.java2.SpringConfig.SpringConfig;
 import lv.javaguru.java2.controller.*;
 import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.user.UserModelImpl;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +21,20 @@ import java.util.Map;
 import java.util.Optional;
 
 public class MainFilter implements Filter {
-    Map<String,MVCController> urlToController;
-
+    private Map<String,MVCController> urlToController;
+    private ApplicationContext applicationContext;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
+        try{
+            applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+        } catch (BeansException e ) {
+            e.printStackTrace();
+        }
         urlToController = new HashMap<>();
-        urlToController.put("/index",new HelloWorldController());
+        urlToController.put("/index", applicationContext.getBean(HelloWorldController.class));
         urlToController.put("/registration", new RegisterController());
-        urlToController.put("/login", new LoginController(new UserModelImpl()));
+        urlToController.put("/login", applicationContext.getBean(LoginController.class));
         urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
         urlToController.put("/addTimeLaps",new AddTimeLapsController());
     }
@@ -42,9 +52,9 @@ public class MainFilter implements Filter {
         HttpSession session = httpServletRequest.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
         if(isLogIn == null || !isLogIn) {
-            controller = new LoginController(new UserModelImpl());
+            controller = applicationContext.getBean(LoginController.class);
         }  else {
-            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(new ErrorController());
+            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(applicationContext.getBean(ErrorController.class));
         }
 
         MVCModel model;
