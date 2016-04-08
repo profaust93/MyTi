@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by ruslan on 16.30.3.
  */
-public class TimeLapsServices {
+public class TimeLapsChecks {
 
     String ok = "OK";
     Integer count;

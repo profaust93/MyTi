@@ -35,8 +35,8 @@ public class MainFilter implements Filter {
         urlToController.put("/index", applicationContext.getBean(HelloWorldController.class));
         urlToController.put("/registration", new RegisterController());
         urlToController.put("/login", applicationContext.getBean(LoginController.class));
-        urlToController.put("/viewTimeLaps",new ViewTimeLapsController());
-        urlToController.put("/addTimeLaps",new AddTimeLapsController());
+        urlToController.put("/viewTimeLaps",applicationContext.getBean(ViewTimeLapsController.class));
+        urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
     }
 
     @Override
