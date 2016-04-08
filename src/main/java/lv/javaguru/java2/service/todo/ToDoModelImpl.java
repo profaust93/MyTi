@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.todo;
+package lv.javaguru.java2.service.todo;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ToDoDAO;
@@ -6,20 +6,20 @@ import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.ToDo;
 import lv.javaguru.java2.domain.ToDoList;
 import lv.javaguru.java2.model.exceptions.ToDoException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Component
 class ToDoModelImpl implements ToDoModel {
-    private ToDoDAO toDoDAO;
 
-    @Override
-    public void setToDoDAO(ToDoDAO toDoDAO) {
-        this.toDoDAO = toDoDAO;
-    }
+    @Autowired
+    private ToDoDAO toDoDAO;
 
     @Override
     public ToDo getToDoById(Long toDoId) throws ToDoException {
@@ -35,7 +35,7 @@ class ToDoModelImpl implements ToDoModel {
         try {
             List<ToDo> allToDo  = toDoDAO.getToDoByUserId(Long.parseLong(userId));
 
-            List<ToDo> filteredToDo = allToDo.stream().filter(e->e.getUserId()
+            List<ToDo> filteredToDo = allToDo.stream().filter(e -> e.getUserId()
                     .equals(Long.parseLong(userId))).collect(Collectors.toList());
 
             return filteredToDo.stream().map(todo ->
@@ -94,6 +94,10 @@ class ToDoModelImpl implements ToDoModel {
 
     @Override
     public TimeLaps makeTimeLapsFromToDo(ToDo todo) {
+        Optional<ToDo> todoO = Optional.of(todo);
+
+        todoO.map(ToDo::getDeadLineTime).orElse(LocalDateTime.now());
+
         TimeLaps timeLaps = new TimeLaps();
         timeLaps.setTimeLapsName(todo.getToDoName());
         timeLaps.setCategory(todo.getCategory().orElse(""));

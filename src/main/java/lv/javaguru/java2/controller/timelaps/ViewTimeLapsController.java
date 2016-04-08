@@ -7,15 +7,15 @@ import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.model.timelaps.TimeLapsModel;
 import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ruslan on 16.29.3.
  */
+@Component
 public class ViewTimeLapsController implements MVCController {
 
     private List<TimeLapsList> list;

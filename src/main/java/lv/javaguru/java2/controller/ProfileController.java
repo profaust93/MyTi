@@ -1,7 +1,6 @@
 package lv.javaguru.java2.controller;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.database.jdbc.UserProfileDAOImpl;
 import lv.javaguru.java2.model.MVCModel;
 

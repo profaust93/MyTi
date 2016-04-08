@@ -1,10 +1,11 @@
 package lv.javaguru.java2.controller;
 
 import lv.javaguru.java2.model.MVCModel;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+@Component
 public class IndexController implements MVCController {
 
     @Override

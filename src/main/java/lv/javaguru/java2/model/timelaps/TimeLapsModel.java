@@ -5,7 +5,6 @@ import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ public interface TimeLapsModel {
 
     Map<Object,String> addTimeLaps(TimeLaps timeLaps);
 
-    void editTimeLaps(TimeLaps timeLaps);
+    Map<Object,String> editTimeLaps(TimeLaps timeLaps);
 
     void deleteTimeLapsList(List<String> timeLapsIdList);
 

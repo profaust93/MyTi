@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by ruslan on 16.21.3.
  */
+@Component
 public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     @Override
     public List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException {
