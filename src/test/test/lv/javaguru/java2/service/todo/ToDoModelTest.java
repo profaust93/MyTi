@@ -1,4 +1,6 @@
-package lv.javaguru.java2.model.todo;
+package lv.javaguru.java2.service.todo;
+
+import static org.junit.Assert.*;
 
 import lv.javaguru.java2.database.ToDoDAO;
 import lv.javaguru.java2.domain.TimeLaps;
@@ -13,7 +15,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -8,8 +8,6 @@ import lv.javaguru.java2.model.MVCModel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
 /**
  * Created by Kemran on 02/04/2016.

@@ -7,7 +7,6 @@ import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.user.UserModelImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -47,7 +46,7 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
-        if(contextURI.matches(".*(css|jpg|png|gif|js)$")){
+        if(contextURI.matches(".*(css|jpg|png|gif|js|map|woff|ttf)$")){
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }

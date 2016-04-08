@@ -13,7 +13,6 @@ import java.util.Map;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by Ruslan on 2016.04.06..

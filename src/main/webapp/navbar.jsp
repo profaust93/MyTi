@@ -1,3 +1,5 @@
+<%@ page import="lv.javaguru.java2.dto.UserDTO" %>
+<jsp:useBean id="user" scope="session" type="lv.javaguru.java2.dto.UserDTO"/>
 <%--
   Created by IntelliJ IDEA.
   User: german
@@ -6,6 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    user = (UserDTO) session.getAttribute("user");
+%>
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -94,7 +99,8 @@
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i>  ${user.userLogin} <i class="fa fa-caret-down"></i>
+
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -113,7 +119,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li>
-                    <a href="/java2/hello" class="active"><i class="fa fa-dashboard fa-fw"></i> Main page</a>
+                    <a href="/java2/index" class="active"><i class="fa fa-dashboard fa-fw"></i> Main page</a>
                 </li>
                 <li>
                     <a href="/java2/toDoList"><i class="fa fa-table fa-fw"></i> ToDo List</a>

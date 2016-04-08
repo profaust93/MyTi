@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.todo;
+package lv.javaguru.java2.service.todo;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ToDoDAO;
@@ -6,6 +6,8 @@ import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.ToDo;
 import lv.javaguru.java2.domain.ToDoList;
 import lv.javaguru.java2.model.exceptions.ToDoException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -13,14 +15,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Component
 class ToDoModelImpl implements ToDoModel {
-    private ToDoDAO toDoDAO;
 
-    @Override
-    public void setToDoDAO(ToDoDAO toDoDAO) {
-        this.toDoDAO = toDoDAO;
-    }
+    @Autowired
+    private ToDoDAO toDoDAO;
 
     @Override
     public ToDo getToDoById(Long toDoId) throws ToDoException {
