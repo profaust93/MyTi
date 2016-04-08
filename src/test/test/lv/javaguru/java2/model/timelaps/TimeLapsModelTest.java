@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
@@ -55,7 +56,7 @@ public class TimeLapsModelTest {
         try {
             for(Map.Entry entry:timeLapsModel.addTimeLaps(timeLaps).entrySet()){
                 String value = (String) entry.getValue();
-                if(!value.equalsIgnoreCase("ok")) throw new TimeLapsException(entry.getValue().toString());
+                if(!value.equalsIgnoreCase("ok")) throw new TimeLapsException("Error");
             }
         } catch (Exception e){
             assertEquals("Error",e.getMessage());
