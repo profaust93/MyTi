@@ -10,9 +10,7 @@ import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ruslan on 16.29.3.

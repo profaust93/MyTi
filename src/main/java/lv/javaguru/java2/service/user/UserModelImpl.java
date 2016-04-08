@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.user;
+package lv.javaguru.java2.service.user;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
@@ -19,7 +19,7 @@ public class UserModelImpl implements UserModel {
     private UserDAO userDAO;
 
     @Override
-    public Map<String, String> logInUser(String userCred, String password, Boolean rememberMe) throws LoginException {
+    public User logInUser(String userCred, String password, Boolean rememberMe) throws LoginException {
 
         User user;
         Map<String,String> userInfo = new HashMap<>();
@@ -33,12 +33,7 @@ public class UserModelImpl implements UserModel {
         if(!password.equals(user.getPassword())) {
             throw new LoginException("Wrong Password");
         }
-
-        userInfo.put("userId", Long.toString(user.getUserId()));
-        userInfo.put("userLogin",user.getLogin());
-        userInfo.put("userName",user.getFirstName());
-        userInfo.put("userLastName",user.getLastName());
-        return userInfo;
+        return user;
     }
 
     @Override

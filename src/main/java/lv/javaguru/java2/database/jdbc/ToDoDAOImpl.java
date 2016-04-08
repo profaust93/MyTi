@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ToDoDAO;
 import lv.javaguru.java2.domain.ToDo;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Component
 public class ToDoDAOImpl extends DAOImpl implements ToDoDAO {
 
     private  static Logger log = Logger.getLogger(ToDo.class.getName());

@@ -7,7 +7,6 @@ import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.user.UserModelImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
