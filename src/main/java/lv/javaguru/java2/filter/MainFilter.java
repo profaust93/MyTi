@@ -3,6 +3,7 @@ package lv.javaguru.java2.filter;
 import lv.javaguru.java2.SpringConfig.SpringConfig;
 import lv.javaguru.java2.controller.*;
 import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
+import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
@@ -37,6 +38,7 @@ public class MainFilter implements Filter {
         urlToController.put("/login", applicationContext.getBean(LoginController.class));
         urlToController.put("/viewTimeLaps",applicationContext.getBean(ViewTimeLapsController.class));
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
+        urlToController.put("/editTimeLaps",applicationContext.getBean(EditTimeLapsController.class));
     }
 
     @Override

@@ -1,8 +1,8 @@
-<%@ page import="java.util.Map" %> %><%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
-  User: ruslan
-  Date: 16.29.3
-  Time: 23:59
+  User: Ruslan
+  Date: 2016.04.08.
+  Time: 13:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,28 +11,26 @@
     <link href="${pageContext.request.contextPath}/resources/lib/datetimepicker/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen"
           href="${pageContext.request.contextPath}/resources/lib/datetimepicker/css/bootstrap-datetimepicker.min.css">
-    <title>AddTimeLaps</title>
+    <title>Edit Time Laps</title>
 </head>
 <body>
-<p><%=request.getAttribute("data")%></p>
 
-<% Map<String,String> dataMap = (Map<String,String>) request.getAttribute("data");
-%>
-<form method = "post" action="addTimeLaps">
+<form method = "get" action="editTimeLaps">
+    <% Map<String,String> dataMap = (Map<String,String>) request.getAttribute("data");
+    %>
     <h3>TimeLaps name:</h3>
-    <input type="text" name="name"> <%=dataMap.get("nameCheckResult")%>
+    <input type="text" name="name" value="<%=dataMap.get("name")%>">
     <h3>Category:</h3>
     <select name="category">
-        <option value=""></option>
+        <option value="<%=dataMap.get("category")%>"><%=dataMap.get("category")%></option>
         <option value="sport">Sport</option>
         <option value="fun">Fun</option>
         <option value="work">Work</option>
         <option value="home">Home</option>
-    </select> <%= dataMap.get("categoryCheckResult")%>
-    <h3>Date:</h3> <%= dataMap.get("dateCheckResult")%>
-
+    </select>
+    <h3>Date:</h3>
     <div id="datetimepicker" class="input-append date">
-        <input type="text" name = "date">
+        <input type="text" name = "date" value="<%= dataMap.get("date")%>">
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
       </span>
@@ -53,14 +51,17 @@
         });
     </script>
 
-    <h3>Short Description</h3> <%= dataMap.get("sDescCheck")%>
+    <h3>Short Description</h3>
     <textarea rows="2" cols="50" type="text" name="shortDescription" autofocus maxlength="100">
+        <%= dataMap.get("shortDesc")%>
     </textarea>
-    <h3>Long Description</h3><%= dataMap.get("lDescCheck")%>
+    <h3>Long Description</h3>
     <textarea rows="4" cols="50" type="text" name="longDescription" autofocus maxlength="1000">
+        <%= dataMap.get("longDesc")%>
     </textarea>
     <input type="submit" value="submit">
-
 </form>
+
+
 </body>
 </html>

@@ -22,7 +22,7 @@ public interface TimeLapsModel {
 
     Map<Object,String> addTimeLaps(TimeLaps timeLaps);
 
-    void editTimeLaps(TimeLaps timeLaps);
+    Map<Object,String> editTimeLaps(TimeLaps timeLaps);
 
     void deleteTimeLapsList(List<String> timeLapsIdList);
 

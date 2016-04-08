@@ -69,6 +69,12 @@ public class TimeLapsChecks {
         return dateTime;
     }
 
+    public String dateConvert(LocalDateTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String convertedDate = time.format(formatter);
+        return convertedDate;
+    }
+
     public String userIdCheck(String data) {
         try {
             if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));

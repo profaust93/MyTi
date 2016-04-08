@@ -83,18 +83,40 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public void editTimeLaps(TimeLaps timeLaps) {
+    public Map<Object,String> editTimeLaps(TimeLaps timeLaps) {
+        Map<Object,String> resultCheckMap = new HashMap<>();
+        try {
 
+            resultCheckMap.put("userIdCheckResult", timeLapsChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
+            resultCheckMap.put("categoryCheckResult", timeLapsChecks.categoryCheck(timeLaps.getCategory()));
+            resultCheckMap.put("nameCheckResult", timeLapsChecks.nameCheck(timeLaps.getTimeLapsName()));
+            resultCheckMap.put("dateCheckResult", timeLapsChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
+            resultCheckMap.put("sDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getShortDescription(), 100));
+            resultCheckMap.put("lDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getLongDescription(), 1000));
+
+            for (Map.Entry entry : resultCheckMap.entrySet()) {
+                String value = (String) entry.getValue();
+                if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
+            }
+            timeLapsDAO.update(timeLaps);
+        }catch (DBException e){
+            return resultCheckMap;
+        }
+        return resultCheckMap;
     }
 
     @Override
-    public void deleteTimeLapsList(List<String> timeLapsIdList) {
+    public void deleteTimeLapsList(List<String> timeLapsList) {
 
     }
 
     @Override
     public void deleteTimeLaps(TimeLaps timeLaps) {
-
+        try {
+            timeLapsDAO.delete(timeLaps);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
     }
 
 }
