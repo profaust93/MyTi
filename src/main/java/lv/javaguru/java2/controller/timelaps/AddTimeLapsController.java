@@ -11,6 +11,7 @@ import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.LoginException;
+import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.model.timelaps.TimeLapsModel;
 import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
@@ -37,7 +38,7 @@ public class AddTimeLapsController implements MVCController {
     }
 
     @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    public MVCModel processPost(HttpServletRequest req) throws RedirectException {
 
         TimeLaps timeLaps = new TimeLaps();
         TimeLapsServices timeLapsServices = new TimeLapsServices();
@@ -64,7 +65,7 @@ public class AddTimeLapsController implements MVCController {
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }
-
-        return new MVCModel("/viewTimeLaps.jsp",list);
+        throw new RedirectException("Don't need to login again","/java2/viewTimeLaps");
+        //return new MVCModel("/viewTimeLaps.jsp",list);
     }
 }

@@ -57,7 +57,12 @@ public class MainFilter implements Filter {
                 return;
             }
         } else {
-            model = controller.processPost(httpServletRequest);
+            try {
+                model = controller.processPost(httpServletRequest);
+            } catch (RedirectException e) {
+                httpServletResponse.sendRedirect(e.getUrlToRedirect());
+                return;
+            }
         }
 
         httpServletRequest.setAttribute("data",model.getData());

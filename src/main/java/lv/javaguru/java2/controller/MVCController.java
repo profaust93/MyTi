@@ -9,5 +9,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface MVCController {
     MVCModel processGet(HttpServletRequest req) throws RedirectException;
 
-    MVCModel processPost(HttpServletRequest req);
+    MVCModel processPost(HttpServletRequest req) throws RedirectException;
 }
