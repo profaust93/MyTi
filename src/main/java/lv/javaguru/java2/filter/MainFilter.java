@@ -45,7 +45,7 @@ public class MainFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         MVCController controller;
         String contextURI = httpServletRequest.getServletPath();
-        if(contextURI.matches(".*(css|jpg|png|gif|js)$")){
+        if(contextURI.matches(".*(css|jpg|png|gif|js|map|woff|ttf)$")){
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }

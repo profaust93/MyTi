@@ -31,11 +31,11 @@ public class LoginControllerTest {
     UserModel userModel;
 
 
-    MVCController loginController;
+    private MVCController loginController;
     @Before
     public void setUp() throws Exception {
 
-        loginController = new LoginController(userModel);
+        loginController = new LoginController();
         //mock method to return mocked session
         when(req.getSession()).thenReturn(session);
         when(req.getRequestURL()).thenReturn(new StringBuffer("SomeWeb"));
