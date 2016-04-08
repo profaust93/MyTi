@@ -54,7 +54,6 @@ public class LoginControllerTest {
     @Test
     public void testProcessGetNotLoggedInUser() throws Exception {
         when(session.getAttribute("IsLoggedIn")).thenReturn(null);
-
         MVCModel mvcModel = loginController.processGet(req);
         assertEquals("/login.jsp",mvcModel.getJspName());
         assertNull(mvcModel.getData());
