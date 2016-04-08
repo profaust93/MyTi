@@ -2,12 +2,15 @@ package lv.javaguru.java2.model.timelaps;
 
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDateTime;
+import java.util.Map;
+
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
@@ -50,9 +53,15 @@ public class TimeLapsModelTest {
         timeLaps.setLongDescription(null);
         timeLaps.setTimeLapsName(null);
 
-        timeLapsModel.addTimeLaps(timeLaps);
+        try {
+            for(Map.Entry entry:timeLapsModel.addTimeLaps(timeLaps).entrySet()){
+                String value = (String) entry.getValue();
+                if(!value.equalsIgnoreCase("ok")) throw new TimeLapsException(entry.getValue().toString());
+            }
+        } catch (Exception e){
+            assertEquals("Error",e.getMessage());
 
-
+        }
     }
 
     @Test

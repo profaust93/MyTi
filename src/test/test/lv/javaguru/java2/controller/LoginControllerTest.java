@@ -35,7 +35,7 @@ public class LoginControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        loginController = new LoginController(userModel);
+        //loginController = new LoginController(userModel);
         //mock method to return mocked session
         when(req.getSession()).thenReturn(session);
         when(req.getRequestURL()).thenReturn(new StringBuffer("SomeWeb"));

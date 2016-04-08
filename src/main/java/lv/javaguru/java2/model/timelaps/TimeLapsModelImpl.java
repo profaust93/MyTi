@@ -98,7 +98,9 @@ public class TimeLapsModelImpl implements TimeLapsModel {
                 String value = (String) entry.getValue();
                 if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
             }
+
             timeLapsDAO.update(timeLaps);
+
         }catch (DBException e){
             return resultCheckMap;
         }
