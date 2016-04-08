@@ -48,7 +48,7 @@
 <body>
 <% List<TimeLapsList> list = (List<TimeLapsList>) request.getAttribute("data");%>
 
-<h2>Animated Accordion</h2>
+<h2>View Time Laps Page</h2>
 <% for (int i = 0; i < list.size() ; i++) { %>
 <button class="accordion"><p>Name:<%=list.get(i).getTimeLapsName()%></p><p>ID:<%=list.get(i).getTimeLapsId()%></p></button>
 <div class="panel">

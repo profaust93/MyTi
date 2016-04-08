@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by ruslan on 16.30.3.
  */
-public class TimeLapsServices {
+public class TimeLapsChecks {
 
     String ok = "OK";
     Integer count;
@@ -67,6 +67,12 @@ public class TimeLapsServices {
         }
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
         return dateTime;
+    }
+
+    public String dateConvert(LocalDateTime time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String convertedDate = time.format(formatter);
+        return convertedDate;
     }
 
     public String userIdCheck(String data) {
