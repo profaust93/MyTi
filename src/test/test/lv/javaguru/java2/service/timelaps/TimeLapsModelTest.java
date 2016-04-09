@@ -46,11 +46,8 @@ public class TimeLapsModelTest {
     @Test
     public void testAddNewTimeLapsWithNullFields() throws Exception {
         TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(null);
         timeLaps.setUserId(1L);
         timeLaps.setCategory(null);
-        timeLaps.setShortDescription(null);
-        timeLaps.setLongDescription(null);
         timeLaps.setTimeLapsName(null);
 
         try {
