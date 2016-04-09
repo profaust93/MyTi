@@ -12,7 +12,9 @@ import lv.javaguru.java2.service.TimeLapsChecks;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,31 +24,60 @@ import java.util.Map;
 public class EditTimeLapsController implements MVCController{
 
 
+    private List<Map> list = new ArrayList<>();
+    private Map<String,Object> dataMap = new HashMap<>();
+    private Map<String,Object> resultCheckMap = new HashMap<>();
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
         TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
 
-        Map<Object,String> map = new HashMap<>();
 
-        String timeLapsId = "10";
+
+        String timeLapsId = "120";
 
         try {
             TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
-            map.put("name",timeLaps.getTimeLapsName());
-            map.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
-            map.put("category",timeLaps.getCategory());
-            map.put("shortDesc",timeLaps.getShortDescription());
-            map.put("longDesc",timeLaps.getLongDescription());
+            dataMap.put("name",timeLaps.getTimeLapsName());
+            dataMap.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
+            dataMap.put("category",timeLaps.getCategory());
+            dataMap.put("shortDesc",timeLaps.getShortDescription());
+            dataMap.put("longDesc",timeLaps.getLongDescription());
+            resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }
-        return new MVCModel("/editTimeLaps.jsp",map);
+        list.add(dataMap);
+        list.add(resultCheckMap);
+        return new MVCModel("/editTimeLaps.jsp",list);
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        return null;
+        TimeLaps timeLaps = new TimeLaps();
+        TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
+
+        String userId = (String) req.getSession().getAttribute("userId");
+        timeLaps.setUserId(Long.parseLong(userId));
+        timeLaps.setTimeLapsName(req.getParameter("name"));
+        timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
+        timeLaps.setCategory(req.getParameter("category"));
+        timeLaps.setShortDescription(req.getParameter("shortDescription"));
+        timeLaps.setLongDescription(req.getParameter("longDescription"));
+
+
+        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
+        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+
+        resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
+
+        list.add(resultCheckMap);
+
+        for(Map.Entry entry:resultCheckMap.entrySet()){
+            String value = (String) entry.getValue();
+            if(!value.equalsIgnoreCase("ok")) return new MVCModel("/editTimeLaps.jsp",list);
+        }
+        return new MVCModel("/editTimeLaps.jsp",list);
     }
 }

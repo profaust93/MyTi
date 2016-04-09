@@ -95,10 +95,11 @@ public class UserModelTest {
     @Test
     public void testEmptyFields() throws Exception {
         try{
-            userModel.registerUser(createUser(2L,"","password","user","lastN","email"));
+            userModel.registerUser(createUser(2L,"","","user","lastN","email"));
             fail("No Exception was thrown");
         } catch (RegisterException e){
-            assertEquals("Login is empty", e.getMessage());
+            assertEquals(true, e.getBadFields().contains("Login is empty"));
+            assertEquals(true, e.getBadFields().contains("Password is empty"));
         }
     }
 

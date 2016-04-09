@@ -1,4 +1,5 @@
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
   Date: 2016.04.08.
@@ -14,21 +15,22 @@
     <title>Edit Time Laps</title>
 </head>
 <body>
+<% List<Map> dataList = (List<Map>) request.getAttribute("data");%>
+<%Map<String,String> dataMap = dataList.get(0);%>
+<%Map<String,String> resultCheckMap = dataList.get(1);%>
+<form method = "post" action="editTimeLaps">
 
-<form method = "get" action="editTimeLaps">
-    <% Map<String,String> dataMap = (Map<String,String>) request.getAttribute("data");
-    %>
     <h3>TimeLaps name:</h3>
-    <input type="text" name="name" value="<%=dataMap.get("name")%>">
+    <input type="text" name="name" value="<%=dataMap.get("name")%>"> <%= resultCheckMap.get("nameCheckResult")%>
     <h3>Category:</h3>
-    <select name="category">
+    <select name="category"> <%=resultCheckMap.get("categoryCheckResult")%>
         <option value="<%=dataMap.get("category")%>"><%=dataMap.get("category")%></option>
         <option value="sport">Sport</option>
         <option value="fun">Fun</option>
         <option value="work">Work</option>
         <option value="home">Home</option>
     </select>
-    <h3>Date:</h3>
+    <h3>Date:</h3> <%=resultCheckMap.get("dateCheckResult")%>
     <div id="datetimepicker" class="input-append date">
         <input type="text" name = "date" value="<%= dataMap.get("date")%>">
       <span class="add-on">
@@ -51,11 +53,11 @@
         });
     </script>
 
-    <h3>Short Description</h3>
+    <h3>Short Description</h3> <%=resultCheckMap.get("sDescCheck")%>
     <textarea rows="2" cols="50" type="text" name="shortDescription" autofocus maxlength="100">
         <%= dataMap.get("shortDesc")%>
     </textarea>
-    <h3>Long Description</h3>
+    <h3>Long Description</h3> <%=resultCheckMap.get("lDescCheck")%>
     <textarea rows="4" cols="50" type="text" name="longDescription" autofocus maxlength="1000">
         <%= dataMap.get("longDesc")%>
     </textarea>

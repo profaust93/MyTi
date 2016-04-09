@@ -22,7 +22,7 @@ import java.util.*;
 @Component
 public class AddTimeLapsController implements MVCController {
 
-    private Map<Object,String> resultCheckMap = new HashMap<>();
+    private Map<String,Object> resultCheckMap = new HashMap<>();
     private List<TimeLapsList> list;
 
     @Override
