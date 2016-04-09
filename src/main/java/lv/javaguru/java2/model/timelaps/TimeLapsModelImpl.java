@@ -53,9 +53,9 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public Map<Object, String> addTimeLaps(TimeLaps timeLaps) {
+    public Map<String,Object> addTimeLaps(TimeLaps timeLaps) {
 
-        Map<Object,String> resultCheckMap = new HashMap<>();
+        Map<String,Object> resultCheckMap = new HashMap<>();
 
         try{
             resultCheckMap.put("userIdCheckResult", timeLapsChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
@@ -83,8 +83,8 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public Map<Object,String> editTimeLaps(TimeLaps timeLaps) {
-        Map<Object,String> resultCheckMap = new HashMap<>();
+    public Map<String,Object> editTimeLaps(TimeLaps timeLaps) {
+        Map<String,Object> resultCheckMap = new HashMap<>();
         try {
 
             resultCheckMap.put("userIdCheckResult", timeLapsChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));

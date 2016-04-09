@@ -19,9 +19,9 @@ public interface TimeLapsModel {
 
     List<TimeLapsList> getAllTimeLapsForUser(String userId) throws TimeLapsException;
 
-    Map<Object,String> addTimeLaps(TimeLaps timeLaps);
+    Map<String,Object> addTimeLaps(TimeLaps timeLaps);
 
-    Map<Object,String> editTimeLaps(TimeLaps timeLaps);
+    Map<String,Object> editTimeLaps(TimeLaps timeLaps);
 
     void deleteTimeLapsList(List<String> timeLapsIdList);
 
