@@ -5,10 +5,11 @@ import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
+import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.model.timelaps.TimeLapsModel;
-import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
+import lv.javaguru.java2.service.timelaps.TimeLapsModel;
+import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
 import lv.javaguru.java2.service.TimeLapsChecks;
 import org.springframework.stereotype.Component;
 
@@ -36,8 +37,8 @@ public class AddTimeLapsController implements MVCController {
         TimeLaps timeLaps = new TimeLaps();
         TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
 
-        String userId = (String) req.getSession().getAttribute("userId");
-        timeLaps.setUserId(Long.parseLong(userId));
+        UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
+        timeLaps.setUserId(userDTO.getUserId());
         timeLaps.setTimeLapsName(req.getParameter("name"));
         timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
         timeLaps.setCategory(req.getParameter("category"));
@@ -54,7 +55,7 @@ public class AddTimeLapsController implements MVCController {
             if(!value.equalsIgnoreCase("ok")) return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
         }
         try {
-            list = timeLapsModel.getAllTimeLapsForUser(userId);
+            list = timeLapsModel.getAllTimeLapsForUser(String.valueOf(userDTO.getUserId()));
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }

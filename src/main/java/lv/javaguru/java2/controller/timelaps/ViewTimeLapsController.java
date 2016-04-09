@@ -3,10 +3,11 @@ package lv.javaguru.java2.controller.timelaps;
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLapsList;
+import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.model.timelaps.TimeLapsModel;
-import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
+import lv.javaguru.java2.service.timelaps.TimeLapsModel;
+import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +24,11 @@ public class ViewTimeLapsController implements MVCController {
     @Override
     public MVCModel processGet(HttpServletRequest req) {
         String userId = (String) req.getSession().getAttribute("userId");
+        UserDTO userDTO =(UserDTO) req.getSession().getAttribute("user");
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
         try {
-            list = timeLapsModel.getAllTimeLapsForUser(userId);
+            list = timeLapsModel.getAllTimeLapsForUser(String.valueOf(userDTO.getUserId()));
 
         } catch (TimeLapsException e) {
             e.printStackTrace();

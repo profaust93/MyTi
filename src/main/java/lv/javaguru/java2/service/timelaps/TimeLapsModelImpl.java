@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.timelaps;
+package lv.javaguru.java2.service.timelaps;
 
 
 import lv.javaguru.java2.database.DBException;

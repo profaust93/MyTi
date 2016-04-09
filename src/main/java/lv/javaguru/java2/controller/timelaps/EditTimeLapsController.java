@@ -3,11 +3,12 @@ package lv.javaguru.java2.controller.timelaps;
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.model.timelaps.TimeLapsModel;
-import lv.javaguru.java2.model.timelaps.TimeLapsModelImpl;
+import lv.javaguru.java2.service.timelaps.TimeLapsModel;
+import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
 import lv.javaguru.java2.service.TimeLapsChecks;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +36,7 @@ public class EditTimeLapsController implements MVCController{
 
 
 
-        String timeLapsId = "120";
+        String timeLapsId = "10";
 
         try {
             TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
@@ -55,23 +56,27 @@ public class EditTimeLapsController implements MVCController{
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        TimeLaps timeLaps = new TimeLaps();
-        TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
-
-        String userId = (String) req.getSession().getAttribute("userId");
-        timeLaps.setUserId(Long.parseLong(userId));
-        timeLaps.setTimeLapsName(req.getParameter("name"));
-        timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
-        timeLaps.setCategory(req.getParameter("category"));
-        timeLaps.setShortDescription(req.getParameter("shortDescription"));
-        timeLaps.setLongDescription(req.getParameter("longDescription"));
-
-
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+        String timeLapsId = "10";
+        TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
 
-        resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
+        try {
+            TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
 
+
+            UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
+
+            timeLaps.setUserId(userDTO.getUserId());
+            timeLaps.setTimeLapsName(req.getParameter("name"));
+            timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
+            timeLaps.setCategory(req.getParameter("category"));
+            timeLaps.setShortDescription(req.getParameter("shortDescription"));
+            timeLaps.setLongDescription(req.getParameter("longDescription"));
+            resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
+        }catch (TimeLapsException e){
+            e.printStackTrace();
+        }
         list.add(resultCheckMap);
 
         for(Map.Entry entry:resultCheckMap.entrySet()){
