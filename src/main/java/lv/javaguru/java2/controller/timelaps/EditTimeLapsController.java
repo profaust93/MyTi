@@ -9,7 +9,7 @@ import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
-import lv.javaguru.java2.service.TimeLapsChecks;
+import lv.javaguru.java2.service.timelaps.TimeLapsChecks;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +34,11 @@ public class EditTimeLapsController implements MVCController{
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
 
-
-
         String timeLapsId = "10";
 
         try {
             TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
+            dataMap.put("timeLapsId",timeLaps.getTimeLapsId());
             dataMap.put("name",timeLaps.getTimeLapsName());
             dataMap.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
             dataMap.put("category",timeLaps.getCategory());
@@ -58,11 +57,11 @@ public class EditTimeLapsController implements MVCController{
     public MVCModel processPost(HttpServletRequest req) {
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
-        String timeLapsId = "10";
         TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
 
+
         try {
-            TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
+            TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong((String)dataMap.get("timeLapsId")));
 
 
             UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
@@ -73,16 +72,24 @@ public class EditTimeLapsController implements MVCController{
             timeLaps.setCategory(req.getParameter("category"));
             timeLaps.setShortDescription(req.getParameter("shortDescription"));
             timeLaps.setLongDescription(req.getParameter("longDescription"));
+
+            dataMap.put("name",timeLaps.getTimeLapsName());
+            dataMap.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
+            dataMap.put("category",timeLaps.getCategory());
+            dataMap.put("shortDesc",timeLaps.getShortDescription());
+            dataMap.put("longDesc",timeLaps.getLongDescription());
+
             resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
+
         }catch (TimeLapsException e){
             e.printStackTrace();
         }
         list.add(resultCheckMap);
-
+        list.add(dataMap);
         for(Map.Entry entry:resultCheckMap.entrySet()){
             String value = (String) entry.getValue();
             if(!value.equalsIgnoreCase("ok")) return new MVCModel("/editTimeLaps.jsp",list);
         }
-        return new MVCModel("/editTimeLaps.jsp",list);
+        return new MVCModel("/redirect.jsp","viewTimeLaps");
     }
 }

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.service;
+package lv.javaguru.java2.service.timelaps;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;

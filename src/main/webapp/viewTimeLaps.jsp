@@ -65,6 +65,9 @@
     </div>
     <div>
         <p>BUTTONS</p>
+        <form method="get" action="editTimeLaps" name="TimeLapsId">
+            <input type="submit" value="<%=list.get(i).getTimeLapsId()%>">
+        </form>
     </div>
 
 </div>

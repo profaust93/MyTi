@@ -10,7 +10,7 @@ import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
-import lv.javaguru.java2.service.TimeLapsChecks;
+import lv.javaguru.java2.service.timelaps.TimeLapsChecks;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +60,6 @@ public class AddTimeLapsController implements MVCController {
             e.printStackTrace();
         }
 
-        return new MVCModel("/viewTimeLaps.jsp",list);
+        return new MVCModel("/redirect.jsp","viewTimeLaps");
     }
 }

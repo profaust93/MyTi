@@ -6,7 +6,6 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.service.TimeLapsChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

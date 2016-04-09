@@ -11,6 +11,7 @@ import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,7 +24,6 @@ public class ViewTimeLapsController implements MVCController {
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
-        String userId = (String) req.getSession().getAttribute("userId");
         UserDTO userDTO =(UserDTO) req.getSession().getAttribute("user");
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
@@ -33,12 +33,15 @@ public class ViewTimeLapsController implements MVCController {
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }
-
+        String timeLapsId = req.getParameter("TimeLapsId");
+        System.out.println(timeLapsId);
         return new MVCModel("/viewTimeLaps.jsp",list);
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        return null;
+        String timeLapsId = req.getParameter("TimeLapsId");
+        System.out.println(timeLapsId);
+        return new MVCModel("/redirect.jsp","editTimeLaps");
     }
 }
