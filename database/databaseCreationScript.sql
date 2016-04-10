@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
 
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
+INSERT INTO Profiles VALUES (default, 1, "testName", "testFamilyName","testEmail");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
