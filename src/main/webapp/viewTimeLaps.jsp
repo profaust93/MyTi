@@ -64,9 +64,8 @@
         <p><%=list.get(i).getLongDescription()%></p>
     </div>
     <div>
-        <p>BUTTONS</p>
         <form method="get" action="editTimeLaps" name="TimeLapsId">
-            <input type="submit" value="<%=list.get(i).getTimeLapsId()%>">
+            <button type="submit" value="<%=list.get(i).getTimeLapsId()%>" name = "TimeLapsId">Edit</button>
         </form>
     </div>
 

@@ -33,15 +33,11 @@ public class ViewTimeLapsController implements MVCController {
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }
-        String timeLapsId = req.getParameter("TimeLapsId");
-        System.out.println(timeLapsId);
         return new MVCModel("/viewTimeLaps.jsp",list);
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        String timeLapsId = req.getParameter("TimeLapsId");
-        System.out.println(timeLapsId);
         return new MVCModel("/redirect.jsp","editTimeLaps");
     }
 }

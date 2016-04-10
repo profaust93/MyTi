@@ -34,7 +34,8 @@ public class EditTimeLapsController implements MVCController{
         TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
         timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
 
-        String timeLapsId = "10";
+        String timeLapsId = req.getParameter("TimeLapsId");
+
 
         try {
             TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
@@ -61,7 +62,7 @@ public class EditTimeLapsController implements MVCController{
 
 
         try {
-            TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong((String)dataMap.get("timeLapsId")));
+            TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(dataMap.get("timeLapsId").toString()));
 
 
             UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
