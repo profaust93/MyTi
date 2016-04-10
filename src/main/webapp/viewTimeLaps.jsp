@@ -67,6 +67,9 @@
         <form method="get" action="editTimeLaps" name="TimeLapsId">
             <button type="submit" value="<%=list.get(i).getTimeLapsId()%>" name = "TimeLapsId">Edit</button>
         </form>
+        <form method="post" action="viewTimeLaps" name="DeleteTimeLapsById">
+            <button type="submit" value="<%=list.get(i).getTimeLapsId()%>" name="DeleteTimeLapsById">Delete</button>
+        </form>
     </div>
 
 </div>

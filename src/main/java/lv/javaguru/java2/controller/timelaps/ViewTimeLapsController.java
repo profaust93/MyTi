@@ -2,6 +2,7 @@ package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
+import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
@@ -38,6 +39,18 @@ public class ViewTimeLapsController implements MVCController {
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
+        String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
+        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
+        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+        if(deleteTimeLapsById != null){
+            try {
+                TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
+                timeLapsModel.deleteTimeLaps(timeLaps);
+                return new MVCModel("/redirect.jsp","viewTimeLaps");
+            } catch (TimeLapsException e) {
+                e.printStackTrace();
+            }
+        }
         return new MVCModel("/redirect.jsp","editTimeLaps");
     }
 }
