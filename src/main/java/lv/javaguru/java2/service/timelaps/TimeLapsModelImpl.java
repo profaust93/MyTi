@@ -107,8 +107,13 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     }
 
     @Override
-    public void deleteTimeLapsList(List<String> timeLapsList) {
+    public void deleteAllTimeLaps(Long userId) {
 
+        try {
+            timeLapsDAO.deleteAllTimeLaps(userId);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

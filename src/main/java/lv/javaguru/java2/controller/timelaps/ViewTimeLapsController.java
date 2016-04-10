@@ -1,6 +1,7 @@
 package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ruslan on 16.29.3.
@@ -47,19 +50,22 @@ public class ViewTimeLapsController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
         String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
-
-
-        if(deleteTimeLapsById != null){
+        String deleteAllTimeLaps = req.getParameter("DeleteAllTimeLaps");
+        UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
+        if (deleteTimeLapsById != null) {
             try {
                 TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
                 timeLapsModel.deleteTimeLaps(timeLaps);
-                return new MVCModel("/redirect.jsp","viewTimeLaps");
+                return new MVCModel("/redirect.jsp", "viewTimeLaps");
             } catch (TimeLapsException e) {
                 e.printStackTrace();
             }
         }
 
-
-        return new MVCModel("/redirect.jsp","editTimeLaps");
+        if (deleteAllTimeLaps != null) {
+            timeLapsModel.deleteAllTimeLaps(userDTO.getUserId());
+            return new MVCModel("/redirect.jsp", "viewTimeLaps");
+        }
+            return new MVCModel("/redirect.jsp", "editTimeLaps");
     }
 }

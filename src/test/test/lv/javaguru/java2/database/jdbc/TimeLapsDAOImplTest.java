@@ -127,4 +127,24 @@ public class TimeLapsDAOImplTest {
         assertEquals(3,timeLapsList.size());
 
     }
+
+    @Test
+    public void deleteAllTimeLapsTest() throws Exception {
+        TimeLaps timeLaps = new TimeLaps();
+        timeLaps.setCompleteTime(LocalDateTime.now());
+        timeLaps.setShortDescription("ShortDescription");
+        timeLaps.setLongDescription("LongDescription");
+        timeLaps.setCategory("sport");
+        timeLaps.setTimeLapsName("timelaps");
+        timeLaps.setUserId(3L);
+        timeLapsDAO.create(timeLaps);
+        timeLapsDAO.create(timeLaps);
+        timeLapsDAO.create(timeLaps);
+
+
+        timeLapsDAO.deleteAllTimeLaps(3L);
+
+        assertEquals(0,timeLapsDAO.getAllTimeLapsByUserId(3L).size());
+
+    }
 }

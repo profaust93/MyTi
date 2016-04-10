@@ -47,7 +47,9 @@
 </head>
 <body>
 <% List<TimeLapsList> list = (List<TimeLapsList>) request.getAttribute("data");%>
-
+<form method="post" action="viewTimeLaps" name="DeleteAllTimeLaps">
+    <button type="submit" value="Delete" name = "DeleteAllTimeLaps">Delete All</button>
+</form>
 <h2>View Time Laps Page</h2>
 <% for (int i = 0; i < list.size() ; i++) { %>
 <button class="accordion"><p>Name:<%=list.get(i).getTimeLapsName()%></p><p>ID:<%=list.get(i).getTimeLapsId()%></p></button>

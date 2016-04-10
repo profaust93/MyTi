@@ -67,5 +67,10 @@ public class TimeLapsModelTest {
         verify(timeLapsDAO).getById(666L);
     }
 
+    @Test
+    public void testDeleteAllTimeLaps() throws Exception {
+        timeLapsModel.deleteAllTimeLaps(666L);
+        verify(timeLapsDAO).deleteAllTimeLaps(666L);
 
+    }
 }

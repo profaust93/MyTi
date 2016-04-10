@@ -39,6 +39,46 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     }
 
     @Override
+    public void deleteAllTimeLaps(Long userId) throws DBException {
+        Connection connection = null;
+        try{
+            connection = getConnection();
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("DELETE FROM my_ti.TimeLaps WHERE UserID = ?");
+            preparedStatement.setLong(1,userId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+
+    @Override
+    public void delete(TimeLaps timeLaps) throws DBException {
+        if(timeLaps==null){
+            return;
+        }
+        Connection connection = null;
+        try{
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM my_ti.TimeLaps WHERE TimeLapsId = ?");
+            preparedStatement.setLong(1,timeLaps.getTimeLapsId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
+    }
+
+
+    @Override
     public void create(TimeLaps timeLaps) throws DBException {
         if(timeLaps == null){
             return;
@@ -107,26 +147,6 @@ public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
         }
     }
 
-    @Override
-    public void delete(TimeLaps timeLaps) throws DBException {
-        if(timeLaps==null){
-            return;
-        }
-        Connection connection = null;
-        try{
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("DELETE FROM my_ti.TimeLaps WHERE TimeLapsId = ?");
-            preparedStatement.setLong(1,timeLaps.getTimeLapsId());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection(connection);
-        }
-
-    }
 
     @Override
     public TimeLaps getById(Long id) throws DBException {
