@@ -47,7 +47,6 @@ public class ViewTimeLapsController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
         String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
-        System.out.println(deleteTimeLapsById);
 
 
         if(deleteTimeLapsById != null){

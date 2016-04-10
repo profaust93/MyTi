@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by Camille on 07.04.2016.
  */
 @Component
-public class VievUserProfileController implements MVCController{
+public class ViewUserProfileController implements MVCController{
 
     /**
      * processGet:
