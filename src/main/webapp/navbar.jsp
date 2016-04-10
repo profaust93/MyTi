@@ -125,7 +125,7 @@
                     <a href="/java2/toDoList"><i class="fa fa-table fa-fw"></i> ToDo List</a>
                 </li>
                 <li>
-                    <a href="/java2/timeLaps"><i class="fa fa-table fa-fw"></i> TimeLaps</a>
+                    <a href="/java2/viewTimeLaps"><i class="fa fa-table fa-fw"></i> TimeLaps</a>
                 </li>
                 <li>
                     <a href="/java2/statistic"><i class="fa fa-edit fa-fw"></i> Statistic</a>

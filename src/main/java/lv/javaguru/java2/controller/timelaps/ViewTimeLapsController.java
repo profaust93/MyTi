@@ -51,6 +51,7 @@ public class ViewTimeLapsController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) {
         String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
         String deleteAllTimeLaps = req.getParameter("DeleteAllTimeLaps");
+        String addTimeLaps = req.getParameter("AddTimeLaps");
         UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
         if (deleteTimeLapsById != null) {
             try {
@@ -65,6 +66,10 @@ public class ViewTimeLapsController implements MVCController {
         if (deleteAllTimeLaps != null) {
             timeLapsModel.deleteAllTimeLaps(userDTO.getUserId());
             return new MVCModel("/redirect.jsp", "viewTimeLaps");
+        }
+
+        if(addTimeLaps != null){
+            return new MVCModel("/redirect.jsp","addTimeLaps");
         }
             return new MVCModel("/redirect.jsp", "editTimeLaps");
     }
