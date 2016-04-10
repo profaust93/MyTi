@@ -21,6 +21,8 @@ public interface TimeLapsDAO {
 
     List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException;
 
+    void deleteAllTimeLaps(Long userId) throws DBException;
+
 
 
 }
