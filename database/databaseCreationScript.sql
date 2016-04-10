@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `my_ti`.`Profiles` ;-- ------------------------------------
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
     ProfileId INT(11) NOT NULL AUTO_INCREMENT,
-    UserId INT (11) NOT NULL,
+    UserId INT (11) NOT NULL UNIQUE,
     FirstName VARCHAR (30),
     LastName VARCHAR (30),
     Email VARCHAR (30),
