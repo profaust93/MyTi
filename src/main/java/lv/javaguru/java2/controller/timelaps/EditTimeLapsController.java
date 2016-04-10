@@ -1,6 +1,7 @@
 package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.dto.UserDTO;
@@ -10,6 +11,7 @@ import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
 import lv.javaguru.java2.service.timelaps.TimeLapsChecks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +26,20 @@ import java.util.Map;
 @Component
 public class EditTimeLapsController implements MVCController{
 
+    @Autowired
+    TimeLapsModel timeLapsModel;
+    @Autowired
+    TimeLapsDAO timeLapsDAO;
+    @Autowired
+    TimeLapsChecks timeLapsChecks;
+
 
     private List<Map> list = new ArrayList<>();
     private Map<String,Object> dataMap = new HashMap<>();
     private Map<String,Object> resultCheckMap = new HashMap<>();
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
-        TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
-        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
-        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+
 
         String timeLapsId = req.getParameter("TimeLapsId");
 
@@ -56,9 +63,6 @@ public class EditTimeLapsController implements MVCController{
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
-        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
-        TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
 
 
         try {

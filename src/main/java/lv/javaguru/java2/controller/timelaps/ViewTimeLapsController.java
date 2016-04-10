@@ -1,6 +1,7 @@
 package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
@@ -9,6 +10,7 @@ import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +23,18 @@ import java.util.List;
 @Component
 public class ViewTimeLapsController implements MVCController {
 
+    @Autowired
+    TimeLapsDAO timeLapsDAO;
+    @Autowired
+    TimeLapsModel timeLapsModel;
+
     private List<TimeLapsList> list;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
         UserDTO userDTO =(UserDTO) req.getSession().getAttribute("user");
-        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
-        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+
+
         try {
             list = timeLapsModel.getAllTimeLapsForUser(String.valueOf(userDTO.getUserId()));
 
@@ -40,8 +47,8 @@ public class ViewTimeLapsController implements MVCController {
     @Override
     public MVCModel processPost(HttpServletRequest req) {
         String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
-        TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
-        timeLapsModel.setTimeLapsDAO(new TimeLapsDAOImpl());
+
+
         if(deleteTimeLapsById != null){
             try {
                 TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
@@ -51,6 +58,8 @@ public class ViewTimeLapsController implements MVCController {
                 e.printStackTrace();
             }
         }
+
+
         return new MVCModel("/redirect.jsp","editTimeLaps");
     }
 }
