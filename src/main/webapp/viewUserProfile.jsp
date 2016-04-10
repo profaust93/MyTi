@@ -15,8 +15,8 @@
 <h1>Hi, Dude!</h1>
 <p>This is your profile.</p>
 <p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
-<p>Name: <% System.out.println( userProfile.getFirstName()); %></p>
-<p>Family name: <% System.out.println(userProfile.getLastName()); %></p>
-<p>E-mail: <% System.out.println(userProfile.getEmail()); %></p>
+<p>Name: <%=userProfile.getFirstName()%></p>
+<p>Family name: <%=userProfile.getLastName()%></p>
+<p>E-mail: <%=userProfile.getEmail()%></p>
 </body>
 </html>
