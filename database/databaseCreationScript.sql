@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS `my_ti`.`Profiles` ;-- ------------------------------------
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
     ProfileId INT(11) NOT NULL AUTO_INCREMENT,
-    UserId INT (11) NOT NULL,
+    UserId INT (11) NOT NULL UNIQUE,
     FirstName VARCHAR (30),
     LastName VARCHAR (30),
     Email VARCHAR (30),
@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
 
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
+INSERT INTO Profiles VALUES (default, 1, "testName", "testFamilyName","testEmail");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

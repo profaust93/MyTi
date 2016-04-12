@@ -66,17 +66,16 @@ public class UserProfileDaoImplTest {
 
     @Test
     public void testUpdate() throws Exception{
-        System.out.println("testUpdate START");
+
 
         UserProfile userProfile = new UserProfile();
-        System.out.println(user.getUserId());
         userProfile.setUserId(user.getUserId());
         userProfile.setFirstName("nameName");
         userProfile.setLastName("lastNameLastName");
         userProfile.setEmail("emailEmail");
         userProfile.setUserId(user.getUserId());
         userProfileDAO.create(userProfile);
-        System.out.println("profileId= "+userProfile.getProfileId());
+
 
         userProfile.setFirstName("nameName22");
         userProfile.setLastName("lastNameLastName2");
@@ -91,5 +90,22 @@ public class UserProfileDaoImplTest {
         assertEquals(userProfile.getUserId(),userProfileFromDB.getUserId());
     }
 
+    @Test
+    public void testDelete() throws Exception{
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUserId(user.getUserId());
+        userProfile.setFirstName("nameName");
+        userProfile.setLastName("lastNameLastName");
+        userProfile.setEmail("emailEmail");
+        userProfile.setUserId(user.getUserId());
+        userProfileDAO.create(userProfile);
+        UserProfile userProfile1FromDB = userProfileDAO.getById(user.getUserId());
+        assertNotNull(userProfile1FromDB);
+
+        userProfileDAO.delete(user.getUserId());
+        userProfileDAO.getById(user.getUserId());
+        userProfile1FromDB = userProfileDAO.getById(user.getUserId());
+        assertNull(userProfile1FromDB);
+    }
 
 }

@@ -10,13 +10,11 @@ import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
 import lv.javaguru.java2.model.profile.UserProfileModel;
 import lv.javaguru.java2.model.profile.UserProfileModelImpl;
-import lv.javaguru.java2.service.ProfileServices;
+import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Camille on 07.04.2016.
