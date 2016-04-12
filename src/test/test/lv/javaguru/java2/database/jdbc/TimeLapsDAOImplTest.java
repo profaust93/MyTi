@@ -119,6 +119,7 @@ public class TimeLapsDAOImplTest {
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);
+        timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
 
@@ -139,12 +140,14 @@ public class TimeLapsDAOImplTest {
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
         timeLapsDAO.create(timeLaps);
+        timeLaps.setUserId(2L);
         timeLapsDAO.create(timeLaps);
 
 
         timeLapsDAO.deleteAllTimeLaps(3L);
 
         assertEquals(0,timeLapsDAO.getAllTimeLapsByUserId(3L).size());
+        assertEquals(1,timeLapsDAO.getAllTimeLaps().size());
 
     }
 }

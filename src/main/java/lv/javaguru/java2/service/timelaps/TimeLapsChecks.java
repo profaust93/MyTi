@@ -61,18 +61,18 @@ public class TimeLapsChecks {
     }
 
     public LocalDateTime dateConvert(String data) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         if(!isNotEmpty(data).equalsIgnoreCase(ok)) try {
             throw new DBException("Empty field, LDT - now");
         } catch (DBException e) {
-            return LocalDateTime.now();
+            return LocalDateTime.parse(LocalDateTime.now().toString(),formatter);
         }
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
         return dateTime;
     }
 
     public String dateConvert(LocalDateTime time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         String convertedDate = time.format(formatter);
         return convertedDate;
     }
@@ -125,7 +125,7 @@ public class TimeLapsChecks {
         try {
 
             if (StringUtils.length(data) > count) {
-                throw new DBException("Too long description, must be shorter(not more than" +
+                throw new DBException("Too long description, must be shorter(not more than " +
                         count + " symbols)");
             }
         } catch (DBException e) {

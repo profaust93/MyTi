@@ -34,9 +34,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href="${pageContext.request.contextPath}/resources/lib/datetimepicker/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen"
-          href="${pageContext.request.contextPath}/resources/lib/datetimepicker/css/bootstrap-datetimepicker.min.css">
+          href="${pageContext.request.contextPath}/resources/lib/datetimepickernew/jquery.datetimepicker.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,27 +72,21 @@
     <h3>Date:</h3><%if(dataMap.get("dateCheckResult") != null) { %>
     <%= dataMap.get("dateCheckResult")%>
     <%};%>
-    <div id="datetimepicker" class="input-append date">
-        <input type="text" name = "date">
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-    </div>
+
+    <input id="datetimepicker" type="text" name="date" >
+
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/lib/datetimepicker/js/jquery.min.js">
+            src="${pageContext.request.contextPath}/resources/lib/datetimepicker-master/build/jquery.datetimepicker.min.js">
     </script>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/lib/datetimepicker/js/bootstrap.min.js">
+            src="${pageContext.request.contextPath}/resources/lib/datetimepicker-master/build/jquery.datetimepicker.full.min.js">
     </script>
     <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/lib/datetimepicker/js/bootstrap-datetimepicker.min.js">
+            src="${pageContext.request.contextPath}/resources/lib/datetimepicker-master/build/jquery.datetimepicker.full.js">
     </script>
 
     <script type="text/javascript">
-        $('#datetimepicker').datetimepicker({
-            format: 'dd/MM/yyyy hh:mm:ss',
-            language: 'en'
-        });
+        jQuery('#datetimepicker').datetimepicker();
     </script>
 
     <h3>Short Description</h3><%if(dataMap.get("sDescCheck") != null) { %>
