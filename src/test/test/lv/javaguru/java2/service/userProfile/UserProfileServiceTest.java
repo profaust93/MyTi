@@ -24,8 +24,8 @@ public class UserProfileServiceTest {
     @Mock
     UserProfileDAOImpl mockedUserProfileDAO;
 
-    //под @InjectMocks обект, методы которого будем тестировать и в которых используется
-    //созданный выще мок
+    //под @InjectMocks объект, методы которого будем тестировать и в которых используется
+    //созданный выше мок
     @InjectMocks
     ProfileServices profileServices = new ProfileServices();
 
