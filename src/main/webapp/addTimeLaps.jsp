@@ -35,7 +35,7 @@
     <link href="${pageContext.request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" type="text/css" media="screen"
-          href="${pageContext.request.contextPath}/resources/lib/datetimepickernew/jquery.datetimepicker.css">
+          href="${pageContext.request.contextPath}/resources/lib/datetimepicker-master/jquery.datetimepicker.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
