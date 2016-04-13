@@ -65,7 +65,8 @@ public class TimeLapsChecks {
         if(!isNotEmpty(data).equalsIgnoreCase(ok)) try {
             throw new DBException("Empty field, LDT - now");
         } catch (DBException e) {
-            return LocalDateTime.parse(LocalDateTime.now().toString(),formatter);
+            String date = LocalDateTime.now().format(formatter);
+            return LocalDateTime.parse(date,formatter);
         }
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
         return dateTime;
