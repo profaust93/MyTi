@@ -5,6 +5,9 @@ import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.service.user.UserModelImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +15,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by Kemran on 02/04/2016.
  */
+@Component
 public class RegisterController implements MVCController {
+
+    @Autowired
+    UserDAO userDAO;
 
 
     @Override
@@ -29,13 +36,12 @@ public class RegisterController implements MVCController {
                 req.getParameter("lastname"),
                 req.getParameter("email")
         );
-        HttpSession ses = req.getSession();
-        UserDAO userDAO = new UserDAOImpl();
+        System.out.println(user);
         User checkUser = null;
 
         try {
             checkUser = userDAO.getUserByEmailOrLogin(user.getLogin());
-
+            System.out.println(checkUser);
         } catch (DBException e) {
             return new MVCModel("/register", e.getMessage());
         }
@@ -45,6 +51,7 @@ public class RegisterController implements MVCController {
                     userDAO.create(user);
                     req.getSession().setAttribute("userId", user.getUserId());
                     req.getSession().setAttribute("isLoggedIn",true);
+                    System.out.println("Success");
                 } catch (DBException e) {
                     return new MVCModel("/register.jsp", "Error with DB.");
                 }

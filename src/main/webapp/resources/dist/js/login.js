@@ -24,3 +24,14 @@ function login() {
         $("#appError").show();
     });
 }
+
+function register() {
+    $.post("register", $("#registerForm").serialize())
+        .done(function(data){
+            if(data.status == "OK") {
+                window.location.href = data.redirectTo;
+            }else if(data.status == "NOK"){
+
+            }
+        });
+}

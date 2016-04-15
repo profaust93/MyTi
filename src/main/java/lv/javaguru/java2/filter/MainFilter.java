@@ -34,7 +34,7 @@ public class MainFilter implements Filter {
         }
         urlToController = new HashMap<>();
         urlToController.put("/index", applicationContext.getBean(HelloWorldController.class));
-        urlToController.put("/registration", new RegisterController());
+        urlToController.put("/register", applicationContext.getBean(RegisterController.class));
         urlToController.put("/login", applicationContext.getBean(LoginController.class));
         urlToController.put("/viewTimeLaps",applicationContext.getBean(ViewTimeLapsController.class));
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
@@ -54,7 +54,8 @@ public class MainFilter implements Filter {
         }
         HttpSession session = httpServletRequest.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
-        if(isLogIn == null || !isLogIn) {
+        System.out.println(contextURI);
+        if((isLogIn == null || !isLogIn) && !contextURI.equals("/register")) {
             controller = applicationContext.getBean(LoginController.class);
         }  else {
             controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(applicationContext.getBean(ErrorController.class));
