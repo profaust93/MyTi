@@ -164,8 +164,17 @@
             <li><a href="#" class="tablinks" onclick="openCategory(event, 'Fun')">Fun(<%=funCount%>)</a></li>
             <li><a href="#" class="tablinks" onclick="openCategory(event, 'Home')">Home(<%=homeCount%>)</a></li>
         </ul>
+
         <div id="All" class="tabcontent">
+            <div id="wrap">
+                <div class="product-head">
+                    <h1>Product Search</h1>
+                    <div id="form"></div>
+                    <div class="clear"></div>
+                </div>
+                <ul id="list">
             <% for (int i = 0; i < timeLapsList.size() ; i++) { %>
+
             <button class="accordion"><p>Name:<%=timeLapsList.get(i).getTimeLapsName()%></p><p>ID:<%=timeLapsList.get(i).getTimeLapsId()%></p></button>
             <div class="panel">
                 <div>
@@ -190,9 +199,11 @@
                         <button type="submit" value="<%=timeLapsList.get(i).getTimeLapsId()%>" name="DeleteTimeLapsById">Delete</button>
                     </form>
                 </div>
-
             </div>
+
             <% } %>
+                </ul>
+        </div>
         </div>
         <div id="Sport" class="tabcontent">
             <% for (int i = 0; i < timeLapsList.size() ; i++) { %>
@@ -348,7 +359,41 @@
                 evt.currentTarget.className += " active";
             }
         </script>
+        <script>
+            (function ($) {
+                jQuery.expr[':'].Contains = function(a,i,m){
+                    return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
+                };
 
+                function filterList(header, list) {
+                    var form = $("<form>").attr({"class":"filterform","action":"#"}),
+                            input = $("<input>").attr({"class":"filterinput","type":"text"});
+                    $(form).append(input).appendTo(header);
+
+                    $(input)
+                            .change( function () {
+                                var filter = $(this).val();
+                                if(filter) {
+
+                                    $matches = $(list).find('a:Contains(' + filter + ')').parent();
+                                    $('button', list).not($matches).slideUp();
+                                    $matches.slideDown();
+
+                                } else {
+                                    $(list).find("button").slideDown();
+                                }
+                                return false;
+                            })
+                            .keyup( function () {
+                                $(this).change();
+                            });
+                }
+
+                $(function () {
+                    filterList($("#form"), $("#list"));
+                });
+            }(jQuery));
+        </script>
     </div>
 </div>
 </body>
