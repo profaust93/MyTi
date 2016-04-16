@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Register page">
+    <meta name="author" content="MyTi team">
 
     <title>Register Page</title>
 
@@ -16,7 +16,7 @@
     <link href="${pageContext.request.contextPath}/resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="${pageContext.request.contextPath}/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/dist/css/myTi.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -31,6 +31,10 @@
 <body>
 
     <div class="container">
+        <div id = "appError"class="alert alert-danger" style="display: none">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Application Error</strong> Please refresh the page.
+        </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
@@ -40,8 +44,14 @@
                     <div class="panel-body">
                         <form id="registerForm" method="post" role="form">
                             <fieldset>
+                                <div id = "emptyFields" class="alert alert-danger" style="display: none">
+                                    Fill all fields
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Login" name="login" type="text" autofocus>
+                                </div>
+                                <div id = "existLogin" class="alert alert-danger" style="display: none">
+                                    User already exists
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
@@ -54,6 +64,9 @@
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Email" name="email" type="email" value="">
+                                </div>
+                                <div id = "existEmail" class="alert alert-danger" style="display: none">
+                                    Email already exists
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->

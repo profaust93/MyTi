@@ -54,7 +54,6 @@ public class MainFilter implements Filter {
         }
         HttpSession session = httpServletRequest.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
-        System.out.println(contextURI);
         if((isLogIn == null || !isLogIn) && !contextURI.equals("/register")) {
             controller = applicationContext.getBean(LoginController.class);
         }  else {

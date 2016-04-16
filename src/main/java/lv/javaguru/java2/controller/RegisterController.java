@@ -4,13 +4,19 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.model.exceptions.RedirectException;
+import lv.javaguru.java2.model.exceptions.RegisterException;
 import lv.javaguru.java2.service.user.UserModelImpl;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Kemran on 02/04/2016.
@@ -21,14 +27,25 @@ public class RegisterController implements MVCController {
     @Autowired
     UserDAO userDAO;
 
+    @Autowired
+    UserModelImpl userModel;
 
     @Override
-    public MVCModel processGet(HttpServletRequest req) {
-        return new MVCModel("/register.jsp", "Registration");
+    public MVCModel processGet(HttpServletRequest req) throws RedirectException {
+        HttpSession session = req.getSession();
+        Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIN");
+        if(isLogIn != null && isLogIn){
+            return  new MVCModel("/redirect.jsp","index");
+        }
+        String contextURI = req.getRequestURL().toString();
+        session.setAttribute("comeFrom",contextURI);
+        return new MVCModel("/register.jsp", null);
     }
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
+        Map<String,String> resultMap = new HashMap<>();
+
         User user = new User(
                 req.getParameter("login"),
                 req.getParameter("password"),
@@ -36,29 +53,33 @@ public class RegisterController implements MVCController {
                 req.getParameter("lastname"),
                 req.getParameter("email")
         );
-        System.out.println(user);
-        User checkUser = null;
 
         try {
-            checkUser = userDAO.getUserByEmailOrLogin(user.getLogin());
-            System.out.println(checkUser);
+            userModel.registerUser(user);
+            userDAO.create(user);
+            HttpSession session = req.getSession();
+            UserDTO userDTO = new UserDTO(user.getFirstName(),user.getLogin(),user.getUserId());
+            session.setAttribute("user", userDTO);
+            session.setAttribute("isLoggedIn",true);
+            resultMap.put("status", "OK");
+            if(!req.getServletPath().equals("/register")){
+                resultMap.put("redirectTo", (String)session.getAttribute("comeFrom"));
+            }else{
+                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/java2/index";
+                resultMap.put("redirectTo",url);
+            }
+            return new MVCModel("/json.jsp", new JSONObject(resultMap));
+
         } catch (DBException e) {
-            return new MVCModel("/register", e.getMessage());
+            resultMap.put("status","NOK");
+            resultMap.put("ERROR",e.getMessage());
+            return new MVCModel("/json.jsp", new JSONObject(resultMap));
+
+        } catch ( RegisterException e){
+            resultMap.put("status","NOK");
+            resultMap.put("ERROR",e.getMessage());
+            return new MVCModel("/json.jsp", new JSONObject(resultMap));
         }
 
-            if (checkUser == null) {
-                try {
-                    userDAO.create(user);
-                    req.getSession().setAttribute("userId", user.getUserId());
-                    req.getSession().setAttribute("isLoggedIn",true);
-                    System.out.println("Success");
-                } catch (DBException e) {
-                    return new MVCModel("/register.jsp", "Error with DB.");
-                }
-            } else {
-                return new MVCModel("/register.jsp", "This login is already taken.");
-            }
-
-        return new MVCModel("/register.jsp", null);
     }
 }

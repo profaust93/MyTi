@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 // TODO: 2016.04.08. rewrite Tests
-@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserModelTest {
 
@@ -84,10 +84,10 @@ public class UserModelTest {
     @Test
     public void testRegisterUserExist() throws Exception {
         try{
-            userModel.registerUser(createUser(2L,"user","password","user","lastN","email"));
+            userModel.registerUser(createUser(2L,"udd","password","user","lastN","email"));
             fail("No Exception was thrown");
         } catch (RegisterException e){
-            assertEquals("User is already Exist", e.getMessage());
+            assertEquals("User already exists", e.getMessage());
         }
     }
 

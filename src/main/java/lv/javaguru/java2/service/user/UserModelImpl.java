@@ -79,14 +79,15 @@ public class UserModelImpl implements UserModel {
         }
 
         if (testUser == null) {
-            try {
-                userDAO.create(user);
-            } catch (DBException e){
-                throw new RegisterException("Problem with creating account");
-            }
+            return;
         }
-        else if (user.getLogin().equals(testUser.getLogin()) || user.getEmail().equals(testUser.getEmail())){
-            throw new RegisterException("User is already Exist");
+        System.out.println(testUser.getEmail().toLowerCase());
+        System.out.println(user.getEmail().toLowerCase());
+        if (user.getLogin().toLowerCase().equals(testUser.getLogin().toLowerCase())) {
+            throw new RegisterException("User already exists");
+        }
+        else if (user.getEmail().toLowerCase().equals(testUser.getEmail().toLowerCase())){
+            throw new RegisterException("Email already exists");
         }
 
     }
