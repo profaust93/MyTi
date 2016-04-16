@@ -81,8 +81,6 @@ public class UserModelImpl implements UserModel {
         if (testUser == null) {
             return;
         }
-        System.out.println(testUser.getEmail().toLowerCase());
-        System.out.println(user.getEmail().toLowerCase());
         if (user.getLogin().toLowerCase().equals(testUser.getLogin().toLowerCase())) {
             throw new RegisterException("User already exists");
         }

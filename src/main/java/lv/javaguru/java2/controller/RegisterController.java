@@ -33,7 +33,7 @@ public class RegisterController implements MVCController {
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
         HttpSession session = req.getSession();
-        Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIN");
+        Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
         if(isLogIn != null && isLogIn){
             return  new MVCModel("/redirect.jsp","index");
         }
@@ -60,15 +60,15 @@ public class RegisterController implements MVCController {
             HttpSession session = req.getSession();
             UserDTO userDTO = new UserDTO(user.getFirstName(),user.getLogin(),user.getUserId());
             session.setAttribute("user", userDTO);
-            session.setAttribute("isLoggedIn",true);
-            resultMap.put("status", "OK");
-            if(!req.getServletPath().equals("/register")){
-                resultMap.put("redirectTo", (String)session.getAttribute("comeFrom"));
-            }else{
-                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/java2/index";
+            session.setAttribute("IsLoggedIn",true);
+            resultMap.put("status","OK");
+            if(!req.getServletPath().equals("/register")) {
+                resultMap.put("redirectTo",(String)session.getAttribute("comeFrom"));
+            } else {
+                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/index";
                 resultMap.put("redirectTo",url);
             }
-            return new MVCModel("/json.jsp", new JSONObject(resultMap));
+            return new MVCModel("/json.jsp",new JSONObject(resultMap));
 
         } catch (DBException e) {
             resultMap.put("status","NOK");
