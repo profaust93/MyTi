@@ -2,6 +2,7 @@ package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.SpringConfig.SpringConfig;
 import lv.javaguru.java2.controller.*;
+import lv.javaguru.java2.controller.profile.EditUserProfileController;
 import lv.javaguru.java2.controller.profile.ViewUserProfileController;
 import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
@@ -40,6 +41,7 @@ public class MainFilter implements Filter {
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
         urlToController.put("/editTimeLaps",applicationContext.getBean(EditTimeLapsController.class));
         urlToController.put("/viewUserProfile",applicationContext.getBean(ViewUserProfileController.class));
+        urlToController.put("/EditUserProfile",applicationContext.getBean(EditUserProfileController.class));//
     }
 
     @Override

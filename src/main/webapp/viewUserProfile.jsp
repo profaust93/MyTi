@@ -17,6 +17,12 @@
 <p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
 <p>Name: <%=userProfile.getFirstName()%></p>
 <p>Family name: <%=userProfile.getLastName()%></p>
-<p>E-mail: <%=userProfile.getEmail()%></p>
+<p>E-mail: <%=userProfile.getEmail()%></p></br>
+
+<form action="editUserProfile.jsp">
+    <input type="submit" value="Edit profile">
+</form>
+
+
 </body>
 </html>

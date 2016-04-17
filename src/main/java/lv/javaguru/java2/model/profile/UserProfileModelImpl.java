@@ -5,13 +5,15 @@ import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.domain.UserProfile;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
 
+import java.util.Map;
+
 /**
  * Created by Camille on 07.04.2016.
  */
 public class UserProfileModelImpl implements UserProfileModel {
 
     UserProfileDAO userProfileDAO;
-
+    UserProfile userProfile;
     @Override
     public void setUserProfileDAO(UserProfileDAO userProfileDAO) {
     this.userProfileDAO = userProfileDAO;
@@ -29,8 +31,32 @@ public class UserProfileModelImpl implements UserProfileModel {
     }
 
     @Override
-    public void updateUserProfile() {
+    public void createUserProfile(Map profileData) {
+        userProfile = new UserProfile();
+        userProfile.setUserId((Long)profileData.get("userId"));
+        userProfile.setFirstName((String)profileData.get("firstName"));
+        userProfile.setFirstName((String)profileData.get("lastName"));
+        userProfile.setFirstName((String)profileData.get("email"));
+        try {
+            userProfileDAO.create(userProfile);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    @Override
+    public void updateUserProfile(Map profileData) {
+        userProfile = new UserProfile();
+        userProfile.setUserId((Long)profileData.get("userId"));
+        userProfile.setFirstName((String)profileData.get("firstName"));
+        userProfile.setFirstName((String)profileData.get("lastName"));
+        userProfile.setFirstName((String)profileData.get("email"));
+        try {
+            userProfileDAO.update(userProfile);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

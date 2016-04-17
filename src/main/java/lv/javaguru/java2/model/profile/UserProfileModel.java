@@ -5,6 +5,8 @@ import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.domain.UserProfile;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
 
+import java.util.Map;
+
 /**
  * Created by Camille on 07.04.2016.
  */
@@ -14,7 +16,8 @@ public interface UserProfileModel {
 
     UserProfile getUserProfile(Long userId) throws UserProfileException;
 
-    void updateUserProfile ();
+    void createUserProfile(Map profileDatas);
+    void updateUserProfile (Map profileData);
 
     void addFoto();
 

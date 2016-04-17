@@ -41,7 +41,6 @@ public class ViewUserProfileController implements MVCController{
         UserDTO userDTO;
         HttpSession session = req.getSession();
         userDTO = (UserDTO)session.getAttribute("user");
-        //session.setAttribute("IsLoggedIn",true);//for test puposes
         if ((Boolean) session.getAttribute("IsLoggedIn")){
             //check if profile already exists
             try {
@@ -61,12 +60,9 @@ public class ViewUserProfileController implements MVCController{
                 e.printStackTrace();
             }
 
-        }else {
-
-            return new MVCModel("/redirect.jsp", "Login");
         }
 
-        return null;
+        return null;//??
     }
 
     @Override
