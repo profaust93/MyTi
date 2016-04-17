@@ -54,7 +54,7 @@ public class EditUserProfileController implements MVCController {
         }catch (UserProfileException e){
             e.printStackTrace();
         }
-         return new MVCModel("/editUserProfile.jsp",null);
+         return new MVCModel("/editUserProfile.jsp",userProfile);
     }
 
     @Override
