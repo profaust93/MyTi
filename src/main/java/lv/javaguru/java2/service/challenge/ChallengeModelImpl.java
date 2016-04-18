@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Ruslan on 2016.04.17..
  */
-@Component
+
 public class ChallengeModelImpl implements ChallengeModel {
     @Autowired
     ChallengeDAO challengeDAO;
