@@ -6,6 +6,7 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
+import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,8 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     @Autowired
     TimeLapsDAO timeLapsDAO;
 
-    private TimeLapsChecks timeLapsChecks = new TimeLapsChecks();
+    @Autowired
+    ModelChecks modelChecks;
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
         this.timeLapsDAO = timeLapsDAO;
@@ -57,12 +59,12 @@ public class TimeLapsModelImpl implements TimeLapsModel {
         Map<String,Object> resultCheckMap = new HashMap<>();
 
         try{
-            resultCheckMap.put("userIdCheckResult", timeLapsChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
-            resultCheckMap.put("categoryCheckResult", timeLapsChecks.categoryCheck(timeLaps.getCategory()));
-            resultCheckMap.put("nameCheckResult", timeLapsChecks.nameCheck(timeLaps.getTimeLapsName()));
-            resultCheckMap.put("dateCheckResult", timeLapsChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
-            resultCheckMap.put("sDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getShortDescription(),100));
-            resultCheckMap.put("lDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getLongDescription(),1000));
+            resultCheckMap.put("userIdCheckResult", modelChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
+            resultCheckMap.put("categoryCheckResult", modelChecks.categoryCheck(timeLaps.getCategory()));
+            resultCheckMap.put("nameCheckResult", modelChecks.nameCheck(timeLaps.getTimeLapsName()));
+            resultCheckMap.put("dateCheckResult", modelChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
+            resultCheckMap.put("sDescCheck", modelChecks.descriptionCheck(timeLaps.getShortDescription(),100));
+            resultCheckMap.put("lDescCheck", modelChecks.descriptionCheck(timeLaps.getLongDescription(),1000));
 
 
 
@@ -86,12 +88,12 @@ public class TimeLapsModelImpl implements TimeLapsModel {
         Map<String,Object> resultCheckMap = new HashMap<>();
         try {
 
-            resultCheckMap.put("userIdCheckResult", timeLapsChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
-            resultCheckMap.put("categoryCheckResult", timeLapsChecks.categoryCheck(timeLaps.getCategory()));
-            resultCheckMap.put("nameCheckResult", timeLapsChecks.nameCheck(timeLaps.getTimeLapsName()));
-            resultCheckMap.put("dateCheckResult", timeLapsChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
-            resultCheckMap.put("sDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getShortDescription(), 100));
-            resultCheckMap.put("lDescCheck", timeLapsChecks.descriptionCheck(timeLaps.getLongDescription(), 1000));
+            resultCheckMap.put("userIdCheckResult", modelChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
+            resultCheckMap.put("categoryCheckResult", modelChecks.categoryCheck(timeLaps.getCategory()));
+            resultCheckMap.put("nameCheckResult", modelChecks.nameCheck(timeLaps.getTimeLapsName()));
+            resultCheckMap.put("dateCheckResult", modelChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
+            resultCheckMap.put("sDescCheck", modelChecks.descriptionCheck(timeLaps.getShortDescription(), 100));
+            resultCheckMap.put("lDescCheck", modelChecks.descriptionCheck(timeLaps.getLongDescription(), 1000));
 
             for (Map.Entry entry : resultCheckMap.entrySet()) {
                 String value = (String) entry.getValue();

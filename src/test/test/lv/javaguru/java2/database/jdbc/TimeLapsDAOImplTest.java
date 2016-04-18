@@ -99,7 +99,7 @@ public class TimeLapsDAOImplTest {
         timeLaps1.setLongDescription("LongDescription");
         timeLaps1.setCategory("sport");
         timeLaps1.setUserId(3L);
-        timeLaps.setTimeLapsName("timelaps");
+        timeLaps1.setTimeLapsName("timelaps");
         timeLapsDAO.create(timeLaps1);
 
         Long timeLapsId = timeLaps.getTimeLapsId();

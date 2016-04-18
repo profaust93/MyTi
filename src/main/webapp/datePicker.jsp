@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="datetimepicker" class="input-append date">
-    <input type="text" id = "date"></input>
+    <input type="text" id = "date">
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
       </span>

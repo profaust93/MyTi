@@ -77,9 +77,25 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
 )
   ENGINE =InnoDB
   AUTO_INCREMENT = 100;
-
+-- -----------------------------------------------------
+-- Table `my_ti`.`Challenge`
+DROP TABLE IF EXISTS `my_ti`.`Challenge` ;-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
+(
+  ChallengeId INT(11) NOT NULL AUTO_INCREMENT,
+  ChallengeName VARCHAR(100),
+  FromUserId INT(11),
+  ToUserId INT(11),
+  ChallengeState VARCHAR(20),
+  Description VARCHAR(1000),
+  EndTime TIMESTAMP,
+  PRIMARY KEY (ChallengeId)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
+INSERT INTO my_ti.Users VALUES (2,'admin2','qwerty','Admin2','Admin2','admin2@myTi.com');
 INSERT INTO Profiles VALUES (default, 1, "testName", "testFamilyName","testEmail");
 
 SET SQL_MODE=@OLD_SQL_MODE;

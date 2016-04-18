@@ -3,15 +3,11 @@ package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
-import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
-import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
-import lv.javaguru.java2.service.timelaps.TimeLapsChecks;
+import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +26,7 @@ public class AddTimeLapsController implements MVCController {
     @Autowired
     TimeLapsModel timeLapsModel;
     @Autowired
-    TimeLapsChecks timeLapsChecks;
+    ModelChecks modelChecks;
 
 
     @Override
@@ -50,7 +46,7 @@ public class AddTimeLapsController implements MVCController {
         UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
         timeLaps.setUserId(userDTO.getUserId());
         timeLaps.setTimeLapsName(req.getParameter("name"));
-        timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
+        timeLaps.setCompleteTime(modelChecks.dateConvert(req.getParameter("date")));
         timeLaps.setCategory(req.getParameter("category"));
         timeLaps.setShortDescription(req.getParameter("shortDescription"));
         timeLaps.setLongDescription(req.getParameter("longDescription"));

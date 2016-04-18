@@ -1,4 +1,4 @@
-package lv.javaguru.java2.service.timelaps;
+package lv.javaguru.java2.service;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
@@ -16,10 +16,10 @@ import java.util.List;
  * Created by ruslan on 16.30.3.
  */
 @Component
-public class TimeLapsChecks {
+public class ModelChecks {
 
     String ok = "OK";
-    Integer count;
+
 
     public String isNotEmpty(String data) {
         if (StringUtils.isEmpty(data)) try {
@@ -32,7 +32,7 @@ public class TimeLapsChecks {
 
     public String isDefinedUserId(String data) {
         UserDAO userDAO = new UserDAOImpl();
-        count = 0;
+        Integer count = 0;
         try {
             List<User> userList = userDAO.getAll();
             if (userList.size() == 0) {
@@ -124,7 +124,6 @@ public class TimeLapsChecks {
 
     public String descriptionCheck(String data, Integer count) {
         try {
-
             if (StringUtils.length(data) > count) {
                 throw new DBException("Too long description, must be shorter(not more than " +
                         count + " symbols)");
@@ -133,5 +132,15 @@ public class TimeLapsChecks {
             return e.getMessage();
         }
         return ok;
+    }
+
+    public String stateCheck(String data){
+        try{
+            if(data.equalsIgnoreCase("pending") || data.equalsIgnoreCase("accepted")
+                    || data.equalsIgnoreCase("declined")) return ok;
+            else throw new DBException("Wrong state");
+        } catch (DBException e){
+            return e.getMessage();
+        }
     }
 }

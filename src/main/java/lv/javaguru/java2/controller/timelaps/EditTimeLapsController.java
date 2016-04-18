@@ -2,15 +2,13 @@ package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
-import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
-import lv.javaguru.java2.service.timelaps.TimeLapsChecks;
+import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +29,7 @@ public class EditTimeLapsController implements MVCController{
     @Autowired
     TimeLapsDAO timeLapsDAO;
     @Autowired
-    TimeLapsChecks timeLapsChecks;
+    ModelChecks modelChecks;
 
 
     private List<Map> list = new ArrayList<>();
@@ -48,7 +46,7 @@ public class EditTimeLapsController implements MVCController{
             TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(timeLapsId));
             dataMap.put("timeLapsId",timeLaps.getTimeLapsId());
             dataMap.put("name",timeLaps.getTimeLapsName());
-            dataMap.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
+            dataMap.put("date", modelChecks.dateConvert(timeLaps.getCompleteTime()));
             dataMap.put("category",timeLaps.getCategory());
             dataMap.put("shortDesc",timeLaps.getShortDescription());
             dataMap.put("longDesc",timeLaps.getLongDescription());
@@ -73,13 +71,13 @@ public class EditTimeLapsController implements MVCController{
 
             timeLaps.setUserId(userDTO.getUserId());
             timeLaps.setTimeLapsName(req.getParameter("name"));
-            timeLaps.setCompleteTime(timeLapsChecks.dateConvert(req.getParameter("date")));
+            timeLaps.setCompleteTime(modelChecks.dateConvert(req.getParameter("date")));
             timeLaps.setCategory(req.getParameter("category"));
             timeLaps.setShortDescription(req.getParameter("shortDescription"));
             timeLaps.setLongDescription(req.getParameter("longDescription"));
 
             dataMap.put("name",timeLaps.getTimeLapsName());
-            dataMap.put("date",timeLapsChecks.dateConvert(timeLaps.getCompleteTime()));
+            dataMap.put("date", modelChecks.dateConvert(timeLaps.getCompleteTime()));
             dataMap.put("category",timeLaps.getCategory());
             dataMap.put("shortDesc",timeLaps.getShortDescription());
             dataMap.put("longDesc",timeLaps.getLongDescription());

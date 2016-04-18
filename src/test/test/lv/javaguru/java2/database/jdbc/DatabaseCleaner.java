@@ -18,6 +18,7 @@ public class DatabaseCleaner extends DAOImpl {
         tableNames.add("ToDo");
         tableNames.add("TimeLaps");
         tableNames.add("Profiles");
+        tableNames.add("Challenge");
 
         return tableNames;
     }
