@@ -74,17 +74,21 @@ public class UserModelImpl implements UserModel {
         User testUser;
         try{
             testUser = userDAO.getUserByEmailOrLogin(user.getLogin());
+
+            if (testUser == null) {
+                testUser = userDAO.getUserByEmailOrLogin(user.getEmail());
+            }
+            if (testUser == null){
+                return;
+            }
         }catch (DBException e){
             throw new RegisterException(e.getMessage());
         }
 
-        if (testUser == null) {
-            return;
-        }
-        if (user.getLogin().toLowerCase().equals(testUser.getLogin().toLowerCase())) {
+        if (user.getLogin().toLowerCase().equals(testUser.getLogin().toLowerCase())){
             throw new RegisterException("User already exists");
         }
-        else if (user.getEmail().toLowerCase().equals(testUser.getEmail().toLowerCase())){
+        else if(user.getEmail().toLowerCase().equals(testUser.getEmail().toLowerCase())){
             throw new RegisterException("Email already exists");
         }
 

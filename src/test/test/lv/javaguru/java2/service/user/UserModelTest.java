@@ -31,7 +31,7 @@ public class UserModelTest {
 
     @Before
     public void setUp() throws Exception {
-        when(userDAO.getUserByEmailOrLogin("user"))
+        when(userDAO.getUserByEmailOrLogin("email"))
                 .thenReturn(createUser(1L,"user","password","user","lastN","email"));
 
         when(userDAO.getUserByEmailOrLogin("unknown")).thenReturn(null);
@@ -84,10 +84,11 @@ public class UserModelTest {
     @Test
     public void testRegisterUserExist() throws Exception {
         try{
-            userModel.registerUser(createUser(2L,"udd","password","user","lastN","email"));
+            userModel.registerUser(createUser(2L,"us","password","user","lastN","email"));
             fail("No Exception was thrown");
         } catch (RegisterException e){
-            assertEquals("User already exists", e.getMessage());
+            //assertEquals("User already exists", e.getMessage());
+           assertEquals("Email already exists", e.getMessage());
         }
     }
 
