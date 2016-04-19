@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by ruslan on 16.21.3.
  */
-@Component
+@Component("JDBC_TimeLaps")
 public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     @Override
     public List<TimeLaps> getAllTimeLapsByUserId(Long userId) throws DBException {
