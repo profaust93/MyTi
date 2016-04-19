@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Created by ruslan on 16.18.4.
  */
-@Component
+
 public class AddChallengeController implements MVCController {
     @Autowired
     ModelChecks modelChecks;
