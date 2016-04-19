@@ -31,10 +31,11 @@ public class ViewTimeLapsController implements MVCController {
     @Autowired
     TimeLapsModel timeLapsModel;
 
-    private List<TimeLapsList> list;
+
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
+        List<TimeLapsList> list = new ArrayList<>();
         UserDTO userDTO =(UserDTO) req.getSession().getAttribute("user");
 
 

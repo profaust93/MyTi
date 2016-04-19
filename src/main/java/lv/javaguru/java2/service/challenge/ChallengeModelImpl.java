@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Ruslan on 2016.04.17..
  */
-@Component
+
 public class ChallengeModelImpl implements ChallengeModel {
     @Autowired
     ChallengeDAO challengeDAO;
@@ -33,7 +33,7 @@ public class ChallengeModelImpl implements ChallengeModel {
     }
 
     @Override
-    public Map<String, Object> addChallenge(Challenge challenge) throws ChallengeException {
+    public Map<String, Object> addChallenge(Challenge challenge){
         Map<String,Object> resultCheckMap = new HashMap();
 
         try {

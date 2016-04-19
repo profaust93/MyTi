@@ -15,7 +15,7 @@ public interface ChallengeModel {
 
     Challenge getChallengeById(Long challengeId) throws ChallengeException;
 
-    Map<String,Object> addChallenge(Challenge challenge) throws ChallengeException;
+    Map<String,Object> addChallenge(Challenge challenge);
 
     void changeChallengeState(Challenge challenge) throws ChallengeException;
 
