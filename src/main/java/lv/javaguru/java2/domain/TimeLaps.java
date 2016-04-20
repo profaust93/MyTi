@@ -1,18 +1,30 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by ruslan on 16.17.3 for MyTi project.
  */
+@Entity
+@Table(name = "timelaps")
 public class TimeLaps {
 
+    @Id
+    @Column(name = "TimeLapsId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long timeLapsId;
+    @Column(name = "CompleteTime")
     private LocalDateTime completeTime;
+    @Column(name = "UserId")
     private Long userId;
+    @Column(name = "ShortDescription")
     private String shortDescription;
+    @Column(name = "LongDescription")
     private String longDescription;
+    @Column(name = "Category")
     private String category;
+    @Column(name = "TimeLapsName")
     private String timeLapsName;
 
     public Long getTimeLapsId() {

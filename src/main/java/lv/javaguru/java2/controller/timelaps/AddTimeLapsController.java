@@ -9,6 +9,7 @@ import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import java.util.*;
 public class AddTimeLapsController implements MVCController {
 
     @Autowired
+    @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
     @Autowired
     TimeLapsModel timeLapsModel;

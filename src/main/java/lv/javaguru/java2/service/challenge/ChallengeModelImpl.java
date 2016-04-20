@@ -7,7 +7,7 @@ import lv.javaguru.java2.domain.ChallengeList;
 import lv.javaguru.java2.model.exceptions.ChallengeException;
 import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 public class ChallengeModelImpl implements ChallengeModel {
     @Autowired
+    @Qualifier("ORM_ChallengeDAO")
     ChallengeDAO challengeDAO;
     @Autowired
     ModelChecks modelChecks;
@@ -64,7 +65,7 @@ public class ChallengeModelImpl implements ChallengeModel {
                 String value = (String) entry.getValue();
                 if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
             }
-            challengeDAO.changeState(challenge);
+            challengeDAO.update(challenge);
         } catch (DBException e) {
             e.printStackTrace();
         }

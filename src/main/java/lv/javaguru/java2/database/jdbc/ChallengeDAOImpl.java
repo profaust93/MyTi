@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Ruslan on 2016.04.15..
  */
+@Component("JDBC_ChallengeDAO")
 public class ChallengeDAOImpl extends DAOImpl implements ChallengeDAO {
     @Override
     public void create(Challenge challenge) throws DBException {
@@ -91,7 +93,7 @@ public class ChallengeDAOImpl extends DAOImpl implements ChallengeDAO {
     }
 
     @Override
-    public void changeState(Challenge challenge) throws DBException {
+    public void update(Challenge challenge) throws DBException {
         if(challenge == null){
             return;
         }

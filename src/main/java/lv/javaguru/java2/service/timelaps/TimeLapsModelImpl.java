@@ -8,6 +8,7 @@ import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class TimeLapsModelImpl implements TimeLapsModel {
     @Autowired
+    @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
 
     @Autowired

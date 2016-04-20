@@ -15,7 +15,7 @@ public interface ChallengeDAO {
 
     Challenge getById(Long id)throws DBException;
 
-    void changeState(Challenge challenge) throws DBException;
+    void update(Challenge challenge) throws DBException;
 
     List<Challenge> getAllChallenge() throws DBException;
 

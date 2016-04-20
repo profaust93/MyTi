@@ -1,18 +1,29 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Created by Ruslan on 2016.04.15..
  */
+@Entity
+@Table(name = "Challenge")
 public class Challenge {
-
+    @Column(name = "ChallengeName")
     private String challengeName;
+    @Column(name = "ChallengeId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long challengeId;
+    @Column(name = "FromUserId")
     private Long fromUserId;
+    @Column(name = "ToUserId")
     private Long toUserId;
+    @Column(name = "ChallengeState")
     private String challengeState;
+    @Column(name = "Description")
     private String description;
+    @Column(name = "EndTime")
     private LocalDateTime endTime;
 
     public String getChallengeName() {
