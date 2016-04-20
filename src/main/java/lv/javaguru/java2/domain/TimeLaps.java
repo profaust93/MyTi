@@ -11,20 +11,22 @@ import java.time.LocalDateTime;
 public class TimeLaps {
 
     @Id
-    @Column(name = "TimeLapsId")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TimeLapsId", nullable = false)
     private Long timeLapsId;
+
     @Column(name = "CompleteTime")
     private LocalDateTime completeTime;
-    @Column(name = "UserId")
+
+    @Transient
     private Long userId;
-    @Column(name = "ShortDescription")
+    @Transient
     private String shortDescription;
-    @Column(name = "LongDescription")
+    @Transient
     private String longDescription;
-    @Column(name = "Category")
+    @Transient
     private String category;
-    @Column(name = "TimeLapsName")
+    @Transient
     private String timeLapsName;
 
     public Long getTimeLapsId() {

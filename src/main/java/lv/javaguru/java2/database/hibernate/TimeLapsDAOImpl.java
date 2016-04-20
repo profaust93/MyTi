@@ -16,16 +16,14 @@ import java.util.List;
  */
 @Component("ORM_TimeLapsDAO")
 @Transactional
-public class TimeLapsDAOImpl implements TimeLapsDAO {
+public class TimeLapsDAOImpl extends BaseDAO implements TimeLapsDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
     public void create(TimeLaps timeLaps) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(timeLaps);
-
+        super.saveOrUpdate(timeLaps);
     }
 
     @Override
