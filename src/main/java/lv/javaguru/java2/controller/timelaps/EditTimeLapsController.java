@@ -10,6 +10,7 @@ import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
 import lv.javaguru.java2.service.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class EditTimeLapsController implements MVCController{
     @Autowired
     TimeLapsModel timeLapsModel;
     @Autowired
+    @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
     @Autowired
     ModelChecks modelChecks;
