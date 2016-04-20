@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
  */
 
 public class ChallengeDAOImplTest extends SpringIntegration {
-    private SessionFactory sessionFactory;
+
     @Autowired
     @Qualifier("ORM_ChallengeDAO")
     private ChallengeDAO challengeDAO;
@@ -81,8 +81,8 @@ public class ChallengeDAOImplTest extends SpringIntegration {
         challengeDAO.create(challenge);
         Challenge challengeFromDb = challengeDAO.getById(challenge.getChallengeId());
 
-        challenge.setChallengeState("Accepted");
-        challengeDAO.update(challenge);
+        challengeFromDb.setChallengeState("Accepted");
+        challengeDAO.update(challengeFromDb);
 
 
 

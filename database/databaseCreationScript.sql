@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
 DROP TABLE IF EXISTS `my_ti`.`TimeLaps` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
-    TimeLapsId INT(11) NOT NULL AUTO_INCREMENT,
-    CompleteTime TIMESTAMP,
-    UserID INT(11),
+    TimeLapsId BIGINT(11) NOT NULL AUTO_INCREMENT,
+    CompleteTime TINYBLOB,
+    UserID BIGINT(11),
     ShortDescription VARCHAR(100),
     LongDescription VARCHAR(1000),
     Category VARCHAR(100),
@@ -82,13 +82,13 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
 DROP TABLE IF EXISTS `my_ti`.`Challenge` ;-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
 (
-  ChallengeId INT(11) NOT NULL AUTO_INCREMENT,
+  ChallengeId BIGINT(11) NOT NULL AUTO_INCREMENT,
   ChallengeName VARCHAR(100),
-  FromUserId INT(11),
-  ToUserId INT(11),
+  FromUserId BIGINT(11),
+  ToUserId BIGINT(11),
   ChallengeState VARCHAR(20),
   Description VARCHAR(1000),
-  EndTime TIMESTAMP,
+  EndTime TINYBLOB,
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB

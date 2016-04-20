@@ -5,7 +5,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeList;
 import lv.javaguru.java2.model.exceptions.ChallengeException;
-import lv.javaguru.java2.service.ModelChecks;
+import lv.javaguru.java2.service.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

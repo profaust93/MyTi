@@ -8,7 +8,7 @@ import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.timelaps.TimeLapsModel;
-import lv.javaguru.java2.service.ModelChecks;
+import lv.javaguru.java2.service.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

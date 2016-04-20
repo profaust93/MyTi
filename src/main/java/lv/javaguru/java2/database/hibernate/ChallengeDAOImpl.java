@@ -23,24 +23,22 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
 
     @Override
     public void create(Challenge challenge) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(challenge);
+        super.saveOrUpdate(challenge);
     }
 
     @Override
     public void delete(Challenge challenge) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(challenge);
+        super.delete(challenge);
     }
 
     @Override
     public Challenge getById(Long id) throws DBException {
-        return get(Challenge.class,id);
+        return super.get(Challenge.class,id);
     }
 
     @Override
     public void update(Challenge challenge) throws DBException {
-
+        super.saveOrUpdate(challenge);
     }
 
     @Override

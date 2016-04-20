@@ -6,10 +6,9 @@ import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.service.ModelChecks;
+import lv.javaguru.java2.service.validators.ModelChecks;
 import lv.javaguru.java2.service.challenge.ChallengeModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

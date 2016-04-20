@@ -1,21 +1,13 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.SpringConfig.SpringConfig;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.database.ToDoDAO;
-import lv.javaguru.java2.database.hibernate.*;
-import lv.javaguru.java2.database.hibernate.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.ToDo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -28,16 +20,11 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by ruslan on 16.22.3.
  */
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
 public class TimeLapsDAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
-    @Autowired
-    @Qualifier("ORM_TimeLapsDAO")
-    private TimeLapsDAO timeLapsDAO;
+    private TimeLapsDAO timeLapsDAO = new TimeLapsDAOImpl();
 
 
     @Before
@@ -152,9 +139,15 @@ public class TimeLapsDAOImplTest {
         timeLaps.setTimeLapsName("timelaps");
         timeLaps.setUserId(3L);
         timeLapsDAO.create(timeLaps);
-        timeLapsDAO.create(timeLaps);
-        timeLaps.setUserId(2L);
-        timeLapsDAO.create(timeLaps);
+
+        TimeLaps timeLaps1 = new TimeLaps();
+        timeLaps1.setCompleteTime(LocalDateTime.now());
+        timeLaps1.setShortDescription("ShortDescription");
+        timeLaps1.setLongDescription("LongDescription");
+        timeLaps1.setCategory("sport");
+        timeLaps1.setUserId(2L);
+        timeLaps1.setTimeLapsName("timelaps");
+        timeLapsDAO.create(timeLaps1);
 
 
         timeLapsDAO.deleteAllTimeLaps(3L);
