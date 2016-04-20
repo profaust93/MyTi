@@ -1,48 +1,101 @@
 package lv.javaguru.java2.domain;
 
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Set;
+
+@Entity
+@Table(name = "ToDoList")
 public class ToDoList {
-    private Long toDoId;
-    private Integer priority;
-    private Boolean isDone;
-    private String toDoName;
 
-    public ToDoList(Long toDoId, Integer priority, Boolean isDone, String toDoName) {
-        this.toDoId = toDoId;
-        this.priority = priority;
-        this.isDone = isDone;
-        this.toDoName = toDoName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long Id;
+
+    @Column(name = "ListName")
+    private String listName;
+
+    @Column(name = "CreateTime", nullable = false)
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
+    private LocalDateTime createTime;
+
+    @Column(name = "DeadLineTime")
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
+    private LocalDateTime deadLineTime;
+
+    @Column(name = "Notes")
+    @Type(type="text")
+    private String notes;
+
+    @OneToMany(mappedBy = "toDoList")
+    private Set<ToDoTask> toDoTasks;
+
+    @Column(name = "UserId")
+    private Long userId;
+
+    public Long getId() {
+        return Id;
     }
 
-    public Long getToDoId() {
-        return toDoId;
+    public ToDoList setId(Long id) {
+        Id = id;
+        return this;
     }
 
-    public void setToDoId(Long toDoId) {
-        this.toDoId = toDoId;
+    public String getListName() {
+        return listName;
     }
 
-    public Integer getPriority() {
-        return priority;
+    public ToDoList setListName(String listName) {
+        this.listName = listName;
+        return this;
     }
 
-    public void setPriority(Integer priority) {
-        this.priority = priority;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public Boolean getDone() {
-        return isDone;
+    public ToDoList setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+        return this;
     }
 
-    public void setDone(Boolean done) {
-        isDone = done;
+    public LocalDateTime getDeadLineTime() {
+        return deadLineTime;
     }
 
-    public String getToDoName() {
-        return toDoName;
+    public ToDoList setDeadLineTime(LocalDateTime deadLineTime) {
+        this.deadLineTime = deadLineTime;
+        return this;
     }
 
-    public void setToDoName(String toDoName) {
-        this.toDoName = toDoName;
+    public String getNotes() {
+        return notes;
+    }
+
+    public ToDoList setNotes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Set<ToDoTask> getToDoTasks() {
+        return toDoTasks;
+    }
+
+    public ToDoList setToDoTasks(Set<ToDoTask> toDoTasks) {
+        this.toDoTasks = toDoTasks;
+        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public ToDoList setUserId(Long userId) {
+        this.userId = userId;
+        return this;
     }
 }

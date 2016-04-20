@@ -23,27 +23,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
 -- -----------------------------------------------------
--- Table `my_ti`.`ToDo_`
--- ------------------------------------ -----------------
-DROP TABLE IF EXISTS `my_ti`.`ToDo` ;
-
-CREATE TABLE IF NOT EXISTS `my_ti`.`ToDo` (
-  `ToDoId` INT(11) NOT NULL AUTO_INCREMENT,
-  `ToDoTime` TIMESTAMP,
-  `DeadLineTime` TIMESTAMP,
-  `Category` VARCHAR(100),
-  `ShortDesc` VARCHAR(100),
-  `FullDesc` VARCHAR(1000),
-  `Priority` SMALLINT NOT NULL,
-  `IsDone` BOOLEAN NOT NULL,
-  `Name` VARCHAR(100) NOT NULL,
-  `UserId` INT(11) NOT NULL,
-
-  PRIMARY KEY (`ToDoId`)
-)
-  ENGINE = InnoDB
-  AUTO_INCREMENT = 100;
--- -----------------------------------------------------
 -- Table `my_ti`.`TimeLaps`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `my_ti`.`TimeLaps` ;
@@ -92,6 +71,35 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
+
+/*ToDoList Table*/
+
+DROP TABLE IF EXISTS my_ti.ToDoList;
+CREATE TABLE IF NOT EXISTS my_ti.ToDoList
+(
+  Id BIGINT (11) NOT NULL AUTO_INCREMENT,
+  ListName VARCHAR(100),
+  CreateTime TIMESTAMP,
+  DeadLineTime TIMESTAMP,
+  UserId BIGINT(11),
+  Notes TEXT,
+  PRIMARY KEY (Id)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
+
+DROP TABLE IF EXISTS my_ti.ToDoTask;
+CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
+(
+  Id BIGINT(11) NOT NULL AUTO_INCREMENT,
+  TaskName VARCHAR(100),
+  IsComplete BOOLEAN,
+  Description VARCHAR(255),
+  ToDoListId BIGINT(11),
+  PRIMARY KEY (Id),
+  FOREIGN KEY (ToDoListId) REFERENCES my_ti.ToDoList(Id)
+) ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
