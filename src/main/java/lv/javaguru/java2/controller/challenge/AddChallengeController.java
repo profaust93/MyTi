@@ -9,6 +9,7 @@ import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.service.validators.ModelChecks;
 import lv.javaguru.java2.service.challenge.ChallengeModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  * Created by ruslan on 16.18.4.
  */
-
+@Component
 public class AddChallengeController implements MVCController {
     @Autowired
     ModelChecks modelChecks;
@@ -41,6 +42,13 @@ public class AddChallengeController implements MVCController {
         challenge.setDescription(req.getParameter("description"));
         challenge.setEndTime(modelChecks.dateConvert(req.getParameter("date")));
         resultCheckMap = challengeModel.addChallenge(challenge);
-        return null;
+
+
+        for(Map.Entry entry:resultCheckMap.entrySet()){
+            String value = (String) entry.getValue();
+            if(!value.equalsIgnoreCase("ok")) return new MVCModel("/addChallenge.jsp",resultCheckMap);
+        }
+
+        return new MVCModel("/addChallenge.jsp",resultCheckMap);
     }
 }

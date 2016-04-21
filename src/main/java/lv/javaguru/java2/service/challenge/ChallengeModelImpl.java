@@ -6,6 +6,8 @@ import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeList;
 import lv.javaguru.java2.model.exceptions.ChallengeException;
 import lv.javaguru.java2.service.validators.ModelChecks;
+import lv.javaguru.java2.service.validators.ValidatorException;
+import lv.javaguru.java2.service.validators.Validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -36,21 +38,14 @@ public class ChallengeModelImpl implements ChallengeModel {
     @Override
     public Map<String, Object> addChallenge(Challenge challenge){
         Map<String,Object> resultCheckMap = new HashMap();
-
-        try {
-            resultCheckMap.put("toUserIdCheck", modelChecks.userIdCheck(String.valueOf(challenge.getToUserId())));
-            resultCheckMap.put("fromUserIdCheck", modelChecks.userIdCheck(String.valueOf(challenge.getFromUserId())));
-            resultCheckMap.put("nameCheck", modelChecks.nameCheck(challenge.getChallengeName()));
-            resultCheckMap.put("descriptionCheck", modelChecks.descriptionCheck(challenge.getDescription(), 1000));
-
-            for (Map.Entry entry : resultCheckMap.entrySet()) {
-                String value = (String) entry.getValue();
-                if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
-            }
-
+        Validators validators = new Validators();
+        try{
+            validators.challengeValidator(challenge);
             challengeDAO.create(challenge);
-        }catch (DBException e){
-            return resultCheckMap;
+        } catch (ValidatorException e) {
+            return e.getMap();
+        } catch (DBException e) {
+            e.printStackTrace();
         }
         return resultCheckMap;
     }
