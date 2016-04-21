@@ -39,8 +39,7 @@ class ToDoModelImpl implements ToDoModel {
                     .equals(Long.parseLong(userId))).collect(Collectors.toList());
 
             return filteredToDo.stream().map(todo ->
-                    new ToDoList(todo.getToDoId(), todo.getPriority(),
-                            todo.getDone(),todo.getToDoName()))
+                    new ToDoList())
                     .collect(Collectors.toList());
         } catch (DBException e) {
             throw new ToDoException(e.getMessage());
