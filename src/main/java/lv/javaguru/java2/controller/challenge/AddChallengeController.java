@@ -9,6 +9,7 @@ import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.service.validators.ModelChecks;
 import lv.javaguru.java2.service.challenge.ChallengeModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ public class AddChallengeController implements MVCController {
     @Autowired
     ChallengeModel challengeModel;
     @Autowired
+    @Qualifier("ORM_ChallengeDAO")
     ChallengeDAO challengeDAO;
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
