@@ -1,4 +1,4 @@
-package lv.javaguru.java2.SpringConfig;
+package lv.javaguru.java2.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
