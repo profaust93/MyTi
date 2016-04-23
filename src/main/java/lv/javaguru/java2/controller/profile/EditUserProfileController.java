@@ -79,7 +79,7 @@ public class EditUserProfileController implements MVCController {
 
                userProfileModel.updateUserProfile(profileData);
                userProfile = userProfileModel.getUserProfile(userDTO.getUserId());
-               return new MVCModel("/editUserProfile.jsp",userProfile);
+               return new MVCModel("/viewUserProfile.jsp",userProfile);
            }
 
        userProfileModel.createUserProfile(profileData);
@@ -91,7 +91,7 @@ public class EditUserProfileController implements MVCController {
            e.printStackTrace();
       }
 
-        return new MVCModel("/editUserProfile.jsp",userProfile);
+        return new MVCModel("/viewUserProfile.jsp",userProfile);
     }
 
 }

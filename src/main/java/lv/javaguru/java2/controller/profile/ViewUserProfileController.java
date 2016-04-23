@@ -51,7 +51,7 @@ public class ViewUserProfileController implements MVCController{
                     return new MVCModel("/viewUserProfile.jsp",userProfile);
                             //http://localhost:8080/java2/viewUserProfile
                  }else {
-                    return new MVCModel("/redirect.jsp","EditUserProfile");
+                    return new MVCModel("/redirect.jsp","editUserProfile");
                 }
             } catch (DBException e) {
                 e.printStackTrace();

@@ -49,15 +49,36 @@
     <div id="page-wrapper">
 <h1>Here you can edit your profile.</h1>
 
-<form method="post" action="editUserProfile.jsp">
+<form method="post" action="editUserProfile">
     <p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
 
     <p>First Name: </p><input type="text" name="firstName" value="<%=userProfile.getFirstName()%>"></br>
     <p>Last Name: </p><input type="text" name="lastName" value="<%=userProfile.getLastName()%>"></br>
-    <p>E-mail: </p><input type="text" name="email" value="<%=userProfile.getEmail()%>"></br>
+    <p>E-mail: </p><input id="email" type="text" name="email" value="<%=userProfile.getEmail()%>"></br>
     <input type="submit" value="Save">
 </form>
 
+       <!-- <script type="text/javascript">
+
+            function validateEmail(email) {
+            // http://stackoverflow.com/a/46181/11236
+
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+            }
+
+            function validate(){
+            $("#result").text("");
+            var email = $("#email").val();
+            if (validateEmail(email)) {
+                $("#result").text(email + "is not valid :(");
+                $("#result").css("color", "red");
+            }
+            return false;
+            }
+
+            $("form").bind("submit", validate);
+            </script>-->
     </div>
 </div>
 </body>

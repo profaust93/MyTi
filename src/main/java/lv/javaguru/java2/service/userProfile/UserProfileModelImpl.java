@@ -39,8 +39,8 @@ public class UserProfileModelImpl implements UserProfileModel {
         userProfile = new UserProfile();
         userProfile.setUserId((Long)profileData.get("userId"));
         userProfile.setFirstName((String)profileData.get("firstName"));
-        userProfile.setFirstName((String)profileData.get("lastName"));
-        userProfile.setFirstName((String)profileData.get("email"));
+        userProfile.setLastName((String)profileData.get("lastName"));
+        userProfile.setEmail((String)profileData.get("email"));
         try {
             userProfileDAO.create(userProfile);
         } catch (DBException e) {
@@ -54,8 +54,8 @@ public class UserProfileModelImpl implements UserProfileModel {
         userProfile = new UserProfile();
         userProfile.setUserId((Long)profileData.get("userId"));
         userProfile.setFirstName((String)profileData.get("firstName"));
-        userProfile.setFirstName((String)profileData.get("lastName"));
-        userProfile.setFirstName((String)profileData.get("email"));
+        userProfile.setLastName((String)profileData.get("lastName"));
+        userProfile.setEmail((String)profileData.get("email"));
         try {
             userProfileDAO.update(userProfile);
         } catch (DBException e) {
