@@ -22,7 +22,13 @@ public class ToDoTask {
 
     @ManyToOne
     @JoinColumn(name = "ToDoListId")
-    private ToDoList toDoList;
+    private ToDo toDo;
+
+    @Column(name = "Goals")
+    private Integer goalsCount;
+
+    @Column(name = "CompletedGoals")
+    private Integer completedGoals;
 
     public Long getId() {
         return id;
@@ -60,12 +66,30 @@ public class ToDoTask {
         return this;
     }
 
-    public ToDoList getToDoList() {
-        return toDoList;
+    public ToDo getToDo() {
+        return toDo;
     }
 
-    public ToDoTask setToDoList(ToDoList toDoList) {
-        this.toDoList = toDoList;
+    public ToDoTask setToDo(ToDo toDo) {
+        this.toDo = toDo;
+        return this;
+    }
+
+    public Integer getGoalsCount() {
+        return goalsCount;
+    }
+
+    public ToDoTask setGoalsCount(Integer goalsCount) {
+        this.goalsCount = goalsCount;
+        return this;
+    }
+
+    public Integer getCompletedGoals() {
+        return completedGoals;
+    }
+
+    public ToDoTask setCompletedGoals(Integer completedGoals) {
+        this.completedGoals = completedGoals;
         return this;
     }
 }

@@ -1,7 +1,7 @@
 package lv.javaguru.java2.database.hibernate;
 
 import lv.javaguru.java2.database.ToDoListDAO;
-import lv.javaguru.java2.domain.ToDoList;
+import lv.javaguru.java2.domain.ToDo;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
@@ -12,28 +12,28 @@ import java.util.List;
 public class ToDoListDAOImpl extends BaseDAO implements ToDoListDAO{
 
     @Override
-    public void createOrUpdate(ToDoList toDoList) {
-        super.saveOrUpdate(toDoList);
+    public void createOrUpdate(ToDo toDo) {
+        super.saveOrUpdate(toDo);
     }
 
     @Override
-    public ToDoList getById(Long id) {
-        return super.get(ToDoList.class,id);
+    public ToDo getById(Long id) {
+        return super.get(ToDo.class,id);
     }
 
     @Override
-    public void delete(ToDoList toDoList) {
-        super.delete(toDoList);
+    public void delete(ToDo toDo) {
+        super.delete(toDo);
     }
 
     @Override
-    public List<ToDoList> getAllToDoList() {
-        return super.getAll(ToDoList.class);
+    public List<ToDo> getAllToDoList() {
+        return super.getAll(ToDo.class);
     }
 
     @Override
-    public List<ToDoList> getAllToDoListByUserId(Long userId) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ToDoList.class);
+    public List<ToDo> getAllToDoListByUserId(Long userId) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ToDo.class);
         return criteria.add(Restrictions.eq("userId",userId)).list();
     }
 }

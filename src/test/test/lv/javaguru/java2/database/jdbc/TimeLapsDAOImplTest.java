@@ -2,9 +2,7 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.database.ToDoDAO;
 import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.domain.ToDo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -19,9 +19,6 @@ import java.util.List;
 @Transactional
 public class TimeLapsDAOImpl extends BaseDAO implements TimeLapsDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
     @Override
     public void create(TimeLaps timeLaps) throws DBException {
         super.saveOrUpdate(timeLaps);

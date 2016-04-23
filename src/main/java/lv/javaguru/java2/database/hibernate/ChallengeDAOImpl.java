@@ -18,8 +18,6 @@ import java.util.List;
 @Component("ORM_ChallengeDAO")
 @Transactional
 public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Override
     public void create(Challenge challenge) throws DBException {

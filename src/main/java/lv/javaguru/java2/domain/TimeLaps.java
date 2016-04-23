@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Created by ruslan on 16.17.3 for MyTi project.
  */
 @Entity
-@Table(name = "timelaps")
+@Table(name = "TimeLaps")
 public class TimeLaps {
 
     @Id
