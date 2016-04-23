@@ -48,13 +48,13 @@
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
         <form method = "post" action="addChallenge">
-            Name:
+            <h3>Name:</h3>
             <input type="text" name="name">
-            From:
+            <h3>From:</h3>
             <input type = "text" name="fromUserId">
-            To:
+            <h3>To:</h3>
             <input type="text" name="toUserId">
-            End date:
+            <h3>End date:</h3>
             <input id="datetimepicker" type="text" name="date" >
 
             <script type="text/javascript"
@@ -70,7 +70,9 @@
             <script type="text/javascript">
                 jQuery('#datetimepicker').datetimepicker();
             </script>
+            <h3>Description</h3>
             <textarea rows="2" cols="50" type="text" name="description" autofocus maxlength="1000"></textarea>
+            <input type="submit" value="submit">
         </form>
     </div>
 </div>

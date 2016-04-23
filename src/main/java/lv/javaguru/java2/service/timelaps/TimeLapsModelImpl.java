@@ -27,8 +27,6 @@ public class TimeLapsModelImpl implements TimeLapsModel {
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
 
-    //@Autowired
-    ModelChecks modelChecks = new ModelChecks();
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
         this.timeLapsDAO = timeLapsDAO;

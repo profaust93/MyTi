@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,7 +30,8 @@ public class AddChallengeController implements MVCController {
     ChallengeDAO challengeDAO;
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
-        return new MVCModel("/addChallenge.jsp",null);
+        Map<String,Object> resultCheckMap =new HashMap<>();
+        return new MVCModel("/addChallenge.jsp",resultCheckMap);
     }
 
     @Override

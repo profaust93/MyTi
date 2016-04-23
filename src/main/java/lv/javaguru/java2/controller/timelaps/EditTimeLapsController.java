@@ -37,6 +37,7 @@ public class EditTimeLapsController implements MVCController{
     private List<Map> list = new ArrayList<>();
     private Map<String,Object> dataMap = new HashMap<>();
     private Map<String,Object> resultCheckMap = new HashMap<>();
+
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
 
