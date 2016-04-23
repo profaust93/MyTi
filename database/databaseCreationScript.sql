@@ -104,6 +104,19 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
+DROP TABLE IF EXISTS my_ti.Challenge;
+CREATE TABLE IF NOT EXISTS my_ti.UserMessages
+(
+  Id BIGINT(11) NOT NULL AUTO_INCREMENT,
+  Message VARCHAR(100),
+  SernderId BIGINT(11) NOT NULL,
+  ReceipentId VARCHAR(255),
+  ChallengeId BIGINT(11),
+  PRIMARY KEY (Id),
+  FOREIGN KEY (ChallengeId) REFERENCES my_ti.challenge(ChallengeId)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
+
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
 INSERT INTO my_ti.Users VALUES (2,'admin2','qwerty','Admin2','Admin2','admin2@myTi.com');
 INSERT INTO Profiles VALUES (default, 1, "testName", "testFamilyName","testEmail");
