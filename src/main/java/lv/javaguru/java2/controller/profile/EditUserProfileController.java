@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -66,8 +67,10 @@ public class EditUserProfileController implements MVCController {
          */
         HttpSession session = req.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
-        Map profileData =  req.getParameterMap();
-
+        Map <String, Object> profileData = new HashMap<>();
+        profileData.put("firstName",req.getParameter("firstName"));
+        profileData.put("lastName",req.getParameter("lastName"));
+        profileData.put("email",req.getParameter("email"));
         profileData.put("userId",userDTO.getUserId());
         UserProfile userProfile = null;
         userProfileModel.setUserProfileDAO(userProfileDao);
