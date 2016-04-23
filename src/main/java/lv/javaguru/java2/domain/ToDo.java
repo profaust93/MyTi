@@ -1,98 +1,101 @@
 package lv.javaguru.java2.domain;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.Set;
 
-
+@Entity
+@Table(name = "ToDoList")
 public class ToDo {
-    private Long toDoId;
-    private LocalDateTime toDoTime;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
+    private Long Id;
+
+    @Column(name = "ListName")
+    private String listName;
+
+    @Column(name = "CreateTime", nullable = false)
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
+    private LocalDateTime createTime;
+
+    @Column(name = "DeadLineTime")
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
     private LocalDateTime deadLineTime;
-    private String category;
-    private String shortDescription;
-    private String longDescription;
-    private Integer priority;
-    private Boolean isDone;
-    private String toDoName;
+
+    @Column(name = "Notes")
+    @Type(type="text")
+    private String notes;
+
+    @OneToMany(mappedBy = "toDo")
+    private Set<ToDoTask> toDoTasks;
+
+    @Column(name = "UserId")
     private Long userId;
 
-    public Long getToDoId() {
-        return toDoId;
+    public Long getId() {
+        return Id;
     }
 
-    public void setToDoId(Long toDoId) {
-        this.toDoId = toDoId;
+    public ToDo setId(Long id) {
+        Id = id;
+        return this;
     }
 
-    public LocalDateTime getToDoTime() {
-        return toDoTime;
+    public String getListName() {
+        return listName;
     }
 
-    public void setToDoTime(LocalDateTime toDoTime) {
-        this.toDoTime = toDoTime;
+    public ToDo setListName(String listName) {
+        this.listName = listName;
+        return this;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public ToDo setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getDeadLineTime() {
         return deadLineTime;
     }
 
-    public void setDeadLineTime(LocalDateTime deadLineTime) {
+    public ToDo setDeadLineTime(LocalDateTime deadLineTime) {
         this.deadLineTime = deadLineTime;
+        return this;
     }
 
-    public Optional<String> getCategory() {
-        return Optional.ofNullable(category);
+    public String getNotes() {
+        return notes;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public ToDo setNotes(String notes) {
+        this.notes = notes;
+        return this;
     }
 
-    public Optional<String> getShortDescription() {
-        return Optional.ofNullable(shortDescription);
+    public Set<ToDoTask> getToDoTasks() {
+        return toDoTasks;
     }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public Optional <String> getLongDescription() {
-        return Optional.ofNullable(longDescription);
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
-    public Boolean getDone() {
-        return isDone;
-    }
-
-    public void setDone(Boolean done) {
-        isDone = done;
-    }
-
-    public String getToDoName() {
-        return toDoName;
-    }
-
-    public void setToDoName(String toDoName) {
-        this.toDoName = toDoName;
+    public ToDo setToDoTasks(Set<ToDoTask> toDoTasks) {
+        this.toDoTasks = toDoTasks;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public ToDo setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 }

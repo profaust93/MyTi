@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
-/*ToDoList Table*/
+/*ToDo Table*/
 
 DROP TABLE IF EXISTS my_ti.ToDoList;
 CREATE TABLE IF NOT EXISTS my_ti.ToDoList
@@ -97,6 +97,8 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
   IsComplete BOOLEAN,
   Description VARCHAR(255),
   ToDoListId BIGINT(11),
+  Goals INT(11),
+  CompletedGoals INT(11),
   PRIMARY KEY (Id),
   FOREIGN KEY (ToDoListId) REFERENCES my_ti.ToDoList(Id)
 ) ENGINE = InnoDB

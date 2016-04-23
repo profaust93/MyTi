@@ -1,6 +1,6 @@
 package lv.javaguru.java2.database.hibernate;
 
-import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.database.ToDoTaskDAO;
 import lv.javaguru.java2.domain.ToDoTask;
 import org.junit.Before;
@@ -10,14 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = TestSpringConfig.class)
 @Transactional
 @Rollback(true)
 public class ToDoTaskDAOImplTest {

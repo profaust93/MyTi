@@ -66,7 +66,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a class="text-center" href="/java2/toDoList">
+                    <a class="text-center" href="/java2/toDo">
                         <strong>See All ToDo</strong>
                         <i class="fa fa-angle-right"></i>
                     </a>
@@ -122,7 +122,7 @@
                     <a href="/java2/index" class="active"><i class="fa fa-dashboard fa-fw"></i> Main page</a>
                 </li>
                 <li>
-                    <a href="/java2/toDoList"><i class="fa fa-table fa-fw"></i> ToDo List</a>
+                    <a href="/java2/toDo"><i class="fa fa-table fa-fw"></i> ToDo List</a>
                 </li>
                 <li>
                     <a href="/java2/viewTimeLaps"><i class="fa fa-table fa-fw"></i> TimeLaps</a>

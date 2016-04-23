@@ -1,19 +1,19 @@
 package lv.javaguru.java2.database;
 
 
-import lv.javaguru.java2.domain.ToDoList;
+import lv.javaguru.java2.domain.ToDo;
 
 import java.util.List;
 
 public interface ToDoListDAO {
 
-    void createOrUpdate (ToDoList toDoList);
+    void createOrUpdate (ToDo toDo);
 
-    ToDoList getById(Long id);
+    ToDo getById(Long id);
 
-    void delete(ToDoList toDoList);
+    void delete(ToDo toDo);
 
-    List<ToDoList> getAllToDoList();
+    List<ToDo> getAllToDoList();
 
-    List<ToDoList> getAllToDoListByUserId(Long userId);
+    List<ToDo> getAllToDoListByUserId(Long userId);
 }
