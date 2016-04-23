@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.profile;
+package lv.javaguru.java2.service.userProfile;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserProfileDAO;

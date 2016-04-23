@@ -7,7 +7,7 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.model.profile.UserProfileModel;
+import lv.javaguru.java2.service.userProfile.UserProfileModel;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.junit.Before;
 import org.junit.Ignore;

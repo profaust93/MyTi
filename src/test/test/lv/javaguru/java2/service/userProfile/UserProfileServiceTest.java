@@ -17,6 +17,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Camille on 10.04.2016.
  *
+ * тест заебись, но моки нихуя не работают.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserProfileServiceTest {
@@ -36,11 +37,13 @@ public class UserProfileServiceTest {
 
         UserProfile userProfile = new UserProfile();
             when(mockedUserProfileDAO.getById(1L)).thenReturn(userProfile);
+        when(mockedUserProfileDAO.getById(2L)).thenReturn(null);
 
     }
     @Test
     public void profileExistTest ()throws DBException {
         //сам тест
         assertEquals(true,profileServices.profileExist(1L));
+        assertEquals(false,profileServices.profileExist(2L));
     }
 }
