@@ -16,6 +16,8 @@
     <meta name="author" content="<MyTi Team">
 
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <!-- jQuery (not sure if it is needed for jQuery to work on this page, but added still)-->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,36 +51,29 @@
     <div id="page-wrapper">
 <h1>Here you can edit your profile.</h1>
 
-<form method="post" action="editUserProfile">
-    <p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
 
-    <p>First Name: </p><input type="text" name="firstName" value="<%=userProfile.getFirstName()%>"></br>
-    <p>Last Name: </p><input type="text" name="lastName" value="<%=userProfile.getLastName()%>"></br>
+<form method="post" action="editUserProfile">
+    <% UserProfile userProfile = (UserProfile)request.getAttribute("data");%>
+
+    <%--script doesn't work yet--%>
+    <%--<script>--%>
+        <%--var dataValue = (String)<%=userProfile.getFirstName()%>;--%>
+        <%--$(document).ready(function() {--%>
+            <%--if (dataValue != "null"){--%>
+                <%--$('#firstName').fadeOut(1000);--%>
+                <%--$('#lastName').fadeOut(1000);--%>
+                <%--$('#email').fadeOut(1000);--%>
+            <%--}--%>
+
+        <%--});--%>
+    <%--</script>--%>
+
+    <p>First Name: </p><input id="firstName" type="text" name="firstName" value="<%=userProfile.getFirstName()%>"></br>
+    <p>Last Name: </p><input  id="lastName" type="text" name="lastName" value="<%=userProfile.getLastName()%>"></br>
     <p>E-mail: </p><input id="email" type="text" name="email" value="<%=userProfile.getEmail()%>"></br>
     <input type="submit" value="Save">
 </form>
 
-       <!-- <script type="text/javascript">
-
-            function validateEmail(email) {
-            // http://stackoverflow.com/a/46181/11236
-
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(email);
-            }
-
-            function validate(){
-            $("#result").text("");
-            var email = $("#email").val();
-            if (validateEmail(email)) {
-                $("#result").text(email + "is not valid :(");
-                $("#result").css("color", "red");
-            }
-            return false;
-            }
-
-            $("form").bind("submit", validate);
-            </script>-->
     </div>
 </div>
 </body>

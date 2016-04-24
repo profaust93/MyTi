@@ -44,7 +44,7 @@ public class EditUserProfileController implements MVCController {
 
         HttpSession session = req.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
-        UserProfile userProfile = null;
+        UserProfile userProfile = new UserProfile();
         userProfileModel.setUserProfileDAO(userProfileDao);
         try {
             if (profileServices.profileExist(userDTO.getUserId())){
