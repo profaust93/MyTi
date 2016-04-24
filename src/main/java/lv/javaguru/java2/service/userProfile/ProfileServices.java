@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Camille on 07.04.2016.
  */
-//@Component
+@Component
 public class ProfileServices {
     //UserProfileDAO userDAO;
     public Boolean profileExist (Long userid) throws DBException {

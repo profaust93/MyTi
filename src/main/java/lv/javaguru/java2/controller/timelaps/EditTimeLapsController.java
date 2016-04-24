@@ -53,13 +53,11 @@ public class EditTimeLapsController implements MVCController{
             dataMap.put("category",timeLaps.getCategory());
             dataMap.put("shortDesc",timeLaps.getShortDescription());
             dataMap.put("longDesc",timeLaps.getLongDescription());
-            resultCheckMap = timeLapsModel.editTimeLaps(timeLaps);
         } catch (TimeLapsException e) {
             e.printStackTrace();
         }
-        list.add(dataMap);
-        list.add(resultCheckMap);
-        return new MVCModel("/editTimeLaps.jsp",list);
+        list.add(dataMap)
+        ;return new MVCModel("/editTimeLaps.jsp",list);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class MainFilter implements Filter {
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
         urlToController.put("/editTimeLaps",applicationContext.getBean(EditTimeLapsController.class));
         urlToController.put("/viewUserProfile",applicationContext.getBean(ViewUserProfileController.class));
-        urlToController.put("/EditUserProfile",applicationContext.getBean(EditUserProfileController.class));//
+        urlToController.put("/editUserProfile",applicationContext.getBean(EditUserProfileController.class));//
         urlToController.put("/addChallenge",applicationContext.getBean(AddChallengeController.class));
     }
 

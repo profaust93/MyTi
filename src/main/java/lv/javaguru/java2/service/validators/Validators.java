@@ -29,7 +29,7 @@ public class Validators {
                 if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
             }
         } catch (DBException e) {
-            throw new ValidatorException(resultCheckMap);
+            throw new ValidatorException(resultCheckMap,e);
         }
     }
 
@@ -46,7 +46,7 @@ public class Validators {
                 if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
             }
         } catch (DBException e) {
-            throw new ValidatorException(resultCheckMap);
+            throw new ValidatorException(resultCheckMap, e);
         }
     }
 }

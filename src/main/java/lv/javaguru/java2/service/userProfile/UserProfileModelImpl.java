@@ -1,18 +1,22 @@
-package lv.javaguru.java2.model.profile;
+package lv.javaguru.java2.service.userProfile;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.domain.UserProfile;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
  * Created by Camille on 07.04.2016.
  */
-public class UserProfileModelImpl implements UserProfileModel {
 
+public class UserProfileModelImpl implements UserProfileModel {
+    @Autowired
     UserProfileDAO userProfileDAO;
+
     UserProfile userProfile;
     @Override
     public void setUserProfileDAO(UserProfileDAO userProfileDAO) {
@@ -35,8 +39,8 @@ public class UserProfileModelImpl implements UserProfileModel {
         userProfile = new UserProfile();
         userProfile.setUserId((Long)profileData.get("userId"));
         userProfile.setFirstName((String)profileData.get("firstName"));
-        userProfile.setFirstName((String)profileData.get("lastName"));
-        userProfile.setFirstName((String)profileData.get("email"));
+        userProfile.setLastName((String)profileData.get("lastName"));
+        userProfile.setEmail((String)profileData.get("email"));
         try {
             userProfileDAO.create(userProfile);
         } catch (DBException e) {
@@ -50,8 +54,8 @@ public class UserProfileModelImpl implements UserProfileModel {
         userProfile = new UserProfile();
         userProfile.setUserId((Long)profileData.get("userId"));
         userProfile.setFirstName((String)profileData.get("firstName"));
-        userProfile.setFirstName((String)profileData.get("lastName"));
-        userProfile.setFirstName((String)profileData.get("email"));
+        userProfile.setLastName((String)profileData.get("lastName"));
+        userProfile.setEmail((String)profileData.get("email"));
         try {
             userProfileDAO.update(userProfile);
         } catch (DBException e) {

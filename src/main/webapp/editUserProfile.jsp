@@ -1,16 +1,14 @@
-<%@ page import="lv.javaguru.java2.domain.UserProfile" %>
-<%--
+<%@ page import="lv.javaguru.java2.domain.UserProfile" %><%--
   Created by IntelliJ IDEA.
   User: Camille
-  Date: 02.04.2016
-  Time: 13:26
+  Date: 13.04.2016
+  Time: 22:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Profile</title>
-
+    <title>Edit User Profile</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,17 +47,39 @@
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
+<h1>Here you can edit your profile.</h1>
 
-<p>This is your profile.</p>
-<p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
-<p>Name: <%=userProfile.getFirstName()%></p>
-<p>Family name: <%=userProfile.getLastName()%></p>
-<p>E-mail: <%=userProfile.getEmail()%></p></br>
+<form method="post" action="editUserProfile">
+    <p><% UserProfile userProfile = (UserProfile)request.getAttribute("data");%></p>
 
-<form action="editUserProfile">
-    <input type="submit" value="Edit profile">
+    <p>First Name: </p><input type="text" name="firstName" value="<%=userProfile.getFirstName()%>"></br>
+    <p>Last Name: </p><input type="text" name="lastName" value="<%=userProfile.getLastName()%>"></br>
+    <p>E-mail: </p><input id="email" type="text" name="email" value="<%=userProfile.getEmail()%>"></br>
+    <input type="submit" value="Save">
 </form>
-</div>
+
+       <!-- <script type="text/javascript">
+
+            function validateEmail(email) {
+            // http://stackoverflow.com/a/46181/11236
+
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+            }
+
+            function validate(){
+            $("#result").text("");
+            var email = $("#email").val();
+            if (validateEmail(email)) {
+                $("#result").text(email + "is not valid :(");
+                $("#result").css("color", "red");
+            }
+            return false;
+            }
+
+            $("form").bind("submit", validate);
+            </script>-->
+    </div>
 </div>
 </body>
 </html>
