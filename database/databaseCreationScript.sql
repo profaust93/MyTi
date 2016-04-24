@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS my_ti.UserMessages
   Id BIGINT(11) NOT NULL AUTO_INCREMENT,
   Message VARCHAR(100),
   SernderId BIGINT(11) NOT NULL,
-  ReceipentId VARCHAR(255),
+  RecipientId VARCHAR(255),
   ChallengeId BIGINT(11),
   PRIMARY KEY (Id),
   FOREIGN KEY (ChallengeId) REFERENCES my_ti.challenge(ChallengeId)

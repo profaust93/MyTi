@@ -7,7 +7,7 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.service.validators.ModelChecks;
-import lv.javaguru.java2.service.challenge.ChallengeModel;
+import lv.javaguru.java2.service.challenge.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class AddChallengeController implements MVCController {
     @Autowired
     ModelChecks modelChecks;
     @Autowired
-    ChallengeModel challengeModel;
+    ChallengeService challengeService;
     @Autowired
     @Qualifier("ORM_ChallengeDAO")
     ChallengeDAO challengeDAO;
@@ -45,7 +45,8 @@ public class AddChallengeController implements MVCController {
         challenge.setChallengeName(req.getParameter("name"));
         challenge.setDescription(req.getParameter("description"));
         challenge.setEndTime(modelChecks.dateConvert(req.getParameter("date")));
-        resultCheckMap = challengeModel.addChallenge(challenge);
+
+        resultCheckMap = challengeService.addChallenge(challenge);
 
 
         for(Map.Entry entry:resultCheckMap.entrySet()){

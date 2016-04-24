@@ -15,13 +15,13 @@ import static org.mockito.Mockito.*;
  * Created by Ruslan on 2016.04.23..
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ChallengeModelTest {
+public class ChallengeServiceTest {
 
     @Mock
     private ChallengeDAO challengeDAO;
 
     @InjectMocks
-    ChallengeModel challengeModel = new ChallengeModelImpl();
+    ChallengeService challengeService = new ChallengeServiceImpl();
 
     @Test
     public void testAddNewChallenge() throws Exception {
@@ -32,7 +32,7 @@ public class ChallengeModelTest {
         challenge.setToUserId(2L);
         challenge.setEndTime(LocalDateTime.now());
         challenge.setDescription("Hibernate");
-        challengeModel.addChallenge(challenge);
+        challengeService.addChallenge(challenge);
 
         verify(challengeDAO).create(anyObject());
 
@@ -40,27 +40,27 @@ public class ChallengeModelTest {
 
     @Test
     public void testGetChallengeById() throws Exception {
-        challengeModel.getChallengeById(666L);
+        challengeService.getChallengeById(666L);
         verify(challengeDAO).getById(666L);
 
     }
 
     @Test
     public void testGetAllChallengeFromUserId() throws Exception {
-        challengeModel.getAllChallengeFromUserId(666L);
+        challengeService.getAllChallengeFromUserId(666L);
         verify(challengeDAO).getAllChallengeFromUserId(666L);
     }
 
     @Test
     public void testGetAllChallengeToUserId() throws Exception {
-        challengeModel.getAllChallengeToUserId(666L);
+        challengeService.getAllChallengeToUserId(666L);
         verify(challengeDAO).getAllChallengeToUserId(666L);
     }
 
     @Test
     public void testDelete() throws Exception {
         Challenge challenge = new Challenge();
-        challengeModel.deleteChallenge(challenge);
+        challengeService.deleteChallenge(challenge);
         verify(challengeDAO).delete(challenge);
 
     }

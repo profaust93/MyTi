@@ -6,7 +6,7 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
-import lv.javaguru.java2.service.timelaps.TimeLapsModel;
+import lv.javaguru.java2.service.timelaps.TimeLapsService;
 import lv.javaguru.java2.service.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +26,7 @@ public class AddTimeLapsController implements MVCController {
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
     @Autowired
-    TimeLapsModel timeLapsModel;
+    TimeLapsService timeLapsService;
     @Autowired
     ModelChecks modelChecks;
 
@@ -54,7 +54,7 @@ public class AddTimeLapsController implements MVCController {
         timeLaps.setLongDescription(req.getParameter("longDescription"));
 
 
-        resultCheckMap = timeLapsModel.addTimeLaps(timeLaps);
+        resultCheckMap = timeLapsService.addTimeLaps(timeLaps);
 
         for(Map.Entry entry:resultCheckMap.entrySet()){
             String value = (String) entry.getValue();

@@ -3,11 +3,13 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.domain.UserProfile;
+import lv.javaguru.java2.domain.UserProfileList;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  * Created by Camille on 02.04.2016.
@@ -114,5 +116,10 @@ public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
             closeConnection(connection);
         }
 
+    }
+
+    @Override
+    public List<UserProfileList> getAllUserProfile() throws DBException {
+        return null;
     }
 }

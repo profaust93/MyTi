@@ -1,9 +1,9 @@
 package lv.javaguru.java2.service.user;
 
-        import lv.javaguru.java2.domain.UserMessage;
-        import lv.javaguru.java2.web.form.model.MessageModel;
+import lv.javaguru.java2.domain.UserMessage;
+import lv.javaguru.java2.web.form.model.MessageModel;
 
-        import java.util.List;
+import java.util.List;
 
 public interface UserMessageService {
 
