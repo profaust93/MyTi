@@ -3,12 +3,16 @@ package lv.javaguru.java2.web.form.model;
 import lv.javaguru.java2.domain.ToDo;
 import lv.javaguru.java2.domain.ToDoTask;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ToDoListModel {
+    private Long id;
     private String toDoName;
     private LocalDateTime createDate;
     private LocalDateTime deadLine;
@@ -16,6 +20,7 @@ public class ToDoListModel {
     private Double percentDone;
 
     public ToDoListModel(ToDo toDo) {
+        this.id = toDo.getId();
         this.toDoName = toDo.getListName();
         this.createDate = toDo.getCreateTime();
         this.deadLine = toDo.getDeadLineTime();
@@ -58,6 +63,10 @@ public class ToDoListModel {
         this.taskCount = taskCount;
         return this;
     }
+    public String getFromatedDeadLineDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return this.deadLine.format(formatter);
+    }
 
     public Double getPercentDone() {
         return percentDone;
@@ -66,6 +75,14 @@ public class ToDoListModel {
     public ToDoListModel setPercentDone(Double percentDone) {
         this.percentDone = percentDone;
         return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -77,8 +94,6 @@ public class ToDoListModel {
     private Double calculateDone(Set<ToDoTask> todoTasks) {
         Double total = todoTasks.stream().mapToDouble(e->(double)e.getCompletedGoals()/e.getGoalsCount())
                 .reduce((s1,s2)->s1+s2).orElse(0);
-
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
-        return Double.valueOf(twoDForm.format(total/todoTasks.size()));
+        return new BigDecimal(total/todoTasks.size()).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 }

@@ -1,5 +1,6 @@
 package lv.javaguru.java2.domain;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -35,6 +36,9 @@ public class ToDo {
 
     @Column(name = "UserId")
     private Long userId;
+
+    @Column(name = "IsComplete")
+    private Boolean isComplete;
 
     public Long getId() {
         return Id;
@@ -96,6 +100,15 @@ public class ToDo {
 
     public ToDo setUserId(Long userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public ToDo setComplete(Boolean complete) {
+        isComplete = complete;
         return this;
     }
 }

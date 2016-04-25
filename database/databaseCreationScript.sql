@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoList
   DeadLineTime TIMESTAMP,
   UserId BIGINT(11),
   Notes TEXT,
+  IsComplete BOOLEAN,
   PRIMARY KEY (Id)
 )
   ENGINE = InnoDB

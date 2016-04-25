@@ -6,13 +6,20 @@ import lv.javaguru.java2.domain.ToDo;
 import lv.javaguru.java2.domain.ToDoTask;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ToDoModel {
     private Long id;
     private String todoName;
     private String notes;
     private LocalDateTime deadLine;
+    private Boolean isComeplete;
+
+    public ToDoModel() {
+    }
 
     public ToDoModel(ToDo toDo) {
         this.id = toDo.getId();
@@ -20,15 +27,16 @@ public class ToDoModel {
         this.notes = toDo.getNotes();
         this.deadLine = toDo.getDeadLineTime();
         this.toDoTaskModels = convertTasksToWebModel(toDo.getToDoTasks());
+        this.isComeplete = toDo.getComplete();
     }
 
-    private Set<ToDoTaskModel> toDoTaskModels;
+    private List<ToDoTaskModel> toDoTaskModels;
 
-    public Set<ToDoTaskModel> getToDoTaskModels() {
+    public List<ToDoTaskModel> getToDoTaskModels() {
         return toDoTaskModels;
     }
 
-    public ToDoModel setToDoTaskModels(Set<ToDoTaskModel> toDoTaskModels) {
+    public ToDoModel setToDoTaskModels(List<ToDoTaskModel> toDoTaskModels) {
         this.toDoTaskModels = toDoTaskModels;
         return this;
     }
@@ -69,7 +77,35 @@ public class ToDoModel {
         return this;
     }
 
-    private Set<ToDoTaskModel> convertTasksToWebModel(Set<ToDoTask> toDoTaskSet) {
-        return null;
+    private List<ToDoTaskModel> convertTasksToWebModel(Set<ToDoTask> toDoTaskSet) {
+        if(toDoTaskSet != null) {
+            return toDoTaskSet.stream().map(ToDoTaskModel::new).collect(Collectors.toList());
+        } else {
+            return null;
+        }
+    }
+
+    public  Set<ToDoTask> convertTaskModelToEntity() {
+        if (this.toDoTaskModels != null) {
+           return this.toDoTaskModels.stream().map(task -> {
+                return new ToDoTask().setId(task.getId())
+                        .setComplete(task.getComplete())
+                        .setCompletedGoals(task.getCompletedGoal())
+                        .setGoalsCount(task.getTaskGoal())
+                        .setDescription(task.getDescription())
+                        .setTaskName(task.getTaskName())
+                        .setToDo(new ToDo().setId(this.getId()));
+            }).collect(Collectors.toSet());
+        } else {
+            return null;
+        }
+    }
+
+    public Boolean getComeplete() {
+        return isComeplete;
+    }
+
+    public void setComeplete(Boolean comeplete) {
+        isComeplete = comeplete;
     }
 }

@@ -8,6 +8,8 @@ import lv.javaguru.java2.controller.profile.ViewUserProfileController;
 import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
+import lv.javaguru.java2.controller.todo.ToDoAddController;
+import lv.javaguru.java2.controller.todo.ToDoListController;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import org.springframework.beans.BeansException;
@@ -44,6 +46,8 @@ public class MainFilter implements Filter {
         urlToController.put("/viewUserProfile",applicationContext.getBean(ViewUserProfileController.class));
         urlToController.put("/editUserProfile",applicationContext.getBean(EditUserProfileController.class));//
         urlToController.put("/addChallenge",applicationContext.getBean(AddChallengeController.class));
+        urlToController.put("/todo",applicationContext.getBean(ToDoListController.class));
+        urlToController.put("/addToDo",applicationContext.getBean(ToDoAddController.class));
     }
 
     @Override
