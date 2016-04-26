@@ -12,6 +12,15 @@ public class UserProfile {
     private String email;
     //private byte image;
 
+    public UserProfile() {}
+
+    //Not needed, but decided to leave it here. Mb will use of it someday.
+    public UserProfile(String firstName,String lastName, String email ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }
