@@ -8,9 +8,9 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileModel;
-import lv.javaguru.java2.service.userProfile.UserProfileModelImpl;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
+import lv.javaguru.java2.service.userProfile.UserProfileService;
+import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +45,6 @@ public class EditUserProfileController implements MVCController {
         HttpSession session = req.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         UserProfile userProfile = new UserProfile();
-        userProfileModel.setUserProfileDAO(userProfileDao);
         try {
             if (profileServices.profileExist(userDTO.getUserId())){
                    userProfile = userProfileService.getUserProfile(userDTO.getUserId());

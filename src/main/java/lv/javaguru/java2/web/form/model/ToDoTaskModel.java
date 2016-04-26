@@ -1,10 +1,20 @@
 package lv.javaguru.java2.web.form.model;
 
 public class ToDoTaskModel {
+    private Long id;
     private String taskName;
     private String description;
     private Integer taskGoal;
     private Integer completedGoal;
+
+    public Long getId() {
+        return id;
+    }
+
+    public ToDoTaskModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getTaskName() {
         return taskName;

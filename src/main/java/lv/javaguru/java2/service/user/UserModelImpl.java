@@ -44,13 +44,6 @@ public class UserModelImpl implements UserModel {
 
         isUserExist(user); //заимплементь метод
 
-      /*  if(!checkFields(user)){
-            checkFields(user); // просто вызови метод, а мтеод путьс генерит эксепшены
-        }else{
-            return true;   // после return код не пишется, здесь просто оставь экспешн
-        }*/
-        // чтобы вывести пользователя вызови userDAO.create(user)
-
         return true;
     }
 

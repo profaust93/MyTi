@@ -6,13 +6,20 @@ import lv.javaguru.java2.domain.ToDo;
 import lv.javaguru.java2.domain.ToDoTask;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ToDoModel {
     private Long id;
     private String todoName;
     private String notes;
     private LocalDateTime deadLine;
+
+    public ToDoModel() {
+    }
 
     public ToDoModel(ToDo toDo) {
         this.id = toDo.getId();
@@ -22,13 +29,13 @@ public class ToDoModel {
         this.toDoTaskModels = convertTasksToWebModel(toDo.getToDoTasks());
     }
 
-    private Set<ToDoTaskModel> toDoTaskModels;
+    private List<ToDoTaskModel> toDoTaskModels;
 
-    public Set<ToDoTaskModel> getToDoTaskModels() {
+    public List<ToDoTaskModel> getToDoTaskModels() {
         return toDoTaskModels;
     }
 
-    public ToDoModel setToDoTaskModels(Set<ToDoTaskModel> toDoTaskModels) {
+    public ToDoModel setToDoTaskModels(List<ToDoTaskModel> toDoTaskModels) {
         this.toDoTaskModels = toDoTaskModels;
         return this;
     }
@@ -69,7 +76,15 @@ public class ToDoModel {
         return this;
     }
 
-    private Set<ToDoTaskModel> convertTasksToWebModel(Set<ToDoTask> toDoTaskSet) {
-        return null;
+    private List<ToDoTaskModel> convertTasksToWebModel(Set<ToDoTask> toDoTaskSet) {
+        if(toDoTaskSet == null) {
+            return new ArrayList<>();
+        }
+        return toDoTaskSet.stream().map(task -> new ToDoTaskModel()
+                .setTaskName(task.getTaskName())
+                .setCompletedGoal(task.getCompletedGoals())
+                .setDescription(task.getDescription())
+                .setTaskGoal(task.getCompletedGoals())
+        ).collect(Collectors.toList());
     }
 }
