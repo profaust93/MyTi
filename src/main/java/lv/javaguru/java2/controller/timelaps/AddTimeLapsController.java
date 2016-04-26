@@ -56,10 +56,9 @@ public class AddTimeLapsController implements MVCController {
 
         resultCheckMap = timeLapsService.addTimeLaps(timeLaps);
 
-        for(Map.Entry entry:resultCheckMap.entrySet()){
-            String value = (String) entry.getValue();
-            if(!value.equalsIgnoreCase("ok")) return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
-        }
+
+        if(resultCheckMap.size()!=0) return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
+
 
         return new MVCModel("/redirect.jsp","viewTimeLaps");
     }

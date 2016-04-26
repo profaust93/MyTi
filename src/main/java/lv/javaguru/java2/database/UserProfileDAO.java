@@ -19,6 +19,6 @@ public interface UserProfileDAO {
 
     void update (UserProfile userProfile) throws DBException;
 
-    List<UserProfileList> getAllUserProfile() throws DBException;
+    List<UserProfile> getAllUserProfile() throws DBException;
 
 }

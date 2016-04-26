@@ -25,8 +25,9 @@ public class TimeLapsDAOImplTest extends SpringIntegration {
     @Qualifier("ORM_TimeLapsDAO")
     private TimeLapsDAO timeLapsDAO;
 
-    private TimeLaps createdTimeLaps;
+   // private TimeLaps createdTimeLaps;
 
+    /*
     @Before
     public void setUp() throws Exception{
         TimeLaps timeLaps = new TimeLaps();
@@ -36,7 +37,7 @@ public class TimeLapsDAOImplTest extends SpringIntegration {
         timeLaps.setCategory("Fun");
         timeLapsDAO.create(timeLaps);
         this.createdTimeLaps = timeLaps;
-    }
+    }*/
 
     @Test
     @Transactional
@@ -59,8 +60,14 @@ public class TimeLapsDAOImplTest extends SpringIntegration {
     @Test
     @Transactional
     public void testUpdate() throws DBException{
-        createdTimeLaps.setTimeLapsName("Renamed");
-        assertEquals("Renamed",createdTimeLaps.getTimeLapsName());
+        TimeLaps timeLaps = new TimeLaps();
+        timeLaps.setTimeLapsName("Name");
+        timeLaps.setUserId(666L);
+        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30));
+        timeLaps.setCategory("Fun");
+        timeLapsDAO.create(timeLaps);
+        timeLaps.setTimeLapsName("Renamed");
+        assertEquals("Renamed",timeLaps.getTimeLapsName());
     }
 
     @Test

@@ -64,4 +64,11 @@ public class ChallengeServiceTest {
         verify(challengeDAO).delete(challenge);
 
     }
+
+    @Test
+    public void testChangeState() throws Exception {
+        Challenge challenge = new Challenge();
+        challengeService.changeChallengeState(challenge,"Accept");
+        verify(challengeDAO).update(challenge);
+    }
 }

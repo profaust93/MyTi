@@ -3,8 +3,11 @@ package lv.javaguru.java2.filter;
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.controller.*;
 import lv.javaguru.java2.controller.challenge.AddChallengeController;
+import lv.javaguru.java2.controller.challenge.ViewChallengeController;
+import lv.javaguru.java2.controller.message.ViewMessageController;
 import lv.javaguru.java2.controller.profile.EditUserProfileController;
 import lv.javaguru.java2.controller.profile.ViewUserProfileController;
+import lv.javaguru.java2.controller.profile.ViewUserProfileListController;
 import lv.javaguru.java2.controller.timelaps.AddTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.EditTimeLapsController;
 import lv.javaguru.java2.controller.timelaps.ViewTimeLapsController;
@@ -42,8 +45,11 @@ public class MainFilter implements Filter {
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
         urlToController.put("/editTimeLaps",applicationContext.getBean(EditTimeLapsController.class));
         urlToController.put("/viewUserProfile",applicationContext.getBean(ViewUserProfileController.class));
-        urlToController.put("/editUserProfile",applicationContext.getBean(EditUserProfileController.class));//
+        urlToController.put("/editUserProfile",applicationContext.getBean(EditUserProfileController.class));
         urlToController.put("/addChallenge",applicationContext.getBean(AddChallengeController.class));
+        urlToController.put("/viewUserProfileList",applicationContext.getBean(ViewUserProfileListController.class));
+        urlToController.put("/viewMessage",applicationContext.getBean(ViewMessageController.class));
+        urlToController.put("/viewChallenge",applicationContext.getBean(ViewChallengeController.class));
     }
 
     @Override

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: ruslan
   Date: 16.18.4
@@ -44,16 +44,17 @@
     <![endif]-->
 </head>
 <body>
+<%Map<String,String> dataMap = (Map<String,String>) request.getAttribute("data");%>
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
         <form method = "post" action="addChallenge">
-            <h3>Name:</h3>
+            <h3>Challenge name:</h3>
             <input type="text" name="name">
             <h3>From:</h3>
-            <input type = "text" name="fromUserId">
+            <input name="senderId" value="<%=dataMap.get("senderId")%>" readonly="true">
             <h3>To:</h3>
-            <input type="text" name="toUserId">
+            <input name="recipientId" value="<%=dataMap.get("recipientId")%>" readonly="true">
             <h3>End date:</h3>
             <input id="datetimepicker" type="text" name="date" >
 
@@ -70,7 +71,7 @@
             <script type="text/javascript">
                 jQuery('#datetimepicker').datetimepicker();
             </script>
-            <h3>Description</h3>
+            <h3>Description:</h3>
             <textarea rows="2" cols="50" type="text" name="description" autofocus maxlength="1000"></textarea>
             <input type="submit" value="submit">
         </form>

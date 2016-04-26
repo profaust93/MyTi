@@ -166,13 +166,6 @@
         </ul>
 
         <div id="All" class="tabcontent">
-            <div id="wrap">
-                <div class="product-head">
-                    <h1>Product Search</h1>
-                    <div id="form"></div>
-                    <div class="clear"></div>
-                </div>
-                <ul id="list">
             <% for (int i = 0; i < timeLapsList.size() ; i++) { %>
 
             <button class="accordion"><p>Name:<%=timeLapsList.get(i).getTimeLapsName()%></p><p>ID:<%=timeLapsList.get(i).getTimeLapsId()%></p></button>
@@ -202,8 +195,7 @@
             </div>
 
             <% } %>
-                </ul>
-        </div>
+
         </div>
         <div id="Sport" class="tabcontent">
             <% for (int i = 0; i < timeLapsList.size() ; i++) { %>

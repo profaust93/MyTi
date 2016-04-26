@@ -1,6 +1,7 @@
 package lv.javaguru.java2.service.timelaps;
 
 import lv.javaguru.java2.database.TimeLapsDAO;
+import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import org.junit.Test;

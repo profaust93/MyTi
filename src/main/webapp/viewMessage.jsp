@@ -1,16 +1,15 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="lv.javaguru.java2.domain.UserProfileList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="lv.javaguru.java2.domain.UserMessage" %>
+<%@ page import="lv.javaguru.java2.domain.UserMessageList" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
-  Date: 2016.04.23.
-  Time: 13:43
+  Date: 2016.04.25.
+  Time: 16:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User Profile List</title>
     <style>
         /* Style the timeLapsList */
         ul.tab {
@@ -114,64 +113,62 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
-<%List<UserProfileList> userProfileList = (List<UserProfileList>) request.getAttribute("data");%>
-
+<%List<UserMessageList> list = (List<UserMessageList>) request.getAttribute("data");%>
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
 
-        <% for(int i = 0; i < userProfileList.size() ; i++) { %>
-<button class="accordion"><p>Name:<%=userProfileList.get(i).getFirstName()%></p>
-    <p>Surname:<%=userProfileList.get(i).getLastName()%></p>
-    <p>ID:<%=userProfileList.get(i).getUserId()%></p>
-</button>
-<div class="panel">
-    <div>
-        <p><b>Name:</b><%=userProfileList.get(i).getFirstName()%></p>
-    </div>
-    <div>
-        <p><b>Surname:</b><%=userProfileList.get(i).getLastName()%></p>
-    </div>
-    <div>
-        <h4>E-mail:</h4><p><%=userProfileList.get(i).getEmail()%></p>
-    </div>
-    <div>
-        <form method="get" action="addChallenge" name="recipientId">
-            <button type="submit" value="<%=userProfileList.get(i).getUserId()%>" name = "recipientId">Challenge!</button>
-        </form>
-    </div>
-</div>
-<%}%>
-        <script>
-            var acc = document.getElementsByClassName("accordion");
-            var i;
+            <% for (int i = 0; i < list.size() ; i++) { %>
 
-            for (i = 0; i < acc.length; i++) {
-                acc[i].onclick = function(){
-                    this.classList.toggle("active");
-                    this.nextElementSibling.classList.toggle("show");
+            <button class="accordion"><p>From user ID:<%=list.get(i).getSenderId()%> </p></button>
+            <div class="panel">
+                <div>
+                    <p><b>Message ID:</b><%=list.get(i).getMessageId()%></p>
+                </div>
+                <div>
+                    <p><b>Description:</b><%=list.get(i).getMessage()%></p>
+                </div>
+                <div>
+                    <form method="post" action="viewMessage" name="AcceptMessage">
+                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "AcceptMessageId">Accept</button>
+                    </form>
+                    <form method="post" action="viewMessage" name="RejectMessage">
+                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name="RejectMessageId">Decline</button>
+                    </form>
+                </div>
+            </div>
+
+            <% } %>
+
+            <script>
+                var acc = document.getElementsByClassName("accordion");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                    acc[i].onclick = function(){
+                        this.classList.toggle("active");
+                        this.nextElementSibling.classList.toggle("show");
+                    }
                 }
-            }
-        </script>
-        <script>
-            function openCategory(evt, category) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
+            </script>
+            <script>
+                function openCategory(evt, category) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(category).style.display = "block";
+                    evt.currentTarget.className += " active";
                 }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(category).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-        </script>
-    </div>
+            </script>
 </div>
+
 </body>
 </html>

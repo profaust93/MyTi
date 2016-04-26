@@ -40,6 +40,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     public Map<String, Object> addChallenge(Challenge challenge){
         Map<String,Object> resultCheckMap = new HashMap();
         Validators validators = new Validators();
+        challenge.setChallengeState("Pending");
         try{
             validators.challengeValidator(challenge);
             challengeDAO.create(challenge);
@@ -52,19 +53,19 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
 
     @Override
-    public void changeChallengeState(Challenge challenge) throws ChallengeException {
-        Map<String,Object> resultCheckMap = new HashMap<>();
+    public void changeChallengeState(Challenge challenge,String state) throws ChallengeException {
 
         try {
-            resultCheckMap.put("stateCheck",modelChecks.stateCheck(challenge.getChallengeState()));
-            for (Map.Entry entry : resultCheckMap.entrySet()) {
-                String value = (String) entry.getValue();
-                if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
+            if(state.equalsIgnoreCase("reject")){
+                challengeDAO.delete(challenge);
+            } else {
+                challenge.setChallengeState(state);
+                challengeDAO.update(challenge);
             }
-            challengeDAO.update(challenge);
         } catch (DBException e) {
             e.printStackTrace();
         }
+
 
     }
 

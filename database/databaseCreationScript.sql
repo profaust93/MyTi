@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS my_ti.UserMessages
 (
   Id BIGINT(11) NOT NULL AUTO_INCREMENT,
   Message VARCHAR(100),
-  SernderId BIGINT(11) NOT NULL,
-  RecipientId VARCHAR(255),
+  SenderId BIGINT(11) NOT NULL,
+  RecipientId BIGINT(11),
   ChallengeId BIGINT(11),
   PRIMARY KEY (Id),
   FOREIGN KEY (ChallengeId) REFERENCES my_ti.challenge(ChallengeId)
@@ -119,7 +119,8 @@ CREATE TABLE IF NOT EXISTS my_ti.UserMessages
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
 INSERT INTO my_ti.Users VALUES (2,'admin2','qwerty','Admin2','Admin2','admin2@myTi.com');
-INSERT INTO Profiles VALUES (default, 1, "testName", "testFamilyName","testEmail");
+INSERT INTO Profiles VALUES (default, 1, "admin", "admin","admin@myTi.com");
+INSERT INTO Profiles VALUES (default, 2, "admin2", "admin2","admin2@myTi.com");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

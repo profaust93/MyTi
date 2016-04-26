@@ -8,8 +8,8 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileModel;
-import lv.javaguru.java2.service.userProfile.UserProfileModelImpl;
+import lv.javaguru.java2.service.userProfile.UserProfileService;
+import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class EditUserProfileController implements MVCController {
     ProfileServices profileServices;
     @Autowired
     UserProfileDAO userProfileDao;
-    UserProfileModel userProfileModel = new UserProfileModelImpl();
+    UserProfileService userProfileService = new UserProfileServiceImpl();
 
 
     @Override
@@ -45,10 +45,10 @@ public class EditUserProfileController implements MVCController {
         HttpSession session = req.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         UserProfile userProfile = null;
-        userProfileModel.setUserProfileDAO(userProfileDao);
+        userProfileService.setUserProfileDAO(userProfileDao);
         try {
             if (profileServices.profileExist(userDTO.getUserId())){
-                   userProfile = userProfileModel.getUserProfile(userDTO.getUserId());
+                   userProfile = userProfileService.getUserProfile(userDTO.getUserId());
             }
         } catch (DBException e) {
             e.printStackTrace();
@@ -73,17 +73,17 @@ public class EditUserProfileController implements MVCController {
         profileData.put("email",req.getParameter("email"));
         profileData.put("userId",userDTO.getUserId());
         UserProfile userProfile = null;
-        userProfileModel.setUserProfileDAO(userProfileDao);
+        userProfileService.setUserProfileDAO(userProfileDao);
       try {
            if (profileServices.profileExist(userDTO.getUserId())){
 
-               userProfileModel.updateUserProfile(profileData);
-               userProfile = userProfileModel.getUserProfile(userDTO.getUserId());
+               userProfileService.updateUserProfile(profileData);
+               userProfile = userProfileService.getUserProfile(userDTO.getUserId());
                return new MVCModel("/viewUserProfile.jsp",userProfile);
            }
 
-       userProfileModel.createUserProfile(profileData);
-        userProfile = userProfileModel.getUserProfile(userDTO.getUserId());
+       userProfileService.createUserProfile(profileData);
+        userProfile = userProfileService.getUserProfile(userDTO.getUserId());
 
        } catch (DBException e){
            e.printStackTrace();

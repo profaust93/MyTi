@@ -81,21 +81,17 @@ public class EditTimeLapsController implements MVCController{
             dataMap.put("shortDesc",timeLaps.getShortDescription());
             dataMap.put("longDesc",timeLaps.getLongDescription());
 
+            resultCheckMap = timeLapsService.editTimeLaps(timeLaps);
+
             list.add(dataMap);
             list.add(resultCheckMap);
 
-            resultCheckMap = timeLapsService.editTimeLaps(timeLaps);
+                if(resultCheckMap.size() != 0) return new MVCModel("/editTimeLaps.jsp",list);
 
-            for(Map.Entry entry:resultCheckMap.entrySet()){
-                String value = (String) entry.getValue();
-                if(!value.equalsIgnoreCase("ok")) return new MVCModel("/editTimeLaps.jsp",list);
-            }
 
         }catch (TimeLapsException e){
             e.printStackTrace();
         }
-
-
 
         return new MVCModel("/redirect.jsp","viewTimeLaps");
     }

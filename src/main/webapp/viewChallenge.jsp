@@ -1,16 +1,14 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="lv.javaguru.java2.domain.UserProfileList" %>
+<%@ page import="lv.javaguru.java2.domain.ChallengeList" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
-  Date: 2016.04.23.
-  Time: 13:43
+  Date: 2016.04.25.
+  Time: 13:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User Profile List</title>
     <style>
         /* Style the timeLapsList */
         ul.tab {
@@ -114,37 +112,88 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
-<%List<UserProfileList> userProfileList = (List<UserProfileList>) request.getAttribute("data");%>
-
+<%List<ChallengeList> list = (List<ChallengeList>) request.getAttribute("data");%>
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
+        <%
+            Integer pendingCount = 0;
+            Integer acceptCount = 0;
+        %>
+        <% for (int i = 0; i < list.size() ; i++) {
+            if (list.get(i).getChallengeState().equalsIgnoreCase("Pending")) {
+                pendingCount++;
+            }
+            if (list.get(i).getChallengeState().equalsIgnoreCase("Accept")){
+                acceptCount++;
+            }
+        }
+        %>
 
-        <% for(int i = 0; i < userProfileList.size() ; i++) { %>
-<button class="accordion"><p>Name:<%=userProfileList.get(i).getFirstName()%></p>
-    <p>Surname:<%=userProfileList.get(i).getLastName()%></p>
-    <p>ID:<%=userProfileList.get(i).getUserId()%></p>
-</button>
-<div class="panel">
-    <div>
-        <p><b>Name:</b><%=userProfileList.get(i).getFirstName()%></p>
-    </div>
-    <div>
-        <p><b>Surname:</b><%=userProfileList.get(i).getLastName()%></p>
-    </div>
-    <div>
-        <h4>E-mail:</h4><p><%=userProfileList.get(i).getEmail()%></p>
-    </div>
-    <div>
-        <form method="get" action="addChallenge" name="recipientId">
-            <button type="submit" value="<%=userProfileList.get(i).getUserId()%>" name = "recipientId">Challenge!</button>
-        </form>
-    </div>
-</div>
-<%}%>
+        <ul class="tab">
+            <li><a href="#" class="tablinks" onclick="openCategory(event, 'Active')">Active(<%=acceptCount%>)</a></li>
+            <li><a href="#" class="tablinks" onclick="openCategory(event, 'Pending')">Pending(<%=pendingCount%>)</a></li>
+        </ul>
+        <div id="Active" class="tabcontent">
+        <% for (int i = 0; i < list.size() ; i++) { %>
+            <% if (list.get(i).getChallengeState().equalsIgnoreCase("Accept")) { %>
+        <button class="accordion"><p>Challenge Name:<%=list.get(i).getChallengeName()%> </p></button>
+        <div class="panel">
+            <div>
+                <p><b>Recieved From:</b><%=list.get(i).getFromUserId()%></p>
+            </div>
+            <div>
+                <p><b>Description:</b><%=list.get(i).getDescription()%></p>
+            </div>
+            <div>
+                <p><b>End Time:</b><%=list.get(i).getEndTime()%></p>
+            </div>
+            <div>
+                <p><b>State:</b><%=list.get(i).getChallengeState()%></p>
+            </div>
+            <% if(list.get(i).getChallengeState().equalsIgnoreCase("Pending")){ %>
+            <div>
+                <form method="post" action="viewMessage" name="viewMessage">
+                    <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "viewMessage">View Message</button>
+                </form>
+
+            </div>
+            <%}%>
+        </div>
+            <%}%>
+        <% } %>
+        </div>
+        <div id="Pending" class="tabcontent">
+            <% for (int i = 0; i < list.size() ; i++) { %>
+            <% if (list.get(i).getChallengeState().equalsIgnoreCase("Pending")){ %>
+            <button class="accordion"><p>Challenge Name:<%=list.get(i).getChallengeName()%> </p></button>
+            <div class="panel">
+                <div>
+                    <p><b>Recieved From:</b><%=list.get(i).getFromUserId()%></p>
+                </div>
+                <div>
+                    <p><b>Description:</b><%=list.get(i).getDescription()%></p>
+                </div>
+                <div>
+                    <p><b>End Time:</b><%=list.get(i).getEndTime()%></p>
+                </div>
+                <div>
+                    <p><b>State:</b><%=list.get(i).getChallengeState()%></p>
+                </div>
+                <% if(list.get(i).getChallengeState().equalsIgnoreCase("Pending")){ %>
+                <div>
+                    <form method="post" action="viewMessage" name="viewMessage">
+                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "viewMessage">View Message</button>
+                    </form>
+
+                </div>
+                <%}%>
+            </div>
+            <% } %>
+            <% } %>
+        </div>
         <script>
             var acc = document.getElementsByClassName("accordion");
             var i;

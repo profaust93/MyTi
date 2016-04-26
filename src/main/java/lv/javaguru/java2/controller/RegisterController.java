@@ -65,7 +65,7 @@ public class RegisterController implements MVCController {
             if(!req.getServletPath().equals("/register")) {
                 resultMap.put("redirectTo",(String)session.getAttribute("comeFrom"));
             } else {
-                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/index";
+                String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/java2/index";
                 resultMap.put("redirectTo",url);
             }
             return new MVCModel("/json.jsp",new JSONObject(resultMap));

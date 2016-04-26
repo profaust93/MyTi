@@ -1,5 +1,7 @@
 package lv.javaguru.java2.web.form.model;
 
+import lv.javaguru.java2.domain.UserMessage;
+
 /**
  * Created by germans.kuzmins on 2016.04.23..
  */
@@ -11,12 +13,12 @@ public class MessageModel {
     private Long senderId;
     private Long recipientId;
 
-    public MessageModel(Long messageId, Long challengeId, String message, Long senderId, Long recipientId) {
-        this.messageId = messageId;
-        this.challengeId = challengeId;
-        this.message = message;
-        this.senderId = senderId;
-        this.recipientId = recipientId;
+    public MessageModel(UserMessage userMessage) {
+        this.messageId = userMessage.getMessageId();
+        this.challengeId = userMessage.getChallengeId();
+        this.message = userMessage.getMessage();
+        this.senderId = userMessage.getSenderId();
+        this.recipientId = userMessage.getRecipientId();
     }
 
     public Long getMessageId() {
