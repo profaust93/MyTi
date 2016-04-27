@@ -7,6 +7,7 @@ import lv.javaguru.java2.web.form.model.ToDoListModel;
 import lv.javaguru.java2.web.form.model.ToDoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,12 +41,27 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public void upsertToDo(ToDoModel toDoModel) {
-
+    public void upsertToDo(ToDoModel toDoModel) throws ToDoException {
+        try {
+            ToDo toDo = new ToDo().setToDoTasks(toDoModel.convertTaskModelToTask())
+                    .setCreateTime(LocalDateTime.now())
+                    .setDeadLineTime(toDoModel.getDeadLine())
+                    .setId(toDoModel.getId())
+                    .setListName(toDoModel.getTodoName())
+                    .setNotes(toDoModel.getNotes());
+            toDoListDAO.createOrUpdate(toDo);
+        } catch (Exception e ){
+            throw new ToDoException(e.getMessage());
+        }
     }
 
     @Override
-    public void removeToDo() {
+    public void removeToDo(Long toDoId) throws ToDoException {
+        try {
+            toDoListDAO.delete(new ToDo().setId(toDoId));
+        } catch (Exception e) {
+            throw new ToDoException(e.getMessage());
+        }
 
     }
 

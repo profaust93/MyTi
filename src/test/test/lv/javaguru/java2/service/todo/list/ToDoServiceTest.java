@@ -57,6 +57,14 @@ public class ToDoServiceTest {
                 .setDeadLine(LocalDateTime.parse("2016-12-03T10:15:30"))
                 .setNotes("someNotes")
                 .setToDoTaskModels(Collections.singletonList(new ToDoTaskModel().setTaskName("test")));
+        toDoService.upsertToDo(toDoModel);
         verify(toDoListDAO).createOrUpdate(anyObject());
     }
+
+    @Test
+    public void testDeleteToDo() throws Exception {
+        toDoService.removeToDo(TODO_ID);
+        verify(toDoListDAO).delete(anyObject());
+    }
+
 }

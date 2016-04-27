@@ -6,7 +6,6 @@ import lv.javaguru.java2.domain.ToDoTask;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ToDoListModel {
     private String toDoName;

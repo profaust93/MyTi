@@ -87,4 +87,12 @@ public class ToDoModel {
                 .setTaskGoal(task.getCompletedGoals())
         ).collect(Collectors.toList());
     }
+
+    public Set<ToDoTask> convertTaskModelToTask() {
+        return this.toDoTaskModels.stream().map(task -> new ToDoTask().setCompletedGoals(task.getCompletedGoal())
+                .setDescription(task.getDescription())
+                .setGoalsCount(task.getTaskGoal())
+                .setId(task.getId())
+        ).collect(Collectors.toSet());
+    }
 }

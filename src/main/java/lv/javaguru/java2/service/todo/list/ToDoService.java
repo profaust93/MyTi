@@ -13,9 +13,9 @@ public interface ToDoService {
 
     List<ToDoListModel> getAllToDoForUser(Long userId) throws ToDoException;
 
-    void upsertToDo(ToDoModel toDoModel);
+    void upsertToDo(ToDoModel toDoModel) throws ToDoException;
 
-    void removeToDo();
+    void removeToDo(Long toDoId) throws ToDoException;
 
     void makeToDoDone();
 
