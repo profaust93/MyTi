@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class User {
 /*
     CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
