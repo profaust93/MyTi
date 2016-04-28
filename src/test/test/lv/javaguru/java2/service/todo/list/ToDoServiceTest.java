@@ -39,7 +39,6 @@ public class ToDoServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        when(toDoListDAO.getById(TODO_ID)).thenReturn(new ToDo());
         MockitoAnnotations.initMocks(this);
     }
 
@@ -50,8 +49,6 @@ public class ToDoServiceTest {
         verify(toDoListDAO).getById(TODO_ID);
         assertEquals(TODO_ID,toDoModel.getId());
         assertEquals(TODO_NAME,toDoModel.getTodoName());
-        toDoService.getToDoList(2L);
-        verify(toDoListDAO).getById(2L);
     }
 
     @Test
@@ -69,7 +66,7 @@ public class ToDoServiceTest {
 
     @Test
     public void testRemoveToDO() throws Exception {
-        toDoService.removeToDo(new ToDoModel().setId(2L));
+        toDoService.removeToDo(TODO_ID);
         verify(toDoListDAO).delete(anyObject());
 
     }

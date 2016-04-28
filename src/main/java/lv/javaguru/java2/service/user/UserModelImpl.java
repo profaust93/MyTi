@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserModelImpl implements UserModel {
 
     @Autowired
-    @Qualifier("ORM_UserDAO")
+    @Qualifier("JDBC_DAO")
     private UserDAO userDAO;
 
     @Override

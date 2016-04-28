@@ -19,6 +19,8 @@ public class ToDoModel {
     private String todoName;
     private String notes;
     private LocalDateTime deadLine;
+    private Boolean isComeplete;
+    private List<ToDoTaskModel> toDoTaskModels;
 
     public ToDoModel() {
     }
@@ -32,7 +34,7 @@ public class ToDoModel {
         this.isComeplete = toDo.getComplete();
     }
 
-    private List<ToDoTaskModel> toDoTaskModels;
+
 
     public List<ToDoTaskModel> getToDoTaskModels() {
         return toDoTaskModels;
@@ -93,15 +95,14 @@ public class ToDoModel {
 
     public  Set<ToDoTask> convertTaskModelToEntity() {
         if (this.toDoTaskModels != null) {
-           return this.toDoTaskModels.stream().map(task -> {
-                return new ToDoTask().setId(task.getId())
-                        .setComplete(task.getComplete())
-                        .setCompletedGoals(task.getCompletedGoal())
-                        .setGoalsCount(task.getTaskGoal())
-                        .setDescription(task.getDescription())
-                        .setTaskName(task.getTaskName())
-                        .setToDo(new ToDo().setId(this.getId()));
-            }).collect(Collectors.toSet());
+           return this.toDoTaskModels.stream().map(task -> new ToDoTask().setId(task.getId())
+                   .setComplete(task.getComplete())
+                   .setCompletedGoals(task.getCompletedGoal())
+                   .setGoalsCount(task.getTaskGoal())
+                   .setDescription(task.getDescription())
+                   .setTaskName(task.getTaskName())
+                   //.setToDo(new ToDo().setId(this.getId()))
+           ).collect(Collectors.toSet());
         } else {
             return null;
         }

@@ -66,6 +66,6 @@ public class ToDoTaskModel {
     }
 
     public Boolean getComplete() {
-        return taskGoal.equals(completedGoal);
+        return !(taskGoal == null || completedGoal == null) && taskGoal.equals(completedGoal);
     }
 }

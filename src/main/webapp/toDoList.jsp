@@ -54,7 +54,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>ToDoList</h1>
-                    <button type="button" class="btn btn-primary pull-right" onclick="window.location.href='/todo/add'">Add ToDo</button>
 
                     <c:if test="${!empty data}">
                         <table class="table table-striped table-list-search">

@@ -15,7 +15,6 @@ public class DatabaseCleaner extends DAOImpl {
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
         tableNames.add("Users");
-        tableNames.add("ToDo");
         tableNames.add("TimeLaps");
         tableNames.add("Profiles");
         tableNames.add("Challenge");
