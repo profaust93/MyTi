@@ -1,25 +1,20 @@
 package lv.javaguru.java2.controller.timelaps;
 
 import lv.javaguru.java2.controller.MVCController;
-import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.service.timelaps.TimeLapsModel;
-import lv.javaguru.java2.service.timelaps.TimeLapsModelImpl;
+import lv.javaguru.java2.service.timelaps.TimeLapsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by ruslan on 16.29.3.
@@ -28,10 +23,7 @@ import java.util.stream.Collectors;
 public class ViewTimeLapsController implements MVCController {
 
     @Autowired
-    @Qualifier("ORM_TimeLapsDAO")
-    TimeLapsDAO timeLapsDAO;
-    @Autowired
-    TimeLapsModel timeLapsModel;
+    TimeLapsService timeLapsService;
 
 
 
@@ -42,7 +34,7 @@ public class ViewTimeLapsController implements MVCController {
 
 
         try {
-            list = timeLapsModel.getAllTimeLapsForUser(String.valueOf(userDTO.getUserId()));
+            list = timeLapsService.getAllTimeLapsForUser(String.valueOf(userDTO.getUserId()));
 
         } catch (TimeLapsException e) {
             e.printStackTrace();
@@ -58,8 +50,8 @@ public class ViewTimeLapsController implements MVCController {
         UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
         if (deleteTimeLapsById != null) {
             try {
-                TimeLaps timeLaps = timeLapsModel.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
-                timeLapsModel.deleteTimeLaps(timeLaps);
+                TimeLaps timeLaps = timeLapsService.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
+                timeLapsService.deleteTimeLaps(timeLaps);
                 return new MVCModel("/redirect.jsp", "viewTimeLaps");
             } catch (TimeLapsException e) {
                 e.printStackTrace();
@@ -67,7 +59,7 @@ public class ViewTimeLapsController implements MVCController {
         }
 
         if (deleteAllTimeLaps != null) {
-            timeLapsModel.deleteAllTimeLaps(userDTO.getUserId());
+            timeLapsService.deleteAllTimeLaps(userDTO.getUserId());
             return new MVCModel("/redirect.jsp", "viewTimeLaps");
         }
 

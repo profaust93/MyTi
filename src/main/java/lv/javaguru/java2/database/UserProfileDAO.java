@@ -1,6 +1,9 @@
 package lv.javaguru.java2.database;
 
 import lv.javaguru.java2.domain.UserProfile;
+import lv.javaguru.java2.domain.UserProfileList;
+
+import java.util.List;
 
 /**
  * Created by Camille on 02.04.2016.
@@ -15,5 +18,7 @@ public interface UserProfileDAO {
     void delete (Long profileId) throws DBException;
 
     void update (UserProfile userProfile) throws DBException;
+
+    List<UserProfile> getAllUserProfile() throws DBException;
 
 }

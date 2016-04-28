@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.hibernate;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +24,20 @@ public class TimeLapsDAOImplTest extends SpringIntegration {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
     private TimeLapsDAO timeLapsDAO;
+
+   // private TimeLaps createdTimeLaps;
+
+    /*
+    @Before
+    public void setUp() throws Exception{
+        TimeLaps timeLaps = new TimeLaps();
+        timeLaps.setTimeLapsName("Name");
+        timeLaps.setUserId(666L);
+        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30));
+        timeLaps.setCategory("Fun");
+        timeLapsDAO.create(timeLaps);
+        this.createdTimeLaps = timeLaps;
+    }*/
 
     @Test
     @Transactional
@@ -46,29 +61,13 @@ public class TimeLapsDAOImplTest extends SpringIntegration {
     @Transactional
     public void testUpdate() throws DBException{
         TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(LocalDateTime.now());
-        timeLaps.setShortDescription("ShortDescription");
-        timeLaps.setLongDescription("Hibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setUserId(2L);
-        timeLaps.setTimeLapsName("timelaps");
+        timeLaps.setTimeLapsName("Name");
+        timeLaps.setUserId(666L);
+        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30));
+        timeLaps.setCategory("Fun");
         timeLapsDAO.create(timeLaps);
-
-        timeLaps.setCompleteTime(LocalDateTime.of(2014, 12, 1, 10, 10, 30));
-        timeLaps.setShortDescription("UpdatedShortDescription");
-        timeLaps.setLongDescription("UpdatedHibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setTimeLapsName("timelaps");
-        timeLapsDAO.update(timeLaps);
-        TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
-
-        assertNotNull(timeLapsFromDb);
-        assertEquals(timeLaps.getTimeLapsId(),timeLapsFromDb.getTimeLapsId());
-        assertEquals(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30),timeLapsFromDb.getCompleteTime());
-        assertEquals("UpdatedShortDescription",timeLapsFromDb.getShortDescription());
-        assertEquals("UpdatedHibernate",timeLapsFromDb.getLongDescription());
-        assertEquals(new String("sport"),timeLapsFromDb.getCategory());
-        assertEquals(new Long(2),timeLapsFromDb.getUserId());
+        timeLaps.setTimeLapsName("Renamed");
+        assertEquals("Renamed",timeLaps.getTimeLapsName());
     }
 
     @Test

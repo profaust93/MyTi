@@ -2,17 +2,23 @@ package lv.javaguru.java2.controller.challenge;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.ChallengeDAO;
+import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.UserMessageDAO;
 import lv.javaguru.java2.domain.Challenge;
+import lv.javaguru.java2.domain.UserMessage;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
+import lv.javaguru.java2.service.user.UserMessageService;
 import lv.javaguru.java2.service.validators.ModelChecks;
-import lv.javaguru.java2.service.challenge.ChallengeModel;
+import lv.javaguru.java2.service.challenge.ChallengeService;
+import lv.javaguru.java2.web.form.model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,13 +29,16 @@ public class AddChallengeController implements MVCController {
     @Autowired
     ModelChecks modelChecks;
     @Autowired
-    ChallengeModel challengeModel;
+    ChallengeService challengeService;
     @Autowired
-    @Qualifier("ORM_ChallengeDAO")
-    ChallengeDAO challengeDAO;
+    UserMessageService messageService;
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
-        return new MVCModel("/addChallenge.jsp",null);
+        Map<String,Object> dataMap =new HashMap<>();
+        UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
+        dataMap.put("senderId",String.valueOf(userDTO.getUserId()));
+        dataMap.put("recipientId", req.getParameter("recipientId"));
+        return new MVCModel("/addChallenge.jsp",dataMap);
     }
 
     @Override
@@ -39,18 +48,25 @@ public class AddChallengeController implements MVCController {
 
         UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
         challenge.setFromUserId(userDTO.getUserId());
-        challenge.setToUserId(Long.valueOf(req.getParameter("toUserId")));
+        challenge.setToUserId(Long.valueOf(req.getParameter("recipientId")));
         challenge.setChallengeName(req.getParameter("name"));
         challenge.setDescription(req.getParameter("description"));
         challenge.setEndTime(modelChecks.dateConvert(req.getParameter("date")));
-        resultCheckMap = challengeModel.addChallenge(challenge);
+
+        resultCheckMap = challengeService.addChallenge(challenge);
+        if(resultCheckMap.size() != 0) return new MVCModel("/addChallenge.jsp",resultCheckMap);
 
 
-        for(Map.Entry entry:resultCheckMap.entrySet()){
-            String value = (String) entry.getValue();
-            if(!value.equalsIgnoreCase("ok")) return new MVCModel("/addChallenge.jsp",resultCheckMap);
-        }
+        UserMessage userMessage = new UserMessage();
+        userMessage.setChallengeId(challenge.getChallengeId());
+        userMessage.setMessage(challenge.getDescription());
+        userMessage.setSenderId(challenge.getFromUserId());
+        userMessage.setRecipientId(challenge.getToUserId());
 
-        return new MVCModel("/addChallenge.jsp",resultCheckMap);
+        messageService.sendMessage(userMessage);
+
+
+
+        return new MVCModel("/redirect.jsp","index");
     }
 }

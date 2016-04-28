@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Created by Ruslan on 2016.04.17..
  */
 @Component
-public class ChallengeModelImpl implements ChallengeModel {
+public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
     @Qualifier("ORM_ChallengeDAO")
     ChallengeDAO challengeDAO;
@@ -40,6 +40,7 @@ public class ChallengeModelImpl implements ChallengeModel {
     public Map<String, Object> addChallenge(Challenge challenge){
         Map<String,Object> resultCheckMap = new HashMap();
         Validators validators = new Validators();
+        challenge.setChallengeState("Pending");
         try{
             validators.challengeValidator(challenge);
             challengeDAO.create(challenge);
@@ -52,19 +53,19 @@ public class ChallengeModelImpl implements ChallengeModel {
     }
 
     @Override
-    public void changeChallengeState(Challenge challenge) throws ChallengeException {
-        Map<String,Object> resultCheckMap = new HashMap<>();
+    public void changeChallengeState(Challenge challenge,String state) throws ChallengeException {
 
         try {
-            resultCheckMap.put("stateCheck",modelChecks.stateCheck(challenge.getChallengeState()));
-            for (Map.Entry entry : resultCheckMap.entrySet()) {
-                String value = (String) entry.getValue();
-                if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
+            if(state.equalsIgnoreCase("reject")){
+                challengeDAO.delete(challenge);
+            } else {
+                challenge.setChallengeState(state);
+                challengeDAO.update(challenge);
             }
-            challengeDAO.update(challenge);
         } catch (DBException e) {
             e.printStackTrace();
         }
+
 
     }
 

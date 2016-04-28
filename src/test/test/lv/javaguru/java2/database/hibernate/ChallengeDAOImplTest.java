@@ -79,6 +79,7 @@ public class ChallengeDAOImplTest extends SpringIntegration {
         challenge.setDescription("Hibernate");
         challenge.setEndTime(LocalDateTime.now());
         challengeDAO.create(challenge);
+
         Challenge challengeFromDb = challengeDAO.getById(challenge.getChallengeId());
 
         challengeFromDb.setChallengeState("Accepted");

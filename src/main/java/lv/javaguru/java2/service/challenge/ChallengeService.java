@@ -11,13 +11,13 @@ import java.util.Map;
 /**
  * Created by Ruslan on 2016.04.17..
  */
-public interface ChallengeModel {
+public interface ChallengeService {
 
     Challenge getChallengeById(Long challengeId) throws ChallengeException;
 
     Map<String,Object> addChallenge(Challenge challenge);
 
-    void changeChallengeState(Challenge challenge) throws ChallengeException;
+    void changeChallengeState(Challenge challenge,String state) throws ChallengeException;
 
     List<ChallengeList> getAllChallengeFromUserId(Long fromUserId) throws ChallengeException;
 

@@ -1,25 +1,23 @@
 package lv.javaguru.java2.domain;
 
-import javax.persistence.*;
-
 /**
- * Created by germans.kuzmins on 2016.04.23..
+ * Created by Ruslan on 2016.04.25..
  */
-@Entity
-@Table(name = "UserMessages")
-public class UserMessage {
-    @Column(name = "Id",nullable = false)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserMessageList {
+
     private Long messageId;
-    @Column(name = "ChallengeId")
     private Long challengeId;
-    @Column(name = "Message")
     private String message;
-    @Column(name = "SenderId")
     private Long senderId;
-    @Column(name = "RecipientId")
     private Long recipientId;
+
+    public UserMessageList(Long messageId, Long challengeId, String message, Long senderId, Long recipientId) {
+        this.messageId = messageId;
+        this.challengeId = challengeId;
+        this.message = message;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+    }
 
     public Long getMessageId() {
         return messageId;

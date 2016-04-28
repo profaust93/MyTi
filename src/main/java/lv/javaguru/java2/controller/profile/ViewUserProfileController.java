@@ -8,8 +8,8 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileModel;
-import lv.javaguru.java2.service.userProfile.UserProfileModelImpl;
+import lv.javaguru.java2.service.userProfile.UserProfileService;
+import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.springframework.stereotype.Component;
 
@@ -29,11 +29,11 @@ import javax.servlet.http.HttpSession;
 @Component
 public class ViewUserProfileController implements MVCController{
     ProfileServices profileServices = new ProfileServices();
-    UserProfileModel userProfileModel = new UserProfileModelImpl();
+    UserProfileService userProfileService = new UserProfileServiceImpl();
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
 
-        userProfileModel.setUserProfileDAO(new UserProfileDAOImpl());
+        userProfileService.setUserProfileDAO(new UserProfileDAOImpl());
 
         UserDTO userDTO;
         HttpSession session = req.getSession();
@@ -44,7 +44,7 @@ public class ViewUserProfileController implements MVCController{
                 if (profileServices.profileExist(userDTO.getUserId())){
                     UserProfile userProfile = null;
                     try {
-                        userProfile = userProfileModel.getUserProfile(userDTO.getUserId());
+                        userProfile = userProfileService.getUserProfile(userDTO.getUserId());
                     } catch (UserProfileException e) {
                         e.printStackTrace();
                     }

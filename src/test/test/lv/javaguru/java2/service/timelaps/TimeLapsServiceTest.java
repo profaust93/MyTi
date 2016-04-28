@@ -1,6 +1,7 @@
 package lv.javaguru.java2.service.timelaps;
 
 import lv.javaguru.java2.database.TimeLapsDAO;
+import lv.javaguru.java2.database.jdbc.TimeLapsDAOImpl;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import org.junit.Test;
@@ -19,13 +20,13 @@ import static org.mockito.Mockito.*;
  * Created by Ruslan on 2016.04.06..
  */
 @RunWith(MockitoJUnitRunner.class)
-public class TimeLapsModelTest {
+public class TimeLapsServiceTest {
 
     @Mock
     private TimeLapsDAO timeLapsDAO;
 
     @InjectMocks
-    TimeLapsModel timeLapsModel = new TimeLapsModelImpl();
+    TimeLapsService timeLapsService = new TimeLapsServiceImpl();
 
     @Test
     public void testAddNewTimeLaps() throws Exception {
@@ -37,7 +38,7 @@ public class TimeLapsModelTest {
         timeLaps.setLongDescription("Long Description");
         timeLaps.setTimeLapsName("TestCreate2");
 
-        timeLapsModel.addTimeLaps(timeLaps);
+        timeLapsService.addTimeLaps(timeLaps);
 
         verify(timeLapsDAO).create(anyObject());
 
@@ -53,13 +54,13 @@ public class TimeLapsModelTest {
 
     @Test
     public void testGetTimeLapsById() throws Exception {
-        timeLapsModel.getTimeLapsById(666L);
+        timeLapsService.getTimeLapsById(666L);
         verify(timeLapsDAO).getById(666L);
     }
 
     @Test
     public void testDeleteAllTimeLaps() throws Exception {
-        timeLapsModel.deleteAllTimeLaps(666L);
+        timeLapsService.deleteAllTimeLaps(666L);
         verify(timeLapsDAO).deleteAllTimeLaps(666L);
 
     }
@@ -88,7 +89,7 @@ public class TimeLapsModelTest {
         timeLaps.setShortDescription(shortDescription);
         timeLaps.setLongDescription(longDescription);
         try {
-            for(Map.Entry entry:timeLapsModel.addTimeLaps(timeLaps).entrySet()){
+            for(Map.Entry entry: timeLapsService.addTimeLaps(timeLaps).entrySet()){
                 String value = (String) entry.getValue();
                 if(!value.equalsIgnoreCase("ok")) throw new TimeLapsException(value);
             }

@@ -7,7 +7,7 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileModel;
+import lv.javaguru.java2.service.userProfile.UserProfileService;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -44,7 +44,7 @@ public class UserProfileControllerTest {
     ProfileServices mockProfileServices;
 
     @Mock
-    UserProfileModel mockUserProfileModel;
+    UserProfileService mockUserProfileService;
 
     @Mock
     UserProfile mockUserProfile;
@@ -59,7 +59,7 @@ public class UserProfileControllerTest {
         when(mockRequest.getSession()).thenReturn(mockSession);
         when(mockSession.getAttribute("user")).thenReturn(mockUserDTO);
         when(mockUserDTO.getUserId()).thenReturn(1L);
-        when(mockUserProfileModel.getUserProfile(1L)).thenReturn(mockUserProfile);
+        when(mockUserProfileService.getUserProfile(1L)).thenReturn(mockUserProfile);
 
         //when(mockUserDTO.)
     }

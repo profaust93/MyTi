@@ -6,7 +6,6 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
-import lv.javaguru.java2.service.validators.ModelChecks;
 import lv.javaguru.java2.service.validators.ValidatorException;
 import lv.javaguru.java2.service.validators.Validators;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,11 @@ import java.util.stream.Collectors;
  * Created by Ruslan on 2016.04.04..
  */
 @Component
-public class TimeLapsModelImpl implements TimeLapsModel {
+public class TimeLapsServiceImpl implements TimeLapsService {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
 
-    //@Autowired
-    ModelChecks modelChecks = new ModelChecks();
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
         this.timeLapsDAO = timeLapsDAO;

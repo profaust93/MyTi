@@ -30,14 +30,14 @@
             </a>
             <ul class="dropdown-menu dropdown-messages">
                 <li>
-                    <a href="#">
+                    <a href="/java2/viewMessage">
                         <div>
-                            <strong>John Smith</strong>
+                            <strong>Message Box</strong>
                                     <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                        <em>New Message</em>
                                     </span>
                         </div>
-                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                        <div>Press to continue...</div>
                     </a>
                 </li>
             </ul>
@@ -131,7 +131,10 @@
                     <a href="/java2/statistic"><i class="fa fa-edit fa-fw"></i> Statistic</a>
                 </li>
                 <li>
-                    <a href="/java2/challenge"><i class="fa fa-edit fa-fw"></i> Challenges</a>
+                    <a href="/java2/viewChallenge"><i class="fa fa-edit fa-fw"></i> Challenges</a>
+                </li>
+                <li>
+                    <a href="/java2/viewUserProfileList"><i class="fa fa-edit fa-fw"></i> Users</a>
                 </li>
             </ul>
         </div>
