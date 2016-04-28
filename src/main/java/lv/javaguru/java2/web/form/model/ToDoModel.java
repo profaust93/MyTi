@@ -8,6 +8,9 @@ import lv.javaguru.java2.domain.ToDoTask;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,7 +19,6 @@ public class ToDoModel {
     private String todoName;
     private String notes;
     private LocalDateTime deadLine;
-    private Boolean isComeplete;
 
     public ToDoModel() {
     }
@@ -78,11 +80,15 @@ public class ToDoModel {
     }
 
     private List<ToDoTaskModel> convertTasksToWebModel(Set<ToDoTask> toDoTaskSet) {
-        if(toDoTaskSet != null) {
-            return toDoTaskSet.stream().map(ToDoTaskModel::new).collect(Collectors.toList());
-        } else {
-            return null;
+        if(toDoTaskSet == null) {
+            return new ArrayList<>();
         }
+        return toDoTaskSet.stream().map(task -> new ToDoTaskModel()
+                .setTaskName(task.getTaskName())
+                .setCompletedGoal(task.getCompletedGoals())
+                .setDescription(task.getDescription())
+                .setTaskGoal(task.getCompletedGoals())
+        ).collect(Collectors.toList());
     }
 
     public  Set<ToDoTask> convertTaskModelToEntity() {

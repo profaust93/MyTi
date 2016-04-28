@@ -11,6 +11,8 @@ import lv.javaguru.java2.model.exceptions.UserProfileException;
 import lv.javaguru.java2.service.userProfile.UserProfileService;
 import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
+import lv.javaguru.java2.service.userProfile.UserProfileService;
+import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -9,7 +9,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ToDoListModel {
     private Long id;

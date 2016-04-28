@@ -9,6 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Created by german on 4/23/16 for MyTi project.
+ */
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +40,9 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public List<ToDoListModel> getAllToDoForUser(Long userId) throws ToDoException {
         try{
-            List<ToDo> toDoList = toDoListDAO.getAllToDoListByUserId(userId);
-            return toDoList.stream().map(ToDoListModel::new).collect(Collectors.toList());
-        } catch (Exception e) {
+            List<ToDo> todoEntity =  toDoListDAO.getAllToDoListByUserId(userId);
+            return todoEntity.stream().map(ToDoListModel::new).collect(Collectors.toList());
+        } catch (Exception e ){
             throw new ToDoException(e.getMessage());
         }
     }
@@ -51,12 +58,13 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public void removeToDo(ToDoModel toDoModel) throws ToDoException {
+    public void removeToDo(Long toDoId) throws ToDoException {
         try {
-            toDoListDAO.delete(makeToDoFromWebModel(toDoModel));
-        } catch (Exception e ) {
+            toDoListDAO.delete(new ToDo().setId(toDoId));
+        } catch (Exception e) {
             throw new ToDoException(e.getMessage());
         }
+
     }
 
     @Override

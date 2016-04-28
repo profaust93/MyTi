@@ -15,7 +15,7 @@ public interface ToDoService {
 
     void upsertToDo(ToDoModel toDoModel) throws ToDoException;
 
-    void removeToDo(ToDoModel toDoModel) throws ToDoException;
+    void removeToDo(Long toDoId) throws ToDoException;
 
     void makeToDoDone(ToDoModel toDoModel) throws ToDoException;
 
