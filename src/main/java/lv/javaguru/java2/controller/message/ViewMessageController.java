@@ -1,12 +1,12 @@
 package lv.javaguru.java2.controller.message;
 
 import lv.javaguru.java2.controller.MVCController;
-import lv.javaguru.java2.domain.UserMessageList;
+import lv.javaguru.java2.domain.ChallengeMessageList;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserMessageException;
-import lv.javaguru.java2.service.user.UserMessageService;
+import lv.javaguru.java2.service.challenge.ChallengeMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,15 +21,15 @@ import java.util.List;
 public class ViewMessageController implements MVCController {
 
     @Autowired
-    UserMessageService userMessageService;
+    ChallengeMessageService challengeMessageService;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
-        List<UserMessageList> list = new ArrayList<>();
+        List<ChallengeMessageList> list = new ArrayList<>();
         UserDTO userDTO =(UserDTO) req.getSession().getAttribute("user");
 
         try {
-            list = userMessageService.getAllMessageForUser(userDTO.getUserId());
+            list = challengeMessageService.getAllMessageForUser(userDTO.getUserId());
         } catch (UserMessageException e) {
             e.printStackTrace();
         }
@@ -41,11 +41,11 @@ public class ViewMessageController implements MVCController {
     public MVCModel processPost(HttpServletRequest req) throws RedirectException {
 
         if(req.getParameter("AcceptMessageId")!= null){
-            userMessageService.acceptMessage(Long.parseLong(req.getParameter("AcceptMessageId")));
+            challengeMessageService.acceptMessage(Long.parseLong(req.getParameter("AcceptMessageId")));
         }
 
         if(req.getParameter("RejectMessageId") != null){
-            userMessageService.rejectMessage(Long.parseLong(req.getParameter("RejectMessageId")));
+            challengeMessageService.rejectMessage(Long.parseLong(req.getParameter("RejectMessageId")));
         }
         return new MVCModel("/redirect.jsp","viewMessage");
     }
