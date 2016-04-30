@@ -14,15 +14,9 @@ public class ToDoTask {
     @Column(name = "TaskName", nullable = false)
     private String taskName;
 
-    @Column(name = "IsComplete")
-    private Boolean isComplete;
-
     @Column(name = "Description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "ToDoListId")
-    private ToDo toDo;
 
     @Column(name = "Goals")
     private Integer goalsCount;
@@ -48,15 +42,6 @@ public class ToDoTask {
         return this;
     }
 
-    public Boolean getComplete() {
-        return isComplete;
-    }
-
-    public ToDoTask setComplete(Boolean complete) {
-        isComplete = complete;
-        return this;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -66,14 +51,6 @@ public class ToDoTask {
         return this;
     }
 
-    public ToDo getToDo() {
-        return toDo;
-    }
-
-    public ToDoTask setToDo(ToDo toDo) {
-        this.toDo = toDo;
-        return this;
-    }
 
     public Integer getGoalsCount() {
         return goalsCount;

@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestSpringConfig.class)
 @Transactional
-@Rollback(true)
+@Rollback
 public class ToDoTaskDAOImplTest {
 
     @Autowired
@@ -38,7 +38,6 @@ public class ToDoTaskDAOImplTest {
     public void testCreate() throws Exception {
         ToDoTask toDoTask = new ToDoTask()
                 .setTaskName("test")
-                .setComplete(false)
                 .setDescription("description");
 
         toDoTaskDAO.createOrUpdate(toDoTask);

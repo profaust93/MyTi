@@ -1,6 +1,8 @@
 package lv.javaguru.java2.domain;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -31,7 +33,9 @@ public class ToDo {
     @Type(type="text")
     private String notes;
 
-    @OneToMany(mappedBy = "toDo")
+    @OneToMany
+    @JoinColumn(name = "ToDoListId")
+    @Fetch(FetchMode.SUBSELECT)
     private Set<ToDoTask> toDoTasks;
 
     @Column(name = "UserId")
