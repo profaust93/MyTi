@@ -8,9 +8,9 @@ import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.ProfileServices;
 import lv.javaguru.java2.service.userProfile.UserProfileService;
 import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
+import lv.javaguru.java2.service.userProfile.ProfileServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -72,7 +72,7 @@ public class EditUserProfileController implements MVCController {
         profileData.put("lastName",req.getParameter("lastName"));
         profileData.put("email",req.getParameter("email"));
         profileData.put("userId",userDTO.getUserId());
-        UserProfile userProfile = new UserProfile();
+        UserProfile userProfile = null;
         userProfileService.setUserProfileDAO(userProfileDao);
       try {
            if (profileServices.profileExist(userDTO.getUserId())){

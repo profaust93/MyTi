@@ -1,12 +1,41 @@
 package lv.javaguru.java2.domain;
 
-public class User {
+import javax.persistence.*;
 
+
+@Entity
+@Table(name = "Users")
+public class User {
+/*
+    CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
+            `UserId` INT(11) NOT NULL AUTO_INCREMENT,
+    `Login` CHAR(32) NOT NULL,
+    `Password` CHAR(32) NOT NULL,
+    `FirstName` CHAR(32) NOT NULL,
+    `LastName` CHAR(32) NOT NULL,
+    `Email` CHAR(32) NOT NULL,
+    PRIMARY KEY (`UserId`)
+    )*/
+
+
+    @Id
+    @Column(name = "UserId", columnDefinition = "INT(11)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
+    @Column(name = "Login", columnDefinition = "CHAR(32)")
     private String login;
+
+    @Column(name = "FirstName", columnDefinition = "CHAR(32)")
     private String firstName;
+
+    @Column(name = "LastName", columnDefinition = "CHAR(32)")
     private String lastName;
+
+    @Column(name = "Password", columnDefinition = "CHAR(32)")
     private String password;
+
+    @Column(name = "Email", columnDefinition = "CHAR(32)")
     private String email;
 
     public User(){

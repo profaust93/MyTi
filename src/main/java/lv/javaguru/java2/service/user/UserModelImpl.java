@@ -6,6 +6,7 @@ import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.model.exceptions.LoginException;
 import lv.javaguru.java2.model.exceptions.RegisterException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class UserModelImpl implements UserModel {
 
     @Autowired
+    @Qualifier("JDBC_UserDAO")
     private UserDAO userDAO;
 
     @Override

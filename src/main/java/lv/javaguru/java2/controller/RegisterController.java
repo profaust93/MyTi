@@ -11,6 +11,7 @@ import lv.javaguru.java2.model.exceptions.RegisterException;
 import lv.javaguru.java2.service.user.UserModelImpl;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import java.util.Map;
 @Component
 public class RegisterController implements MVCController {
 
+    @Qualifier("ORM_UserDAO")
     @Autowired
     UserDAO userDAO;
 
