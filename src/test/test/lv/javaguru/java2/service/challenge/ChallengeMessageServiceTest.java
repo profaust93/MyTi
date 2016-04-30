@@ -1,13 +1,12 @@
 package lv.javaguru.java2.service.challenge;
 
-
-import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.database.ChallengeMessageDAO;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeMessage;
 
+import lv.javaguru.java2.model.exceptions.ChallengeException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,51 +18,52 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-/**
- * Created by Ruslan on 2016.04.28..
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class ChallengeMessageServiceTest {
 
-    private Challenge createdChallenge;
-    private ChallengeMessage createdMessage;
+    private final Long CHALLENGE_ID = 1L;
+    private final String CHALENGE_NAME = "Test Chalenge";
+    private final Long SENDER_ID = 10L;
+    private final Long RECEIVER_ID = 11L;
+    private final String CHALENGE_STATE = "pending";
+    private final String DESC = "Chalenge test desctiption";
+    private final LocalDateTime END_TIME = LocalDateTime.now();
+    private final String ACCEPT_STATE = "Accept";
+
+    private final Long MESSAGE_ID = 12L;
+
+    private Challenge challenge;
+
+    private ChallengeMessage challengeMessage;
+
 
     @Mock
     private ChallengeMessageDAO challengeMessageDAO;
+
     @Mock
-    private ChallengeDAO challengeDAO;
+    private ChallengeService challengeService;
 
     @InjectMocks
     ChallengeMessageService challengeMessageService = new ChallengeMessageServiceImpl();
-    @InjectMocks
-    ChallengeService challengeService = new ChallengeServiceImpl();
 
     @Before
-    public void setUp() throws DBException {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("ABC");
-        challenge.setEndTime(LocalDateTime.now());
+    public void setUp() throws DBException, ChallengeException {
+        challenge = new Challenge()
+                .setChallengeName(CHALENGE_NAME)
+                .setFromUserId(SENDER_ID)
+                .setToUserId(RECEIVER_ID)
+                .setChallengeState(CHALENGE_STATE)
+                .setDescription(DESC)
+                .setEndTime(END_TIME)
+                .setChallengeId(CHALLENGE_ID);
 
-        challengeDAO.create(challenge);
+        when(challengeService.getChallengeById(CHALLENGE_ID)).thenReturn(challenge);
 
-        createdChallenge = challenge;
-
-        ChallengeMessage challengeMessage = new ChallengeMessage();
-        challengeMessage.setChallengeId(challenge.getChallengeId());
-        challengeMessage.setRecipientId(1L);
-        challengeMessage.setSenderId(2L);
-        challengeMessage.setMessage("ASD");
-        challengeMessageDAO.create(challengeMessage);
-
-        createdMessage = challengeMessage;
-
-        System.out.println(challenge.getChallengeId());
-        System.out.println(challengeMessage.getChallengeId());
+        challengeMessage = new ChallengeMessage().setMessageId(MESSAGE_ID).setChallengeId(CHALLENGE_ID);
+        when(challengeMessageDAO.getById(MESSAGE_ID)).thenReturn(challengeMessage);
 
 
     }
@@ -82,6 +82,12 @@ public class ChallengeMessageServiceTest {
 
     @Test
     public void testAcceptMessage() throws Exception {
+        challengeMessageService.acceptMessage(MESSAGE_ID);
+
+        verify(challengeMessageDAO).getById(MESSAGE_ID);
+        verify(challengeMessageDAO).delete(challengeMessage);
+        verify(challengeService).changeChallengeState(null,ACCEPT_STATE);
+
 
     }
 

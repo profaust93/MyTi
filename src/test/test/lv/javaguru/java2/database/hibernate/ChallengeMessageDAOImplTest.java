@@ -1,5 +1,6 @@
 package lv.javaguru.java2.database.hibernate;
 
+import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.database.ChallengeMessageDAO;
 import lv.javaguru.java2.database.DBException;
@@ -7,8 +8,11 @@ import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeMessage;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -17,10 +21,10 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-/**
- * Created by Ruslan on 2016.04.28..
- */
-public class ChallengeMessageDAOImplTest extends SpringIntegration {
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class)
+public class ChallengeMessageDAOImplTest  {
 
     private Challenge createdChallenge;
 

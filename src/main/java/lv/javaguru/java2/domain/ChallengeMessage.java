@@ -2,9 +2,6 @@ package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by germans.kuzmins on 2016.04.23..
- */
 @Entity
 @Table(name = "UserMessages")
 public class ChallengeMessage {
@@ -25,39 +22,44 @@ public class ChallengeMessage {
         return messageId;
     }
 
-    public void setMessageId(Long messageId) {
+    public ChallengeMessage setMessageId(Long messageId) {
         this.messageId = messageId;
+        return this;
     }
 
     public Long getChallengeId() {
         return challengeId;
     }
 
-    public void setChallengeId(Long challengeId) {
+    public ChallengeMessage setChallengeId(Long challengeId) {
         this.challengeId = challengeId;
+        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public ChallengeMessage setMessage(String message) {
         this.message = message;
+        return this;
     }
 
     public Long getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(Long senderId) {
+    public ChallengeMessage setSenderId(Long senderId) {
         this.senderId = senderId;
+        return this;
     }
 
     public Long getRecipientId() {
         return recipientId;
     }
 
-    public void setRecipientId(Long recipientId) {
+    public ChallengeMessage setRecipientId(Long recipientId) {
         this.recipientId = recipientId;
+        return this;
     }
 }

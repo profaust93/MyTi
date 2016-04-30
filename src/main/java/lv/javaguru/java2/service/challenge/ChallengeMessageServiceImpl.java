@@ -18,9 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by Ruslan on 2016.04.24..
- */
 @Component
 public class ChallengeMessageServiceImpl implements ChallengeMessageService {
     @Autowired
@@ -53,9 +50,7 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
             challengeMessageDAO.delete(challengeMessage);
             challengeService.changeChallengeState(challenge,"Accept");
 
-        } catch (DBException e) {
-            e.printStackTrace();
-        } catch (ChallengeException e) {
+        } catch (DBException | ChallengeException e) {
             e.printStackTrace();
         }
     }
@@ -81,9 +76,7 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
             challengeMessageDAO.delete(challengeMessage);
             challengeService.changeChallengeState(challenge,"Reject");
 
-        } catch (DBException e) {
-            e.printStackTrace();
-        } catch (ChallengeException e) {
+        } catch (DBException | ChallengeException e) {
             e.printStackTrace();
         }
     }

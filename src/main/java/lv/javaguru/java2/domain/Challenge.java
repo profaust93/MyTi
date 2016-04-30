@@ -3,9 +3,6 @@ package lv.javaguru.java2.domain;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * Created by Ruslan on 2016.04.15..
- */
 @Entity
 @Table(name = "Challenge")
 public class Challenge {
@@ -30,55 +27,62 @@ public class Challenge {
         return challengeName;
     }
 
-    public void setChallengeName(String challengeName) {
+    public Challenge setChallengeName(String challengeName) {
         this.challengeName = challengeName;
+        return this;
     }
 
     public Long getChallengeId() {
         return challengeId;
     }
 
-    public void setChallengeId(Long challengeId) {
+    public Challenge setChallengeId(Long challengeId) {
         this.challengeId = challengeId;
+        return this;
     }
 
     public Long getFromUserId() {
         return fromUserId;
     }
 
-    public void setFromUserId(Long fromUserId) {
+    public Challenge setFromUserId(Long fromUserId) {
         this.fromUserId = fromUserId;
+        return this;
     }
 
     public Long getToUserId() {
         return toUserId;
     }
 
-    public void setToUserId(Long toUserId) {
+    public Challenge setToUserId(Long toUserId) {
         this.toUserId = toUserId;
+        return this;
     }
 
     public String getChallengeState() {
         return challengeState;
     }
 
-    public void setChallengeState(String challengeState) {
+    public Challenge setChallengeState(String challengeState) {
         this.challengeState = challengeState;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Challenge setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public Challenge setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+        return this;
     }
 }
