@@ -2,15 +2,14 @@ package lv.javaguru.java2.service.todo.list;
 
 import lv.javaguru.java2.database.ToDoListDAO;
 import lv.javaguru.java2.domain.ToDo;
+import lv.javaguru.java2.utils.DefaultToDoModelConverter;
+import lv.javaguru.java2.utils.ToDoModelConverter;
 import lv.javaguru.java2.web.form.model.ToDoModel;
 import lv.javaguru.java2.web.form.model.ToDoTaskModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -23,13 +22,11 @@ import java.util.Collections;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-/**
- * Created by german on 4/23/16 for MyTi project.
- */
 public class ToDoServiceTest {
     private static final Long USER_ID = 2L;
     private static final Long TODO_ID = 50L;
     private static final String TODO_NAME = "Test ToDo";
+
 
     @Mock
     ToDoListDAO toDoListDAO;
@@ -41,6 +38,9 @@ public class ToDoServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
+
+    @Spy
+    private ToDoModelConverter toDoModelConverter = new DefaultToDoModelConverter();
 
     @Test
     public void testGetToDoList() throws Exception {
@@ -77,7 +77,7 @@ public class ToDoServiceTest {
                )));
         ArgumentCaptor<ToDo> toDoArgumentCaptor = ArgumentCaptor.forClass(ToDo.class);
         verify(toDoListDAO).createOrUpdate(toDoArgumentCaptor.capture());
-        ToDoModel toDoModel = new ToDoModel(toDoArgumentCaptor.getValue());
+        ToDoModel toDoModel = toDoModelConverter.convertDomainToModel(toDoArgumentCaptor.getValue());
         assertEquals(true,toDoModel.getComeplete());
     }
 

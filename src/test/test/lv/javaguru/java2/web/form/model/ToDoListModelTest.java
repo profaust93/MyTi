@@ -12,7 +12,7 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 public class ToDoListModelTest {
-    ToDo todo;
+    private ToDo todo;
 
     @Before
     public void setUp() throws Exception {
@@ -20,7 +20,7 @@ public class ToDoListModelTest {
                 new HashSet<>(
                         Arrays.asList(new ToDoTask().setGoalsCount(10),
                                 new ToDoTask().setGoalsCount(10),
-                                new ToDoTask().setGoalsCount(10)));
+                                new ToDoTask().setGoalsCount(20)));
         todo = new ToDo().setToDoTasks(toDoTasks);
 
     }
