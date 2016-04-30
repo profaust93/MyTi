@@ -75,7 +75,7 @@
                                     <%--<td><tags:localDate date="${todo.deadLine}"/></td>--%>
                                     <td>${todo.taskCount}</td>
                                     <td><fmt:formatNumber type="percent"
-                                                          maxIntegerDigits="2" value="${todo.percentDone}" /></td>
+                                                          maxIntegerDigits="3" value="${todo.percentDone}" /></td>
                                     <td>
                                         <div class='pull-right'>
                                             <a class="btn btn-success" href="<c:url value='/java2/todo/${todo.id}/edit' />" >Edit</a>

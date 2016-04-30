@@ -28,10 +28,12 @@
     <!-- Timeline CSS -->
     <link href="${pageContext.request.contextPath}/resources/dist/css/timeline.css" rel="stylesheet">
 
+    <!-- Jquerry UI Css -->
+    <link href="${pageContext.request.contextPath}/resources/bower_components/jquery-ui/themes/base/all.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/resources/dist/css/myTi.css" rel="stylesheet">
 
-    <link href="${pageContext.request.contextPath}/resources/dist/css/todo.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="${pageContext.request.contextPath}/resources/bower_components/morrisjs/morris.css" rel="stylesheet">
@@ -54,19 +56,40 @@
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <h1>Add ToDO</h1>
-                    <div class="task-list" id="pending">
-                        <h3>Task List</h3>
-                        <!-- Sample task added manually to check look -->
-                        <div class="todo-task">
-                            <div class="task-header">Sample Header</div>
-                            <div class="task-date">25/06/1992</div>
-                            <div class="task-description">Lorem Ipsum Dolor Sit Amet</div>
-                        </div>
-                    </div>
 
-                    <div class="task-list">
+                    <form method="post" action="/animal/add">
+                        <div class="form-group">
+                            <label for="toDoName">ToDo Name</label>
+                            <input id="toDoName" required="required" type="text" class="form-control" placeholder="ToDo Name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deadline">DeadLine</label>
+                            <input id="deadline" type="datetime-local" class="form-control" placeholder="DeadLine"/>
+                        </div>
+                        <div class="form-group">
+                            <div class = "row">
+                                <div class = "col-md-4">
+                                    <h2>Task </h2>
+                                    <label for="taskName">Task Name</label>
+                                    <input id="taskName" type="text" class="form-control" placeholder="Task Name"/>
+                                    <label for="goals">DeadLine</label>
+                                    <input id="goals" type="text" class="form-control" placeholder="DeadLine"/>
+                                </div>
+                            </div>
+
+                            <button id="addTask" type="button" class="btn btn-primary">Add Task</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" rows="5" cols="30" class="form-control" placeholder="ToDo Name"></textarea>
+                        </div>
+
+
+                    <%--<div class="task-list">
                         <h3>Add a task</h3>
                         <form id="todo-form">
                             <input type="text" placeholder="Title" />
@@ -78,7 +101,9 @@
                         <input type="button" class="btn btn-primary" value="Clear Data" />
 
                         <div id="delete-div">Drag Here to Delete</div>
-                    </div>
+                    </div>--%>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -96,9 +121,8 @@
 <script src="${pageContext.request.contextPath}/resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="${pageContext.request.contextPath}/resources/dist/js/myTi.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/dist/js/login.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/js/myTi.js"></script>
 
 <script src="${pageContext.request.contextPath}/resources/dist/js/todo.js"></script>
 </body>
