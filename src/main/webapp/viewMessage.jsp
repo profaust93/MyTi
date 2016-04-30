@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="lv.javaguru.java2.domain.UserMessage" %>
-<%@ page import="lv.javaguru.java2.domain.UserMessageList" %><%--
+<%@ page import="lv.javaguru.java2.domain.ChallengeMessage" %>
+<%@ page import="lv.javaguru.java2.domain.ChallengeMessageList" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
   Date: 2016.04.25.
@@ -115,7 +115,7 @@
     <![endif]-->
 </head>
 <body>
-<%List<UserMessageList> list = (List<UserMessageList>) request.getAttribute("data");%>
+<%List<ChallengeMessageList> list = (List<ChallengeMessageList>) request.getAttribute("data");%>
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">

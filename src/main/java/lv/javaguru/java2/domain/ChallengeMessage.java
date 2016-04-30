@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "UserMessages")
-public class UserMessage {
+public class ChallengeMessage {
     @Column(name = "Id",nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

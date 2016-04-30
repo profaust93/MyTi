@@ -2,6 +2,7 @@ package lv.javaguru.java2.service.validators;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
+import lv.javaguru.java2.domain.ChallengeMessage;
 import lv.javaguru.java2.domain.TimeLaps;
 
 import java.util.HashMap;
@@ -40,6 +41,23 @@ public class Validators {
             resultCheckMap.put("fromUserIdCheck", modelChecks.userIdCheck(String.valueOf(challenge.getFromUserId())));
             resultCheckMap.put("nameCheck", modelChecks.nameCheck(challenge.getChallengeName()));
             resultCheckMap.put("descriptionCheck", modelChecks.descriptionCheck(challenge.getDescription(), 1000));
+
+            for (Map.Entry entry : resultCheckMap.entrySet()) {
+                String value = (String) entry.getValue();
+                if (!value.equalsIgnoreCase("ok")) throw new DBException("Error");
+            }
+        } catch (DBException e) {
+            throw new ValidatorException(resultCheckMap, e);
+        }
+    }
+
+    public void challengeMessageValidator(ChallengeMessage challengeMessage) throws ValidatorException{
+        Map<String,Object> resultCheckMap = new HashMap<>();
+        try{
+            resultCheckMap.put("recipientIdCheck",modelChecks.userIdCheck(String.valueOf(challengeMessage.getRecipientId())));
+            resultCheckMap.put("senderIdCheck",modelChecks.userIdCheck(String.valueOf(challengeMessage.getSenderId())));
+            resultCheckMap.put("nameCheck",modelChecks.nameCheck(challengeMessage.getMessage()));
+            resultCheckMap.put("descriptionCheck",modelChecks.descriptionCheck(challengeMessage.getMessage(),1000));
 
             for (Map.Entry entry : resultCheckMap.entrySet()) {
                 String value = (String) entry.getValue();

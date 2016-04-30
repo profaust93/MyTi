@@ -1,6 +1,6 @@
 package lv.javaguru.java2.web.form.model;
 
-import lv.javaguru.java2.domain.UserMessage;
+import lv.javaguru.java2.domain.ChallengeMessage;
 
 /**
  * Created by germans.kuzmins on 2016.04.23..
@@ -13,12 +13,12 @@ public class MessageModel {
     private Long senderId;
     private Long recipientId;
 
-    public MessageModel(UserMessage userMessage) {
-        this.messageId = userMessage.getMessageId();
-        this.challengeId = userMessage.getChallengeId();
-        this.message = userMessage.getMessage();
-        this.senderId = userMessage.getSenderId();
-        this.recipientId = userMessage.getRecipientId();
+    public MessageModel(ChallengeMessage challengeMessage) {
+        this.messageId = challengeMessage.getMessageId();
+        this.challengeId = challengeMessage.getChallengeId();
+        this.message = challengeMessage.getMessage();
+        this.senderId = challengeMessage.getSenderId();
+        this.recipientId = challengeMessage.getRecipientId();
     }
 
     public Long getMessageId() {

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserModelImpl implements UserModel {
 
     @Autowired
-    @Qualifier("JDBC_DAO")
+    @Qualifier("JDBC_UserDAO")
     private UserDAO userDAO;
 
     @Override
@@ -45,6 +45,13 @@ public class UserModelImpl implements UserModel {
         checkFields(user);
 
         isUserExist(user); //заимплементь метод
+
+      /*  if(!checkFields(user)){
+            checkFields(user); // просто вызови метод, а мтеод путьс генерит эксепшены
+        }else{
+            return true;   // после return код не пишется, здесь просто оставь экспешн
+        }*/
+        // чтобы вывести пользователя вызови userDAO.create(user)
 
         return true;
     }

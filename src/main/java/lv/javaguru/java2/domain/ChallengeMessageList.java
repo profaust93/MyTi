@@ -3,7 +3,7 @@ package lv.javaguru.java2.domain;
 /**
  * Created by Ruslan on 2016.04.25..
  */
-public class UserMessageList {
+public class ChallengeMessageList {
 
     private Long messageId;
     private Long challengeId;
@@ -11,7 +11,7 @@ public class UserMessageList {
     private Long senderId;
     private Long recipientId;
 
-    public UserMessageList(Long messageId, Long challengeId, String message, Long senderId, Long recipientId) {
+    public ChallengeMessageList(Long messageId, Long challengeId, String message, Long senderId, Long recipientId) {
         this.messageId = messageId;
         this.challengeId = challengeId;
         this.message = message;
