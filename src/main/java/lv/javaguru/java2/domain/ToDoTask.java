@@ -14,8 +14,6 @@ public class ToDoTask {
     @Column(name = "TaskName", nullable = false)
     private String taskName;
 
-    @Column(name = "Description")
-    private String description;
 
 
     @Column(name = "Goals")
@@ -39,15 +37,6 @@ public class ToDoTask {
 
     public ToDoTask setTaskName(String taskName) {
         this.taskName = taskName;
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public ToDoTask setDescription(String description) {
-        this.description = description;
         return this;
     }
 

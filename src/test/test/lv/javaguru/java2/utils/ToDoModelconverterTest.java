@@ -33,7 +33,6 @@ public class ToDoModelConverterTest {
     public void convertEntityToWebModel() throws Exception {
 
         ToDoTask toDoTask = new ToDoTask().setId(TASK_ID).setTaskName(TASK_NAME)
-                .setDescription(TASK_DESC)
                 .setGoalsCount(TASK_GOALS_COUNT)
                 .setCompletedGoals(TASK_COMPLETED_GOALS_COUNT);
 
@@ -128,6 +127,5 @@ public class ToDoModelConverterTest {
 
         assertEquals(toDoTaskModel.getTaskGoal(), toDoTask.getGoalsCount());
 
-        assertEquals(toDoTaskModel.getDescription(), toDoTask.getDescription());
     }
 }

@@ -21,14 +21,6 @@ public class ToDoTaskModel {
     public ToDoTaskModel() {
     }
 
-    public ToDoTaskModel(ToDoTask toDoTask) {
-        this.id = toDoTask.getId();
-        this.taskName = toDoTask.getTaskName();
-        this.description = toDoTask.getDescription();
-        this.taskGoal = toDoTask.getGoalsCount();
-        this.completedGoal = toDoTask.getCompletedGoals();
-    }
-
     public String getTaskName() {
         return taskName;
     }

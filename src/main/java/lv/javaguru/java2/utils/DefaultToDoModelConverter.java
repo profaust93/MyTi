@@ -42,7 +42,6 @@ public class DefaultToDoModelConverter  implements ToDoModelConverter{
         return toDoTaskSet.stream().map(task -> new ToDoTaskModel()
                 .setTaskName(task.getTaskName())
                 .setCompletedGoal(task.getCompletedGoals())
-                .setDescription(task.getDescription())
                 .setTaskGoal(task.getGoalsCount())
                 .setId(task.getId())
         ).collect(Collectors.toList());
@@ -53,7 +52,6 @@ public class DefaultToDoModelConverter  implements ToDoModelConverter{
             return toDoTaskModels.stream().map(task -> new ToDoTask().setId(task.getId())
                             .setCompletedGoals(task.getCompletedGoal())
                             .setGoalsCount(task.getTaskGoal())
-                            .setDescription(task.getDescription())
                             .setTaskName(task.getTaskName())
             ).collect(Collectors.toSet());
         } else {

@@ -56,7 +56,7 @@
                     <h1>ToDoList</h1>
 
                     <c:if test="${!empty data}">
-                        <table class="table table-striped table-list-search">
+                        <table class="table table-striped table-list-search table-hover ">
                             <thead>
                             <tr>
                                 <th>ToDo Name</th>

@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.UserProfileDAO;
 import lv.javaguru.java2.database.jdbc.UserProfileDAOImpl;
 import lv.javaguru.java2.domain.UserProfile;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ProfileServices {
-    //UserProfileDAO userDAO;
+    @Autowired
+    UserProfileDAO userProfileDAO;
     public Boolean profileExist (Long userid) throws DBException {
-        UserProfileDAO userDAO = new UserProfileDAOImpl();
         Boolean exists = false;
-        UserProfile userProfile = userDAO.getById(userid);
+        UserProfile userProfile = userProfileDAO.getById(userid);
         if (userProfile != null){
             exists=true;
             System.out.println("exists = true");

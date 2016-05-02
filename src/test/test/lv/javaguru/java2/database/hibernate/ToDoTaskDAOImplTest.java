@@ -37,8 +37,7 @@ public class ToDoTaskDAOImplTest {
     @Test
     public void testCreate() throws Exception {
         ToDoTask toDoTask = new ToDoTask()
-                .setTaskName("test")
-                .setDescription("description");
+                .setTaskName("test");
 
         toDoTaskDAO.createOrUpdate(toDoTask);
         assertNotNull(toDoTask.getId());

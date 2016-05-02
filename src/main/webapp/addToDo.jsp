@@ -17,7 +17,7 @@
     <meta name="description" content="ToDo List">
     <meta name="author" content="<MyTi Team">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>MyTi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -55,10 +55,8 @@
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
                 <div class="col-lg-6">
-                    <h1>Add ToDO</h1>
-
+                    <h1>Add ToDo</h1>
                     <form method="post" action="/animal/add">
                         <div class="form-group">
                             <label for="toDoName">ToDo Name</label>
@@ -67,45 +65,41 @@
 
                         <div class="form-group">
                             <label for="deadline">DeadLine</label>
-                            <input id="deadline" type="datetime-local" class="form-control" placeholder="DeadLine"/>
+                            <input id="deadline" type="text" class="form-control" placeholder="DeadLine"/>
                         </div>
-                        <div class="form-group">
+
                             <div class = "row">
+                                <h2>Task </h2>
                                 <div class = "col-md-4">
-                                    <h2>Task </h2>
                                     <label for="taskName">Task Name</label>
                                     <input id="taskName" type="text" class="form-control" placeholder="Task Name"/>
-                                    <label for="goals">DeadLine</label>
-                                    <input id="goals" type="text" class="form-control" placeholder="DeadLine"/>
+                                    <input id="multiGoal" type="checkbox" class="goalCheck" placeholder="Many goals"/>
+                                    task have goals
+                                </div>
+                                <div style="display: none;" class = "goalsDiv" >
+                                    <div class = "col-md-4">
+                                        <label for="goals">Task count</label>
+                                        <input id="goals" type="number" value="1" class="form-control" placeholder="Task count"/></div>
+                                    <div class = "col-md-4">
+                                        <label for="goalsComplete">Completed</label>
+                                        <input id="goalsComplete" value="0" type="number" class="form-control" placeholder="Completed"/>
+
+                                    </div>
                                 </div>
                             </div>
 
+
                             <button id="addTask" type="button" class="btn btn-primary">Add Task</button>
-                        </div>
+
 
                         <div class="form-group">
                             <label for="notes">Notes</label>
                             <textarea id="notes" rows="5" cols="30" class="form-control" placeholder="ToDo Name"></textarea>
                         </div>
 
-
-                    <%--<div class="task-list">
-                        <h3>Add a task</h3>
-                        <form id="todo-form">
-                            <input type="text" placeholder="Title" />
-                            <textarea placeholder="Descrtipion"></textarea>
-                            <input type="text" placeholder="Due Date (dd/mm/yyyy)" />
-                            <input type="button" class="btn btn-primary" value="Add Task" />
-                        </form>
-
-                        <input type="button" class="btn btn-primary" value="Clear Data" />
-
-                        <div id="delete-div">Drag Here to Delete</div>
-                    </div>--%>
                         <button type="submit" class="btn btn-success">Save</button>
                     </form>
                 </div>
-            </div>
         </div>
     </div>
 </div>
