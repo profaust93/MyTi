@@ -7,7 +7,7 @@ import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.validators.ValidatorException;
-import lv.javaguru.java2.service.validators.Validators;
+import lv.javaguru.java2.service.validators.ValidatorsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -45,8 +45,7 @@ public class TimeLapsServiceImpl implements TimeLapsService {
         try {
             List<TimeLaps> allTimeLaps  = timeLapsDAO.getAllTimeLapsByUserId(Long.parseLong(userId));
             return allTimeLaps.stream().map(timelaps ->
-                    new TimeLapsList(timelaps.getTimeLapsId(),timelaps.getTimeLapsName(),timelaps.getCompleteTime(),
-                            timelaps.getShortDescription(),timelaps.getLongDescription(),timelaps.getCategory()))
+                    new TimeLapsList(timelaps))
                     .collect(Collectors.toList());
         } catch (DBException e) {
             throw new TimeLapsException(e.getMessage());
@@ -58,9 +57,9 @@ public class TimeLapsServiceImpl implements TimeLapsService {
     public Map<String,Object> addTimeLaps(TimeLaps timeLaps) {
 
         Map<String,Object> map = new HashMap<>();
-        Validators validators = new Validators();
+        ValidatorsImpl validatorsImpl = new ValidatorsImpl();
         try{
-            validators.timeLapsValidator(timeLaps);
+            validatorsImpl.timeLapsValidator(timeLaps);
             timeLapsDAO.create(timeLaps);
         } catch (ValidatorException e) {
             return e.getMap();
@@ -73,9 +72,9 @@ public class TimeLapsServiceImpl implements TimeLapsService {
     @Override
     public Map<String,Object> editTimeLaps(TimeLaps timeLaps) {
         Map<String,Object> resultCheckMap = new HashMap<>();
-        Validators validators = new Validators();
+        ValidatorsImpl validatorsImpl = new ValidatorsImpl();
         try {
-            validators.timeLapsValidator(timeLaps);
+            validatorsImpl.timeLapsValidator(timeLaps);
             timeLapsDAO.update(timeLaps);
         }catch (DBException e){
             return resultCheckMap;

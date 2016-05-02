@@ -3,11 +3,12 @@ package lv.javaguru.java2.database.hibernate;
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.domain.Challenge;
-import org.hibernate.SessionFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,68 +25,71 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
+@Rollback(true)
 public class ChallengeDAOImplTest {
 
+    private Challenge firstChallenge;
+    private Challenge secondChallenge;
+    private final String NAME = "Name";
+
+    private final Long FIRST_SENDER_ID = 12L;
+    private final Long SECOND_SENDER_ID = 15L;
+
+    private final Long FIRST_RECIPIENT_ID = 13L;
+    private final Long SECOND_RECIPIENT_ID = 19L;
+
+    private final String DESCRIPTION = "Description";
+    private final String PENDING_STATE = "Pending";
     @Autowired
     @Qualifier("ORM_ChallengeDAO")
     private ChallengeDAO challengeDAO;
 
+    @Before
+    @Transactional
+    public void setUp() throws Exception{
+        firstChallenge = new Challenge()
+                .setChallengeName(NAME)
+                .setFromUserId(FIRST_SENDER_ID)
+                .setToUserId(FIRST_RECIPIENT_ID)
+                .setDescription(DESCRIPTION)
+                .setChallengeState(PENDING_STATE);
+
+        secondChallenge = new Challenge()
+                .setChallengeName(NAME)
+                .setFromUserId(SECOND_SENDER_ID)
+                .setToUserId(SECOND_RECIPIENT_ID)
+                .setDescription(DESCRIPTION)
+                .setChallengeState(PENDING_STATE);
+    }
     @Test
     @Transactional
     public void testCreate() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
+        challengeDAO.create(firstChallenge);
 
-        Challenge challengeFromDb = challengeDAO.getById(challenge.getChallengeId());
+        Challenge challengeFromDb = challengeDAO.getById(firstChallenge.getChallengeId());
         assertNotNull(challengeFromDb);
-        assertEquals(challenge.getChallengeId(),challengeFromDb.getChallengeId());
+        assertEquals(firstChallenge.getChallengeId(),challengeFromDb.getChallengeId());
 
     }
     @Test
     @Transactional
     public void testDelete() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
-        Challenge challenge1 = new Challenge();
-        challenge1.setChallengeName("Name");
-        challenge1.setFromUserId(1L);
-        challenge1.setToUserId(2L);
-        challenge1.setChallengeState("pending");
-        challenge1.setDescription("Hibernate");
-        challenge1.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge1);
+        challengeDAO.create(firstChallenge);
+        challengeDAO.create(secondChallenge);
 
-        Long challengeId = challenge.getChallengeId();
+        Long challengeId = firstChallenge.getChallengeId();
 
-        challengeDAO.delete(challenge);
+        challengeDAO.delete(firstChallenge);
         assertNull(challengeDAO.getById(challengeId));
-        assertNotNull(challengeDAO.getById(challenge1.getChallengeId()));
+        assertNotNull(challengeDAO.getById(secondChallenge.getChallengeId()));
     }
     @Test
     @Transactional
     public void testUpdate() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
 
-        Challenge challengeFromDb = challengeDAO.getById(challenge.getChallengeId());
+        challengeDAO.create(firstChallenge);
+
+        Challenge challengeFromDb = challengeDAO.getById(firstChallenge.getChallengeId());
 
         challengeFromDb.setChallengeState("Accepted");
         challengeDAO.update(challengeFromDb);
@@ -93,10 +97,10 @@ public class ChallengeDAOImplTest {
 
 
         assertNotNull(challengeFromDb);
-        assertEquals(challengeFromDb.getFromUserId(),challenge.getFromUserId());
-        assertEquals(challengeFromDb.getToUserId(),challenge.getToUserId());
-        assertEquals(challengeFromDb.getDescription(),challenge.getDescription());
-        assertEquals(challengeFromDb.getChallengeName(),challenge.getChallengeName());
+        assertEquals(challengeFromDb.getFromUserId(),firstChallenge.getFromUserId());
+        assertEquals(challengeFromDb.getToUserId(),firstChallenge.getToUserId());
+        assertEquals(challengeFromDb.getDescription(),firstChallenge.getDescription());
+        assertEquals(challengeFromDb.getChallengeName(),firstChallenge.getChallengeName());
         assertEquals("Accepted",challengeFromDb.getChallengeState());
 
     }
@@ -104,26 +108,9 @@ public class ChallengeDAOImplTest {
     @Test
     @Transactional
     public void testGetAllChallenge() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
 
-        Challenge challenge1 = new Challenge();
-        challenge1.setChallengeName("Name");
-        challenge1.setFromUserId(1L);
-        challenge1.setToUserId(2L);
-        challenge1.setChallengeState("pending");
-        challenge1.setDescription("Hibernate");
-        challenge1.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge1);
-
-
-
+        challengeDAO.create(firstChallenge);
+        challengeDAO.create(secondChallenge);
         List<Challenge> list = challengeDAO.getAllChallenge();
         assertEquals(2,list.size());
 
@@ -132,42 +119,23 @@ public class ChallengeDAOImplTest {
     @Test
     @Transactional
     public void testGetAllChallengeFromUserId() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
 
-        Challenge challenge1 = new Challenge();
-        challenge1.setChallengeName("Name");
-        challenge1.setFromUserId(1L);
-        challenge1.setToUserId(2L);
-        challenge1.setChallengeState("pending");
-        challenge1.setDescription("Hibernate");
-        challenge1.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge1);
+        challengeDAO.create(firstChallenge);
 
-        List<Challenge> list = challengeDAO.getAllChallengeFromUserId(1L);
-        assertEquals(2,list.size());
+        challengeDAO.create(secondChallenge);
+
+        List<Challenge> list = challengeDAO.getAllChallengeFromUserId(FIRST_SENDER_ID);
+        assertEquals(1,list.size());
 
     }
 
     @Test
     @Transactional
     public void testGetAllChallengeToUserId() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        challengeDAO.create(challenge);
 
-        List<Challenge> list = challengeDAO.getAllChallengeToUserId(2L);
+        challengeDAO.create(firstChallenge);
+
+        List<Challenge> list = challengeDAO.getAllChallengeToUserId(FIRST_RECIPIENT_ID);
 
         assertEquals(1,list.size());
 

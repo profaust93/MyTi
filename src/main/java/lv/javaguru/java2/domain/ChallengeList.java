@@ -15,16 +15,14 @@ public class ChallengeList {
     private String description;
     private LocalDateTime endTime;
 
-    public ChallengeList(Long challengeId, String challengeName,
-                         Long fromUserId, Long toUserId, String challengeState,
-                         String description, LocalDateTime endTime) {
-        this.challengeId = challengeId;
-        this.challengeName = challengeName;
-        this.fromUserId = fromUserId;
-        this.toUserId = toUserId;
-        this.challengeState = challengeState;
-        this.description = description;
-        this.endTime = endTime;
+    public ChallengeList(Challenge challenge) {
+        this.challengeId = challenge.getChallengeId();
+        this.challengeName = challenge.getChallengeName();
+        this.fromUserId = challenge.getFromUserId();
+        this.toUserId = challenge.getToUserId();
+        this.challengeState = challenge.getChallengeState();
+        this.description = challenge.getDescription();
+        this.endTime = challenge.getEndTime();
     }
 
     public Long getChallengeId() {

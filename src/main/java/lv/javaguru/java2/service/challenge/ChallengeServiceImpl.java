@@ -5,9 +5,9 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeList;
 import lv.javaguru.java2.model.exceptions.ChallengeException;
-import lv.javaguru.java2.service.validators.ModelChecks;
 import lv.javaguru.java2.service.validators.ValidatorException;
 import lv.javaguru.java2.service.validators.Validators;
+import lv.javaguru.java2.service.validators.ValidatorsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -25,8 +25,11 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
     @Qualifier("ORM_ChallengeDAO")
     ChallengeDAO challengeDAO;
+
+
     @Autowired
-    ModelChecks modelChecks;
+    Validators validators;
+
     @Override
     public Challenge getChallengeById(Long challengeId) throws ChallengeException {
         try {
@@ -39,7 +42,6 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Override
     public Map<String, Object> addChallenge(Challenge challenge){
         Map<String,Object> resultCheckMap = new HashMap();
-        Validators validators = new Validators();
         challenge.setChallengeState("Pending");
         try{
             validators.challengeValidator(challenge);
@@ -53,9 +55,10 @@ public class ChallengeServiceImpl implements ChallengeService {
     }
 
     @Override
-    public void changeChallengeState(Challenge challenge,String state) throws ChallengeException {
+    public void changeChallengeState(Long challengeId,String state) throws ChallengeException {
 
         try {
+            Challenge challenge = challengeDAO.getById(challengeId);
             if(state.equalsIgnoreCase("reject")){
                 challengeDAO.delete(challenge);
             } else {
@@ -74,9 +77,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         try {
             List<Challenge> list = challengeDAO.getAllChallengeFromUserId(fromUserId);
             return list.stream().map(challenge ->
-                    new ChallengeList(challenge.getChallengeId(),challenge.getChallengeName(),
-                            challenge.getFromUserId(),challenge.getToUserId(),challenge.getChallengeState(),
-                            challenge.getDescription(),challenge.getEndTime())).collect(Collectors.toList());
+                    new ChallengeList(challenge)).collect(Collectors.toList());
         } catch (DBException e) {
             throw new ChallengeException(e.getMessage());
         }
@@ -87,9 +88,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         try {
             List<Challenge> list = challengeDAO.getAllChallengeToUserId(toUserId);
             return list.stream().map(challenge -> new ChallengeList(
-                    challenge.getChallengeId(),challenge.getChallengeName(),challenge.getFromUserId(),
-                    challenge.getToUserId(),challenge.getChallengeState(),challenge.getDescription(),challenge.getEndTime()
-            )).collect(Collectors.toList());
+                    challenge)).collect(Collectors.toList());
         } catch (DBException e) {
             throw new ChallengeException(e.getMessage());
         }

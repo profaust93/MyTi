@@ -1,5 +1,7 @@
 package lv.javaguru.java2.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -21,6 +23,7 @@ public class Challenge {
     @Column(name = "Description")
     private String description;
     @Column(name = "EndTime")
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
     private LocalDateTime endTime;
 
     public String getChallengeName() {

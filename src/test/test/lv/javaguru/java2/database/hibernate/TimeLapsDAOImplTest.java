@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,103 +27,84 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
+@Rollback(true)
 public class TimeLapsDAOImplTest {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
     private TimeLapsDAO timeLapsDAO;
 
-   // private TimeLaps createdTimeLaps;
+    private TimeLaps firstTimeLaps;
+    private TimeLaps secondTimeLaps;
+    private final LocalDateTime DATE = LocalDateTime.now();
+    private final String SHORT_DESCRIPTION = "Short Description";
+    private final String LONG_DESCRIPTION = "Long Description";
+    private final String CATEGORY = "Sport";
+    private final Long FIRST_USER_ID = 12L;
+    private final Long SECOND_USER_ID = 15L;
+    private final String NAME = "TimeLaps";
 
-    /*
     @Before
-    public void setUp() throws Exception{
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setTimeLapsName("Name");
-        timeLaps.setUserId(666L);
-        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30));
-        timeLaps.setCategory("Fun");
-        timeLapsDAO.create(timeLaps);
-        this.createdTimeLaps = timeLaps;
-    }*/
+    @Transactional
+    public void setUp(){
+        firstTimeLaps = new TimeLaps()
+                .setTimeLapsName(NAME)
+                .setCompleteTime(DATE)
+                .setShortDescription(SHORT_DESCRIPTION)
+                .setLongDescription(LONG_DESCRIPTION)
+                .setCategory(CATEGORY)
+                .setUserId(FIRST_USER_ID);
+
+        secondTimeLaps = new TimeLaps()
+                .setTimeLapsName(NAME)
+                .setCompleteTime(DATE)
+                .setShortDescription(SHORT_DESCRIPTION)
+                .setLongDescription(LONG_DESCRIPTION)
+                .setCategory(CATEGORY)
+                .setUserId(SECOND_USER_ID);
+    }
 
     @Test
     @Transactional
     public void testCreate() throws DBException {
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(LocalDateTime.now());
-        timeLaps.setShortDescription("ShortDescription");
-        timeLaps.setLongDescription("Hibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setUserId(2L);
-        timeLaps.setTimeLapsName("timelaps");
-        timeLapsDAO.create(timeLaps);
 
-        TimeLaps timeLapsFromDb = timeLapsDAO.getById(timeLaps.getTimeLapsId());
+        timeLapsDAO.create(firstTimeLaps);
+
+        TimeLaps timeLapsFromDb = timeLapsDAO.getById(firstTimeLaps.getTimeLapsId());
         assertNotNull(timeLapsFromDb);
-        assertEquals(timeLaps.getTimeLapsId(),timeLapsFromDb.getTimeLapsId());
+        assertEquals(firstTimeLaps.getTimeLapsId(),timeLapsFromDb.getTimeLapsId());
 
     }
 
     @Test
     @Transactional
     public void testUpdate() throws DBException{
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setTimeLapsName("Name");
-        timeLaps.setUserId(666L);
-        timeLaps.setCompleteTime(LocalDateTime.of(2014, Month.DECEMBER, 1, 10, 10, 30));
-        timeLaps.setCategory("Fun");
-        timeLapsDAO.create(timeLaps);
-        timeLaps.setTimeLapsName("Renamed");
-        assertEquals("Renamed",timeLaps.getTimeLapsName());
+
+        timeLapsDAO.create(firstTimeLaps);
+        firstTimeLaps.setTimeLapsName("Renamed");
+        assertEquals("Renamed",firstTimeLaps.getTimeLapsName());
     }
 
     @Test
     @Transactional
     public void testDelete() throws DBException{
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(LocalDateTime.now());
-        timeLaps.setShortDescription("ShortDescription");
-        timeLaps.setLongDescription("Hibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setUserId(3L);
-        timeLaps.setTimeLapsName("timelaps");
-        timeLapsDAO.create(timeLaps);
 
-        TimeLaps timeLaps1 = new TimeLaps();
-        timeLaps1.setCompleteTime(LocalDateTime.now());
-        timeLaps1.setShortDescription("ShortDescription");
-        timeLaps1.setLongDescription("LongDescription");
-        timeLaps1.setCategory("sport");
-        timeLaps1.setUserId(3L);
-        timeLaps1.setTimeLapsName("timelaps");
-        timeLapsDAO.create(timeLaps1);
+        timeLapsDAO.create(firstTimeLaps);
 
-        Long timeLapsId = timeLaps.getTimeLapsId();
-        timeLapsDAO.delete(timeLaps);
+        timeLapsDAO.create(secondTimeLaps);
+
+        Long timeLapsId = firstTimeLaps.getTimeLapsId();
+        timeLapsDAO.delete(firstTimeLaps);
         assertNull(timeLapsDAO.getById(timeLapsId));
-        assertNotNull(timeLapsDAO.getById(timeLaps1.getTimeLapsId()));
+        assertNotNull(timeLapsDAO.getById(secondTimeLaps.getTimeLapsId()));
     }
 
     @Test
     @Transactional
     public void getAllTimeLapsTest() throws DBException{
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(LocalDateTime.now());
-        timeLaps.setShortDescription("ShortDescription");
-        timeLaps.setLongDescription("Hibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setTimeLapsName("timelaps");
-        timeLaps.setUserId(3L);
-        timeLapsDAO.create(timeLaps);
 
-        TimeLaps timeLaps1 = new TimeLaps();
-        timeLaps1.setCompleteTime(LocalDateTime.now());
-        timeLaps1.setShortDescription("ShortDescription");
-        timeLaps1.setLongDescription("Hibernate");
-        timeLaps1.setCategory("sport");
-        timeLaps1.setTimeLapsName("timelaps");
-        timeLaps1.setUserId(2L);
-        timeLapsDAO.create(timeLaps1);
+        timeLapsDAO.create(firstTimeLaps);
+
+        timeLapsDAO.create(secondTimeLaps);
 
 
         List<TimeLaps> timeLapsList = timeLapsDAO.getAllTimeLaps();
@@ -134,27 +116,14 @@ public class TimeLapsDAOImplTest {
     @Test
     @Transactional
     public void deleteAllTimeLapsTest() throws Exception {
-        TimeLaps timeLaps = new TimeLaps();
-        timeLaps.setCompleteTime(LocalDateTime.now());
-        timeLaps.setShortDescription("ShortDescription");
-        timeLaps.setLongDescription("Hibernate");
-        timeLaps.setCategory("sport");
-        timeLaps.setTimeLapsName("timelaps");
-        timeLaps.setUserId(3L);
-        timeLapsDAO.create(timeLaps);
 
-        TimeLaps timeLaps1 = new TimeLaps();
-        timeLaps1.setCompleteTime(LocalDateTime.now());
-        timeLaps1.setShortDescription("ShortDescription");
-        timeLaps1.setLongDescription("LongDescription");
-        timeLaps1.setCategory("sport");
-        timeLaps1.setUserId(2L);
-        timeLaps1.setTimeLapsName("timelaps");
-        timeLapsDAO.create(timeLaps1);
+        timeLapsDAO.create(firstTimeLaps);
 
-        timeLapsDAO.deleteAllTimeLaps(3L);
+        timeLapsDAO.create(secondTimeLaps);
 
-        assertEquals(0,timeLapsDAO.getAllTimeLapsByUserId(3L).size());
+        timeLapsDAO.deleteAllTimeLaps(FIRST_USER_ID);
+
+        assertEquals(0,timeLapsDAO.getAllTimeLapsByUserId(FIRST_USER_ID).size());
         assertEquals(1,timeLapsDAO.getAllTimeLaps().size());
 
     }
