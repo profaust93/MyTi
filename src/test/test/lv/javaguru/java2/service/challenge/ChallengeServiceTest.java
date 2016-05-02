@@ -2,6 +2,7 @@ package lv.javaguru.java2.service.challenge;
 
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.domain.Challenge;
+import lv.javaguru.java2.service.validators.Validators;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,6 +20,9 @@ public class ChallengeServiceTest {
 
     @Mock
     private ChallengeDAO challengeDAO;
+
+    @Mock
+    private Validators validators;
 
     @InjectMocks
     ChallengeService challengeService = new ChallengeServiceImpl();
@@ -68,7 +72,7 @@ public class ChallengeServiceTest {
     @Test
     public void testChangeState() throws Exception {
         Challenge challenge = new Challenge();
-        challengeService.changeChallengeState(challenge,"Accept");
+        challengeService.changeChallengeState(null,"Accept");
         verify(challengeDAO).update(challenge);
     }
 }

@@ -11,12 +11,12 @@ public class ChallengeMessageList {
     private Long senderId;
     private Long recipientId;
 
-    public ChallengeMessageList(Long messageId, Long challengeId, String message, Long senderId, Long recipientId) {
-        this.messageId = messageId;
-        this.challengeId = challengeId;
-        this.message = message;
-        this.senderId = senderId;
-        this.recipientId = recipientId;
+    public ChallengeMessageList(ChallengeMessage challengeMessage) {
+        this.messageId = challengeMessage.getMessageId();
+        this.challengeId = challengeMessage.getChallengeId();
+        this.message = challengeMessage.getMessage();
+        this.senderId = challengeMessage.getSenderId();
+        this.recipientId = challengeMessage.getRecipientId();
     }
 
     public Long getMessageId() {

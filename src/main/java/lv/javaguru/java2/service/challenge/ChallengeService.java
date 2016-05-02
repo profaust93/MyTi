@@ -17,7 +17,7 @@ public interface ChallengeService {
 
     Map<String,Object> addChallenge(Challenge challenge);
 
-    void changeChallengeState(Challenge challenge,String state) throws ChallengeException;
+    void changeChallengeState(Long challengeId,String state) throws ChallengeException;
 
     List<ChallengeList> getAllChallengeFromUserId(Long fromUserId) throws ChallengeException;
 

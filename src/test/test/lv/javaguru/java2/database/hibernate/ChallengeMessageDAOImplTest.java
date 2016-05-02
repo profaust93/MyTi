@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,90 +25,82 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
+@Rollback(true)
 public class ChallengeMessageDAOImplTest  {
 
-    private Challenge createdChallenge;
+    private ChallengeMessage firstChallengeMessage;
+    private ChallengeMessage secondChallengeMessage;
+
+
+    private final Long FIRST_SENDER_ID = 12L;
+    private final Long SECOND_SENDER_ID = 15L;
+
+    private final Long FIRST_RECIPIENT_ID = 13L;
+    private final Long SECOND_RECIPIENT_ID = 19L;
+
+    private final String MESSAGE = "Description";
+
+
+    @Before
+    @Transactional
+    public void setUp(){
+        firstChallengeMessage = new ChallengeMessage()
+                .setMessage(MESSAGE)
+                .setChallengeId(new Challenge().getChallengeId())
+                .setSenderId(FIRST_SENDER_ID)
+                .setRecipientId(FIRST_RECIPIENT_ID);
+
+        secondChallengeMessage = new ChallengeMessage()
+                .setMessage(MESSAGE)
+                .setChallengeId(new Challenge().getChallengeId())
+                .setSenderId(SECOND_SENDER_ID)
+                .setRecipientId(SECOND_RECIPIENT_ID);
+    }
+
+
+
 
     @Autowired
     @Qualifier("ORM_ChallengeMessageDAO")
     ChallengeMessageDAO challengeMessageDAO;
 
-    @Autowired
-    @Qualifier("ORM_ChallengeDAO")
-    ChallengeDAO challengeDAO;
+    @Test
+    @Transactional
+    public void testCreate() throws Exception {
 
-    @Before
-    public void setUp(){
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setChallengeState("pending");
-        challenge.setDescription("Hibernate");
-        challenge.setEndTime(LocalDateTime.now());
-        try {
-            challengeDAO.create(challenge);
-        } catch (DBException e) {
-            e.printStackTrace();
-        }
-        createdChallenge = challenge;
+        challengeMessageDAO.create(firstChallengeMessage);
+
+        ChallengeMessage challengeMessageFromDB = challengeMessageDAO.getById(firstChallengeMessage.getMessageId());
+        assertNotNull(challengeMessageFromDB);
+        assertEquals(firstChallengeMessage.getMessageId(),challengeMessageFromDB.getMessageId());
+
     }
 
     @Test
     @Transactional
-    public void testCreate() throws Exception {
-        ChallengeMessage challengeMessage = new ChallengeMessage();
-        challengeMessage.setChallengeId(createdChallenge.getChallengeId());
-        challengeMessage.setMessage("ASD");
-        challengeMessage.setSenderId(1L);
-        challengeMessage.setRecipientId(2L);
-        challengeMessageDAO.create(challengeMessage);
-
-        ChallengeMessage challengeMessageFromDB = challengeMessageDAO.getById(challengeMessage.getMessageId());
-        assertNotNull(challengeMessageFromDB);
-        assertEquals(challengeMessage.getMessageId(),challengeMessageFromDB.getMessageId());
-
-    }
-
-    @Test
     public void testDelete() throws Exception {
-        ChallengeMessage challengeMessage = new ChallengeMessage();
-        challengeMessage.setChallengeId(createdChallenge.getChallengeId());
-        challengeMessage.setMessage("ASD");
-        challengeMessage.setSenderId(1L);
-        challengeMessage.setRecipientId(3L);
-        challengeMessageDAO.create(challengeMessage);
 
-        ChallengeMessage challengeMessage1 = new ChallengeMessage();
-        challengeMessage1.setChallengeId(createdChallenge.getChallengeId());
-        challengeMessage1.setMessage("ASD");
-        challengeMessage1.setSenderId(1L);
-        challengeMessage1.setRecipientId(2L);
-        challengeMessageDAO.create(challengeMessage1);
+        challengeMessageDAO.create(firstChallengeMessage);
 
-        challengeMessageDAO.delete(challengeMessage1);
 
-        assertNull(challengeMessageDAO.getById(challengeMessage1.getMessageId()));
-        assertNotNull(challengeMessageDAO.getById(challengeMessage.getMessageId()));
+        challengeMessageDAO.create(secondChallengeMessage);
+
+        challengeMessageDAO.delete(secondChallengeMessage);
+
+        assertNull(challengeMessageDAO.getById(secondChallengeMessage.getMessageId()));
+        assertNotNull(challengeMessageDAO.getById(firstChallengeMessage.getMessageId()));
     }
 
     @Test
+    @Transactional
     public void testGetAllMessagesByUserId() throws Exception {
-        ChallengeMessage challengeMessage = new ChallengeMessage();
-        challengeMessage.setChallengeId(createdChallenge.getChallengeId());
-        challengeMessage.setMessage("ASD");
-        challengeMessage.setSenderId(1L);
-        challengeMessage.setRecipientId(5L);
-        challengeMessageDAO.create(challengeMessage);
 
-        ChallengeMessage challengeMessage1 = new ChallengeMessage();
-        challengeMessage1.setChallengeId(createdChallenge.getChallengeId());
-        challengeMessage1.setMessage("ASD");
-        challengeMessage1.setSenderId(1L);
-        challengeMessage1.setRecipientId(2L);
-        challengeMessageDAO.create(challengeMessage1);
+        challengeMessageDAO.create(firstChallengeMessage);
 
-        List<ChallengeMessage> list = challengeMessageDAO.getAllByRecipientId(5L);
+
+        challengeMessageDAO.create(secondChallengeMessage);
+
+        List<ChallengeMessage> list = challengeMessageDAO.getAllByRecipientId(FIRST_RECIPIENT_ID);
 
         assertEquals(1,list.size());
 

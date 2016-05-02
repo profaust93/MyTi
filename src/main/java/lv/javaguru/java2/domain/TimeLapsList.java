@@ -1,5 +1,6 @@
 package lv.javaguru.java2.domain;
 
+
 import java.time.LocalDateTime;
 
 /**
@@ -15,14 +16,13 @@ public class TimeLapsList {
     private String category;
 
 
-    public TimeLapsList(Long timeLapsId, String timeLapsName, LocalDateTime completeTime,
-                        String shortDescription, String longDescription,String category) {
-        this.timeLapsId = timeLapsId;
-        this.timeLapsName = timeLapsName;
-        this.completeTime = completeTime;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
-        this.category = category;
+    public TimeLapsList(TimeLaps timeLaps) {
+        this.timeLapsId = timeLaps.getTimeLapsId();
+        this.timeLapsName = timeLaps.getTimeLapsName();
+        this.completeTime = timeLaps.getCompleteTime();
+        this.shortDescription = timeLaps.getShortDescription();
+        this.longDescription = timeLaps.getLongDescription();
+        this.category = timeLaps.getCategory();
     }
 
     public Long getTimeLapsId() {

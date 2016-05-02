@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS `my_ti`.`TimeLaps` ;
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
     TimeLapsId BIGINT(11) NOT NULL AUTO_INCREMENT,
-    CompleteTime TINYBLOB,
+    CompleteTime TIMESTAMP,
     UserID BIGINT(11),
     ShortDescription VARCHAR(100),
     LongDescription VARCHAR(1000),
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   ToUserId BIGINT(11),
   ChallengeState VARCHAR(20),
   Description VARCHAR(1000),
-  EndTime TINYBLOB,
+  EndTime TIMESTAMP,
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB

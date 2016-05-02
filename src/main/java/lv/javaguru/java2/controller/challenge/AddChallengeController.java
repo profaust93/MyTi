@@ -21,8 +21,8 @@ import java.util.Map;
  */
 @Component
 public class AddChallengeController implements MVCController {
-    @Autowired
-    ModelChecks modelChecks;
+
+    ModelChecks modelChecks = new ModelChecks();
     @Autowired
     ChallengeService challengeService;
     @Autowired

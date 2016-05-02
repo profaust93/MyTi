@@ -27,10 +27,12 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
     @Autowired
     ChallengeService challengeService;
 
+    @Autowired
+    Validators validators;
     @Override
     public Map<String,Object> sendMessage(ChallengeMessage challengeMessage) {
         Map<String,Object> map = new HashMap<>();
-        Validators validators = new Validators();
+
         try{
             validators.challengeMessageValidator(challengeMessage);
             challengeMessageDAO.create(challengeMessage);
@@ -48,7 +50,7 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
             ChallengeMessage challengeMessage = challengeMessageDAO.getById(messageId);
             Challenge challenge = challengeService.getChallengeById(challengeMessage.getChallengeId());
             challengeMessageDAO.delete(challengeMessage);
-            challengeService.changeChallengeState(challenge,"Accept");
+            challengeService.changeChallengeState(challenge.getChallengeId(),"Accept");
 
         } catch (DBException | ChallengeException e) {
             e.printStackTrace();
@@ -59,9 +61,7 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
     public List<ChallengeMessageList> getAllMessageForUser(Long userId) throws UserMessageException {
         try {
             List<ChallengeMessage> allMessageForUser = challengeMessageDAO.getAllByRecipientId(userId);
-            return allMessageForUser.stream().map(userMessage -> new ChallengeMessageList(
-                    userMessage.getMessageId(),userMessage.getChallengeId(),userMessage.getMessage(),
-                    userMessage.getSenderId(),userMessage.getRecipientId()
+            return allMessageForUser.stream().map(challengeMessage -> new ChallengeMessageList(challengeMessage
             )).collect(Collectors.toList());
         } catch (DBException e) {
             throw new UserMessageException(e.getMessage());
@@ -74,7 +74,7 @@ public class ChallengeMessageServiceImpl implements ChallengeMessageService {
             ChallengeMessage challengeMessage = challengeMessageDAO.getById(messageId);
             Challenge challenge = challengeService.getChallengeById(challengeMessage.getChallengeId());
             challengeMessageDAO.delete(challengeMessage);
-            challengeService.changeChallengeState(challenge,"Reject");
+            challengeService.changeChallengeState(challenge.getChallengeId(),"Reject");
 
         } catch (DBException | ChallengeException e) {
             e.printStackTrace();
