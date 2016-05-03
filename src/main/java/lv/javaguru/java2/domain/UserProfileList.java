@@ -1,8 +1,5 @@
 package lv.javaguru.java2.domain;
 
-/**
- * Created by Ruslan on 2016.04.23..
- */
 public class UserProfileList {
 
     private Long UserId;

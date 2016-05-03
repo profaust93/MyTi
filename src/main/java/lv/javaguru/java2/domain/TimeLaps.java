@@ -5,9 +5,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * Created by ruslan on 16.17.3 for MyTi project.
- */
 @Entity
 @Table(name = "TimeLaps")
 public class TimeLaps {

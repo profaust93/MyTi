@@ -4,9 +4,6 @@ import lv.javaguru.java2.domain.Challenge;
 
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.15..
- */
 public interface ChallengeDAO {
 
     void create(Challenge challenge)throws DBException;

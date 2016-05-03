@@ -9,9 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.15..
- */
 @Component("JDBC_ChallengeDAO")
 public class ChallengeDAOImpl extends DAOImpl implements ChallengeDAO {
     @Override

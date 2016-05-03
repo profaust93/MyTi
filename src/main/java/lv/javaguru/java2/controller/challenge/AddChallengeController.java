@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by ruslan on 16.18.4.
- */
 @Component
 public class AddChallengeController implements MVCController {
 

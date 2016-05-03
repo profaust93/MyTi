@@ -19,9 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Ruslan on 2016.04.08..
- */
 @Component
 public class EditTimeLapsController implements MVCController{
 

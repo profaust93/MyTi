@@ -15,10 +15,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-
-/**
- * Created by ruslan on 16.29.3.
- */
 @Component
 public class AddTimeLapsController implements MVCController {
 

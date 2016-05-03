@@ -9,12 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Ruslan on 2016.04.20..
- */
 @Component
 public class ValidatorsImpl implements Validators {
-    ModelChecks modelChecks = new ModelChecks();
+    private ModelChecks modelChecks = new ModelChecks();
 
     public void timeLapsValidator(TimeLaps timeLaps) throws ValidatorException {
 

@@ -7,7 +7,6 @@ import lv.javaguru.java2.domain.ChallengeList;
 import lv.javaguru.java2.model.exceptions.ChallengeException;
 import lv.javaguru.java2.service.validators.ValidatorException;
 import lv.javaguru.java2.service.validators.Validators;
-import lv.javaguru.java2.service.validators.ValidatorsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -17,9 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by Ruslan on 2016.04.17..
- */
+
 @Component
 public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
@@ -41,7 +38,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Override
     public Map<String, Object> addChallenge(Challenge challenge){
-        Map<String,Object> resultCheckMap = new HashMap();
+        Map<String,Object> resultCheckMap = new HashMap<>();
         challenge.setChallengeState("Pending");
         try{
             validators.challengeValidator(challenge);

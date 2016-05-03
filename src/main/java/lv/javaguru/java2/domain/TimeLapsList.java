@@ -3,9 +3,6 @@ package lv.javaguru.java2.domain;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by Ruslan on 2016.04.05..
- */
 public class TimeLapsList {
 
     private Long timeLapsId;

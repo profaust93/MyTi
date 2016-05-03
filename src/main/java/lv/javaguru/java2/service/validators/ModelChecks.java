@@ -12,13 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ruslan on 16.30.3.
- */
 @Component
 public class ModelChecks {
 
-    String ok = "OK";
+    private String ok = "OK";
 
 
     public String isNotEmpty(String data) {
@@ -50,7 +47,7 @@ public class ModelChecks {
     }
 
     public String isNumber(String data) {
-        if (StringUtils.isNumeric(data) == false) {
+        if (!StringUtils.isNumeric(data)) {
             try {
                 throw new DBException("This field must be number");
             } catch (DBException e) {
@@ -80,10 +77,10 @@ public class ModelChecks {
 
     public String userIdCheck(String data) {
         try {
-            if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
-            if (isNumber(data) != ok) throw new DBException(isNumber(data));
-            if (isNotEmpty(data) == ok) {
-                if (isDefinedUserId(data) != ok) throw new DBException(isDefinedUserId(data));
+            if (!isNotEmpty(data).equalsIgnoreCase(ok)) throw new DBException(isNotEmpty(data));
+            if (!isNumber(data).equalsIgnoreCase(ok)) throw new DBException(isNumber(data));
+            if (isNotEmpty(data).equalsIgnoreCase(ok)) {
+                if (!isDefinedUserId(data).equalsIgnoreCase(ok)) throw new DBException(isDefinedUserId(data));
             }
         } catch (DBException e) {
             return e.getMessage();
@@ -93,7 +90,7 @@ public class ModelChecks {
 
     public String dateCheck(String data) {
         try {
-            if (isNotEmpty(data) != ok) throw new DBException(isNotEmpty(data));
+            if (!isNotEmpty(data).equalsIgnoreCase(ok)) throw new DBException(isNotEmpty(data));
         } catch (DBException e) {
             return e.getMessage();
         }
@@ -102,9 +99,9 @@ public class ModelChecks {
 
     public String categoryCheck(String data) {
         try {
-            if (isNotEmpty(data) != ok)
+            if (!isNotEmpty(data).equalsIgnoreCase(ok))
                 throw new DBException(isNotEmpty(data));
-            if (isNumber(data) == ok)
+            if (isNumber(data).equalsIgnoreCase(ok))
                 throw new DBException("This field must be string");
         } catch (DBException e) {
             return e.getMessage();
@@ -114,7 +111,7 @@ public class ModelChecks {
 
     public String nameCheck(String data) {
         try {
-            if (isNotEmpty(data) != ok)
+            if (!isNotEmpty(data).equalsIgnoreCase(ok))
                 throw new DBException(isNotEmpty(data));
         } catch (DBException e) {
             return e.getMessage();

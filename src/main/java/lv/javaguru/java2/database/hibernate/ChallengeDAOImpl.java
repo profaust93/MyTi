@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.20..
- */
 @Component("ORM_ChallengeDAO")
 @Transactional
 public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {

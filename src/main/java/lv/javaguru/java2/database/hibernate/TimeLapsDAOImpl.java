@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by ruslan on 16.19.4.
- */
 @Component("ORM_TimeLapsDAO")
 @Transactional
 public class TimeLapsDAOImpl extends BaseDAO implements TimeLapsDAO {

@@ -9,9 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ruslan on 16.21.3.
- */
 @Component("JDBC_TimeLapsDAO")
 public class TimeLapsDAOImpl extends DAOImpl implements TimeLapsDAO {
     @Override

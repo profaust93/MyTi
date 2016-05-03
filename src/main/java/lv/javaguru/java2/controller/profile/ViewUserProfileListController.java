@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.23..
- */
 @Component
 public class ViewUserProfileListController implements MVCController{
 

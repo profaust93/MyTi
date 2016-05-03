@@ -8,9 +8,6 @@ import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Ruslan on 2016.04.04..
- */
 public interface TimeLapsService {
 
     void setTimeLapsDAO(TimeLapsDAO timeLapsDAO);
