@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.24..
- */
 @Component("ORM_ChallengeMessageDAO")
 @Transactional
 public class ChallengeMessageDAOImpl extends BaseDAO implements ChallengeMessageDAO {

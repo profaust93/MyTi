@@ -7,6 +7,7 @@ import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.domain.TimeLapsList;
 import lv.javaguru.java2.model.exceptions.TimeLapsException;
 import lv.javaguru.java2.service.validators.ValidatorException;
+import lv.javaguru.java2.service.validators.Validators;
 import lv.javaguru.java2.service.validators.ValidatorsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,14 +18,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by Ruslan on 2016.04.04..
- */
 @Component
 public class TimeLapsServiceImpl implements TimeLapsService {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
+
+    @Autowired
+    Validators validators;
 
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
@@ -57,9 +58,9 @@ public class TimeLapsServiceImpl implements TimeLapsService {
     public Map<String,Object> addTimeLaps(TimeLaps timeLaps) {
 
         Map<String,Object> map = new HashMap<>();
-        ValidatorsImpl validatorsImpl = new ValidatorsImpl();
+
         try{
-            validatorsImpl.timeLapsValidator(timeLaps);
+            validators.timeLapsValidator(timeLaps);
             timeLapsDAO.create(timeLaps);
         } catch (ValidatorException e) {
             return e.getMap();
@@ -72,9 +73,9 @@ public class TimeLapsServiceImpl implements TimeLapsService {
     @Override
     public Map<String,Object> editTimeLaps(TimeLaps timeLaps) {
         Map<String,Object> resultCheckMap = new HashMap<>();
-        ValidatorsImpl validatorsImpl = new ValidatorsImpl();
+
         try {
-            validatorsImpl.timeLapsValidator(timeLaps);
+            validators.timeLapsValidator(timeLaps);
             timeLapsDAO.update(timeLaps);
         }catch (DBException e){
             return resultCheckMap;

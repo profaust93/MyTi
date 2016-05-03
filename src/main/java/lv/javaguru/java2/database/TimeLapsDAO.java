@@ -4,9 +4,6 @@ import lv.javaguru.java2.domain.TimeLaps;
 
 import java.util.List;
 
-/**
- * Created by ruslan on 16.20.3.
- */
 public interface TimeLapsDAO {
 
     void create(TimeLaps timeLaps) throws DBException;

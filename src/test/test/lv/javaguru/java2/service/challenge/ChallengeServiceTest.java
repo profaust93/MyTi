@@ -3,20 +3,28 @@ package lv.javaguru.java2.service.challenge;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.service.validators.Validators;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
-/**
- * Created by Ruslan on 2016.04.23..
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class ChallengeServiceTest {
+
+    private Challenge challenge;
+
+    private final String CHALLENGE_NAME = "Test Challenge";
+    private final Long SENDER_ID = 10L;
+    private final Long RECIPIENT_ID = 11L;
+    private final String CHALLENGE_STATE = "Pending";
+    private final String ACCEPT_STATE = "Accept";
+    private final String DESC = "Challenge test description";
+    private final LocalDateTime END_TIME = LocalDateTime.now();
 
     @Mock
     private ChallengeDAO challengeDAO;
@@ -27,15 +35,20 @@ public class ChallengeServiceTest {
     @InjectMocks
     ChallengeService challengeService = new ChallengeServiceImpl();
 
+    @Before
+    public void setUp(){
+        challenge = new Challenge()
+                .setToUserId(RECIPIENT_ID)
+                .setFromUserId(SENDER_ID)
+                .setChallengeState(CHALLENGE_STATE)
+                .setDescription(DESC)
+                .setChallengeName(CHALLENGE_NAME)
+                .setEndTime(END_TIME);
+    }
+
     @Test
     public void testAddNewChallenge() throws Exception {
-        Challenge challenge = new Challenge();
-        challenge.setChallengeName("Name");
-        challenge.setChallengeState("Pending");
-        challenge.setFromUserId(1L);
-        challenge.setToUserId(2L);
-        challenge.setEndTime(LocalDateTime.now());
-        challenge.setDescription("Hibernate");
+
         challengeService.addChallenge(challenge);
 
         verify(challengeDAO).create(anyObject());
@@ -63,7 +76,6 @@ public class ChallengeServiceTest {
 
     @Test
     public void testDelete() throws Exception {
-        Challenge challenge = new Challenge();
         challengeService.deleteChallenge(challenge);
         verify(challengeDAO).delete(challenge);
 
@@ -71,8 +83,8 @@ public class ChallengeServiceTest {
 
     @Test
     public void testChangeState() throws Exception {
-        Challenge challenge = new Challenge();
-        challengeService.changeChallengeState(null,"Accept");
+        when(challengeDAO.getById(challenge.getChallengeId())).thenReturn(challenge);
+        challengeService.changeChallengeState(challenge.getChallengeId(),ACCEPT_STATE);
         verify(challengeDAO).update(challenge);
     }
 }

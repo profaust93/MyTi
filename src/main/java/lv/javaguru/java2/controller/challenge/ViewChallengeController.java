@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ruslan on 2016.04.25..
- */
 @Component
 public class ViewChallengeController implements MVCController {
     @Autowired

@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ruslan on 16.29.3.
- */
 @Component
 public class ViewTimeLapsController implements MVCController {
 

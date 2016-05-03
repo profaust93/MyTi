@@ -1,38 +1,37 @@
-package lv.javaguru.java2.service.timelaps;
+package lv.javaguru.java2.service.validators;
 
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.service.validators.Validators;
+import lv.javaguru.java2.service.timelaps.TimeLapsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import java.time.LocalDateTime;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
-public class TimeLapsServiceTest {
+public class ValidatorsTest {
 
     private TimeLaps timeLaps;
-    private TimeLaps secondTimeLaps;
+
     private final LocalDateTime DATE = LocalDateTime.now();
     private final String SHORT_DESCRIPTION = "Short Description";
     private final String LONG_DESCRIPTION = "Long Description";
     private final String CATEGORY = "Sport";
     private final Long FIRST_USER_ID = 12L;
-    private final Long SECOND_USER_ID = 15L;
     private final String NAME = "TimeLaps";
+
     @Mock
     private TimeLapsDAO timeLapsDAO;
+
     @Mock
-    private Validators validators;
+    private TimeLapsService timeLapsService;
 
     @InjectMocks
-    TimeLapsService timeLapsService = new TimeLapsServiceImpl();
+    Validators validators = new ValidatorsImpl();
 
 
     @Before
@@ -46,29 +45,10 @@ public class TimeLapsServiceTest {
                 .setTimeLapsName(NAME);
 
     }
-    @Test
-    public void testAddNewTimeLaps() throws Exception {
-
-        timeLapsService.addTimeLaps(timeLaps);
-
-        verify(timeLapsDAO).create(anyObject());
-
-    }
-
-
 
     @Test
-    public void testGetTimeLapsById() throws Exception {
-        timeLapsService.getTimeLapsById(666L);
-        verify(timeLapsDAO).getById(666L);
-    }
-
-    @Test
-    public void testDeleteAllTimeLaps() throws Exception {
-        timeLapsService.deleteAllTimeLaps(666L);
-        verify(timeLapsDAO).deleteAllTimeLaps(666L);
+    public void testTimeLapsValidator() throws Exception {
+        validators.timeLapsValidator(timeLaps);
 
     }
-
-
 }

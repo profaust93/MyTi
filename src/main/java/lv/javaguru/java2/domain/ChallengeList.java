@@ -2,9 +2,6 @@ package lv.javaguru.java2.domain;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by Ruslan on 2016.04.17..
- */
 public class ChallengeList {
 
     private Long challengeId;
