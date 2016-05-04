@@ -11,9 +11,8 @@ import lv.javaguru.java2.model.exceptions.UserProfileException;
 import lv.javaguru.java2.service.userProfile.UserProfileService;
 import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import lv.javaguru.java2.service.userProfile.ProfileServices;
-import lv.javaguru.java2.service.userProfile.UserProfileService;
-import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,8 +36,9 @@ public class EditUserProfileController implements MVCController {
     @Autowired
     ProfileServices profileServices;
     @Autowired
-    UserProfileDAO userProfileDao;
-    UserProfileService userProfileService = new UserProfileServiceImpl();
+    @Qualifier("ORM_UserProfileDAO")
+    UserProfileDAO userProfileDAO;
+    private UserProfileService userProfileService = new UserProfileServiceImpl();
 
 
     @Override
@@ -47,17 +47,15 @@ public class EditUserProfileController implements MVCController {
         HttpSession session = req.getSession();
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         UserProfile userProfile = new UserProfile();
-        userProfileService.setUserProfileDAO(userProfileDao);
+        userProfileService.setUserProfileDAO(userProfileDAO);
         try {
             if (profileServices.profileExist(userDTO.getUserId())){
                    userProfile = userProfileService.getUserProfile(userDTO.getUserId());
             }
-        } catch (DBException e) {
-            e.printStackTrace();
-        }catch (UserProfileException e){
+        } catch (DBException | UserProfileException e) {
             e.printStackTrace();
         }
-         return new MVCModel("/editUserProfile.jsp",userProfile);
+        return new MVCModel("/editUserProfile.jsp",userProfile);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class EditUserProfileController implements MVCController {
         profileData.put("email",req.getParameter("email"));
         profileData.put("userId",userDTO.getUserId());
         UserProfile userProfile = null;
-        userProfileService.setUserProfileDAO(userProfileDao);
+        userProfileService.setUserProfileDAO(userProfileDAO);
       try {
            if (profileServices.profileExist(userDTO.getUserId())){
 
@@ -87,11 +85,9 @@ public class EditUserProfileController implements MVCController {
        userProfileService.createUserProfile(profileData);
         userProfile = userProfileService.getUserProfile(userDTO.getUserId());
 
-       } catch (DBException e){
+       } catch (DBException | UserProfileException e){
            e.printStackTrace();
-       } catch (UserProfileException e){
-           e.printStackTrace();
-      }
+       }
 
         return new MVCModel("/viewUserProfile.jsp",userProfile);
     }

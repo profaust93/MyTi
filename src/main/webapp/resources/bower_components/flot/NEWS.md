@@ -212,7 +212,7 @@ overriding the 'flot-tick-label' CSS rule or via the axis 'font' option.
 A new plugin, jquery.flot.canvas.js, allows axis tick labels to be rendered
 directly to the canvas, rather than using HTML elements. This feature can be
 toggled with a simple option, making it easy to create interactive plots in the
-browser using HTML, then re-render them to canvas for export as an image.
+browser using HTML, then re-render them to canvas for export as an imagePath.
 
 The plugin tries to remain as faithful as possible to the original HTML render,
 and goes so far as to automatically extract styles from CSS, to avoid having to

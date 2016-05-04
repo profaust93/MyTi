@@ -6,21 +6,20 @@ import lv.javaguru.java2.domain.UserProfile;
 import lv.javaguru.java2.domain.UserProfileList;
 import lv.javaguru.java2.model.exceptions.UserProfileException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by Camille on 07.04.2016.
- */
 @Component
 public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
+    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDAO;
 
-    UserProfile userProfile;
+    private UserProfile userProfile;
     @Override
     public void setUserProfileDAO(UserProfileDAO userProfileDAO) {
     this.userProfileDAO = userProfileDAO;

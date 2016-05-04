@@ -1,63 +1,81 @@
 package lv.javaguru.java2.domain;
 
-/**
- * Created by Camille on 02.04.2016.
- */
+
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Profiles")
 public class UserProfile {
 
+    @Id
+    @Column(name = "ProfileId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long profileId;
-    private Long UserId;
+    @Column(name = "userId")
+    private Long userId;
+    @Column(name = "FirstName")
     private String firstName;
+    @Column(name = "LastName")
     private String lastName;
+    @Column(name = "Email")
     private String email;
-    //private byte image;
+
+    //private String imagePath;
 
     public UserProfile() {}
 
-    //Not needed, but decided to leave it here. Mb will use of it someday.
-    public UserProfile(String firstName,String lastName, String email ) {
+
+    public UserProfile(String firstName,String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-    }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public Long getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(Long userId) {
-        UserId = userId;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Long getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(Long profileId) {
+    public UserProfile setProfileId(Long profileId) {
         this.profileId = profileId;
+        return this;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public UserProfile setUserId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public UserProfile setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserProfile setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserProfile setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+    
 }

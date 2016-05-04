@@ -3,7 +3,7 @@ Holder
 
 ![](http://imsky.github.io/holder/images/header.png)
 
-Holder renders image placeholders on the client side using SVG.
+Holder renders imagePath placeholders on the client side using SVG.
 
 Used by [Bootstrap](http://getbootstrap.com), thousands of [open source projects](https://github.com/search?q=holder.js+in%3Apath&type=Code&ref=searchresults), and [many other sites](https://search.nerdydata.com/search/#!/searchTerm=holder.js/searchPage=1/sort=pop).
 
@@ -53,7 +53,7 @@ There are 6 default themes: ``sky``, ``vine``, ``lava``, ``gray``, ``industrial`
 Custom colors
 -------------
 
-Custom colors on a specific image can be specified in the ``background:foreground`` format using hex notation, like this:
+Custom colors on a specific imagePath can be specified in the ``background:foreground`` format using hex notation, like this:
 
 ```html
 <img data-src="holder.js/100x200/#000:#fff">
@@ -76,7 +76,7 @@ If you have a group of placeholders where you'd like to use particular text, you
 Holder.addTheme("thumbnail", { background: "#fff", text: "Thumbnail" });
 ```
 
-Holder automatically adds line breaks to text that goes outside of the image boundaries. If the text is so long it goes out of both horizontal and vertical boundaries, the text is moved to the top. If you prefer to control the line breaks, you can add `\n` to the `text` property:
+Holder automatically adds line breaks to text that goes outside of the imagePath boundaries. If the text is so long it goes out of both horizontal and vertical boundaries, the text is moved to the top. If you prefer to control the line breaks, you can add `\n` to the `text` property:
 
 ```html
 <img data-src="holder.js/300x200/text:Add \n line breaks \n anywhere.">
@@ -193,7 +193,7 @@ Fluid placeholders need to be visible in order to work. In cases when a placehol
 Automatically sized placeholders
 --------------------------------
 
-If you'd like to avoid Holder enforcing an image size, use the ``auto`` flag like so:
+If you'd like to avoid Holder enforcing an imagePath size, use the ``auto`` flag like so:
 
 ```html
 <img data-src="holder.js/200x200/auto">
@@ -216,7 +216,7 @@ Holder can render placeholders as background images for elements with the `holde
 <div id="sample" class="holderjs"></div>
 ```
 
-The Holder URL in CSS should have a `?` in front. Like in image placeholders, you can specify the Holder URL in a `data-background-src` attribute:
+The Holder URL in CSS should have a `?` in front. Like in imagePath placeholders, you can specify the Holder URL in a `data-background-src` attribute:
 
 ```html
 <div data-background-src="?holder.js/300x200"></div>
@@ -240,7 +240,7 @@ Using custom settings on load
 
 You can prevent Holder from running its default configuration by executing ``Holder.run`` with your custom settings right after including ``holder.js``. However, you'll have to execute ``Holder.run`` again to render any placeholders that use the default configuration.
 
-Inserting an image with optional custom theme
+Inserting an imagePath with optional custom theme
 ---------------------------------------------
 
 You can add a placeholder programmatically by chaining Holder calls:
