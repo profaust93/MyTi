@@ -1,5 +1,5 @@
-<%@ page import="lv.javaguru.java2.dto.UserDTO" %>
-<jsp:useBean id="user" scope="session" type="lv.javaguru.java2.dto.UserDTO"/>
+<%--<%@ page import="lv.javaguru.java2.dto.UserDTO" %>
+<jsp:useBean id="user" scope="session" type="lv.javaguru.java2.dto.UserDTO"/>--%>
 <%--
   Created by IntelliJ IDEA.
   User: german
@@ -9,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    user = (UserDTO) session.getAttribute("user");
+    //user = (UserDTO) session.getAttribute("user");
 %>
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">

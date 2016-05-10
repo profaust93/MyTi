@@ -2,16 +2,18 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `my_ti` DEFAULT CHARACTER SET utf8 ;
+DROP DATABASE if EXISTS my_ti ;
+
+CREATE DATABASE IF NOT EXISTS `my_ti` DEFAULT CHARACTER SET utf8 ;
 USE `my_ti` ;
 
 -- -----------------------------------------------------
 -- Table `my_ti`.`Users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `my_ti`.`Users` ;
+DROP TABLE IF EXISTS my_ti.Users;
 
-CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
-  `UserId` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS my_ti.Users (
+  `UserId` BIGINT(11) NOT NULL AUTO_INCREMENT,
   `Login` CHAR(32) NOT NULL,
   `Password` CHAR(32) NOT NULL,
   `FirstName` CHAR(32) NOT NULL,
@@ -19,8 +21,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
   `Email` CHAR(32) NOT NULL,
   PRIMARY KEY (`UserId`)
 )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1002;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
 
 -- -----------------------------------------------------
 -- Table `my_ti`.`TimeLaps`
@@ -35,7 +37,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
     LongDescription VARCHAR(1000),
     Category VARCHAR(100),
     TimeLapsName VARCHAR(100),
-  PRIMARY KEY (TimeLapsId)
+  PRIMARY KEY (TimeLapsId),
+  FOREIGN KEY (UserID) REFERENCES my_ti.Users(UserID)
 )
   ENGINE =InnoDB
   AUTO_INCREMENT = 100;
@@ -44,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`TimeLaps`(
 DROP TABLE IF EXISTS `my_ti`.`Profiles` ;-- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
-    ProfileId INT(11) NOT NULL AUTO_INCREMENT,
-    UserId INT (11) NOT NULL UNIQUE,
+    ProfileId BIGINT(11) NOT NULL AUTO_INCREMENT,
+    UserId BIGINT (11) NOT NULL UNIQUE,
     FirstName VARCHAR (30),
     LastName VARCHAR (30),
     Email VARCHAR (30),

@@ -1,3 +1,4 @@
+/*
 package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.config.SpringConfig;
@@ -42,18 +43,17 @@ public class MainFilter implements Filter {
         urlToController = new HashMap<>();
         urlToController.put("/index", applicationContext.getBean(HelloWorldController.class));
         urlToController.put("/register", applicationContext.getBean(RegisterController.class));
-        urlToController.put("/login", applicationContext.getBean(LoginController.class));
         urlToController.put("/viewTimeLaps",applicationContext.getBean(ViewTimeLapsController.class));
         urlToController.put("/addTimeLaps",applicationContext.getBean(AddTimeLapsController.class));
         urlToController.put("/editTimeLaps",applicationContext.getBean(EditTimeLapsController.class));
         urlToController.put("/viewUserProfile",applicationContext.getBean(ViewUserProfileController.class));
         urlToController.put("/editUserProfile",applicationContext.getBean(EditUserProfileController.class));
         urlToController.put("/addChallenge",applicationContext.getBean(AddChallengeController.class));
-        urlToController.put("/todo",applicationContext.getBean(ToDoListController.class));
         urlToController.put("/addToDo",applicationContext.getBean(ToDoAddController.class));
         urlToController.put("/viewUserProfileList",applicationContext.getBean(ViewUserProfileListController.class));
         urlToController.put("/viewMessage",applicationContext.getBean(ViewMessageController.class));
         urlToController.put("/viewChallenge",applicationContext.getBean(ViewChallengeController.class));
+
     }
 
     @Override
@@ -68,34 +68,9 @@ public class MainFilter implements Filter {
         }
         HttpSession session = httpServletRequest.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
-        if((isLogIn == null || !isLogIn) && !contextURI.equals("/register")) {
-            controller = applicationContext.getBean(LoginController.class);
-        }  else {
-            controller  = Optional.ofNullable(urlToController.get(contextURI)).orElse(applicationContext.getBean(ErrorController.class));
-        }
 
-        MVCModel model;
-        String methodName = httpServletRequest.getMethod();
-        if("GET".equalsIgnoreCase(methodName)) {
-            try {
-                model = controller.processGet(httpServletRequest);
-            } catch (RedirectException e) {
-                httpServletResponse.sendRedirect(e.getUrlToRedirect());
-                return;
-            }
-        } else {
-            try {
-                model = controller.processPost(httpServletRequest);
-            } catch (RedirectException e) {
-                httpServletResponse.sendRedirect(e.getUrlToRedirect());
-                return;
-            }
-        }
 
-        httpServletRequest.setAttribute("data",model.getData());
-        ServletContext context = servletRequest.getServletContext();
-        RequestDispatcher requestDispatcher = context.getRequestDispatcher(model.getJspName());
-        requestDispatcher.forward(httpServletRequest,httpServletResponse);
+
 
     }
 
@@ -104,3 +79,4 @@ public class MainFilter implements Filter {
 
     }
 }
+*/

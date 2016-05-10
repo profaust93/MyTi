@@ -9,31 +9,35 @@ import lv.javaguru.java2.service.user.UserModel;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-public class LoginController implements MVCController {
+@Controller
+public class LoginController {
+
     @Autowired
     private UserModel userModel;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) throws RedirectException {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView getLoginPage(HttpServletRequest req) throws RedirectException {
         HttpSession session = req.getSession();
         Boolean isLogIn = (Boolean) session.getAttribute("IsLoggedIn");
         if(isLogIn != null && isLogIn) {
-            //throw new RedirectException("Don't need to login again","/java2/index");
-            return new MVCModel("/redirect.jsp","index");
+            return  new ModelAndView("index","blaa",null);
         }
         String contextURI = req.getRequestURL().toString();
         session.setAttribute("comeFrom",contextURI);
-        return new MVCModel("/login.jsp",null);
+        return  new ModelAndView("login","blaa",null);
     }
 
-    @Override
+
     public MVCModel processPost(HttpServletRequest req) {
         Map<String,String> resultMap = new HashMap<>();
         try{

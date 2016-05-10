@@ -8,30 +8,29 @@ import lv.javaguru.java2.model.exceptions.ToDoException;
 import lv.javaguru.java2.service.todo.list.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
 
-@Component
-public class ToDoListController  implements MVCController{
+@Controller
+public class ToDoListController{
 
     @Autowired
     ToDoService toDoService;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) throws RedirectException {
+    @RequestMapping(value = "/todo", method = RequestMethod.GET)
+    public ModelAndView processGet(HttpServletRequest req) throws RedirectException {
         UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
         try {
-            return new MVCModel("/toDoList.jsp",toDoService.getAllToDoForUser(userDTO.getUserId()));
+            return new ModelAndView("toDoList","data",toDoService.getAllToDoForUser(1L));
         } catch (ToDoException e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    @Override
-    public MVCModel processPost(HttpServletRequest req) throws RedirectException {
-        return null;
     }
 }
