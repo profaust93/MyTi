@@ -8,151 +8,154 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     //user = (UserDTO) session.getAttribute("user");
 %>
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/java2/hello">MyTi</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/">SB Admin</a>
     </div>
-    <!-- /.navbar-header -->
-
-    <ul class="nav navbar-top-links navbar-right">
+    <!-- Top Menu Items -->
+    <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-messages">
-                <li>
-                    <a href="/java2/viewMessage">
-                        <div>
-                            <strong>Message Box</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>New Message</em>
-                                    </span>
-                        </div>
-                        <div>Press to continue...</div>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.dropdown-messages -->
-        </li>
-        <!-- /.dropdown -->
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-tasks">
-                <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+            <ul class="dropdown-menu message-dropdown">
+                <li class="message-preview">
                     <a href="#">
-                        <div>
-                            <p>
-                                <strong>Task 1</strong>
-                                <span class="pull-right text-muted">40% Complete</span>
-                            </p>
-                            <div class="progress progress-striped active">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
+                        <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                            <div class="media-body">
+                                <h5 class="media-heading"><strong>John Smith</strong>
+                                </h5>
+                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
                             </div>
                         </div>
                     </a>
                 </li>
-                <li class="divider"></li>
-                <li>
-                    <a class="text-center" href="/java2/toDo">
-                        <strong>See All ToDo</strong>
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </li>
-            </ul>
-            <!-- /.dropdown-tasks -->
-        </li>
-        <!-- /.dropdown -->
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-alerts">
-                <li>
+                <li class="message-preview">
                     <a href="#">
-                        <div>
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                            <div class="media-body">
+                                <h5 class="media-heading"><strong>John Smith</strong>
+                                </h5>
+                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                            </div>
                         </div>
                     </a>
                 </li>
-                    <a class="text-center" href="#">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
+                <li class="message-preview">
+                    <a href="#">
+                        <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                            <div class="media-body">
+                                <h5 class="media-heading"><strong>John Smith</strong>
+                                </h5>
+                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                            </div>
+                        </div>
                     </a>
                 </li>
+                <li class="message-footer">
+                    <a href="#">Read All New Messages</a>
+                </li>
             </ul>
-            <!-- /.dropdown-alerts -->
         </li>
-        <!-- /.dropdown -->
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  ${user.userLogin} <i class="fa fa-caret-down"></i>
-
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="/java2/viewUserProfile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+            <ul class="dropdown-menu alert-dropdown">
+                <li>
+                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                </li>
+                <li>
+                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                </li>
+                <li>
+                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                </li>
+                <li>
+                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                </li>
+                <li>
+                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                </li>
+                <li>
+                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li>
+                    <a href="#">View All</a>
                 </li>
             </ul>
-            <!-- /.dropdown-user -->
         </li>
-        <!-- /.dropdown -->
-    </ul>
-    <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav in" id="side-menu">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+            <ul class="dropdown-menu">
                 <li>
-                    <a href="/java2/index" class="active"><i class="fa fa-dashboard fa-fw"></i> Main page</a>
+                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                 </li>
                 <li>
-                    <a href="/java2/todo"><i class="fa fa-table fa-fw"></i> ToDo List</a>
+                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                 </li>
                 <li>
-                    <a href="/java2/viewTimeLaps"><i class="fa fa-table fa-fw"></i> TimeLaps</a>
+                    <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                 </li>
+                <li class="divider"></li>
                 <li>
-                    <a href="/java2/statistic"><i class="fa fa-edit fa-fw"></i> Statistic</a>
+                <a href="#" onclick="document.forms['logout'].submit();"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                 </li>
-                <li>
-                    <a href="/java2/viewChallenge"><i class="fa fa-edit fa-fw"></i> Challenges</a>
-                </li>
-                <li>
-                    <a href="/java2/viewUserProfileList"><i class="fa fa-edit fa-fw"></i> Users</a>
-                </li>
+                <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+                <form:form action="${pageContext.request.contextPath}/logout" method="POST" name="logout">
+                </form:form>
             </ul>
-        </div>
-        <!-- /.sidebar-collapse -->
+        </li>
+    </ul>
+    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+            <li>
+                <a href="${pageContext.request.contextPath}/todo"><i class="fa fa-fw fa-dashboard"></i> ToDo List</a>
+            </li>
+            <li>
+                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Time Laps</a>
+            </li>
+            <li>
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo" class="collapse">
+                    <li>
+                        <a href="#">Dropdown Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Dropdown Item</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
+    <!-- /.navbar-collapse -->
 </nav>
-
-<!-- /.navbar-static-side -->
-<!-- jQuery -->
-<script src="${pageContext.request.contextPath}/resources/bower_components/jquery/dist/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="${pageContext.request.contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="${pageContext.request.contextPath}/resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="${pageContext.request.contextPath}/resources/dist/js/myTi.js"></script>
-
-<script src="${pageContext.request.contextPath}/resources/dist/js/login.js"></script>
+<c:if test="${!empty error.getMessage()}">
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> <c:out value="${error.getMessage()}"/>
+    </div>
+</c:if>

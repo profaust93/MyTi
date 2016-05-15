@@ -83,8 +83,8 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoList
 (
   Id BIGINT (11) NOT NULL AUTO_INCREMENT,
   ListName VARCHAR(100),
-  CreateTime TIMESTAMP,
-  DeadLineTime TIMESTAMP,
+  CreateTime TINYBLOB,
+  DeadLineTime TINYBLOB,
   UserId BIGINT(11),
   Notes TEXT,
   IsComplete BOOLEAN,
