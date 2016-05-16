@@ -1,16 +1,12 @@
 package lv.javaguru.java2.domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
-@Table(name = "ToDoList")
+@Table(name = "ToDoTask")
 public class ToDo {
 
     @Id
@@ -18,8 +14,8 @@ public class ToDo {
     @Column(name = "Id")
     private Long Id;
 
-    @Column(name = "ListName")
-    private String listName;
+    @Column(name = "TaskName")
+    private String name;
 
     @Column(name = "CreateTime", nullable = false)
     @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
@@ -33,15 +29,7 @@ public class ToDo {
     @Type(type="text")
     private String notes;
 
-    @OneToMany
-    @JoinColumn(name = "ToDoListId")
-    @Fetch(FetchMode.SUBSELECT)
-    private Set<ToDoTask> toDoTasks;
-
-    @Column(name = "UserId")
-    private Long userId;
-
-    @Column(name = "IsComplete")
+    @Column(name = "Done")
     private Boolean isComplete;
 
     public Long getId() {
@@ -53,12 +41,12 @@ public class ToDo {
         return this;
     }
 
-    public String getListName() {
-        return listName;
+    public String getName() {
+        return name;
     }
 
-    public ToDo setListName(String listName) {
-        this.listName = listName;
+    public ToDo setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -86,24 +74,6 @@ public class ToDo {
 
     public ToDo setNotes(String notes) {
         this.notes = notes;
-        return this;
-    }
-
-    public Set<ToDoTask> getToDoTasks() {
-        return toDoTasks;
-    }
-
-    public ToDo setToDoTasks(Set<ToDoTask> toDoTasks) {
-        this.toDoTasks = toDoTasks;
-        return this;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public ToDo setUserId(Long userId) {
-        this.userId = userId;
         return this;
     }
 

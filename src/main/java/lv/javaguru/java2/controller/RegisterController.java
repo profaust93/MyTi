@@ -1,23 +1,13 @@
 package lv.javaguru.java2.controller;
-
-import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
-import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.exceptions.RegisterException;
-import lv.javaguru.java2.service.user.UserModelImpl;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Kemran on 02/04/2016.
@@ -28,9 +18,6 @@ public class RegisterController implements MVCController {
     @Qualifier("ORM_UserDAO")
     @Autowired
     UserDAO userDAO;
-
-    @Autowired
-    UserModelImpl userModel;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
@@ -46,7 +33,12 @@ public class RegisterController implements MVCController {
 
     @Override
     public MVCModel processPost(HttpServletRequest req) {
-        Map<String,String> resultMap = new HashMap<>();
+
+        //мвц мвц
+        //тут всю каниьель в сервисс надо бы вынести
+        return null;
+    }
+        /*Map<String,String> resultMap = new HashMap<>();
 
         User user = new User(
                 req.getParameter("login"),
@@ -83,5 +75,5 @@ public class RegisterController implements MVCController {
             return new MVCModel("/json.jsp", new JSONObject(resultMap));
         }
 
-    }
+    }*/
 }

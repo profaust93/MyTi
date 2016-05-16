@@ -1,34 +1,23 @@
 package lv.javaguru.java2.config;
-
-import lv.javaguru.java2.filter.SecurityFilter;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
-
-import javax.servlet.Filter;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
-public class SpringInitializer extends AbstractDispatcherServletInitializer{
+
+public class SpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+
     @Override
-    protected WebApplicationContext createRootApplicationContext() {
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(SpringConfig.class);
-        return applicationContext;
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[]{SpringConfig.class, SecurityConfig.class};
     }
+
     @Override
-    protected WebApplicationContext createServletApplicationContext() {
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(SpringMvcConfig.class);
-        return applicationContext;
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[]{SpringMvcConfig.class};
     }
+
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/todo"};
+        return new String[]{"/"};
     }
-
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new SecurityFilter()};
-    }
-
 }

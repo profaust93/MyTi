@@ -1,3 +1,12 @@
+/*
+
+меня сильно не бить
+тут нужен новый сервисс
+спринг секьюрити все дела
+в субботу покажу
+
+
+
 package lv.javaguru.java2.service.user;
 
 import lv.javaguru.java2.database.DBException;
@@ -41,22 +50,28 @@ public class UserModelImpl implements UserModel {
     @Override
     public Boolean registerUser(User user) throws RegisterException {
 
+        //модель поменялась сорян :D
 
-        checkFields(user);
+        */
+/*checkFields(user);
 
-        isUserExist(user); //заимплементь метод
+        isUserExist(user);*//*
+ //заимплементь метод
 
-      /*  if(!checkFields(user)){
+      */
+/*  if(!checkFields(user)){
             checkFields(user); // просто вызови метод, а мтеод путьс генерит эксепшены
         }else{
             return true;   // после return код не пишется, здесь просто оставь экспешн
-        }*/
+        }*//*
+
         // чтобы вывести пользователя вызови userDAO.create(user)
 
         return true;
     }
 
-    private void checkFields(User user) throws RegisterException {
+   */
+/* private void checkFields(User user) throws RegisterException {
         if(user.getLogin() == null || user.getLogin().isEmpty()) {
             throw new RegisterException("Login is empty");
         } else if(user.getPassword() == null || user.getPassword().isEmpty()){
@@ -94,6 +109,8 @@ public class UserModelImpl implements UserModel {
             throw new RegisterException("Email already exists");
         }
 
-    }
+    }*//*
+
 
 }
+*/

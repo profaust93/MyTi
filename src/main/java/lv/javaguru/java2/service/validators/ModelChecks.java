@@ -2,7 +2,7 @@ package lv.javaguru.java2.service.validators;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.database.hibernate.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,3 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ALLOW_INVALID_DATES';
-
 DROP DATABASE if EXISTS my_ti ;
 
 CREATE DATABASE IF NOT EXISTS `my_ti` DEFAULT CHARACTER SET utf8 ;
@@ -13,15 +9,24 @@ USE `my_ti` ;
 DROP TABLE IF EXISTS my_ti.Users;
 
 CREATE TABLE IF NOT EXISTS my_ti.Users (
-  `UserId` BIGINT(11) NOT NULL AUTO_INCREMENT,
-  `Login` CHAR(32) NOT NULL,
-  `Password` CHAR(32) NOT NULL,
-  `FirstName` CHAR(32) NOT NULL,
-  `LastName` CHAR(32) NOT NULL,
-  `Email` CHAR(32) NOT NULL,
-  PRIMARY KEY (`UserId`)
+  UserId BIGINT(11) NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(45) NOT NULL ,
+  Password VARCHAR(60) NOT NULL ,
+  Enabled BIT NOT NULL DEFAULT 1,
+  PRIMARY KEY (UserId)
 )
-  ENGINE = InnoDB
+  ENGINE = InnoDB;
+DROP TABLE IF EXISTS my_ti.User_roles;
+CREATE TABLE my_ti.User_roles (
+  User_role_id int(11) NOT NULL AUTO_INCREMENT,
+  UserId BIGINT(11) NOT NULL,
+  Role varchar(45) NOT NULL,
+  PRIMARY KEY (User_role_id),
+  UNIQUE KEY uni_username_role (Role,UserId),
+  KEY fk_username_idx (UserId),
+  CONSTRAINT fk_username FOREIGN KEY (UserId) REFERENCES my_ti.Users (UserId)
+)
+  ENGINE =InnoDB
   AUTO_INCREMENT = 100;
 
 -- -----------------------------------------------------
@@ -48,7 +53,7 @@ DROP TABLE IF EXISTS `my_ti`.`Profiles` ;-- ------------------------------------
 
 CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
     ProfileId BIGINT(11) NOT NULL AUTO_INCREMENT,
-    UserId BIGINT (11) NOT NULL UNIQUE,
+    UserId BIGINT(11) NOT NULL,
     FirstName VARCHAR (30),
     LastName VARCHAR (30),
     Email VARCHAR (30),
@@ -78,32 +83,16 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
 
 /*ToDo Table*/
 
-DROP TABLE IF EXISTS my_ti.ToDoList;
-CREATE TABLE IF NOT EXISTS my_ti.ToDoList
-(
-  Id BIGINT (11) NOT NULL AUTO_INCREMENT,
-  ListName VARCHAR(100),
-  CreateTime TINYBLOB,
-  DeadLineTime TINYBLOB,
-  UserId BIGINT(11),
-  Notes TEXT,
-  IsComplete BOOLEAN,
-  PRIMARY KEY (Id)
-)
-  ENGINE = InnoDB
-  AUTO_INCREMENT = 100;
-
 DROP TABLE IF EXISTS my_ti.ToDoTask;
 CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
 (
   Id BIGINT(11) NOT NULL AUTO_INCREMENT,
   TaskName VARCHAR(100),
-  Description VARCHAR(255),
-  ToDoListId BIGINT(11),
-  Goals INT(11),
-  CompletedGoals INT(11),
-  PRIMARY KEY (Id),
-  FOREIGN KEY (ToDoListId) REFERENCES my_ti.ToDoList(Id)
+  Notes LONGTEXT,
+  CreateTime TIMESTAMP,
+  DeadLineTime TIMESTAMP,
+  Done BIT,
+  PRIMARY KEY (Id)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
@@ -116,17 +105,20 @@ CREATE TABLE IF NOT EXISTS my_ti.UserMessages
   RecipientId BIGINT(11),
   ChallengeId BIGINT(11),
   PRIMARY KEY (Id),
-  FOREIGN KEY (ChallengeId) REFERENCES my_ti.challenge(ChallengeId)
+  FOREIGN KEY (ChallengeId) REFERENCES my_ti.Challenge(ChallengeId)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
-INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
-INSERT INTO my_ti.Users VALUES (2,'admin2','qwerty','Admin2','Admin2','admin2@myTi.com');
-INSERT INTO Profiles VALUES (default, 1, 'admin', 'admin','admin@myTi.com');
-INSERT INTO Profiles VALUES (default, 2, 'admin2', 'admin2','admin2@myTi.com');
+INSERT INTO Users(UserId,Username,Password,Enabled)
+VALUES (1,'admin','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
+INSERT INTO Users(UserId,Username,Password,Enabled)
+VALUES (2,'gera','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+INSERT INTO User_roles (UserId, Role)
+VALUES (1, 'ROLE_USER');
+INSERT INTO User_roles (UserId, Role)
+VALUES (1, 'ROLE_ADMIN');
+INSERT INTO User_roles (UserId, Role)
+VALUES (2, 'ROLE_USER');
 
 

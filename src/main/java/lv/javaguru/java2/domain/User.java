@@ -1,102 +1,100 @@
 package lv.javaguru.java2.domain;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
-
 
 @Entity
 @Table(name = "Users")
 public class User {
-/*
-    CREATE TABLE IF NOT EXISTS `my_ti`.`Users` (
-            `UserId` INT(11) NOT NULL AUTO_INCREMENT,
-    `Login` CHAR(32) NOT NULL,
-    `Password` CHAR(32) NOT NULL,
-    `FirstName` CHAR(32) NOT NULL,
-    `LastName` CHAR(32) NOT NULL,
-    `Email` CHAR(32) NOT NULL,
-    PRIMARY KEY (`UserId`)
-    )*/
-
 
     @Id
     @Column(name = "UserId", columnDefinition = "INT(11)")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-    @Column(name = "Login", columnDefinition = "CHAR(32)")
-    private String login;
+    @Column(name = "Username", unique = true,
+            nullable = false, length = 45)
+    private String username;
 
-    @Column(name = "FirstName", columnDefinition = "CHAR(32)")
-    private String firstName;
-
-    @Column(name = "LastName", columnDefinition = "CHAR(32)")
-    private String lastName;
-
-    @Column(name = "Password", columnDefinition = "CHAR(32)")
+    @Column(name = "Password",
+            nullable = false, length = 60)
     private String password;
 
-    @Column(name = "Email", columnDefinition = "CHAR(32)")
-    private String email;
+    @Column(name = "Enabled", nullable = false)
+    private Boolean enabled;
 
-    public User(){
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
+    public User() {
     }
 
-    public User(String login, String password,
-                String firstName, String lastName, String email) {
-        this.login = login;
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        this.enabled = enabled;
     }
 
-
-    public Long getUserId() {
-        return userId;
+    public User(String username, String password,
+                boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public String getUsername() {
+        return username;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public User setUsername(String username) {
+        this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public User setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 
-    public String getLogin() {
-        return login;
+    public Set<UserRole> getUserRole() {
+        return userRole;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public User setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
+        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public User setUserId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public User setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 }

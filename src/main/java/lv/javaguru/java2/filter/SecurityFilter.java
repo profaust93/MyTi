@@ -1,3 +1,4 @@
+/*
 package lv.javaguru.java2.filter;
 
 
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+*/
 /**
  * Created by germans.kuzmins on 2016.05.10..
- */
+ *//*
+
 public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -44,3 +47,4 @@ public class SecurityFilter implements Filter {
 
     }
 }
+*/

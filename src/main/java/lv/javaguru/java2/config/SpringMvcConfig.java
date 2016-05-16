@@ -27,18 +27,14 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //map all resources
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-
     }
 
     @Bean
     UrlBasedViewResolver resolver(){
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-
         resolver.setPrefix("/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
-
         return resolver;
     }
 }

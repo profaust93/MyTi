@@ -46,9 +46,20 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
         return super.getAll(User.class);
     }
 
+    @SuppressWarnings("JpaQlInspection")
     @Override
-    public User getUserByEmailOrLogin(String userCred) throws DBException {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-        return (User) criteria.add(Restrictions.eq("userCred", userCred)).uniqueResult();
+    public User findByUserName(String username) {
+        List<User> users;
+
+        users = sessionFactory.getCurrentSession()
+                .createQuery("From User where Username=?")
+                .setParameter(0, username)
+                .list();
+
+        if (users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
     }
 }
