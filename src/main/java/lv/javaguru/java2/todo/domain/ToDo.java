@@ -1,4 +1,4 @@
-package lv.javaguru.java2.domain;
+package lv.javaguru.java2.todo.domain;
 
 import org.hibernate.annotations.Type;
 

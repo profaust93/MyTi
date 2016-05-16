@@ -1,4 +1,4 @@
-package lv.javaguru.java2.web.form.model;
+package lv.javaguru.java2.todo.form;
 
 import java.time.LocalDateTime;
 

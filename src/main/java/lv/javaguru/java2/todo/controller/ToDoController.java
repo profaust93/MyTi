@@ -1,4 +1,4 @@
-package lv.javaguru.java2.controller.todo;
+package lv.javaguru.java2.todo.controller;
 
 import org.springframework.web.servlet.ModelAndView;
 

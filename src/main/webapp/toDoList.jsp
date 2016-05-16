@@ -33,7 +33,7 @@
                             <tbody>
                             <c:forEach items="${data}" var="todo">
                                 <%--<jsp:useBean id="todo"
-                                             class="lv.javaguru.java2.web.form.model.ToDoListModel" scope="page"/>--%>
+                                             class="lv.javaguru.java2.todo.form.ToDoListModel" scope="page"/>--%>
                                 <tr>
                                     <td>${todo.toDoName}</td>
                                     <td>${todo.fromatedDeadLineDate}</td>

@@ -1,6 +1,6 @@
-package lv.javaguru.java2.service.todo;
+package lv.javaguru.java2.todo.service;
 
-import lv.javaguru.java2.web.form.model.ToDoListModel;
+import lv.javaguru.java2.todo.form.ToDoListModel;
 
 import java.util.List;
 
