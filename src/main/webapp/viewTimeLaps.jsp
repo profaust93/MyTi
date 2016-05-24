@@ -11,6 +11,7 @@
 <html>
 <jsp:include page="/header.jsp"/>
 <body>
+<link href="${pageContext.request.contextPath}/resources/css/timelaps.css" type="text/css" rel="stylesheet" />
 
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
