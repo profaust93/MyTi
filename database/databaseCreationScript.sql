@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS my_ti.Profiles(
   FirstName VARCHAR (30),
   LastName VARCHAR (30),
   Email VARCHAR (30),
+  ProfilePicture VARCHAR(255),
 
   PRIMARY KEY (ProfileId),
   FOREIGN KEY (UserId) REFERENCES Users (UserId) ON DELETE CASCADE on UPDATE CASCADE
@@ -127,8 +128,8 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
 
 INSERT INTO my_ti.Users VALUES (1,'admin','qwerty','Admin','Admin','admin@myTi.com');
 INSERT INTO my_ti.Users VALUES (2,'admin2','qwerty','Admin2','Admin2','admin2@myTi.com');
-INSERT INTO Profiles VALUES (default, 1, 'admin', 'admin','admin@myTi.com');
-INSERT INTO Profiles VALUES (default, 2, 'admin2', 'admin2','admin2@myTi.com');
+INSERT INTO Profiles VALUES (default, 1, 'admin', 'admin','admin@myTi.com','resources/profilePictures/defaultProfile.jpg');
+INSERT INTO Profiles VALUES (default, 2, 'admin2', 'admin2','admin2@myTi.com','resources/profilePictures/defaultProfile.jpg');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

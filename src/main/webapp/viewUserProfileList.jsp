@@ -1,6 +1,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="lv.javaguru.java2.domain.UserProfileList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.awt.*" %>
+<%@ page import="javax.swing.*" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
   Date: 2016.04.23.
@@ -119,6 +121,7 @@
 <body>
 <%List<UserProfileList> userProfileList = (List<UserProfileList>) request.getAttribute("data");%>
 
+
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
     <div id="page-wrapper">
@@ -136,7 +139,11 @@
         <p><b>Surname:</b><%=userProfileList.get(i).getLastName()%></p>
     </div>
     <div>
+
         <h4>E-mail:</h4><p><%=userProfileList.get(i).getEmail()%></p>
+    </div>
+    <div>
+        <img src="<%=userProfileList.get(i).getProfilePicture()%>">
     </div>
     <div>
         <form method="get" action="addChallenge" name="recipientId">

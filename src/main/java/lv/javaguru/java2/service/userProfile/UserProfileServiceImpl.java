@@ -58,6 +58,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setFirstName((String)profileData.get("firstName"));
         userProfile.setLastName((String)profileData.get("lastName"));
         userProfile.setEmail((String)profileData.get("email"));
+        userProfile.setProfilePicture((String) profileData.get("profilePicture"));
         try {
             userProfileDAO.update(userProfile);
         } catch (DBException e) {
@@ -65,10 +66,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
     }
 
-    @Override
-    public void addFoto() {
-
-    }
 
     @Override
     public List<UserProfileList> getAllUserProfile() throws UserProfileException {
@@ -77,7 +74,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             return allUserProfile.stream().map(userProfiles ->
                     new UserProfileList(userProfiles.getUserId(),
                             userProfiles.getFirstName(),userProfiles.getLastName(),
-                            userProfiles.getEmail())).collect(Collectors.toList());
+                            userProfiles.getEmail(),userProfiles.getProfilePicture())).collect(Collectors.toList());
         } catch (DBException e) {
             throw new UserProfileException(e.getMessage());
         }

@@ -72,6 +72,7 @@ public class EditUserProfileController implements MVCController {
         profileData.put("lastName",req.getParameter("lastName"));
         profileData.put("email",req.getParameter("email"));
         profileData.put("userId",userDTO.getUserId());
+        profileData.put("profilePicture",req.getParameter("profilePicture"));
         UserProfile userProfile = null;
         userProfileService.setUserProfileDAO(userProfileDAO);
       try {

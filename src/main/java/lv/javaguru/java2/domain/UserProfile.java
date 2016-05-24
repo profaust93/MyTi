@@ -21,7 +21,16 @@ public class UserProfile {
     @Column(name = "Email")
     private String email;
 
-    //private String imagePath;
+    private String profilePicture;
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public UserProfile setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+        return this;
+    }
 
     public UserProfile() {}
 
