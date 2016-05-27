@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.hibernate;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
@@ -26,7 +27,7 @@ import static org.junit.Assert.assertNull;
  * Created by Ruslan on 2016.04.20..
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = TestSpringConfig.class)
 @Rollback(true)
 public class TimeLapsDAOImplTest {
     @Autowired
@@ -39,8 +40,8 @@ public class TimeLapsDAOImplTest {
     private final String SHORT_DESCRIPTION = "Short Description";
     private final String LONG_DESCRIPTION = "Long Description";
     private final String CATEGORY = "Sport";
-    private final Long FIRST_USER_ID = 12L;
-    private final Long SECOND_USER_ID = 15L;
+    private final Long FIRST_USER_ID = 1L;
+    private final Long SECOND_USER_ID = 2L;
     private final String NAME = "TimeLaps";
 
     @Before

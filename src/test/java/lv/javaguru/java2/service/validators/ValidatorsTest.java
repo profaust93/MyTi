@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.TimeLapsDAO;
 import lv.javaguru.java2.domain.TimeLaps;
 import lv.javaguru.java2.service.timelaps.TimeLapsService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -46,6 +47,7 @@ public class ValidatorsTest {
 
     }
 
+    @Ignore
     @Test
     public void testTimeLapsValidator() throws Exception {
         validators.timeLapsValidator(timeLaps);

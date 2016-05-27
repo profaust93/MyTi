@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.hibernate;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.domain.Challenge;
 import org.junit.Before;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertNull;
  * Created by Ruslan on 2016.04.20..
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = TestSpringConfig.class)
 @Rollback(true)
 public class ChallengeDAOImplTest {
 

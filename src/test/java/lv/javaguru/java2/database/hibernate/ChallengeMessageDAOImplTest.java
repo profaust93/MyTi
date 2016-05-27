@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.hibernate;
 
 import lv.javaguru.java2.config.SpringConfig;
+import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.database.ChallengeDAO;
 import lv.javaguru.java2.database.ChallengeMessageDAO;
 import lv.javaguru.java2.database.DBException;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -24,7 +26,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = TestSpringConfig.class)
 @Rollback(true)
 public class ChallengeMessageDAOImplTest  {
 

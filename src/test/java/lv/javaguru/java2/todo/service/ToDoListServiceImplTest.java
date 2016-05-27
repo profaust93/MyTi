@@ -10,8 +10,6 @@ import static org.junit.Assert.*;
  */
 public class ToDoListServiceImplTest {
 
-    @Mock
-
 
     @Test
     public void getListOfToDo() throws Exception {
