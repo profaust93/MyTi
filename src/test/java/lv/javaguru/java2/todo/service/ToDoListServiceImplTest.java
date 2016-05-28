@@ -5,15 +5,12 @@ import org.mockito.Mock;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by german on 5/19/16 for MyTi project.
- */
 public class ToDoListServiceImplTest {
 
 
     @Test
-    public void getListOfToDo() throws Exception {
+    public void shouldThrowExceptionIf() throws Exception {
+
 
     }
-
 }

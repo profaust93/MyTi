@@ -19,7 +19,7 @@ import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = "lv.javaguru.java2.database.hibernate")
+@ComponentScan(basePackages = {"lv.javaguru.java2.todo.database","lv.javaguru.java2.database.hibernate"})
 @EnableTransactionManagement
 public class TestSpringConfig {
 

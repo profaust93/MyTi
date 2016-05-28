@@ -76,7 +76,7 @@ public class SpringConfig {
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setPackagesToScan(packagesToScan);
+        sessionFactoryBean.setPackagesToScan(packagesToScan.split(";"));
         sessionFactoryBean.setHibernateProperties(properties);
         sessionFactoryBean.afterPropertiesSet();
         return sessionFactoryBean.getObject();

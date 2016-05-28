@@ -17,7 +17,7 @@ import java.util.List;
 public class BaseDAO {
 
     @Autowired
-    SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     public void delete(final Object object){
         sessionFactory.getCurrentSession().delete(object);

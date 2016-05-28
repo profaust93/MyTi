@@ -8,5 +8,4 @@ import java.util.List;
 public interface ToDoListService {
 
     List<ToDoListModel> getListOfToDo(Integer page) throws ToDoException;
-
 }

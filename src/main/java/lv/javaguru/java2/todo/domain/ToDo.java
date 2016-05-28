@@ -1,12 +1,15 @@
 package lv.javaguru.java2.todo.domain;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "ToDoTask")
+@Table(name = "ToDoList")
 public class ToDo {
 
     @Id
@@ -14,7 +17,7 @@ public class ToDo {
     @Column(name = "Id")
     private Long Id;
 
-    @Column(name = "TaskName")
+    @Column(name = "Name")
     private String name;
 
     @Column(name = "CreateTime", nullable = false)
@@ -31,6 +34,13 @@ public class ToDo {
 
     @Column(name = "Done")
     private Boolean isComplete;
+
+    @ElementCollection
+    @CollectionTable(name="ToDoTask", joinColumns=@JoinColumn(name="toDoId"))
+    private List<ToDoTask> toDoTaskList;
+
+    @Column(name = "UserId")
+    private Long userId;
 
     public Long getId() {
         return Id;
@@ -83,6 +93,24 @@ public class ToDo {
 
     public ToDo setComplete(Boolean complete) {
         isComplete = complete;
+        return this;
+    }
+
+    public List<ToDoTask> getToDoTaskList() {
+        return toDoTaskList;
+    }
+
+    public ToDo setToDoTaskList(List<ToDoTask> toDoTaskList) {
+        this.toDoTaskList = toDoTaskList;
+        return this;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public ToDo setUserId(Long userId) {
+        this.userId = userId;
         return this;
     }
 }
