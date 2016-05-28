@@ -1,14 +1,13 @@
-package lv.javaguru.java2.service.timelaps;
+package lv.javaguru.java2.timelaps.service;
 
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.domain.TimeLapsList;
-import lv.javaguru.java2.model.exceptions.TimeLapsException;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.domain.TimeLapsList;
+import lv.javaguru.java2.timelaps.exception.TimeLapsException;
 import lv.javaguru.java2.service.validators.ValidatorException;
 import lv.javaguru.java2.service.validators.Validators;
-import lv.javaguru.java2.service.validators.ValidatorsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

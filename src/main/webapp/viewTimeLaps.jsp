@@ -1,5 +1,5 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="lv.javaguru.java2.domain.TimeLapsList" %>
+<%@ page import="lv.javaguru.java2.timelaps.domain.TimeLapsList" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ruslan

@@ -1,8 +1,8 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;

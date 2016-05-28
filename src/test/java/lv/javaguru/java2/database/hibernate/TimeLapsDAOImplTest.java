@@ -1,10 +1,9 @@
 package lv.javaguru.java2.database.hibernate;
 
-import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

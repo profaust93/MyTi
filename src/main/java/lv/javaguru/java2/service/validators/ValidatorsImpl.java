@@ -3,7 +3,7 @@ package lv.javaguru.java2.service.validators;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Challenge;
 import lv.javaguru.java2.domain.ChallengeMessage;
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

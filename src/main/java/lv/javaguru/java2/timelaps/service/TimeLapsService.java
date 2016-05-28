@@ -1,9 +1,9 @@
-package lv.javaguru.java2.service.timelaps;
+package lv.javaguru.java2.timelaps.service;
 
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.domain.TimeLapsList;
-import lv.javaguru.java2.model.exceptions.TimeLapsException;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.domain.TimeLapsList;
+import lv.javaguru.java2.timelaps.exception.TimeLapsException;
 
 import java.util.List;
 import java.util.Map;

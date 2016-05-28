@@ -1,6 +1,7 @@
-package lv.javaguru.java2.database;
+package lv.javaguru.java2.timelaps.database;
 
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 
 import java.util.List;
 

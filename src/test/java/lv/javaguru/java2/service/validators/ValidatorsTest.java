@@ -1,8 +1,8 @@
 package lv.javaguru.java2.service.validators;
 
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
-import lv.javaguru.java2.service.timelaps.TimeLapsService;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.service.TimeLapsService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

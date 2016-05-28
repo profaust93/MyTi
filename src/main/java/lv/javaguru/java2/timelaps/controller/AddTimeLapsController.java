@@ -1,12 +1,12 @@
 
-package lv.javaguru.java2.controller.timelaps;
+package lv.javaguru.java2.timelaps.controller;
 
 import lv.javaguru.java2.controller.MVCController;
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
-import lv.javaguru.java2.service.timelaps.TimeLapsService;
+import lv.javaguru.java2.timelaps.service.TimeLapsService;
 import lv.javaguru.java2.service.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

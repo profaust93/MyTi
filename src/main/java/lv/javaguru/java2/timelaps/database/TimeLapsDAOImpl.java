@@ -1,12 +1,10 @@
-package lv.javaguru.java2.database.hibernate;
+package lv.javaguru.java2.timelaps.database;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.TimeLapsDAO;
-import lv.javaguru.java2.domain.TimeLaps;
+import lv.javaguru.java2.database.hibernate.BaseDAO;
+import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

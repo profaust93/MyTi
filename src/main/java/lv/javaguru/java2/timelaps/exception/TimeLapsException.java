@@ -1,4 +1,4 @@
-package lv.javaguru.java2.model.exceptions;
+package lv.javaguru.java2.timelaps.exception;
 
 /**
  * Created by Ruslan on 2016.04.04..
