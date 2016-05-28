@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by germans.kuzmins on 2016.04.19..
- */
 
 @Component
 @Transactional

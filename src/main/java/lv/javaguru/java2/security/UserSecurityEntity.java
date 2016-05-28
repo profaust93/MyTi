@@ -1,13 +1,10 @@
-package lv.javaguru.java2.service.user;
+package lv.javaguru.java2.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-/**
- * Created by german on 5/24/16 for MyTi project.
- */
 public class UserSecurityEntity extends User {
 
     private Long userId;

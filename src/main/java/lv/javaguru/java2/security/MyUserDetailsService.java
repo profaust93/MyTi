@@ -1,4 +1,4 @@
-package lv.javaguru.java2.service.user;
+package lv.javaguru.java2.security;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import lv.javaguru.java2.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,7 +42,7 @@ public class MyUserDetailsService implements UserDetailsService {
     // Converts lv.javaguru.java2.domain.User user to
     // org.springframework.security.core.userdetails.User
     private UserSecurityEntity buildUserForAuthentication(lv.javaguru.java2.domain.User user,
-                                            List<GrantedAuthority> authorities) {
+                                                          List<GrantedAuthority> authorities) {
         return new UserSecurityEntity(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities,user.getUserId());
     }
@@ -58,5 +57,4 @@ public class MyUserDetailsService implements UserDetailsService {
 
         return new ArrayList<>(setAuths);
     }
-
 }

@@ -3,6 +3,7 @@ package lv.javaguru.java2.todo.database;
 import lv.javaguru.java2.config.TestSpringConfig;
 import lv.javaguru.java2.todo.domain.ToDo;
 import lv.javaguru.java2.todo.domain.ToDoTask;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ import static org.junit.Assert.*;
 @Rollback
 public class ToDoDAOImplTest {
 
-    private static final Long USER_ID = 1L;
-    private static final Long ANOTHER_USER_ID = 2L;
+    private static final Long USER_ID = 2L;
+    private static final Long ANOTHER_USER_ID = 3L;
 
     @Autowired
     ToDoDAO toDoDAO;
@@ -142,9 +143,21 @@ public class ToDoDAOImplTest {
             toDoDAO.createOrUpdate(todo);
         }
 
-        List<ToDo> firstTwentyRecords = toDoDAO.getToDoForUser(USER_ID,15,25);
-        assertEquals(firstTwentyRecords.size(),15);
-        assertEquals(firstTwentyRecords.get(0).getName(), toDoListForUser.get(24).getName());
+        List<ToDo> secondTwentyRecords = toDoDAO.getToDoForUser(USER_ID,20,20);
+        assertEquals(secondTwentyRecords.size(),20);
+        assertEquals(secondTwentyRecords.get(0).getName(), toDoListForUser.get(19).getName());
+    }
+
+    //@Ignore
+    @Test
+    @Rollback(false)
+    public void createToDoTasks() throws Exception {
+
+        List<ToDo> toDoListForUser = createToDo(500,1L);
+
+        for (ToDo todo : toDoListForUser) {
+            toDoDAO.createOrUpdate(todo);
+        }
     }
 
     private List<ToDo> createToDo(Integer count, Long userId) {

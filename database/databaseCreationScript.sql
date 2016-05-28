@@ -15,7 +15,9 @@ CREATE TABLE IF NOT EXISTS my_ti.Users (
   Enabled BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (UserId)
 )
-  ENGINE = InnoDB;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
+
 DROP TABLE IF EXISTS my_ti.User_roles;
 CREATE TABLE my_ti.User_roles (
   User_role_id int(11) NOT NULL AUTO_INCREMENT,
@@ -122,6 +124,8 @@ INSERT INTO Users(UserId,Username,Password,Enabled)
 VALUES (1,'admin','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
 INSERT INTO Users(UserId,Username,Password,Enabled)
 VALUES (2,'gera','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
+INSERT INTO Users(UserId,Username,Password,Enabled)
+VALUES (3,'ruslan','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
 
 INSERT INTO User_roles (UserId, Role)
 VALUES (1, 'ROLE_USER');
