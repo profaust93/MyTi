@@ -19,8 +19,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>ToDoList</h1>
+                    <ul class="pagination">
+                        <c:forEach begin="1" end="${pageCount}" var="i">
+                            <c:choose>
+                                <c:when test="${page eq i}">
+                                    <li class="active"><a href="${pageContext.request.contextPath}/todoList?page=${i}">${i}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="${pageContext.request.contextPath}/todoList?page=${i}">${i}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ul>
+                    <c:if test="${!empty todoList}">
 
-                    <c:if test="${!empty data}">
                         <table class="table table-striped table-list-search table-hover ">
                             <thead>
                             <tr>
@@ -31,16 +43,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${data}" var="todo">
-                                <%--<jsp:useBean id="todo"
-                                             class="lv.javaguru.java2.todo.form.ToDoListModel" scope="page"/>--%>
+                            <c:forEach items="${todoList}" var="todo">
+                                <jsp:useBean id="todo"
+                                             class="lv.javaguru.java2.todo.form.ToDoListModel" scope="page"/>
                                 <tr>
-                                    <td>${todo.toDoName}</td>
-                                    <td>${todo.fromatedDeadLineDate}</td>
-                                    <%--<td><tags:localDate date="${todo.deadLine}"/></td>--%>
+                                    <td>${todo.name}</td>
+                                    <td>${todo.formatedDeadLineTime}</td>
                                     <td>${todo.taskCount}</td>
-                                    <td><fmt:formatNumber type="percent"
-                                                          maxIntegerDigits="3" value="${todo.percentDone}" /></td>
+                                    <td>${todo.complete}</td>
                                     <td>
                                         <div class='pull-right'>
                                             <a class="btn btn-success" href="<c:url value='/java2/todo/${todo.id}/edit' />" >Edit</a>

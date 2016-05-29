@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface ToDoListService {
 
-    List<ToDoListModel> getListOfToDo(Integer page) throws ToDoException;
+    List<ToDoListModel> getListOfToDoForUser(Integer page, Long UserId) throws ToDoException;
+
+    Integer getNumberOfPage(Long UserId) throws ToDoException;
+
 }
