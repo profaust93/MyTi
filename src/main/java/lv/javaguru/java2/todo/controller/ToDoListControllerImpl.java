@@ -1,15 +1,11 @@
 package lv.javaguru.java2.todo.controller;
 
 import lv.javaguru.java2.security.SecurityService;
-import lv.javaguru.java2.security.UserSecurityEntity;
-import lv.javaguru.java2.todo.exception.ToDoError;
 import lv.javaguru.java2.todo.exception.ToDoException;
 import lv.javaguru.java2.todo.form.ToDoListModel;
 import lv.javaguru.java2.todo.service.ToDoListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +17,7 @@ import java.util.List;
 
 
 @Controller
-public class ToDoControllerImpl implements ToDoController {
+public class ToDoListControllerImpl implements ToDoListController {
 
     @Autowired
     private ToDoListService toDoListService;

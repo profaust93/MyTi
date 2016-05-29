@@ -171,5 +171,4 @@ public class ToDoDAOImplTest {
                         .setToDoTaskList(Collections.singletonList(new ToDoTask().setName("test")))
                 ).collect(Collectors.toList());
     }
-
 }

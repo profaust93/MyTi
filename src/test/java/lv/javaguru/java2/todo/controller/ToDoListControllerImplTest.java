@@ -1,8 +1,6 @@
 package lv.javaguru.java2.todo.controller;
 
 import lv.javaguru.java2.security.SecurityService;
-import lv.javaguru.java2.todo.controller.ToDoController;
-import lv.javaguru.java2.todo.controller.ToDoControllerImpl;
 import lv.javaguru.java2.todo.exception.ToDoException;
 import lv.javaguru.java2.todo.service.ToDoListService;
 import lv.javaguru.java2.todo.form.ToDoListModel;
@@ -21,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lv.javaguru.java2.todo.exception.ToDoError.*;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -32,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ToDoControllerImplTest {
+public class ToDoListControllerImplTest {
 
     @Mock
     private ToDoListService toDoListService;
@@ -41,7 +38,7 @@ public class ToDoControllerImplTest {
     private SecurityService securityService;
 
     @InjectMocks
-    private ToDoController toDoController = new ToDoControllerImpl();
+    private ToDoListController toDoListController = new ToDoListControllerImpl();
 
     private MockMvc mockMvc;
 
@@ -49,7 +46,7 @@ public class ToDoControllerImplTest {
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = standaloneSetup(toDoController)
+        mockMvc = standaloneSetup(toDoListController)
                 .setSingleView(new InternalResourceView("toDoList.jsp"))
                 .build();
 
