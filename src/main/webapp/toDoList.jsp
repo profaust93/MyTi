@@ -62,7 +62,7 @@
                             </tbody>
                         </table>
                     </c:if>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='/java2/addToDo'">Add ToDo</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='/addToDo'">Add ToDo</button>
                 </div>
             </div>
         </div>

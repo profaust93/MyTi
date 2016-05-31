@@ -148,7 +148,7 @@ public class ToDoDAOImplTest {
         assertEquals(secondTwentyRecords.get(0).getName(), toDoListForUser.get(19).getName());
     }
 
-    //@Ignore
+    @Ignore
     @Test
     @Rollback(false)
     public void createToDoTasks() throws Exception {
@@ -171,5 +171,4 @@ public class ToDoDAOImplTest {
                         .setToDoTaskList(Collections.singletonList(new ToDoTask().setName("test")))
                 ).collect(Collectors.toList());
     }
-
 }
