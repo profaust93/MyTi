@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS my_ti.Users (
   Username VARCHAR(45) NOT NULL ,
   Password VARCHAR(60) NOT NULL ,
   Enabled BIT NOT NULL DEFAULT 1,
+/*  Firstname VARCHAR(45) NOT NULL ,
+  Lastname VARCHAR(45) NOT NULL ,
+  Email VARCHAR(45) NOT NULL ,*/
   PRIMARY KEY (UserId)
 )
   ENGINE = InnoDB

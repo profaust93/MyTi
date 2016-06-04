@@ -50,7 +50,7 @@
                                 <button type="button" class="btn btn-link pull-right" onclick="location.href='${pageContext.request.contextPath}/register'; return false;">Register</button>
                             </div>
 
-                        </fieldset>
+                    </fieldset>
                     </form>
                 </div>
             </div>
