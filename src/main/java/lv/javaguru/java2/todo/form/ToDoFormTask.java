@@ -3,7 +3,7 @@ package lv.javaguru.java2.todo.form;
 /**
  * Created by germans.kuzmins on 2016.05.29..
  */
-public class ToDoTask {
+public class ToDoFormTask {
 
     private String name;
 
@@ -11,7 +11,7 @@ public class ToDoTask {
         return name;
     }
 
-    public ToDoTask setName(String name) {
+    public ToDoFormTask setName(String name) {
         this.name = name;
         return this;
     }

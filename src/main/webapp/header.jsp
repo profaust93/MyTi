@@ -28,6 +28,8 @@
     <!-- Custom Fonts -->
     <link href="${pageContext.request.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="${pageContext.request.contextPath}/resources/css/jquery.simple-dtpicker.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,9 +45,12 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
+    <%--DateTime Picker--%>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.simple-dtpicker.js"></script>
+
+<%--    <!-- Morris Charts JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/raphael.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script>--%>
 
 </head>
