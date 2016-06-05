@@ -14,6 +14,9 @@
 <html>
 <jsp:include page="/header.jsp"/>
 <body>
+<link href="${pageContext.request.contextPath}/resources/css/todos.css" type="text/css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath}/resources/js/todos.js"></script>
+
 
 <div id="wrapper">
     <jsp:include page="/navbar.jsp"/>
@@ -28,36 +31,29 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="deadLineTime">DeadLine</label>
-                            <form:input path="deadLineTime" id="deadLineTime" type="datetime" class="form-control" placeholder="DeadLine"/>
+                            <label for="formatedDeadLineTime">DeadLine</label>
+                            <form:input path="formatedDeadLineTime" id="formatedDeadLineTime" type="text" class="form-control" placeholder="DeadLine"/>
+
+                            <script type="text/javascript">
+                                $(function(){
+                                    $('#formatedDeadLineTime').appendDtpicker();
+                                });
+                            </script>
                         </div>
                         <h4>Task</h4>
                     <div class="form-group">
-                        <c:forEach items="${toDo.toDoTaskList}" var="task" varStatus="i" begin="0" >
-                            <div class = "row">
+                            <div id="todoapp">
+                                    <input id="new-todo" class="form-control" type="text" placeholder="What needs to be done?">
+                                    <section id='main'>
+                                        <ul id='todo-list'>
+                                        </ul>
+                                    </section>
+                                    <footer> <a id="clear-completed">Clear completed</a>
+                                        <div id='todo-count'></div>
+                                    </footer>
+                            </div>
 
-                                <div class = "col-md-4">
-                                    <input id="taskName" type="text" class="form-control" placeholder="Task Name"/>
-                                </div>
-                                <div style="display: none;" class = "goalsDiv" >
-                                    <div class = "col-md-4">
-                                        <label>Task count
-                                        <form:input path="toDoTaskList[${i.index}].name" id="name${i.index}"/>
-                                        </label>
-                                    </div>
-                            </div>
-                        </c:forEach>
-                        <c:out value="${toDo.toDoName}"></c:out>
-                        <c:if test="${toDo.toDoTaskList.size() == 0}">
-                            <div class = "row">
-                                <div class = "col-md-4">
-                                    <form:input path="toDoTaskList[0].name" class="form-control" name="toDoTaskList[].name" value="" placeholder="Task Name"/>
-                                </div>
-                            </div>
-                        </c:if>
                         </div>
-                        <button id="addTask" type="button" class="btn btn-primary btn-xs">Add Another Task</button>
-
                         <div class="form-group">
                             <label for="notes">Notes</label>
                             <form:textarea path="notes" id="notes" rows="5" cols="30" class="form-control" placeholder="Notes"/>
@@ -72,4 +68,7 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript">
+</script>
 </html>

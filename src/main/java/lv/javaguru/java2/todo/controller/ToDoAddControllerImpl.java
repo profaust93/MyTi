@@ -39,7 +39,7 @@ public class ToDoAddControllerImpl implements ToDoAddController {
     @RequestMapping(value = "/addToDo", method = RequestMethod.POST)
     public String addToDo(@ModelAttribute("toDo") ToDoFormModel toDoFormModel, RedirectAttributes redirectAttributes) {
         try {
-            toDoService.upsertToDo(toDoFormModel);
+            toDoService.upsertToDo(toDoFormModel, securityService.getCurrentUserId());
         } catch (ToDoException e) {
             redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
             handleError(redirectAttributes,e.getToDoError());
@@ -52,6 +52,10 @@ public class ToDoAddControllerImpl implements ToDoAddController {
         switch (toDoError) {
             case TO_DO_ERROR:
                 redirectAttributes.addFlashAttribute("error", "Service error");
+                break;
+            case VALIDATION_FAILS:
+                redirectAttributes.addFlashAttribute("error", "Validation fails");
+                break;
         }
     }
 }
