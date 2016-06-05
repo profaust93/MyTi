@@ -24,22 +24,17 @@ public class User {
     @Column(name = "Enabled", nullable = false)
     private Boolean enabled;
 
-    @Column(name = "Firstname",nullable = false,
-            length = 45)
-    private String firstName;
-
-    @Column(name = "Lastname",nullable = false,
-            length = 45)
-    private String lastName;
-
-    @Column(name = "Email",nullable = false,
-            length = 45)
-    private String email;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private UserProfile userProfile;
+
     public User() {
+    }
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User(String username, String password, boolean enabled) {
@@ -59,7 +54,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public User setUsername(String username) {
         this.username = username;
         return this;
@@ -68,7 +62,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public User setPassword(String password) {
         this.password = password;
         return this;
@@ -77,7 +70,6 @@ public class User {
     public boolean isEnabled() {
         return enabled;
     }
-
     public User setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -86,7 +78,6 @@ public class User {
     public Set<UserRole> getUserRole() {
         return userRole;
     }
-
     public User setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
         return this;
@@ -95,7 +86,6 @@ public class User {
     public Long getUserId() {
         return userId;
     }
-
     public User setUserId(Long userId) {
         this.userId = userId;
         return this;
@@ -104,33 +94,16 @@ public class User {
     public Boolean getEnabled() {
         return enabled;
     }
-
     public User setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

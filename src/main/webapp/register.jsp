@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%  if (((String) session.getAttribute("login")) != null)
+    response.sendRedirect("/index");
+%>
 <html lang="en">
-
 <jsp:include page="/header.jsp"/>
 <body>
 
@@ -19,19 +21,15 @@
                             <c:url value="/register" var="registrUrl"/>
                             <form action="${registrUrl}" method="post">
                             <fieldset>
-                                <c:if test="${param.error != null}">
-                                    <div id = "emptyFields" class="alert alert-danger" style="display: none">
-                                        Fill all fields
+                                <% String error = (String) request.getAttribute("model");
+                                    if (error != null) {%>
+                                    <div class="alert alert-danger" style="display: none">
+                                        <%="Error: " + error%>
                                     </div>
-                                </c:if>
+                                <% } %>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Login" name="login" type="text" autofocus>
                                 </div>
-                                <c:if test="${param.error != null}">
-                                    <div id = "existLogin" class="alert alert-danger" style="display: none">
-                                        User already exists
-                                    </div>
-                                </c:if>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" />
                                 </div>
@@ -46,6 +44,9 @@
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
+                                <input type="hidden"
+                                       name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
                                 <button class="btn btn-lg btn-success btn-block" type="submit" class="btn">Registration</button>
                             </fieldset>
                         </form>
