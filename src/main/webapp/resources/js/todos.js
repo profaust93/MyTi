@@ -16,6 +16,7 @@ $(document).ready(function() {
           $currentListItem = $(this).closest('li');
 
           $currentListItem.remove();
+			generateToDoTaskIndextodoList();
         });
 
         $('.toggle').on('click', function(e) {
@@ -45,7 +46,9 @@ $(document).ready(function() {
 				"<li>" +
           "<div class='view'>" +
             "<input class='toggle' type='checkbox'>" +
+		  	"<input class='springcheckbox' type='hidden' value='off' name=''/>"+
             "<label data=''>" + " " + $('#new-todo').val() + "</label>" +
+		  	"<input type='hidden' class = 'task' name = '' value='"+$('#new-todo').val()+"'/>" +
             "<a class='destroy'></a>" +
           "</div>" +
         "</li>";
@@ -54,7 +57,17 @@ $(document).ready(function() {
 		$todoList.html(todos);
 		runBind();
 		$('#main').show();
+
+		generateToDoTaskIndextodoList($todoList);
     
   }}); // end if
+	function generateToDoTaskIndextodoList() {
+		var toDoList  = $("#todoapp").find("li");
+		toDoList.each(function( index ) {
+			$(this).find("input.task").attr("name","toDoFormTaskList["+index+"].name");
+			$(this).find("input.toggle").attr("name","toDoFormTaskList["+index+"].done");
+			$(this).find("input.springcheckbox").attr("name","_toDoFormTaskList["+index+"].done");
+		});
+	}
 });
 

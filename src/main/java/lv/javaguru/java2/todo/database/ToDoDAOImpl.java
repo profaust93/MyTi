@@ -57,7 +57,7 @@ public class ToDoDAOImpl extends BaseDAO implements ToDoDAO {
 
     @Override
     public void createOrUpdate(ToDo toDo) throws DBException {
-        if(toDo.getComplete() == null) {
+        if(toDo.getCreateTime() == null) {
             toDo.setCreateTime(LocalDateTime.now());
         }
         try {
