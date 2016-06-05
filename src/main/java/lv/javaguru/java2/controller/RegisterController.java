@@ -3,6 +3,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.UserProfile;
+import lv.javaguru.java2.domain.UserRole;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 
 /**
  * Created by Kemran on 02/04/2016.
@@ -37,9 +39,11 @@ public class RegisterController {
         ModelAndView modelAndView = new ModelAndView("register");
         HttpSession session = req.getSession();
         User user = new User(req.getParameter("login"),
-                req.getParameter("password"));
-        UserProfile userProfile = new UserProfile(req.getParameter("firstName"),
-                req.getParameter("lastName"),
+                req.getParameter("password"),
+                true,
+                Collections.singleton(new UserRole().setRole("ROLE_USER")));
+        UserProfile userProfile = new UserProfile(req.getParameter("firstname"),
+                req.getParameter("lastname"),
                 req.getParameter("email"));
 
         if(checkFields(user, userProfile)) return modelAndView.addObject("model", "All fields must be filled");
@@ -53,8 +57,8 @@ public class RegisterController {
                 return modelAndView.addObject("model","Something gone wrong with DB.");
             }
             session.setAttribute("login", req.getParameter("login"));
-            session.setAttribute("firstName", req.getParameter("firstName"));
-            session.setAttribute("lastName", req.getParameter("lastName"));
+            session.setAttribute("firstname", req.getParameter("firstname"));
+            session.setAttribute("lastname", req.getParameter("lastname"));
 
         } else {
             return modelAndView.addObject("model", "User already exists");

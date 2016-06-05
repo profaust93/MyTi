@@ -1,7 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%  if (((String) session.getAttribute("login")) != null)
+<%--<%  if (((String) session.getAttribute("login")) != null)
     response.sendRedirect("/index");
-%>
+%>--%>
 <html lang="en">
 <jsp:include page="/header.jsp"/>
 <body>
@@ -22,8 +23,8 @@
                             <form action="${registrUrl}" method="post">
                             <fieldset>
                                 <% String error = (String) request.getAttribute("model");
-                                    if (error != null) {%>
-                                    <div class="alert alert-danger" style="display: none">
+                                    if (error != null) { %>
+                                    <div class="alert alert-danger">
                                         <%="Error: " + error%>
                                     </div>
                                 <% } %>
