@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityServiceImpl implements SecurityService {
     @Override
-    public Long getCurrentUserId() throws ToDoException {
+    public Long getCurrentUserId() throws Exception {
         try {
             UserSecurityEntity user = (UserSecurityEntity) SecurityContextHolder
                     .getContext().getAuthentication().getPrincipal();
             return user.getUserId();
         } catch (Exception e) {
-            throw new ToDoException(ToDoError.TO_DO_ERROR);
+            throw new Exception("Bad Login", e);
         }
     }
 }

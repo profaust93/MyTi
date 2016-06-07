@@ -46,6 +46,10 @@ public class ToDoAddControllerImpl implements ToDoAddController {
             redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
             handleError(redirectAttributes,e.getToDoError());
             return "redirect:/addToDo";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
+            redirectAttributes.addFlashAttribute("error", "Service error");
+            return "redirect:/addToDo";
         }
         return "redirect:/todoList";
     }

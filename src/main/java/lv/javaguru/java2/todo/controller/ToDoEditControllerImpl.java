@@ -51,6 +51,10 @@ public class ToDoEditControllerImpl implements ToDoEditController {
             redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
             handleError(redirectAttributes,e.getToDoError());
             return "redirect:/toDo/"+id+"/edit";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
+            redirectAttributes.addFlashAttribute("error", "Service error");
+            return "redirect:/toDo/"+id+"/edit";
         }
         return "redirect:/todoList";
     }
@@ -62,6 +66,8 @@ public class ToDoEditControllerImpl implements ToDoEditController {
             toDoService.deleteToDo(id, securityService.getCurrentUserId());
         } catch (ToDoException e) {
             handleError(redirectAttributes,e.getToDoError());
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Service error");
         }
         return "redirect:/todoList";
     }

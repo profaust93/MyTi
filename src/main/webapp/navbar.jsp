@@ -1,5 +1,3 @@
-<%--<%@ page import="lv.javaguru.java2.dto.UserDTO" %>
-<jsp:useBean id="user" scope="session" type="lv.javaguru.java2.dto.UserDTO"/>--%>
 <%--
   Created by IntelliJ IDEA.
   User: german
@@ -13,9 +11,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<%
-    //user = (UserDTO) session.getAttribute("user");
-%>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
