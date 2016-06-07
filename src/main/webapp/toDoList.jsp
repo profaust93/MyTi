@@ -53,8 +53,8 @@
                                     <td>${todo.complete}</td>
                                     <td>
                                         <div class='pull-right'>
-                                            <a class="btn btn-success" href="<c:url value='/java2/todo/${todo.id}/edit' />" >Edit</a>
-                                            <a class="btn btn-danger" href="<c:url value='/java2/todo/${todo.id}/delete' />" >Delete</a>
+                                            <a class="btn btn-success" href="<c:url value='${pageContext.request.contextPath}/toDo/${todo.id}/edit' />" >Edit</a>
+                                            <a class="btn btn-danger" href="<c:url value='${pageContext.request.contextPath}/toDo/${todo.id}/delete' />" >Delete</a>
                                         </div>
                                     </td>
                                 </tr>

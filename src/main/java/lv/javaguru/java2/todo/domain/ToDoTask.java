@@ -18,12 +18,25 @@ public class ToDoTask {
     private String name;
 
 
+    @Column(name = "Done")
+    private Boolean isDone;
+
+
     public String getName() {
         return name;
     }
 
     public ToDoTask setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Boolean getDone() {
+        return isDone;
+    }
+
+    public ToDoTask setDone(Boolean done) {
+        isDone = done;
         return this;
     }
 }

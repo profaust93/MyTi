@@ -3,6 +3,7 @@ package lv.javaguru.java2.todo.util;
 import lv.javaguru.java2.todo.domain.ToDo;
 import lv.javaguru.java2.todo.domain.ToDoTask;
 import lv.javaguru.java2.todo.form.ToDoFormModel;
+import lv.javaguru.java2.todo.form.ToDoFormTask;
 import lv.javaguru.java2.todo.form.ToDoListModel;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,15 @@ public class ToDoModelConverterImpl implements ToDoModelConverter {
                 .setComplete(calculateDone(toDoFormModel));
     }
 
+    @Override
+    public ToDoFormModel convertDomainToFormModel(ToDo toDo) {
+        return new ToDoFormModel().setToDoId(toDo.getId())
+                .setToDoName(toDo.getName())
+                .setNotes(toDo.getNotes())
+                .setDeadLineTime(toDo.getDeadLineTime())
+                .setToDoFormTaskList(convertToFormTasks(toDo.getToDoTaskList()));
+    }
+
     private List<ToDoTask> convertFormTaskToDomainTask(ToDoFormModel toDoFormModel) {
         if(toDoFormModel.getToDoFormTaskList() == null) {
             return Collections.singletonList(new ToDoTask()
@@ -41,7 +51,9 @@ public class ToDoModelConverterImpl implements ToDoModelConverter {
         }
         return toDoFormModel.getToDoFormTaskList().stream()
                 .map(e -> new ToDoTask()
-                        .setName(e.getName())).collect(Collectors.toList());
+                        .setName(e.getName())
+                        .setDone(e.getDone()))
+                .collect(Collectors.toList());
     }
 
     private Boolean calculateDone(ToDoFormModel toDoFormModel) {
@@ -53,5 +65,13 @@ public class ToDoModelConverterImpl implements ToDoModelConverter {
                  .filter(e -> !e.getDone())
                  .findAny().isPresent();
     }
+
+    private List<ToDoFormTask> convertToFormTasks(List<ToDoTask> taskList) {
+        return taskList.stream()
+                .map( e -> new ToDoFormTask().setDone(e.getDone()).setName(e.getName()))
+                .collect(Collectors.toList());
+    }
+
+
 
 }
