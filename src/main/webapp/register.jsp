@@ -1,5 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%  if (((String) session.getAttribute("login")) != null)
+    response.sendRedirect("/index");
+%>--%>
 <html lang="en">
+<jsp:include page="/header.jsp"/>
 <body>
 
     <div class="container">
@@ -14,35 +19,36 @@
                         <h3 class="panel-title">Please Sign Up</h3>
                     </div>
                     <div class="panel-body">
-                        <form id="registerForm" method="post" role="form">
+                            <c:url value="/register" var="registrUrl"/>
+                            <form action="${registrUrl}" method="post">
                             <fieldset>
-                                <div id = "emptyFields" class="alert alert-danger" style="display: none">
-                                    Fill all fields
-                                </div>
+                                <% String error = (String) request.getAttribute("model");
+                                    if (error != null) { %>
+                                    <div class="alert alert-danger">
+                                        <%="Error: " + error%>
+                                    </div>
+                                <% } %>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Login" name="login" type="text" autofocus>
                                 </div>
-                                <div id = "existLogin" class="alert alert-danger" style="display: none">
-                                    User already exists
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password" />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Firstname" name="firstname" type="text"/>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Username" name="firstname" type="text" value="">
+                                    <input class="form-control" placeholder="Lastname" name="lastname" type="text"/>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Lastname" name="lastname" type="text" value="">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Email" name="email" type="email" value="">
-                                </div>
-                                <div id = "existEmail" class="alert alert-danger" style="display: none">
-                                    Email already exists
+                                    <input class="form-control" placeholder="Email" name="email" type="email" />
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a class="btn btn-lg btn-success btn-block" onclick="register(); return false;">Registration</a>
+                                <input type="hidden"
+                                       name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
+                                <button class="btn btn-lg btn-success btn-block" type="submit" class="btn">Registration</button>
                             </fieldset>
                         </form>
                     </div>

@@ -27,6 +27,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private UserProfile userProfile;
+
     public User() {
     }
 
@@ -47,7 +50,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public User setUsername(String username) {
         this.username = username;
         return this;
@@ -56,7 +58,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public User setPassword(String password) {
         this.password = password;
         return this;
@@ -65,7 +66,6 @@ public class User {
     public boolean isEnabled() {
         return enabled;
     }
-
     public User setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -74,7 +74,6 @@ public class User {
     public Set<UserRole> getUserRole() {
         return userRole;
     }
-
     public User setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
         return this;
@@ -83,7 +82,6 @@ public class User {
     public Long getUserId() {
         return userId;
     }
-
     public User setUserId(Long userId) {
         this.userId = userId;
         return this;
@@ -92,9 +90,16 @@ public class User {
     public Boolean getEnabled() {
         return enabled;
     }
-
     public User setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
     }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
 }

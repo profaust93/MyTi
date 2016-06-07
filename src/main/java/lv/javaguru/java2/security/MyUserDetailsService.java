@@ -32,9 +32,11 @@ public class MyUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         lv.javaguru.java2.domain.User user = userDao.findByUserName(username);
+        if(user == null) {
+            throw new UsernameNotFoundException("User Not Found");
+        }
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getUserRole());
-
         return buildUserForAuthentication(user, authorities);
 
     }

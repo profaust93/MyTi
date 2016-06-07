@@ -20,16 +20,10 @@
                     <c:url value="/login" var="loginUrl"/>
                     <form action="${loginUrl}" method="post">
                     <fieldset>
-
-                        <c:if test="${param.error != null}">
-                            <div id = "wrongLogin" class="alert alert-danger" style="display: none">
-                                Wrong login or password.
-                            </div>
-                        </c:if>
-
-                        <c:if test="${param.logout != null}">
-                            <div id = "wrongPass" class="alert alert-danger" style="display: none">
-                                You have been logged out.
+                        <c:if test='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message != null}'>
+                            <div style="color: red">
+                                Your login attempt was not successful, try again.<br /> Caused :
+                                    ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
                             </div>
                         </c:if>
                         <div class="form-group">
@@ -50,7 +44,7 @@
                                 <button type="button" class="btn btn-link pull-right" onclick="location.href='${pageContext.request.contextPath}/register'; return false;">Register</button>
                             </div>
 
-                        </fieldset>
+                    </fieldset>
                     </form>
                 </div>
             </div>

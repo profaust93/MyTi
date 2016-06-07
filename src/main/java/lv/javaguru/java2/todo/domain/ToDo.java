@@ -113,4 +113,10 @@ public class ToDo {
         this.userId = userId;
         return this;
     }
+
+    @PrePersist
+    public void prePersist() {
+        if(isComplete == null) //We set default value in case if the value is not set yet.
+            isComplete = false;
+    }
 }

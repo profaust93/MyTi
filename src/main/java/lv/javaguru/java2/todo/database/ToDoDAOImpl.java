@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -56,6 +57,9 @@ public class ToDoDAOImpl extends BaseDAO implements ToDoDAO {
 
     @Override
     public void createOrUpdate(ToDo toDo) throws DBException {
+        if(toDo.getCreateTime() == null) {
+            toDo.setCreateTime(LocalDateTime.now());
+        }
         try {
             super.saveOrUpdate(toDo);
         } catch (Exception e ){
