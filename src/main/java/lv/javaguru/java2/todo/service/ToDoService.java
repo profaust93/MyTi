@@ -10,4 +10,8 @@ public interface ToDoService {
 
     void upsertToDo(ToDoFormModel toDoFormModel, Long userId) throws ToDoException;
 
+    ToDoFormModel getToDoById(Long toDoId) throws ToDoException;
+
+    void deleteToDo(Long toDoId, Long userId) throws ToDoException;
+
 }

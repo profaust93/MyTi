@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static lv.javaguru.java2.todo.util.ErrorMessageHandler.handleError;
+
 @Controller
 public class ToDoAddControllerImpl implements ToDoAddController {
 
@@ -44,18 +46,11 @@ public class ToDoAddControllerImpl implements ToDoAddController {
             redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
             handleError(redirectAttributes,e.getToDoError());
             return "redirect:/addToDo";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("toDo", toDoFormModel);
+            redirectAttributes.addFlashAttribute("error", "Service error");
+            return "redirect:/addToDo";
         }
         return "redirect:/todoList";
-    }
-
-    private void handleError(RedirectAttributes redirectAttributes, ToDoError toDoError) {
-        switch (toDoError) {
-            case TO_DO_ERROR:
-                redirectAttributes.addFlashAttribute("error", "Service error");
-                break;
-            case VALIDATION_FAILS:
-                redirectAttributes.addFlashAttribute("error", "Validation fails");
-                break;
-        }
     }
 }

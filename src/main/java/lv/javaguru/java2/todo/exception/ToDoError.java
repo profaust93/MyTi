@@ -4,6 +4,7 @@ public enum ToDoError {
     NO_SUCH_PAGE,
     TO_DO_ERROR,
     VALIDATION_FAILS,
-    DB_ERROR
+    DB_ERROR,
+    NO_TODO_FOUND
 
 }

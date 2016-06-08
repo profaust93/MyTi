@@ -8,4 +8,5 @@ import lv.javaguru.java2.todo.form.ToDoListModel;
 public interface ToDoModelConverter {
     ToDoListModel convertDomainToListModel(ToDo todoDomain);
     ToDo convertFormModelToDomain(ToDoFormModel toDoFormModel);
+    ToDoFormModel convertDomainToFormModel(ToDo toDo);
 }

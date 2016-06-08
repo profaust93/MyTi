@@ -69,5 +69,10 @@ $(document).ready(function() {
 			$(this).find("input.springcheckbox").attr("name","_toDoFormTaskList["+index+"].done");
 		});
 	}
+	(function initForm() {
+		runBind();
+		$('#main').show();
+		generateToDoTaskIndextodoList()
+	})()
 });
 
