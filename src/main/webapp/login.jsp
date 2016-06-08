@@ -21,11 +21,16 @@
                     <form action="${loginUrl}" method="post">
                     <fieldset>
                         <c:if test='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message != null}'>
-                            <div style="color: red">
+                            <div class="alert alert-danger">
                                 Your login attempt was not successful, try again.<br /> Caused :
                                     ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
                             </div>
                         </c:if>
+                        <%  if (((String) session.getAttribute("login")) != null) {%>
+                        <div class="alert alert-success">
+                            Great! You are now successfully registered
+                        </div>
+                        <% } %>
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input class="form-control" type="text" id="username" name="username" placeholder="Username"/>

@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%  if (((String) session.getAttribute("login")) != null)
-    response.sendRedirect("/index");
-%>--%>
+<%  if (((String) session.getAttribute("login")) != null)
+    response.sendRedirect("/");
+%>
 <html lang="en">
 <jsp:include page="/header.jsp"/>
 <body>
