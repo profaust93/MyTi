@@ -12,10 +12,13 @@ public interface ChallengeDAO {
 
     void delete(Challenge challenge) throws DBException;
 
+    Long getTotalChallengeCount(Long userId) throws DBException;
 
     Challenge getChallengeById(Long challengeId) throws DBException;
 
     List<Challenge> getAllChallengesByUserId(Long userId) throws DBException;
 
     List<Challenge> getAllChallengesForUserView(Long userId, Integer limit, Integer offset) throws DBException;
+
+    Boolean checkIfBelongToUser(Long challengeId, Long userId) throws DBException;
 }

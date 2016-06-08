@@ -15,7 +15,6 @@ public interface ToDoDAO {
 
     void createOrUpdate(ToDo toDo) throws DBException;
 
-
     void deleteToD(Long toDoId) throws DBException;
 
     ToDo getToDoById(Long id) throws DBException;

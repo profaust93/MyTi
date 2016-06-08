@@ -38,6 +38,11 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
     }
 
     @Override
+    public Long getTotalChallengeCount(Long userId) throws DBException {
+        return null;
+    }
+
+    @Override
     public Challenge getChallengeById(Long challengeId) throws DBException {
         try {
             return super.get(Challenge.class, challengeId);
@@ -68,5 +73,10 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
         } catch (Exception e) {
             throw new DBException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public Boolean checkIfBelongToUser(Long challengeId, Long userId) throws DBException {
+        return null;
     }
 }
