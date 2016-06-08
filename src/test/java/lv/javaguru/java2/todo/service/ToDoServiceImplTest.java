@@ -42,13 +42,13 @@ public class ToDoServiceImplTest {
         when(toDoModelConverter.convertFormModelToDomain(any())).thenReturn(new ToDo());
         ToDoFormModel toDoFormModel = new ToDoFormModel();
         toDoService.upsertToDo(toDoFormModel, USER_ID);
-        verify(toDoValidator).validateToDo(toDoFormModel);
+        verify(toDoValidator).validateToDo(toDoFormModel, USER_ID);
 
     }
 
     @Test
     public void shouldThrowExceptionIfValidationFails() throws Exception {
-        doThrow(new ToDoException(ToDoError.VALIDATION_FAILS)).when(toDoValidator).validateToDo(any());
+        doThrow(new ToDoException(ToDoError.VALIDATION_FAILS)).when(toDoValidator).validateToDo(any(),any());
         try{
             toDoService.upsertToDo(new ToDoFormModel(), USER_ID);
             fail("No Exception thrown");

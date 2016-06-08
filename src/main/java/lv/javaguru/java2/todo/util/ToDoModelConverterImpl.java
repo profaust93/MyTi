@@ -62,7 +62,7 @@ public class ToDoModelConverterImpl implements ToDoModelConverter {
         }
          return !toDoFormModel.getToDoFormTaskList()
                  .stream()
-                 .filter(e -> !e.getDone())
+                 .filter(e -> e.getDone() == null || !e.getDone())
                  .findAny().isPresent();
     }
 

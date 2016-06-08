@@ -29,6 +29,10 @@ public class ToDoValidatorImpl implements ToDoValidator {
         if(toDoFormModel.getToDoId() != null) {
             checkIfToDoBelongToUser(toDoFormModel.getToDoId(), userId);
         }
+
+        if (toDoFormModel.getToDoFormTaskList() == null || toDoFormModel.getToDoFormTaskList().size() == 0) {
+            throw new ToDoException(ToDoError.VALIDATION_FAILS);
+        }
     }
 
     @Override
