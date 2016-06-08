@@ -4,6 +4,8 @@ import lv.javaguru.java2.challenge.domain.Challenge;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.hibernate.BaseDAO;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +41,14 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
 
     @Override
     public Long getTotalChallengeCount(Long userId) throws DBException {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        try{
+            return (Long) session.createCriteria(Challenge.class)
+                    .add(Restrictions.eq("userId",userId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+        } catch (Exception e){
+            throw new DBException(e.getMessage(),e);
+        }
     }
 
     @Override
@@ -77,6 +86,15 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
 
     @Override
     public Boolean checkIfBelongToUser(Long challengeId, Long userId) throws DBException {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        try{
+            Long count = (Long) session.createCriteria(Challenge.class)
+                    .add(Restrictions.eq("userdId",userId))
+                    .add(Restrictions.eq("id",challengeId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new DBException(e.getMessage(), e);
+        }
     }
 }

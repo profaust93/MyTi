@@ -4,9 +4,6 @@ import lv.javaguru.java2.domain.User;
 
 import javax.persistence.*;
 
-/**
- * Created by Camille on 02.04.2016.
- */
 @Entity
 @Table(name = "Profiles")
 public class UserProfile {
@@ -31,6 +28,7 @@ public class UserProfile {
             length = 45)
     private String email;
 
+    @Column(name = "ProfilePicture")
     private String profilePicture;
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn

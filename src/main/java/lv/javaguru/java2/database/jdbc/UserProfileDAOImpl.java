@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Camille on 02.04.2016.
  *
  */
-@Component
+@Component("JDBC_UserProfileDAO")
 public class UserProfileDAOImpl extends DAOImpl implements UserProfileDAO {
     @Override
     public void create(UserProfile userProfile) throws DBException {

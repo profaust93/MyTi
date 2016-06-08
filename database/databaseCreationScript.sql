@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
     FirstName VARCHAR (30),
     LastName VARCHAR (30),
     Email VARCHAR (30),
+    ProfilePicture VARCHAR(255),
 
   PRIMARY KEY (ProfileId),
   FOREIGN KEY (UserId) REFERENCES Users (UserId)

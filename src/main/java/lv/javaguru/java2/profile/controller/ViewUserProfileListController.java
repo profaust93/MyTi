@@ -1,4 +1,4 @@
-package lv.javaguru.java2.controller.profile;
+package lv.javaguru.java2.profile.controller;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.profile.domain.UserProfileList;

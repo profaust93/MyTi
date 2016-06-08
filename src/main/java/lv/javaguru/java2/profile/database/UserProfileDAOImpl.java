@@ -1,6 +1,7 @@
-package lv.javaguru.java2.database.hibernate;
+package lv.javaguru.java2.profile.database;
 
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.hibernate.BaseDAO;
 import lv.javaguru.java2.profile.database.UserProfileDAO;
 import lv.javaguru.java2.profile.domain.UserProfile;
 import org.hibernate.Session;

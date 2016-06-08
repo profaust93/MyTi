@@ -5,6 +5,7 @@ import lv.javaguru.java2.profile.domain.UserProfile;
 
 import lv.javaguru.java2.profile.database.UserProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfileServices {
     @Autowired
+    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDAO;
     public Boolean profileExist (Long userid) throws DBException {
         Boolean exists = false;

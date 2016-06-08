@@ -7,5 +7,6 @@ public enum  ChallengeError {
     NO_SUCH_PAGE,
     CHALLENGE_ERROR,
     VALIDATION_FAILS,
-    DB_ERROR
+    DB_ERROR,
+    NO_CHALLENGE_FOUND
 }

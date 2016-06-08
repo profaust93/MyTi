@@ -6,6 +6,7 @@ import lv.javaguru.java2.todo.domain.ToDo;
 import lv.javaguru.java2.todo.form.ToDoFormModel;
 import lv.javaguru.java2.todo.form.ToDoFormTask;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,6 +25,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = TestSpringConfig.class)
 @Transactional
 @Rollback
+@Ignore
 public class ToDoServiceTestIntegration {
 
 

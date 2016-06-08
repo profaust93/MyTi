@@ -5,11 +5,13 @@ import lv.javaguru.java2.challenge.domain.SubChallenge;
 import lv.javaguru.java2.challenge.form.ChallengeFormModel;
 import lv.javaguru.java2.challenge.form.ChallengeListModel;
 import lv.javaguru.java2.challenge.form.SubChallengeForm;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ChallengeModelConverterImpl implements ChallengeModelConverter {
 
     @Override

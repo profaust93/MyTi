@@ -1,4 +1,4 @@
-package lv.javaguru.java2.controller.profile;
+package lv.javaguru.java2.profile.controller;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.DBException;
@@ -12,6 +12,7 @@ import lv.javaguru.java2.profile.service.UserProfileService;
 import lv.javaguru.java2.profile.service.UserProfileServiceImpl;
 import lv.javaguru.java2.profile.service.ProfileServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +35,11 @@ import java.util.Map;
 public class EditUserProfileController implements MVCController {
     @Autowired
     ProfileServices profileServices;
+
     @Autowired
+    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDao;
+
     UserProfileService userProfileService = new UserProfileServiceImpl();
 
 
