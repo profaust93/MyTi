@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +29,7 @@ public class ViewTimeLapsController {
     @Autowired
     private SecurityService securityService;
 
-    @RequestMapping(value = "/timeLaps", method = RequestMethod.GET)
+    @RequestMapping(value = "/viewTimeLaps", method = RequestMethod.GET)
     public ModelAndView processGet(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView("viewTimeLaps");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -42,33 +43,27 @@ public class ViewTimeLapsController {
         return modelAndView;
     }
 
-    public MVCModel processPost(HttpServletRequest req) {
-        String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
-        String deleteAllTimeLaps = req.getParameter("DeleteAllTimeLaps");
-        String addTimeLaps = req.getParameter("AddTimeLaps");
+    @RequestMapping(value = "/deleteAllTimeLaps", method = RequestMethod.GET)
+    public String processPost() {
 
-        if (deleteTimeLapsById != null) {
-            try {
-                TimeLaps timeLaps = timeLapsService.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
-                timeLapsService.deleteTimeLaps(timeLaps);
-                return new MVCModel("/redirect.jsp", "viewTimeLaps");
-            } catch (TimeLapsException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (deleteAllTimeLaps != null) {
             try {
                 timeLapsService.deleteAllTimeLaps(securityService.getCurrentUserId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return new MVCModel("/redirect.jsp", "viewTimeLaps");
-        }
 
-        if(addTimeLaps != null){
-            return new MVCModel("/redirect.jsp","addTimeLaps");
+        return "redirect:/viewTimeLaps";
+    }
+
+    @RequestMapping(value = "/deleteTimeLaps/{id}", method = RequestMethod.GET)
+    public String deleteTimeLaps(@PathVariable("id") Long id) {
+
+        try {
+            TimeLaps timeLaps = timeLapsService.getTimeLapsById(id);
+            timeLapsService.deleteTimeLaps(timeLaps);
+        } catch (TimeLapsException e) {
+            e.printStackTrace();
         }
-            return new MVCModel("/redirect.jsp", "editTimeLaps");
+        return "redirect:/viewTimeLaps";
     }
 }

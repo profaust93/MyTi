@@ -1,22 +1,24 @@
 
 package lv.javaguru.java2.timelaps.controller;
 
-import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
 import lv.javaguru.java2.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-@Component
-public class AddTimeLapsController implements MVCController {
+@Controller
+public class AddTimeLapsController {
 
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
@@ -28,15 +30,17 @@ public class AddTimeLapsController implements MVCController {
     @Autowired
     private SecurityService securityService;
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) {
+    @RequestMapping(value = "/addTimeLaps", method = RequestMethod.GET)
+    public ModelAndView processGet(HttpServletRequest req) {
         Map<String,Object> resultCheckMap = new HashMap<>();
-
-        return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
+        ModelAndView modelAndView = new ModelAndView("addTimeLaps");
+        modelAndView.addObject("data",resultCheckMap);
+       return modelAndView;
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+
+    @RequestMapping(value = "/addTimeLaps", method = RequestMethod.POST)
+    public String processPost(HttpServletRequest req) {
         Map<String,Object> resultCheckMap;
 
         TimeLaps timeLaps = new TimeLaps();
@@ -55,11 +59,7 @@ public class AddTimeLapsController implements MVCController {
 
 
         resultCheckMap = timeLapsService.addTimeLaps(timeLaps);
+        return "redirect:/viewTimeLaps";
 
-
-        if(resultCheckMap.size()!=0) return new MVCModel("/addTimeLaps.jsp",resultCheckMap);
-
-
-        return new MVCModel("/redirect.jsp","viewTimeLaps");
     }
 }

@@ -22,15 +22,12 @@
 <% List<TimeLapsList> timeLapsList = (List<TimeLapsList>) request.getAttribute("data");%>
 
 
-        <form method="post" action="viewTimeLaps" name="DeleteAllTimeLaps">
-            <button type="submit" value="Delete" name = "DeleteAllTimeLaps">Delete All</button>
-        </form>
+        <button type="button" class="" onclick="window.location.href='/deleteAllTimeLaps'">Delete All</button>
 
-        <form method="post" action="viewTimeLaps" name="AddTimeLaps">
-            <button type="submit" value="add" name="AddTimeLaps">Add New</button>
-        </form>
+        <button type="button" class="" onclick="window.location.href='/addTimeLaps'">Add TimeLaps</button>
 
-<h2>View Time Laps Page</h2>
+
+        <h2>View Time Laps Page</h2>
         <%Integer sportCount = 0;
         Integer workCount =0;
         Integer funCount= 0;
@@ -83,9 +80,8 @@
                     <form method="get" action="editTimeLaps" name="TimeLapsId">
                         <button type="submit" value="<%=timeLapsList.get(i).getTimeLapsId()%>" name = "TimeLapsId">Edit</button>
                     </form>
-                    <form method="post" action="viewTimeLaps" name="DeleteTimeLapsById">
-                        <button type="submit" value="<%=timeLapsList.get(i).getTimeLapsId()%>" name="DeleteTimeLapsById">Delete</button>
-                    </form>
+                        <button type="button" class="" onclick="window.location.href='/deleteTimeLaps/<%=timeLapsList.get(i).getTimeLapsId()%>'">Delete</button>
+                        <%--<button type="submit" value="" name="DeleteTimeLapsById">Delete</button>--%>
                 </div>
             </div>
 
