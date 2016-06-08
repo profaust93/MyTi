@@ -4,13 +4,13 @@ import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.profile.database.UserProfileDAO;
 import lv.javaguru.java2.profile.domain.UserProfile;
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.profile.exception.UserProfileException;
 import lv.javaguru.java2.profile.service.UserProfileService;
 import lv.javaguru.java2.profile.service.UserProfileServiceImpl;
 import lv.javaguru.java2.profile.service.ProfileServices;
+import lv.javaguru.java2.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -40,6 +40,9 @@ public class EditUserProfileController implements MVCController {
     @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDao;
 
+    @Autowired
+    private SecurityService securityService;
+
     UserProfileService userProfileService = new UserProfileServiceImpl();
 
 
@@ -47,19 +50,17 @@ public class EditUserProfileController implements MVCController {
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
 
         HttpSession session = req.getSession();
-        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+
         UserProfile userProfile = new UserProfile();
         userProfileService.setUserProfileDAO(userProfileDao);
         try {
-            if (profileServices.profileExist(userDTO.getUserId())){
-                   userProfile = userProfileService.getUserProfile(userDTO.getUserId());
+            if (profileServices.profileExist(securityService.getCurrentUserId())){
+                   userProfile = userProfileService.getUserProfile(securityService.getCurrentUserId());
             }
-        } catch (DBException e) {
-            e.printStackTrace();
-        }catch (UserProfileException e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-         return new MVCModel("/editUserProfile.jsp",userProfile);
+        return new MVCModel("/editUserProfile.jsp",userProfile);
     }
 
     @Override
@@ -70,29 +71,30 @@ public class EditUserProfileController implements MVCController {
          * false - create profile, return view with new profile data
          */
         HttpSession session = req.getSession();
-        UserDTO userDTO = (UserDTO) session.getAttribute("user");
         Map <String, Object> profileData = new HashMap<>();
         profileData.put("firstName",req.getParameter("firstName"));
         profileData.put("lastName",req.getParameter("lastName"));
         profileData.put("email",req.getParameter("email"));
-        profileData.put("userId",userDTO.getUserId());
+        try {
+            profileData.put("userId",securityService.getCurrentUserId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         UserProfile userProfile = null;
         userProfileService.setUserProfileDAO(userProfileDao);
       try {
-           if (profileServices.profileExist(userDTO.getUserId())){
+           if (profileServices.profileExist(securityService.getCurrentUserId())){
 
                userProfileService.updateUserProfile(profileData);
-               userProfile = userProfileService.getUserProfile(userDTO.getUserId());
+               userProfile = userProfileService.getUserProfile(securityService.getCurrentUserId());
                return new MVCModel("/viewUserProfile.jsp",userProfile);
            }
 
        userProfileService.createUserProfile(profileData);
-        userProfile = userProfileService.getUserProfile(userDTO.getUserId());
+        userProfile = userProfileService.getUserProfile(securityService.getCurrentUserId());
 
-       } catch (DBException e){
-           e.printStackTrace();
-       } catch (UserProfileException e){
-           e.printStackTrace();
+       } catch (Exception e) {
+          e.printStackTrace();
       }
 
         return new MVCModel("/viewUserProfile.jsp",userProfile);

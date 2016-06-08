@@ -1,8 +1,8 @@
 package lv.javaguru.java2.timelaps.controller;
 
 import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.timelaps.exception.TimeLapsException;
@@ -22,6 +22,9 @@ public class EditTimeLapsController implements MVCController{
 
     @Autowired
     TimeLapsService timeLapsService;
+
+    @Autowired
+    private SecurityService securityService;
 
     ModelChecks modelChecks = new ModelChecks();
 
@@ -60,10 +63,7 @@ public class EditTimeLapsController implements MVCController{
         try {
             TimeLaps timeLaps = timeLapsService.getTimeLapsById(Long.parseLong(dataMap.get("timeLapsId").toString()));
 
-
-            UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
-
-            timeLaps.setUserId(userDTO.getUserId());
+            timeLaps.setUserId(securityService.getCurrentUserId());
             timeLaps.setTimeLapsName(req.getParameter("name"));
             timeLaps.setCompleteTime(modelChecks.dateConvert(req.getParameter("date")));
             timeLaps.setCategory(req.getParameter("category"));
@@ -85,6 +85,8 @@ public class EditTimeLapsController implements MVCController{
 
 
         }catch (TimeLapsException e){
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

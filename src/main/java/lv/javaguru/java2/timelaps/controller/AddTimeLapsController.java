@@ -2,9 +2,9 @@
 package lv.javaguru.java2.timelaps.controller;
 
 import lv.javaguru.java2.controller.MVCController;
+import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
 import lv.javaguru.java2.validators.ModelChecks;
@@ -23,9 +23,9 @@ public class AddTimeLapsController implements MVCController {
     TimeLapsDAO timeLapsDAO;
     @Autowired
     TimeLapsService timeLapsService;
-    @Autowired
-    ModelChecks modelChecks;
 
+    @Autowired
+    private SecurityService securityService;
 
     @Override
     public MVCModel processGet(HttpServletRequest req) {
@@ -41,10 +41,13 @@ public class AddTimeLapsController implements MVCController {
         TimeLaps timeLaps = new TimeLaps();
 
 
-        UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
-        timeLaps.setUserId(userDTO.getUserId());
+        try {
+            timeLaps.setUserId(securityService.getCurrentUserId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         timeLaps.setTimeLapsName(req.getParameter("name"));
-        timeLaps.setCompleteTime(modelChecks.dateConvert(req.getParameter("date")));
+
         timeLaps.setCategory(req.getParameter("category"));
         timeLaps.setShortDescription(req.getParameter("shortDescription"));
         timeLaps.setLongDescription(req.getParameter("longDescription"));

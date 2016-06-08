@@ -1,7 +1,7 @@
 package lv.javaguru.java2.timelaps.controller;
 
-import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
+import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.security.UserSecurityEntity;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.timelaps.domain.TimeLapsList;
@@ -25,6 +25,9 @@ public class ViewTimeLapsController {
     @Autowired
     TimeLapsService timeLapsService;
 
+    @Autowired
+    private SecurityService securityService;
+
     @RequestMapping(value = "/timeLaps", method = RequestMethod.GET)
     public ModelAndView processGet(HttpServletRequest req) {
         ModelAndView modelAndView = new ModelAndView("viewTimeLaps");
@@ -43,7 +46,7 @@ public class ViewTimeLapsController {
         String deleteTimeLapsById = req.getParameter("DeleteTimeLapsById");
         String deleteAllTimeLaps = req.getParameter("DeleteAllTimeLaps");
         String addTimeLaps = req.getParameter("AddTimeLaps");
-        UserDTO userDTO = (UserDTO) req.getSession().getAttribute("user");
+
         if (deleteTimeLapsById != null) {
             try {
                 TimeLaps timeLaps = timeLapsService.getTimeLapsById(Long.parseLong(deleteTimeLapsById));
@@ -55,7 +58,11 @@ public class ViewTimeLapsController {
         }
 
         if (deleteAllTimeLaps != null) {
-            timeLapsService.deleteAllTimeLaps(userDTO.getUserId());
+            try {
+                timeLapsService.deleteAllTimeLaps(securityService.getCurrentUserId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return new MVCModel("/redirect.jsp", "viewTimeLaps");
         }
 
