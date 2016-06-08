@@ -81,10 +81,27 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   ChallengeState VARCHAR(20),
   Description VARCHAR(1000),
   EndTime TIMESTAMP,
+  ChallengeNote VARCHAR(255),
+  CreateTime TIMESTAMP,
+  DeadLineTime TIMESTAMP,
+  IsComplete BIT,
+  ReceiverId BIGINT(11),
+  SenderId BIGINT(11),
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 100;
+
+DROP TABLE IF EXISTS my_ti.SubChallenge;
+CREATE TABLE IF NOT EXISTS my_ti.SubChallenge
+(
+  SubChallengeName VARCHAR(100),
+  subChallengeNote VARCHAR(100),
+  ChallengeId BIGINT(11) NOT NULL,
+  IsComplete BIT,
+  FOREIGN KEY (ChallengeId) REFERENCES my_ti.Challenge(ChallengeId)
+) ENGINE = InnoDB;
+
 
 /*ToDo Table*/
 

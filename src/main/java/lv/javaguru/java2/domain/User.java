@@ -29,8 +29,8 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
-    private UserProfile userProfile;
+    /*@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private UserProfile userProfile;*/
 
     public User() {
     }
@@ -97,11 +97,11 @@ public class User {
         return this;
     }
 
-    public UserProfile getUserProfile() {
+/*    public UserProfile getUserProfile() {
         return userProfile;
     }
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
-    }
+    }*/
 
 }
