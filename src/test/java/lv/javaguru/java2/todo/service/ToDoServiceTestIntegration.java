@@ -25,6 +25,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes = TestSpringConfig.class)
 @Transactional
 @Rollback
+@Ignore
 public class ToDoServiceTestIntegration {
 
 

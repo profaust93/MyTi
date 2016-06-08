@@ -23,7 +23,8 @@ public class AddTimeLapsController implements MVCController {
     TimeLapsDAO timeLapsDAO;
     @Autowired
     TimeLapsService timeLapsService;
-
+    @Autowired
+    ModelChecks modelChecks;
     @Autowired
     private SecurityService securityService;
 
@@ -47,7 +48,7 @@ public class AddTimeLapsController implements MVCController {
             e.printStackTrace();
         }
         timeLaps.setTimeLapsName(req.getParameter("name"));
-
+        timeLaps.setCompleteTime(modelChecks.dateConvert(req.getParameter("date")));
         timeLaps.setCategory(req.getParameter("category"));
         timeLaps.setShortDescription(req.getParameter("shortDescription"));
         timeLaps.setLongDescription(req.getParameter("longDescription"));
