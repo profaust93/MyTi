@@ -1,5 +1,7 @@
 package lv.javaguru.java2.challenge.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +27,12 @@ public class Challenge {
     @Column(name = "ChallengeNote")
     private String challengeNote;
 
+    @Column(name = "CreateTime")
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
+    private LocalDateTime createTime;
+
     @Column(name = "DeadLineTime")
+    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
     private LocalDateTime deadLineTime;
 
     @Column(name = "IsComplete")
@@ -35,7 +42,14 @@ public class Challenge {
     @CollectionTable(name = "SubChallengeTask", joinColumns = @JoinColumn(name = "ChallengeId"))
     private List<SubChallengeTask> subChallengeTasks;
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
 
+    public Challenge setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+        return this;
+    }
 
     public Long getChallengeId() {
         return challengeId;

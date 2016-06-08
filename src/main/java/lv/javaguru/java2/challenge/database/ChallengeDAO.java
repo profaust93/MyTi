@@ -8,11 +8,10 @@ import java.util.List;
 
 public interface ChallengeDAO {
 
-    void create(Challenge challenge) throws DBException;
+    void saveOrUpdate(Challenge challenge) throws DBException;
 
     void delete(Challenge challenge) throws DBException;
 
-    void update(Challenge challenge) throws DBException;
 
     Challenge getChallengeById(Long challengeId) throws DBException;
 

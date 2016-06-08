@@ -10,11 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by Kemran on 27/04/2016.
- */
-
-
 @Component("ORM_UserDAO")
 @Transactional
 public class UserDAOImpl extends BaseDAO implements UserDAO {

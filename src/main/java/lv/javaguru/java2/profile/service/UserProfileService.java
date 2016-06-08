@@ -21,8 +21,6 @@ public interface UserProfileService {
     void createUserProfile(Map profileDatas);
     void updateUserProfile (Map profileData);
 
-    void addFoto();
-
     List<UserProfileList> getAllUserProfile() throws UserProfileException;
 
 

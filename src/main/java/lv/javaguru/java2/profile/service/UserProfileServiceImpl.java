@@ -6,21 +6,20 @@ import lv.javaguru.java2.profile.domain.UserProfileList;
 import lv.javaguru.java2.profile.exception.UserProfileException;
 import lv.javaguru.java2.profile.database.UserProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Created by Camille on 07.04.2016.
- */
 @Component
 public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
+    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDAO;
 
-    UserProfile userProfile;
+    private UserProfile userProfile;
     @Override
     public void setUserProfileDAO(UserProfileDAO userProfileDAO) {
     this.userProfileDAO = userProfileDAO;
@@ -59,6 +58,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfile.setFirstName((String)profileData.get("firstName"));
         userProfile.setLastName((String)profileData.get("lastName"));
         userProfile.setEmail((String)profileData.get("email"));
+        userProfile.setProfilePicture((String) profileData.get("profilePicture"));
         try {
             userProfileDAO.update(userProfile);
         } catch (DBException e) {
@@ -66,10 +66,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
     }
 
-    @Override
-    public void addFoto() {
-
-    }
 
     @Override
     public List<UserProfileList> getAllUserProfile() throws UserProfileException {
@@ -78,7 +74,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             return allUserProfile.stream().map(userProfiles ->
                     new UserProfileList(userProfiles.getUserId(),
                             userProfiles.getFirstName(),userProfiles.getLastName(),
-                            userProfiles.getEmail())).collect(Collectors.toList());
+                            userProfiles.getEmail(),userProfiles.getProfilePicture())).collect(Collectors.toList());
         } catch (DBException e) {
             throw new UserProfileException(e.getMessage());
         }
