@@ -1,0 +1,111 @@
+package lv.javaguru.java2.challenge.domain;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Table(name = "Challenge")
+public class Challenge {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ChallengeId")
+    private Long challengeId;
+
+    @Column(name = "SenderId")
+    private Long senderId;
+
+    @Column(name = "ReceiverId")
+    private Long receiverId;
+
+    @Column(name = "ChallengeName")
+    private String challengeName;
+
+    @Column(name = "ChallengeNote")
+    private String challengeNote;
+
+    @Column(name = "DeadLineTime")
+    private LocalDateTime deadLineTime;
+
+    @Column(name = "IsComplete")
+    private Boolean isComplete;
+
+    @ElementCollection
+    @CollectionTable(name = "SubChallengeTask", joinColumns = @JoinColumn(name = "ChallengeId"))
+    private List<SubChallengeTask> subChallengeTasks;
+
+
+
+    public Long getChallengeId() {
+        return challengeId;
+    }
+
+    public Challenge setChallengeId(Long challengeId) {
+        this.challengeId = challengeId;
+        return this;
+    }
+
+    public Long getSenderId() {
+        return senderId;
+    }
+
+    public Challenge setSenderId(Long senderId) {
+        this.senderId = senderId;
+        return this;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public Challenge setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
+        return this;
+    }
+
+    public String getChallengeName() {
+        return challengeName;
+    }
+
+    public Challenge setChallengeName(String challengeName) {
+        this.challengeName = challengeName;
+        return this;
+    }
+
+    public String getChallengeNote() {
+        return challengeNote;
+    }
+
+    public Challenge setChallengeNote(String challengeNote) {
+        this.challengeNote = challengeNote;
+        return this;
+    }
+
+    public List<SubChallengeTask> getSubChallengeTasks() {
+        return subChallengeTasks;
+    }
+
+    public Challenge setSubChallengeTasks(List<SubChallengeTask> subChallengeTasks) {
+        this.subChallengeTasks = subChallengeTasks;
+        return this;
+    }
+
+    public LocalDateTime getDeadLineTime() {
+        return deadLineTime;
+    }
+
+    public Challenge setDeadLineTime(LocalDateTime deadLineTime) {
+        this.deadLineTime = deadLineTime;
+        return this;
+    }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public Challenge setComplete(Boolean complete) {
+        isComplete = complete;
+        return this;
+    }
+}

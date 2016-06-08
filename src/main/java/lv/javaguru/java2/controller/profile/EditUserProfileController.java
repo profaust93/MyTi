@@ -2,17 +2,15 @@ package lv.javaguru.java2.controller.profile;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.UserProfileDAO;
-import lv.javaguru.java2.domain.UserProfile;
+import lv.javaguru.java2.profile.database.UserProfileDAO;
+import lv.javaguru.java2.profile.domain.UserProfile;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
-import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileService;
-import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
-import lv.javaguru.java2.service.userProfile.ProfileServices;
-import lv.javaguru.java2.service.userProfile.UserProfileService;
-import lv.javaguru.java2.service.userProfile.UserProfileServiceImpl;
+import lv.javaguru.java2.profile.exception.UserProfileException;
+import lv.javaguru.java2.profile.service.UserProfileService;
+import lv.javaguru.java2.profile.service.UserProfileServiceImpl;
+import lv.javaguru.java2.profile.service.ProfileServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

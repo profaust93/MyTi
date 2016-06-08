@@ -7,7 +7,7 @@ import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.dto.UserDTO;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
-import lv.javaguru.java2.service.validators.ModelChecks;
+import lv.javaguru.java2.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

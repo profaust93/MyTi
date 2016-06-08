@@ -1,4 +1,4 @@
-<%@ page import="lv.javaguru.java2.domain.ChallengeList" %>
+<%@ page import="lv.javaguru.java2.challenge.domain.ChallengeList" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan

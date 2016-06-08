@@ -1,4 +1,4 @@
-<%@ page import="lv.javaguru.java2.domain.UserProfile" %><%--
+<%@ page import="lv.javaguru.java2.profile.domain.UserProfile" %><%--
   Created by IntelliJ IDEA.
   User: Camille
   Date: 13.04.2016

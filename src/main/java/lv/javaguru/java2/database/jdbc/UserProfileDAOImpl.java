@@ -1,9 +1,8 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.UserProfileDAO;
-import lv.javaguru.java2.domain.UserProfile;
-import lv.javaguru.java2.domain.UserProfileList;
+import lv.javaguru.java2.profile.database.UserProfileDAO;
+import lv.javaguru.java2.profile.domain.UserProfile;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;

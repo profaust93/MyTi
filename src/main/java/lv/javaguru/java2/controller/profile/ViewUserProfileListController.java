@@ -1,10 +1,10 @@
 package lv.javaguru.java2.controller.profile;
 
 import lv.javaguru.java2.controller.MVCController;
-import lv.javaguru.java2.domain.UserProfileList;
+import lv.javaguru.java2.profile.domain.UserProfileList;
 import lv.javaguru.java2.model.MVCModel;
-import lv.javaguru.java2.model.exceptions.UserProfileException;
-import lv.javaguru.java2.service.userProfile.UserProfileService;
+import lv.javaguru.java2.profile.exception.UserProfileException;
+import lv.javaguru.java2.profile.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,5 +1,5 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="lv.javaguru.java2.domain.UserProfileList" %>
+<%@ page import="lv.javaguru.java2.profile.domain.UserProfileList" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan

@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="lv.javaguru.java2.domain.ChallengeMessage" %>
-<%@ page import="lv.javaguru.java2.domain.ChallengeMessageList" %><%--
+<%@ page import="lv.javaguru.java2.challenge.domain.ChallengeMessage" %>
+<%@ page import="lv.javaguru.java2.challenge.domain.ChallengeMessageList" %><%--
   Created by IntelliJ IDEA.
   User: Ruslan
   Date: 2016.04.25.

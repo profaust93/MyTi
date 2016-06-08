@@ -3,8 +3,8 @@ package lv.javaguru.java2.filter;
 
 import lv.javaguru.java2.config.SpringConfig;
 import lv.javaguru.java2.controller.*;
-import lv.javaguru.java2.controller.challenge.AddChallengeController;
-import lv.javaguru.java2.controller.challenge.ViewChallengeController;
+import lv.javaguru.java2.challenge.controller.AddChallengeController;
+import lv.javaguru.java2.challenge.controller.ViewChallengeController;
 import lv.javaguru.java2.controller.message.ViewMessageController;
 import lv.javaguru.java2.controller.profile.EditUserProfileController;
 import lv.javaguru.java2.controller.profile.ViewUserProfileController;
