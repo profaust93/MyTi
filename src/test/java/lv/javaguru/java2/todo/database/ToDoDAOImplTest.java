@@ -71,7 +71,7 @@ public class ToDoDAOImplTest {
         for (ToDo todo : toDoList) {
             toDoDAO.createOrUpdate(todo);
         }
-        toDoDAO.deleteToD(toDoList.get(0));
+        toDoDAO.deleteToD(toDoList.get(0).getId());
 
         List<ToDo> updatedList = toDoDAO.getAllToDoByUserId(USER_ID);
         assertEquals(updatedList.size(),4);

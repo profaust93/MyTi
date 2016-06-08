@@ -48,9 +48,4 @@
     <%--DateTime Picker--%>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.simple-dtpicker.js"></script>
 
-<%--    <!-- Morris Charts JavaScript -->
-    <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/raphael.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js"></script>--%>
-
 </head>

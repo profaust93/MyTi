@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
 (
   Name VARCHAR(100),
   ToDoId BIGINT(11) NOT NULL,
+  Done BIT,
   FOREIGN KEY (ToDoId) REFERENCES my_ti.ToDoList(Id)
 ) ENGINE = InnoDB;
 

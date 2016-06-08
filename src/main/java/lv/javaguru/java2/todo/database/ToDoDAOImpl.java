@@ -57,7 +57,7 @@ public class ToDoDAOImpl extends BaseDAO implements ToDoDAO {
 
     @Override
     public void createOrUpdate(ToDo toDo) throws DBException {
-        if(toDo.getComplete() == null) {
+        if(toDo.getCreateTime() == null) {
             toDo.setCreateTime(LocalDateTime.now());
         }
         try {
@@ -68,24 +68,35 @@ public class ToDoDAOImpl extends BaseDAO implements ToDoDAO {
     }
 
     @Override
-    public void update(ToDo toDo) throws DBException {
-    }
-
-    @Override
-    public void deleteToD(ToDo toDo) throws DBException {
+    public void deleteToD(Long toDoId) throws DBException {
         try {
+            ToDo toDo = (ToDo) super.sessionFactory.getCurrentSession().load(ToDo.class,toDoId);
             super.delete(toDo);
+            super.sessionFactory.getCurrentSession().flush();
         } catch (Exception e ){
             throw new DBException(e.getMessage(),e);
         }
     }
-
 
     @Override
     public ToDo getToDoById(Long id) throws DBException {
         try {
            return super.get(ToDo.class,id);
         } catch (Exception e ){
+            throw new DBException(e.getMessage(),e);
+        }
+    }
+
+    @Override
+    public Boolean checkIfBelongToUser(Long toDoId, Long userId) throws DBException {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            Long count =  (Long)session.createCriteria(ToDo.class)
+                    .add(Restrictions.eq("userId", userId))
+                    .add(Restrictions.eq("id", toDoId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+            return count > 0;
+        } catch (Exception e) {
             throw new DBException(e.getMessage(),e);
         }
     }
