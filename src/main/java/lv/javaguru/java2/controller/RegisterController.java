@@ -2,13 +2,13 @@ package lv.javaguru.java2.controller;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.UserProfile;
+
 import lv.javaguru.java2.domain.UserRole;
-import lv.javaguru.java2.model.MVCModel;
+
 import lv.javaguru.java2.model.exceptions.RedirectException;
+import lv.javaguru.java2.profile.domain.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

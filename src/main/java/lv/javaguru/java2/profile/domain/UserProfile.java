@@ -1,5 +1,7 @@
 package lv.javaguru.java2.profile.domain;
 
+import lv.javaguru.java2.domain.User;
+
 import javax.persistence.*;
 
 /**
@@ -29,6 +31,7 @@ public class UserProfile {
             length = 45)
     private String email;
 
+    private String profilePicture;
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private User user;
@@ -39,6 +42,15 @@ public class UserProfile {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public UserProfile setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+        return this;
     }
 
     public String getEmail() {

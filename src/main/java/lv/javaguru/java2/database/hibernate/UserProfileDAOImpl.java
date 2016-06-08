@@ -1,14 +1,15 @@
 package lv.javaguru.java2.database.hibernate;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.UserProfileDAO;
-import lv.javaguru.java2.domain.UserProfile;
+import lv.javaguru.java2.profile.database.UserProfileDAO;
+import lv.javaguru.java2.profile.domain.UserProfile;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 
 @Component("ORM_UserProfileDAO")
 @Transactional

@@ -1,5 +1,7 @@
 package lv.javaguru.java2.domain;
 
+import lv.javaguru.java2.profile.domain.UserProfile;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;

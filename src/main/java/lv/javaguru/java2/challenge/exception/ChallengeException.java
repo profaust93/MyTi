@@ -3,7 +3,7 @@ package lv.javaguru.java2.challenge.exception;
 /**
  * Created by Ruslan on 2016.06.08..
  */
-public class ChallengeException {
+public class ChallengeException extends Exception {
 
     ChallengeError challengeError;
 

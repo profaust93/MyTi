@@ -39,8 +39,8 @@ public class Challenge {
     private Boolean isComplete;
 
     @ElementCollection
-    @CollectionTable(name = "SubChallengeTask", joinColumns = @JoinColumn(name = "ChallengeId"))
-    private List<SubChallengeTask> subChallengeTasks;
+    @CollectionTable(name = "SubChallenge", joinColumns = @JoinColumn(name = "ChallengeId"))
+    private List<SubChallenge> subChallenges;
 
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -96,12 +96,12 @@ public class Challenge {
         return this;
     }
 
-    public List<SubChallengeTask> getSubChallengeTasks() {
-        return subChallengeTasks;
+    public List<SubChallenge> getSubChallenges() {
+        return subChallenges;
     }
 
-    public Challenge setSubChallengeTasks(List<SubChallengeTask> subChallengeTasks) {
-        this.subChallengeTasks = subChallengeTasks;
+    public Challenge setSubChallenges(List<SubChallenge> subChallenges) {
+        this.subChallenges = subChallenges;
         return this;
     }
 
