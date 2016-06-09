@@ -6,7 +6,6 @@ import lv.javaguru.java2.statistic.form.StatisticFormModel;
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.todo.database.ToDoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,20 +13,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class StatisticServiceImpl implements StatisticService {
     @Autowired
-    private ToDoDAO toDoDAO;
+    ToDoDAO toDoDAO;
 
     @Autowired
-    @Qualifier("ORM_TimeLapsDAO")
-    private TimeLapsDAO timeLapsDAO;
+    TimeLapsDAO timeLapsDAO;
 
     @Override
     public StatisticFormModel getStatisticForUser(Long userId) throws StatisticException {
         try {
-            return new StatisticFormModel()
+            StatisticFormModel statisticFormModel = new StatisticFormModel()
                     .setToDoCount(toDoDAO.getTotalToDoCount(userId))
-                    .setTimeLapsCount(timeLapsDAO.getTimeLapsCount(userId));
+                    .setTimeLapsCount(timeLapsDAO.getTotalTimeLapsCount(userId));
+            return statisticFormModel;
         } catch (DBException e) {
-            throw new StatisticException("ToDo Error");
+            throw new StatisticException("Statistic Error");
         }
     }
 }

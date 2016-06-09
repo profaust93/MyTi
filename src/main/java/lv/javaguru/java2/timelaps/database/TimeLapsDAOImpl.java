@@ -58,13 +58,28 @@ public class TimeLapsDAOImpl extends BaseDAO implements TimeLapsDAO {
         }
     }
 
+
     @Override
-    public Long getTimeLapsCount(Long userId) throws DBException {
+    public Long getTotalTimeLapsCount(Long userId) throws DBException {
         Session session = sessionFactory.getCurrentSession();
         try {
             return (Long)session.createCriteria(TimeLaps.class)
                     .add(Restrictions.eq("userId", userId))
                     .setProjection(Projections.rowCount()).uniqueResult();
+        } catch (Exception e) {
+            throw new DBException(e.getMessage(),e);
+        }
+    }
+
+    @Override
+    public Boolean checkIfBelongToUser(Long timeLapsId, Long userId) throws DBException {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            Long count =  (Long)session.createCriteria(TimeLaps.class)
+                    .add(Restrictions.eq("userId", userId))
+                    .add(Restrictions.eq("id", timeLapsId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+            return count > 0;
         } catch (Exception e) {
             throw new DBException(e.getMessage(),e);
         }

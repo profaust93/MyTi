@@ -3,7 +3,6 @@ package lv.javaguru.java2.statistic.form;
 
 public class StatisticFormModel {
     private Long toDoCount;
-    private Long timeLapsCount;
 
     private Long timeLapsCount;
 
