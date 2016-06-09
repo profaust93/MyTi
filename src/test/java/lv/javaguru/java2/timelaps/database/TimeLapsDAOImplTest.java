@@ -27,6 +27,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestSpringConfig.class)
 @Rollback(true)
+@Ignore
 public class TimeLapsDAOImplTest {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")

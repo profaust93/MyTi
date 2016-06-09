@@ -58,7 +58,7 @@ public class ModelChecks {
     }
 
     public LocalDateTime dateConvert(String data) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         if(!isNotEmpty(data).equalsIgnoreCase(ok)) try {
             throw new DBException("Empty field, LDT - now");
         } catch (DBException e) {
@@ -70,7 +70,7 @@ public class ModelChecks {
     }
 
     public String dateConvert(LocalDateTime time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String convertedDate = time.format(formatter);
         return convertedDate;
     }
