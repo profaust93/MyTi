@@ -134,7 +134,7 @@
                 <a href="${pageContext.request.contextPath}/todoList"><i class="fa fa-fw fa-dashboard"></i> ToDo List</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/timeLaps"><i class="fa fa-fw fa-bar-chart-o"></i> Time Laps</a>
+                <a href="${pageContext.request.contextPath}/viewTimeLaps"><i class="fa fa-fw fa-bar-chart-o"></i> Time Laps</a>
             </li>
             <li>
             <li>

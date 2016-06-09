@@ -59,10 +59,8 @@ public class TimeLapsServiceImpl implements TimeLapsService {
         Map<String,Object> map = new HashMap<>();
 
         try{
-            validators.timeLapsValidator(timeLaps);
+            //validators.timeLapsValidator(timeLaps);
             timeLapsDAO.create(timeLaps);
-        } catch (ValidatorException e) {
-            return e.getMap();
         } catch (DBException e) {
             e.printStackTrace();
         }
@@ -74,12 +72,9 @@ public class TimeLapsServiceImpl implements TimeLapsService {
         Map<String,Object> resultCheckMap = new HashMap<>();
 
         try {
-            validators.timeLapsValidator(timeLaps);
             timeLapsDAO.update(timeLaps);
         }catch (DBException e){
             return resultCheckMap;
-        } catch (ValidatorException e) {
-            return e.getMap();
         }
         return resultCheckMap;
     }

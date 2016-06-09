@@ -10,6 +10,10 @@ import lv.javaguru.java2.timelaps.service.TimeLapsService;
 import lv.javaguru.java2.validators.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -17,8 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
-public class EditTimeLapsController implements MVCController{
+@Controller
+public class EditTimeLapsController{
 
     @Autowired
     TimeLapsService timeLapsService;
@@ -26,15 +30,15 @@ public class EditTimeLapsController implements MVCController{
     @Autowired
     private SecurityService securityService;
 
-    ModelChecks modelChecks = new ModelChecks();
+    private ModelChecks modelChecks = new ModelChecks();
 
 
     private List<Map> list = new ArrayList<>();
     private Map<String,Object> dataMap = new HashMap<>();
     private Map<String,Object> resultCheckMap = new HashMap<>();
 
-    @Override
-    public MVCModel processGet(HttpServletRequest req) throws RedirectException {
+    @RequestMapping(value = "/editTimeLaps", method = RequestMethod.GET)
+    public ModelAndView processGet(HttpServletRequest req) throws RedirectException {
 
         String timeLapsId = req.getParameter("TimeLapsId");
 
@@ -53,11 +57,11 @@ public class EditTimeLapsController implements MVCController{
         }
         list.add(dataMap);
         list.add(resultCheckMap);
-        return new MVCModel("/editTimeLaps.jsp",list);
+        return new ModelAndView("editTimeLaps").addObject("data",list);
     }
 
-    @Override
-    public MVCModel processPost(HttpServletRequest req) {
+    @RequestMapping(value = "/editTimeLaps", method = RequestMethod.POST)
+    public ModelAndView processPost(HttpServletRequest req) {
 
 
         try {
@@ -81,7 +85,7 @@ public class EditTimeLapsController implements MVCController{
             list.add(dataMap);
             list.add(resultCheckMap);
 
-                if(resultCheckMap.size() != 0) return new MVCModel("/editTimeLaps.jsp",list);
+                if(resultCheckMap.size() != 0) return new ModelAndView("editTimeLaps").addObject("data",list);
 
 
         }catch (TimeLapsException e){
@@ -90,6 +94,6 @@ public class EditTimeLapsController implements MVCController{
             e.printStackTrace();
         }
 
-        return new MVCModel("/redirect.jsp","viewTimeLaps");
+        return new ModelAndView("redirect:/viewTimeLaps");
     }
 }
