@@ -100,10 +100,11 @@
                 </div>
                 <div>
                     <form method="get" action="acceptMessage" name="AcceptMessage">
-                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "AcceptMessageId">Accept</button>
+                        <button type="submit" value="<%=list.get(i).getMessageId()%>" name = "AcceptMessageId">Accept</button>
+
                     </form>
                     <form method="get" action="rejectMessage" name="RejectMessage">
-                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name="RejectMessageId">Decline</button>
+                        <button type="submit" value="<%=list.get(i).getMessageId()%>" name="RejectMessageId">Decline</button>
                     </form>
                 </div>
             </div>
