@@ -27,6 +27,9 @@ public class Challenge {
     @Column(name = "ChallengeNote")
     private String challengeNote;
 
+    @Column(name = "Status")
+    private String status;
+
     @Column(name = "CreateTime")
     @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
     private LocalDateTime createTime;

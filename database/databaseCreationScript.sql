@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   IsComplete BIT,
   ReceiverId BIGINT(11),
   SenderId BIGINT(11),
+  Status VARCHAR(20),
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB
@@ -128,18 +129,6 @@ CREATE TABLE IF NOT EXISTS my_ti.ToDoTask
   FOREIGN KEY (ToDoId) REFERENCES my_ti.ToDoList(Id)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS my_ti.UserMessages;
-CREATE TABLE IF NOT EXISTS my_ti.UserMessages
-(
-  Id BIGINT(11) NOT NULL AUTO_INCREMENT,
-  Message VARCHAR(100),
-  SenderId BIGINT(11) NOT NULL,
-  RecipientId BIGINT(11),
-  ChallengeId BIGINT(11),
-  PRIMARY KEY (Id),
-  FOREIGN KEY (ChallengeId) REFERENCES my_ti.Challenge(ChallengeId)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 100;
 
 INSERT INTO Users(UserId,Username,Password,Enabled)
 VALUES (1,'admin','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);

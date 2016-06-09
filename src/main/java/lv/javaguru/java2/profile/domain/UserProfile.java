@@ -30,9 +30,10 @@ public class UserProfile {
 
     @Column(name = "ProfilePicture")
     private String profilePicture;
-/*    @OneToOne(fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
-    private User user;*/
+    private User user;
 
     public UserProfile() {}
     //Not needed, but decided to leave it here. Mb will use of it someday.
@@ -86,12 +87,12 @@ public class UserProfile {
         this.profileId = profileId;
     }
 
-/*    public User getUser() {
+    public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 
 
 }

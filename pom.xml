@@ -198,7 +198,7 @@
                 <version>9.2.11.v20150529</version>
                 <configuration>
                     <webApp>
-                        <contextPath>/java2</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                 </configuration>
             </plugin>

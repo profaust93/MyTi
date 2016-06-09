@@ -20,6 +20,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     UserProfileDAO userProfileDAO;
 
     private UserProfile userProfile;
+
     @Override
     public void setUserProfileDAO(UserProfileDAO userProfileDAO) {
     this.userProfileDAO = userProfileDAO;
