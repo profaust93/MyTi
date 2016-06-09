@@ -136,15 +136,16 @@
             <li>
                 <a href="${pageContext.request.contextPath}/viewTimeLaps"><i class="fa fa-fw fa-bar-chart-o"></i> Time Laps</a>
             </li>
+
             <li>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Challenges <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="${pageContext.request.contextPath}/viewChallenge"><i class="fa fa-fw fa-dashboard"></i>View Challenges</a>
                     </li>
                     <li>
-                        <a href="#">Dropdown Item</a>
+                        <a href="${pageContext.request.contextPath}/addChallenge"><i class="fa fa-fw fa-dashboard"></i>Add Challenge</a>
                     </li>
                 </ul>
             </li>

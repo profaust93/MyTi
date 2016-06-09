@@ -6,6 +6,8 @@ public class StatisticFormModel {
 
     private Long timeLapsCount;
 
+    private Long challengeCount;
+
     public Long getToDoCount() {
         return toDoCount;
     }
@@ -21,6 +23,15 @@ public class StatisticFormModel {
 
     public StatisticFormModel setTimeLapsCount(Long timeLapsCount) {
         this.timeLapsCount = timeLapsCount;
+        return this;
+    }
+
+    public Long getChallengeCount() {
+        return challengeCount;
+    }
+
+    public StatisticFormModel setChallengeCount(Long challengeCount) {
+        this.challengeCount = challengeCount;
         return this;
     }
 }

@@ -5,6 +5,7 @@ import lv.javaguru.java2.challenge.domain.Challenge;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.hibernate.BaseDAO;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +52,17 @@ public class ChallengeDAOImpl extends BaseDAO implements ChallengeDAO {
     public List<Challenge> getAllChallengeToUserId(Long toUserId) throws DBException {
         Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Challenge.class).add(Restrictions.eq("toUserId",toUserId)).list();
+    }
+
+    @Override
+    public Long getTotalChallengeCount(Long userId) throws DBException {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            return (Long)session.createCriteria(Challenge.class)
+                    .add(Restrictions.eq("toUserId", userId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+        } catch (Exception e) {
+            throw new DBException(e.getMessage(),e);
+        }
     }
 }

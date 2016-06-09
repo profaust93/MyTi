@@ -1,5 +1,6 @@
 package lv.javaguru.java2.statistic.service;
 
+import lv.javaguru.java2.challenge.database.ChallengeDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.statistic.exception.StatisticException;
 import lv.javaguru.java2.statistic.form.StatisticFormModel;
@@ -18,12 +19,16 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     TimeLapsDAO timeLapsDAO;
 
+    @Autowired
+    ChallengeDAO challengeDAO;
+
     @Override
     public StatisticFormModel getStatisticForUser(Long userId) throws StatisticException {
         try {
             StatisticFormModel statisticFormModel = new StatisticFormModel()
                     .setToDoCount(toDoDAO.getTotalToDoCount(userId))
-                    .setTimeLapsCount(timeLapsDAO.getTotalTimeLapsCount(userId));
+                    .setTimeLapsCount(timeLapsDAO.getTotalTimeLapsCount(userId))
+                    .setChallengeCount(challengeDAO.getTotalChallengeCount(userId));
             return statisticFormModel;
         } catch (DBException e) {
             throw new StatisticException("Statistic Error");

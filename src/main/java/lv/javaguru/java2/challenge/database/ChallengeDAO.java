@@ -21,4 +21,5 @@ public interface ChallengeDAO {
 
     List<Challenge> getAllChallengeToUserId(Long userId) throws DBException;
 
+    Long getTotalChallengeCount(Long userId) throws DBException;
 }

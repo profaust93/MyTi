@@ -105,12 +105,12 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">${statistic.challengeCount}</div>
                                     <div>Challenges!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="${pageContext.request.contextPath}/viewChallenge">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

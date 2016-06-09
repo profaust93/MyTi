@@ -7,7 +7,6 @@ import lv.javaguru.java2.challenge.domain.ChallengeList;
 import lv.javaguru.java2.challenge.exception.ChallengeException;
 import lv.javaguru.java2.database.DBException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
