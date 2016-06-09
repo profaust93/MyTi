@@ -27,8 +27,7 @@ public class AddTimeLapsController {
     @Autowired
     TimeLapsService timeLapsService;
 
-    @Autowired
-    ModelChecks modelChecks;
+    ModelChecks modelChecks = new ModelChecks();
 
     @Autowired
     private SecurityService securityService;
@@ -43,9 +42,9 @@ public class AddTimeLapsController {
 
 
     @RequestMapping(value = "/addTimeLaps", method = RequestMethod.POST)
-    public String processPost(HttpServletRequest req) {
+    public ModelAndView processPost(HttpServletRequest req) {
         Map<String,Object> resultCheckMap;
-
+        ModelAndView modelAndView = new ModelAndView("addTimeLaps");
         TimeLaps timeLaps = new TimeLaps();
 
 
@@ -62,7 +61,11 @@ public class AddTimeLapsController {
 
 
         resultCheckMap = timeLapsService.addTimeLaps(timeLaps);
-        return "redirect:/viewTimeLaps";
+        modelAndView.addObject("data",resultCheckMap);
+        if(resultCheckMap.size()!=0){
+            return modelAndView;
+        }
+        return modelAndView;
 
     }
 }

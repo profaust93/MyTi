@@ -21,13 +21,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-/**
- * Created by Ruslan on 2016.04.20..
- */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestSpringConfig.class)
 @Rollback(true)
-@Ignore
 public class TimeLapsDAOImplTest {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")

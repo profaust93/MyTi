@@ -19,7 +19,7 @@ import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"lv.javaguru.java2.todo","lv.javaguru.java2.database.hibernate","lv.javaguru.java2.security","lv.javaguru.java2.timelaps","lv.javaguru.java2.profile","lv.javaguru.java2.challenge"})
+@ComponentScan(basePackages = {"lv.javaguru.java2.todo","lv.javaguru.java2.database.hibernate","lv.javaguru.java2.security","lv.javaguru.java2.timelaps","lv.javaguru.java2.challenge"})
 @EnableTransactionManagement
 public class TestSpringConfig {
 

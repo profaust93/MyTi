@@ -10,13 +10,14 @@ import java.util.Map;
 
 @Component
 public class ValidatorsImpl implements Validators {
+
     private ModelChecks modelChecks = new ModelChecks();
 
     public void timeLapsValidator(TimeLaps timeLaps) throws ValidatorException {
 
         Map<String, Object> resultCheckMap = new HashMap<>();
         try {
-            resultCheckMap.put("userIdCheckResult", modelChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
+//            resultCheckMap.put("userIdCheckResult", modelChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
             resultCheckMap.put("categoryCheckResult", modelChecks.categoryCheck(timeLaps.getCategory()));
             resultCheckMap.put("nameCheckResult", modelChecks.nameCheck(timeLaps.getTimeLapsName()));
             resultCheckMap.put("dateCheckResult", modelChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));
