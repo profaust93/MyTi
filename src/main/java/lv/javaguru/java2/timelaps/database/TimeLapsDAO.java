@@ -21,9 +21,10 @@ public interface TimeLapsDAO {
 
     void deleteAllTimeLaps(Long userId) throws DBException;
 
-    Long getTotalTimeLapsCount(Long userId) throws DBException;
+   default Long getTimeLapsCount(Long userId) throws DBException {
+       return 0L;
+   }
 
-    Boolean checkIfBelongToUser(Long timeLapsId, Long userId) throws DBException;
 
 
 }
