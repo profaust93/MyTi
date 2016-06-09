@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Profiles`(
   ENGINE =InnoDB
   AUTO_INCREMENT = 100;
 -- -----------------------------------------------------
--- Table `my_ti`.`Challenge`
+-- Table `my_ti`.`ChallengeNew`
 DROP TABLE IF EXISTS `my_ti`.`Challenge` ;-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
 (
@@ -81,28 +81,23 @@ CREATE TABLE IF NOT EXISTS `my_ti`.`Challenge`
   ChallengeState VARCHAR(20),
   Description VARCHAR(1000),
   EndTime TIMESTAMP,
-  ChallengeNote VARCHAR(255),
-  CreateTime TIMESTAMP,
-  DeadLineTime TIMESTAMP,
-  IsComplete BIT,
-  ReceiverId BIGINT(11),
-  SenderId BIGINT(11),
-  Status VARCHAR(20),
   PRIMARY KEY (ChallengeId)
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 100;
 
-DROP TABLE IF EXISTS my_ti.SubChallenge;
-CREATE TABLE IF NOT EXISTS my_ti.SubChallenge
+DROP TABLE IF EXISTS my_ti.UserMessages;
+CREATE TABLE IF NOT EXISTS my_ti.UserMessages
 (
-  SubChallengeName VARCHAR(100),
-  subChallengeNote VARCHAR(100),
-  ChallengeId BIGINT(11) NOT NULL,
-  IsComplete BIT,
+  Id BIGINT(11) NOT NULL AUTO_INCREMENT,
+  Message VARCHAR(100),
+  SenderId BIGINT(11) NOT NULL,
+  RecipientId BIGINT(11),
+  ChallengeId BIGINT(11),
+  PRIMARY KEY (Id),
   FOREIGN KEY (ChallengeId) REFERENCES my_ti.Challenge(ChallengeId)
-) ENGINE = InnoDB;
-
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 100;
 
 /*ToDo Table*/
 

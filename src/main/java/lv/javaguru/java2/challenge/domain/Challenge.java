@@ -1,56 +1,38 @@
 package lv.javaguru.java2.challenge.domain;
 
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "Challenge")
 public class Challenge {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ChallengeId")
-    private Long challengeId;
-
-    @Column(name = "SenderId")
-    private Long senderId;
-
-    @Column(name = "ReceiverId")
-    private Long receiverId;
-
     @Column(name = "ChallengeName")
     private String challengeName;
-
-    @Column(name = "ChallengeNote")
-    private String challengeNote;
-
-    @Column(name = "Status")
-    private String status;
-
-    @Column(name = "CreateTime")
+    @Column(name = "ChallengeId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long challengeId;
+    @Column(name = "FromUserId")
+    private Long fromUserId;
+    @Column(name = "ToUserId")
+    private Long toUserId;
+    @Column(name = "ChallengeState")
+    private String challengeState;
+    @Column(name = "Description")
+    private String description;
+    @Column(name = "EndTime")
     @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
-    private LocalDateTime createTime;
+    private LocalDateTime endTime;
 
-    @Column(name = "DeadLineTime")
-    @Type(type = "lv.javaguru.java2.domain.types.LocalDateTimeUserType")
-    private LocalDateTime deadLineTime;
-
-    @Column(name = "IsComplete")
-    private Boolean isComplete;
-
-    @ElementCollection
-    @CollectionTable(name = "SubChallenge", joinColumns = @JoinColumn(name = "ChallengeId"))
-    private List<SubChallenge> subChallenges;
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public String getChallengeName() {
+        return challengeName;
     }
 
-    public Challenge setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public Challenge setChallengeName(String challengeName) {
+        this.challengeName = challengeName;
         return this;
     }
 
@@ -63,66 +45,48 @@ public class Challenge {
         return this;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public Long getFromUserId() {
+        return fromUserId;
     }
 
-    public Challenge setSenderId(Long senderId) {
-        this.senderId = senderId;
+    public Challenge setFromUserId(Long fromUserId) {
+        this.fromUserId = fromUserId;
         return this;
     }
 
-    public Long getReceiverId() {
-        return receiverId;
+    public Long getToUserId() {
+        return toUserId;
     }
 
-    public Challenge setReceiverId(Long receiverId) {
-        this.receiverId = receiverId;
+    public Challenge setToUserId(Long toUserId) {
+        this.toUserId = toUserId;
         return this;
     }
 
-    public String getChallengeName() {
-        return challengeName;
+    public String getChallengeState() {
+        return challengeState;
     }
 
-    public Challenge setChallengeName(String challengeName) {
-        this.challengeName = challengeName;
+    public Challenge setChallengeState(String challengeState) {
+        this.challengeState = challengeState;
         return this;
     }
 
-    public String getChallengeNote() {
-        return challengeNote;
+    public String getDescription() {
+        return description;
     }
 
-    public Challenge setChallengeNote(String challengeNote) {
-        this.challengeNote = challengeNote;
+    public Challenge setDescription(String description) {
+        this.description = description;
         return this;
     }
 
-    public List<SubChallenge> getSubChallenges() {
-        return subChallenges;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public Challenge setSubChallenges(List<SubChallenge> subChallenges) {
-        this.subChallenges = subChallenges;
-        return this;
-    }
-
-    public LocalDateTime getDeadLineTime() {
-        return deadLineTime;
-    }
-
-    public Challenge setDeadLineTime(LocalDateTime deadLineTime) {
-        this.deadLineTime = deadLineTime;
-        return this;
-    }
-
-    public Boolean getComplete() {
-        return isComplete;
-    }
-
-    public Challenge setComplete(Boolean complete) {
-        isComplete = complete;
+    public Challenge setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
         return this;
     }
 }

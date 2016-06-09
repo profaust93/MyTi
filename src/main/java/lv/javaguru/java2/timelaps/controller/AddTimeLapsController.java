@@ -23,10 +23,13 @@ public class AddTimeLapsController {
     @Autowired
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
+
     @Autowired
     TimeLapsService timeLapsService;
+
     @Autowired
     ModelChecks modelChecks;
+
     @Autowired
     private SecurityService securityService;
 

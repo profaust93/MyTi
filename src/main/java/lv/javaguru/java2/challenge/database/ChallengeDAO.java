@@ -5,20 +5,20 @@ import lv.javaguru.java2.database.DBException;
 
 import java.util.List;
 
-
 public interface ChallengeDAO {
 
-    void saveOrUpdate(Challenge challenge) throws DBException;
+    void create(Challenge challenge)throws DBException;
 
-    void delete(Challenge challenge) throws DBException;
+    void delete(Challenge challenge)throws DBException;
 
-    Long getTotalChallengeCount(Long userId) throws DBException;
+    Challenge getById(Long id)throws DBException;
 
-    Challenge getChallengeById(Long challengeId) throws DBException;
+    void update(Challenge challenge) throws DBException;
 
-    List<Challenge> getAllChallengesByUserId(Long userId) throws DBException;
+    List<Challenge> getAllChallenge() throws DBException;
 
-    List<Challenge> getAllChallengesForUserView(Long userId, Integer limit, Integer offset) throws DBException;
+    List<Challenge> getAllChallengeFromUserId(Long fromUserId) throws DBException;
 
-    Boolean checkIfBelongToUser(Long challengeId, Long userId) throws DBException;
+    List<Challenge> getAllChallengeToUserId(Long userId) throws DBException;
+
 }
