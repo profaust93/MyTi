@@ -4,15 +4,12 @@ import lv.javaguru.java2.challenge.domain.Challenge;
 import lv.javaguru.java2.challenge.domain.ChallengeMessage;
 import lv.javaguru.java2.challenge.service.ChallengeMessageService;
 import lv.javaguru.java2.challenge.service.ChallengeService;
-import lv.javaguru.java2.controller.MVCController;
 
-import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.security.SecurityService;
 
-import lv.javaguru.java2.validators.ModelChecks;
+import lv.javaguru.java2.timelaps.validator.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -3,6 +3,8 @@ package lv.javaguru.java2.validators;
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
+import lv.javaguru.java2.timelaps.validator.Validators;
+import lv.javaguru.java2.timelaps.validator.ValidatorsImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

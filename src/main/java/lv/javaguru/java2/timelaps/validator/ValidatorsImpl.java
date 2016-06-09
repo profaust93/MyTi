@@ -1,14 +1,16 @@
-package lv.javaguru.java2.validators;
+package lv.javaguru.java2.timelaps.validator;
 
 import lv.javaguru.java2.database.DBException;
 
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+@Service
+@Transactional
 public class ValidatorsImpl implements Validators {
 
     private ModelChecks modelChecks = new ModelChecks();
@@ -17,7 +19,7 @@ public class ValidatorsImpl implements Validators {
 
         Map<String, Object> resultCheckMap = new HashMap<>();
         try {
-//            resultCheckMap.put("userIdCheckResult", modelChecks.userIdCheck(String.valueOf(timeLaps.getUserId())));
+
             resultCheckMap.put("categoryCheckResult", modelChecks.categoryCheck(timeLaps.getCategory()));
             resultCheckMap.put("nameCheckResult", modelChecks.nameCheck(timeLaps.getTimeLapsName()));
             resultCheckMap.put("dateCheckResult", modelChecks.dateCheck(String.valueOf(timeLaps.getCompleteTime())));

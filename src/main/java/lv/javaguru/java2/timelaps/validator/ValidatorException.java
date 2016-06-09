@@ -1,4 +1,4 @@
-package lv.javaguru.java2.validators;
+package lv.javaguru.java2.timelaps.validator;
 
 import java.util.Map;
 

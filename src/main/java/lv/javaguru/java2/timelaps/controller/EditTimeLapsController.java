@@ -1,15 +1,12 @@
 package lv.javaguru.java2.timelaps.controller;
 
-import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
 import lv.javaguru.java2.timelaps.exception.TimeLapsException;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
-import lv.javaguru.java2.validators.ModelChecks;
+import lv.javaguru.java2.timelaps.validator.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

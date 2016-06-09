@@ -2,9 +2,7 @@ package lv.javaguru.java2.timelaps.service;
 
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
-import lv.javaguru.java2.validators.Validators;
-import lv.javaguru.java2.timelaps.service.TimeLapsService;
-import lv.javaguru.java2.timelaps.service.TimeLapsServiceImpl;
+import lv.javaguru.java2.timelaps.validator.Validators;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

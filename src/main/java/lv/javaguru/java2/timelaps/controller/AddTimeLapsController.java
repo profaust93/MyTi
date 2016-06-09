@@ -5,7 +5,7 @@ import lv.javaguru.java2.security.SecurityService;
 import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.timelaps.service.TimeLapsService;
-import lv.javaguru.java2.validators.ModelChecks;
+import lv.javaguru.java2.timelaps.validator.ModelChecks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -65,7 +65,7 @@ public class AddTimeLapsController {
         if(resultCheckMap.size()!=0){
             return modelAndView;
         }
-        return modelAndView;
+        return new ModelAndView("redirect:/viewTimeLaps");
 
     }
 }

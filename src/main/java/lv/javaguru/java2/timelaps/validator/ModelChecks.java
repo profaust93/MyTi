@@ -1,4 +1,4 @@
-package lv.javaguru.java2.validators;
+package lv.javaguru.java2.timelaps.validator;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
