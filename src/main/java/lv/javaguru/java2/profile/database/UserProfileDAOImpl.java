@@ -2,7 +2,6 @@ package lv.javaguru.java2.profile.database;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.hibernate.BaseDAO;
-import lv.javaguru.java2.profile.database.UserProfileDAO;
 import lv.javaguru.java2.profile.domain.UserProfile;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
-@Component("ORM_UserProfileDAO")
+@Component
 @Transactional
 public class UserProfileDAOImpl extends BaseDAO implements UserProfileDAO {
     @Override

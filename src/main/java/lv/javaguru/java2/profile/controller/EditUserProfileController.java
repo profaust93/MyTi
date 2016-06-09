@@ -37,7 +37,6 @@ public class EditUserProfileController implements MVCController {
     ProfileServices profileServices;
 
     @Autowired
-    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDao;
 
     @Autowired

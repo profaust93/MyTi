@@ -2,7 +2,7 @@ package lv.javaguru.java2.profile.controller;
 
 import lv.javaguru.java2.controller.MVCController;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.UserProfileDAOImpl;
+
 import lv.javaguru.java2.profile.domain.UserProfile;
 import lv.javaguru.java2.model.MVCModel;
 import lv.javaguru.java2.model.exceptions.RedirectException;
@@ -36,7 +36,7 @@ public class ViewUserProfileController implements MVCController{
     @Override
     public MVCModel processGet(HttpServletRequest req) throws RedirectException {
 
-        userProfileService.setUserProfileDAO(new UserProfileDAOImpl());
+
 
 
         HttpSession session = req.getSession();

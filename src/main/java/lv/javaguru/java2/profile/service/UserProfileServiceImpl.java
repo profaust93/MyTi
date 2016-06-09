@@ -8,15 +8,17 @@ import lv.javaguru.java2.profile.database.UserProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Component
+@Service
+@Transactional
 public class UserProfileServiceImpl implements UserProfileService {
     @Autowired
-    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDAO;
 
     private UserProfile userProfile;
@@ -72,6 +74,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     public List<UserProfileList> getAllUserProfile() throws UserProfileException {
         try {
             List<UserProfile> allUserProfile = userProfileDAO.getAllUserProfile();
+            System.out.println(userProfileDAO.getAllUserProfile().size());
             return allUserProfile.stream().map(userProfiles ->
                     new UserProfileList(userProfiles.getUserId(),
                             userProfiles.getFirstName(),userProfiles.getLastName(),

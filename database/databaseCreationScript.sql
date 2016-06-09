@@ -136,6 +136,7 @@ INSERT INTO Users(UserId,Username,Password,Enabled)
 VALUES (2,'gera','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
 INSERT INTO Users(UserId,Username,Password,Enabled)
 VALUES (3,'ruslan','$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', true);
+INSERT INTO Profiles VALUES (1,1,'Ruslan','Ruslan','Ruslan','Ruslan');
 
 INSERT INTO User_roles (UserId, Role)
 VALUES (1, 'ROLE_USER');

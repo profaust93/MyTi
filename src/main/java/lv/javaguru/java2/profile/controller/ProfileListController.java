@@ -31,12 +31,12 @@ public class ProfileListController {
 
     @RequestMapping(value = "/profiles",method = RequestMethod.GET)
     public ModelAndView processGet(HttpServletRequest req){
-        ModelAndView modelAndView = new ModelAndView("profileList");
+        ModelAndView modelAndView = new ModelAndView("profiles");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserSecurityEntity user =(UserSecurityEntity)authentication.getPrincipal();
-
         try {
             List<UserProfileList> profiles = userProfileService.getAllUserProfile();
+            System.out.println(profiles.size());
             modelAndView.addObject("data",profiles);
         } catch (UserProfileException e) {
             e.printStackTrace();

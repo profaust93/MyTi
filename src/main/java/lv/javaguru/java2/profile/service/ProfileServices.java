@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfileServices {
     @Autowired
-    @Qualifier("ORM_UserProfileDAO")
     UserProfileDAO userProfileDAO;
     public Boolean profileExist (Long userid) throws DBException {
         Boolean exists = false;

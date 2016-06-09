@@ -4,6 +4,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.hibernate.BaseDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +55,20 @@ public class TimeLapsDAOImpl extends BaseDAO implements TimeLapsDAO {
         for (int i = 0; i < list.size() ; i++) {
             timeLaps = list.get(i);
             session.delete(timeLaps);
+        }
+    }
+
+    @Override
+    public Boolean checkIfBelongToUser(Long timeLapsId, Long userId) throws DBException {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            Long count =  (Long)session.createCriteria(TimeLaps.class)
+                    .add(Restrictions.eq("userId", userId))
+                    .add(Restrictions.eq("id", timeLapsId))
+                    .setProjection(Projections.rowCount()).uniqueResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new DBException(e.getMessage(),e);
         }
     }
 }

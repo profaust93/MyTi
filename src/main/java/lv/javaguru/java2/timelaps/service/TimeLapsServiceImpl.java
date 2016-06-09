@@ -6,8 +6,6 @@ import lv.javaguru.java2.timelaps.database.TimeLapsDAO;
 import lv.javaguru.java2.timelaps.domain.TimeLaps;
 import lv.javaguru.java2.timelaps.domain.TimeLapsList;
 import lv.javaguru.java2.timelaps.exception.TimeLapsException;
-import lv.javaguru.java2.validators.ValidatorException;
-import lv.javaguru.java2.validators.Validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -23,8 +21,6 @@ public class TimeLapsServiceImpl implements TimeLapsService {
     @Qualifier("ORM_TimeLapsDAO")
     TimeLapsDAO timeLapsDAO;
 
-    @Autowired
-    Validators validators;
 
     @Override
     public void setTimeLapsDAO(TimeLapsDAO timeLapsDAO) {
@@ -59,7 +55,7 @@ public class TimeLapsServiceImpl implements TimeLapsService {
         Map<String,Object> map = new HashMap<>();
 
         try{
-            //validators.timeLapsValidator(timeLaps);
+
             timeLapsDAO.create(timeLaps);
         } catch (DBException e) {
             e.printStackTrace();
