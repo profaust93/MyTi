@@ -126,7 +126,7 @@
             <% if(list.get(i).getChallengeState().equalsIgnoreCase("Pending")){ %>
             <div>
                 <form method="post" action="viewMessage" name="viewMessage">
-                    <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "viewMessage">View Message</button>
+                    <button type="button" class="" onclick="window.location.href='/goToMsg'">View Message</button>
                 </form>
 
             </div>
@@ -155,7 +155,7 @@
                 <% if(list.get(i).getChallengeState().equalsIgnoreCase("Pending")){ %>
                 <div>
                     <form method="post" action="viewMessage" name="viewMessage">
-                        <button type="submit" value="<%=list.get(i).getChallengeId()%>" name = "viewMessage">View Message</button>
+                        <button type="button" class="" onclick="window.location.href='/goToMsg'">View Message</button>
                     </form>
 
                 </div>

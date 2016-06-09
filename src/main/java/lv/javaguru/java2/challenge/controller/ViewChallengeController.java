@@ -39,4 +39,9 @@ public class ViewChallengeController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "/goToMsg", method = RequestMethod.GET)
+    public String processPost() {
+        return "redirect:/viewMessage";
+    }
 }

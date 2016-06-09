@@ -48,16 +48,18 @@ public class ViewMessageController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
-    public String processPost(HttpServletRequest req) throws RedirectException {
+    @RequestMapping(value = "/acceptMessage", method = RequestMethod.GET)
+    public String acceptMessage(HttpServletRequest req) throws RedirectException {
 
-        if(req.getParameter("AcceptMessageId")!= null){
             challengeMessageService.acceptMessage(Long.parseLong(req.getParameter("AcceptMessageId")));
-        }
 
-        if(req.getParameter("RejectMessageId") != null){
-            challengeMessageService.rejectMessage(Long.parseLong(req.getParameter("RejectMessageId")));
-        }
+        return "redirect:/viewMessage";
+    }
+    @RequestMapping(value = "/rejectMessage", method = RequestMethod.GET)
+    public String rejectMessage(HttpServletRequest req){
+
+        challengeMessageService.rejectMessage(Long.parseLong(req.getParameter("RejectMessageId")));
+
         return "redirect:/viewMessage";
     }
 }
